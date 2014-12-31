@@ -22,6 +22,8 @@ extern bool displayName;
 extern int posY;
 //Whether or not the player has won the level
 extern bool won;
+extern int lastInputFrame;
+extern int frame;
 extern Mix_Music* levelMusic[MAX_LEVEL];
 bool loadLevel(string levelName,int levelNum);
 void clearObjects();
@@ -226,12 +228,12 @@ void switchLevel(int levelNum)
 		outputLog("Unable to load level, exiting\n");
 		exit(0);
 	}
-	lastMoveDir = D_DOWN;
 	displayName = 1;
 	startLevelName = "";
 	doTextBox(posY);
 	changeText();
 	won = 0;
+	lastInputFrame = frame;
 }
 //Make the level name given the number
 string constructLevelName(int levelNum)
