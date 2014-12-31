@@ -1,6 +1,9 @@
 #include "input_def.h"
 #include "input.h"
 #ifdef GEKKO
+#include <gccore.h>
+extern char HWButton;
+int wupcInput(int);
 //Wii
 //Chose which controller based on initial input
 //Possible choices:
@@ -15,6 +18,14 @@ int pickControls()
 	int i;
 	for (i = 0; i < 4; i++)
 	{
+		int tmp = wupcInput(i);
+		if (tmp != INPUT_NONE)
+		{
+			outputLog("Button for picked controls is: \r\n");
+			outputLog(tmp);
+			wpadnum = i;
+			return CONTROLLER_WUPC;
+		}
 		WPAD_Probe(i, &exp_type);
 		if (WInput(WButtonsDown[i],1,i) != INPUT_NONE)
 		{
@@ -33,11 +44,11 @@ int pickControls()
 			}
 		}
 	}
-	if (checkGC() == 1)
+	if (checkGC() == true)
 	{
 		return CONTROLLER_GAMECUBE;
 	}
-	if (keyInput() > 0)
+	if (keyInput() != INPUT_NONE)
 	{
 		return CONTROLLER_KEYBOARD;
 	}
@@ -93,6 +104,7 @@ void inputInit()
 	WPAD_SetVRes(0, 640, 480);
 	//Initialize the various control schemes
 	KEYBOARD_Init(NULL);
+	WUPC_Init();
 	WPAD_Init();
 	PAD_Init();
 }
@@ -120,12 +132,16 @@ int getInput()
 	for (int i = 0; i < 4; i++)
 		WButtonsDown[i] = WPAD_ButtonsHeld(i);
 	pad_set();
-	outputLog("\r\nControl type is: ");
-	outputLog(controltype);
 	switch (controltype)
 	{
 	case CONTROLLER_NONE:
 		controltype = pickControls();
+		if (controltype != CONTROLLER_NONE)
+		{
+			outputLog("Using control type: ");
+			outputLog(controltype);
+			outputLog("\r\n");
+		}
 		return INPUT_NONE;
 		break;
 	case CONTROLLER_CLASSIC:
@@ -143,6 +159,8 @@ int getInput()
 	case CONTROLLER_KEYBOARD:
 		return keyInput();
 		break;
+	case CONTROLLER_WUPC:
+		return wupcInput(wpadnum);
 	default:
 		break;
 	}	
@@ -166,7 +184,7 @@ int getInput()
 bool checkGC()
 {
 	for (int i = 0; i < 4; i++)
-		if (GCInput(GCButtonsDown[i]) != 0)
+		if (GCInput(GCButtonsDown[i]) != INPUT_NONE)
 		{
 			padnum = i+1;
 			return true;
