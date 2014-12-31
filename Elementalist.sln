@@ -1,11 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Elementalist", "Elementalist\Elementalist.vcxproj", "{86760FF3-FAED-4794-860F-AE6D7ED22766}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F9485F3F-382E-41E6-BBC9-DCCD14EC0C39}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wii", "Wii.vcxproj", "{2653E62B-0C25-4B02-AEDA-117AEB91B9D3}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wii", "..\Wii\Wii.vcxproj", "{FD14A6FB-D458-4AD9-A1FB-C072960A79C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,16 +19,15 @@ Global
 		{86760FF3-FAED-4794-860F-AE6D7ED22766}.Debug|Itanium.Build.0 = Debug|Win32
 		{86760FF3-FAED-4794-860F-AE6D7ED22766}.Debug|Win32.ActiveCfg = Debug|Win32
 		{86760FF3-FAED-4794-860F-AE6D7ED22766}.Debug|Win32.Build.0 = Debug|Win32
-		{86760FF3-FAED-4794-860F-AE6D7ED22766}.Release|Itanium.ActiveCfg = Release|Itanium
-		{86760FF3-FAED-4794-860F-AE6D7ED22766}.Release|Itanium.Build.0 = Release|Itanium
+		{86760FF3-FAED-4794-860F-AE6D7ED22766}.Release|Itanium.ActiveCfg = Release|Win32
 		{86760FF3-FAED-4794-860F-AE6D7ED22766}.Release|Win32.ActiveCfg = Release|Win32
 		{86760FF3-FAED-4794-860F-AE6D7ED22766}.Release|Win32.Build.0 = Release|Win32
-		{2653E62B-0C25-4B02-AEDA-117AEB91B9D3}.Debug|Itanium.ActiveCfg = Debug|Win32
-		{2653E62B-0C25-4B02-AEDA-117AEB91B9D3}.Debug|Win32.ActiveCfg = Debug|Win32
-		{2653E62B-0C25-4B02-AEDA-117AEB91B9D3}.Debug|Win32.Build.0 = Debug|Win32
-		{2653E62B-0C25-4B02-AEDA-117AEB91B9D3}.Release|Itanium.ActiveCfg = Release|Win32
-		{2653E62B-0C25-4B02-AEDA-117AEB91B9D3}.Release|Win32.ActiveCfg = Release|Win32
-		{2653E62B-0C25-4B02-AEDA-117AEB91B9D3}.Release|Win32.Build.0 = Release|Win32
+		{FD14A6FB-D458-4AD9-A1FB-C072960A79C1}.Debug|Itanium.ActiveCfg = Debug|Win32
+		{FD14A6FB-D458-4AD9-A1FB-C072960A79C1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{FD14A6FB-D458-4AD9-A1FB-C072960A79C1}.Debug|Win32.Build.0 = Debug|Win32
+		{FD14A6FB-D458-4AD9-A1FB-C072960A79C1}.Release|Itanium.ActiveCfg = Release|Win32
+		{FD14A6FB-D458-4AD9-A1FB-C072960A79C1}.Release|Win32.ActiveCfg = Release|Win32
+		{FD14A6FB-D458-4AD9-A1FB-C072960A79C1}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
