@@ -12,6 +12,7 @@ bool loadLevel(string fileName, int levelNum)
 	char buffer[BUFFERLENGTH];
 	char c;
 	int i;
+	playerPlaced = 0;
 	if (mapLoaded[levelNum] == 1)
 	{
 		Level *tmp = getCurrentLevel();
@@ -21,7 +22,6 @@ bool loadLevel(string fileName, int levelNum)
 		return true;
 	}
 	totalPressureCount = 0;
-	playerPlaced = 0;
 	int x = 0;
 	int y = 0;
 	FILE *ftemp;
