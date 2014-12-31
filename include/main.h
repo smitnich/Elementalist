@@ -8,16 +8,13 @@
 #include "input_def.h"
 //If wii
 #ifdef GEKKO
-extern s8 HWButton;
+s8 HWButton = -1;
 #include <ogc/usbmouse.h>
 #include "callback.h"
 #endif
 #include "tiles.h"
 unsigned int lastTicks = 0;
 double delta = 0.0;
-#ifdef GEKKO
-s8 HWButton = -1;
-#endif
 void outputLog(char[]);
 void outputLog(const char[]);
 void outputLog(int);

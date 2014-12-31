@@ -89,8 +89,8 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 					levelChange = currentLevelNum;
 					startLevelName.assign("");
 				}
-				if (levelStartCounter == 0)
-					displayName = 0;
+				if (levelStartCounter <= 0)
+					displayName = false;
 			}
 		}
 		else
@@ -114,7 +114,6 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 				if (currentLevelNum > 1 && lastInput != BUTTON_LEVEL_PREV)
 				{
 					lastInput = BUTTON_LEVEL_PREV;
-					currentLevelNum--;
 					levelChange = currentLevelNum-1;
 					startLevelName.assign("");
 					return;

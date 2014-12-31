@@ -2,7 +2,7 @@
 #define wallnames
 #define wallnum 47
 //Defines all of the wallnames as array indices
-typedef enum
+enum
 {
 v_wallbase,
 v_wall1,
