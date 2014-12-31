@@ -1,6 +1,12 @@
 #include "main.h"
 void init(int argc, char* argv[])
 {
+	#ifdef GEKKO
+	SYS_SetResetCallback(WiiResetPressed);
+	SYS_SetPowerCallback(WiiPowerPressed);
+	WPAD_SetPowerButtonCallback(WiimotePowerPressed);
+	inputInit();
+	#endif
 	string tempFileName (argv[0]);
 	//Determine which directory symbol to use
 	if (tempFileName.find("\\") != string::npos)
@@ -35,14 +41,8 @@ void init(int argc, char* argv[])
 #ifdef GEKKO
 	if (smbInit() == 0)
 		outputLog("Unable to initialize SMB\n");
-	inputInit();
 #endif
 	outputLog(const_cast <char *> ("Files Initialized\n"));
-#ifdef GEKKO
-	SYS_SetResetCallback(WiiResetPressed);
-	SYS_SetPowerCallback(WiiPowerPressed);
-	WPAD_SetPowerButtonCallback(WiimotePowerPressed);
-#endif
 	if ( SDL_Init( SDL_INIT_EVERYTHING) < 0 )
 	{
 		fprintf(stderr, "Unable to init SDL: %s\n", SDL_GetError() );
@@ -79,7 +79,6 @@ void init(int argc, char* argv[])
 	SDL_ShowCursor(SDL_DISABLE);
 #endif
 	SDL_FillRect(screen, 0, SDL_MapRGB(screen->format, 91, 91, 255));
-
 }
 //Clear the screen and free all remaining resources
 void cleanup(){
@@ -120,7 +119,7 @@ int main(int argc, char* argv[]){
 	{
 		updateDelta();
 		/*Fix this*/
-		if (frame > lastInputFrame+(framesPerSecond/2))
+		if (frame > lastInputFrame+(framesPerSecond/2) && lastInput != INPUT_NONE)
 			lastInput = INPUT_NONE;
 		checkEvents();
 #ifdef GEKKO
