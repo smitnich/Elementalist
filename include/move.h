@@ -32,7 +32,7 @@ void move()
 	else if (displayName == 1)
 	{
 		int input = getInput();
-		if (input != 0 && input != lastInput)
+		if (input != INPUT_NONE && input != lastInput)
 		{
 			if (won == true)
 			{

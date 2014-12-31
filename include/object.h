@@ -43,7 +43,7 @@ int compareCoordinates(Object*,Object*);
 //Player stuff
 int getInput();
 //The last input to be recieved
-int lastInput = 0;
+int lastInput = INPUT_NONE;
 extern int currentLevel;
 void switchLevel(int);
 extern string startLevelName;
