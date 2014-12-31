@@ -3,12 +3,9 @@
 #ifdef GEKKO
 #include <SDL/sdl.h>
 #include <SDL/SDL_events.h>
-#elif LINUX
+#else
 #include <SDL/SDL.h>
 #include <SDL/SDL_events.h>
-#else
-#include <sdl.h>
-#include <sdl_events.h>
 #endif
 void cleanup();
 void doMouse(SDL_Event);

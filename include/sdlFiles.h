@@ -3,10 +3,6 @@
 #include <SDL/sdl_image.h>
 #include <SDL/sdl_mixer.h>
 #elif _WIN32
-#include <sdl.h>
-#include <sdl_image.h>
-#include <SDL_mixer.h>
-#elif LINUX
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_mixer.h>

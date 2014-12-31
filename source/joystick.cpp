@@ -1,6 +1,6 @@
 #ifndef GEKKO
 #ifdef _WIN32
-#include <sdl.h>
+#include <SDL/SDL.h>
 #elif LINUX
 #include <SDL/SDL.h>
 #endif

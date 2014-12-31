@@ -2,7 +2,7 @@
 #ifdef GEKKO
 #include <SDL/SDL.h>
 #elif _WIN32
-#include <sdl.h>
+#include <SDL/SDL.h>
 #elif LINUX
 #include <SDL.h>
 #endif
