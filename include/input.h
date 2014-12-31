@@ -23,7 +23,7 @@ ir_t ir;
 #include <ogc/usbmouse.h>
 #include <SDL/SDL.h>
 #elif _WIN32
-#include <sdl.h>
+#include <SDL/SDL.h>
 #endif
 //#include <SDL/SDL_events.h>
 bool useMouse = 0;
