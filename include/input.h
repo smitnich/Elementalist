@@ -1,5 +1,6 @@
 #include "base.h"
 #ifdef GEKKO
+#include <wupc/wupc.h>
 #include <ogcsys.h>
 #include <unistd.h>
 int gcsensitivity = 80;
@@ -12,6 +13,7 @@ extern bool showCursor;
 u32 exp_type;
 int WInput(u16,bool,int);
 int classicInput(int);
+int wupcInput(int wpadnum);
 u16 WButtonsDown[4];
 int wpadnum = 0;
 bool mouseConnected = 0;
