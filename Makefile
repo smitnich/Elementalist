@@ -28,11 +28,11 @@ INCLUDES	:=	include
 CFLAGS	= -g -O2 -Wall $(MACHDEP) $(INCLUDE)
 CXXFLAGS	=	$(CFLAGS)
 
-LDFLAGS	=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map
+LDFLAGS	=	-g $(MACHDEP) -Wl,-Map,$(notdir $@).map,-wrap,wiiuse_register
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS := -lSDL_net -lSDL_ttf -lSDL_gfx -lSDL_mixer -lSDL_image -lsmpeg -lSDL -ljpeg -lpng -lz -lfat -lntfs -lfreetype -lvorbisidec -lwiiuse -ltinysmb -lbte -logc -lm -lwiikeyboard
+LIBS := -lSDL_net -lSDL_ttf -lSDL_gfx -lSDL_mixer -lSDL_image -lsmpeg -lSDL -ljpeg -lpng -lz -lfat -lntfs -lfreetype -lvorbisidec -lwiiuse -lwupc -ltinysmb -lbte -logc -lm -lwiikeyboard
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
