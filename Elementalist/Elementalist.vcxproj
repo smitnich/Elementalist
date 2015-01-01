@@ -224,9 +224,9 @@
     <ClCompile Include="..\source\sound.cpp" />
     <ClCompile Include="..\source\terrain.cpp" />
     <ClCompile Include="..\source\textbox.cpp" />
-    <ClCompile Include="..\source\unused.cpp" />
     <ClCompile Include="..\source\winput.cpp" />
     <ClCompile Include="..\source\writelog.cpp" />
+    <ClCompile Include="source\moveQueue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\Output\gfx\app.rc" />

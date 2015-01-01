@@ -40,7 +40,7 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 			this->spriteew[i] = personew[i];
 			this->spritens[i] = personns[i];
 		}
-		this->element = 2;
+		this->element = 0;
 		this->isPlayer = 1;
 		this->x = x2;
 		this->y = y2;

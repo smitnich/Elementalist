@@ -62,7 +62,9 @@ bool requestMove(int x, int y, int xChange, int yChange, Object* obj)
 		return true;
 	}
 	else
+	{
 		return false;
+	}
 }
 //Checks the space given a coordinate to start with
 //and a direction to go in

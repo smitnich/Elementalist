@@ -18,7 +18,6 @@ public: int x, y,  objMoveDir, solid, pushable, frozen, numFrames;
 		unsigned int lastTicks;
 		Object();
 		//Adds objects to be added to the front of the queue and objects to be deleted to the back
-		void addToQueue(bool del);
 		//Clean up the object and reorganize the linked list
 		void deleteMe();
 		int getMoveDir();
@@ -28,7 +27,6 @@ public: int x, y,  objMoveDir, solid, pushable, frozen, numFrames;
 		bool tryMove(int x, int y, int dir);
 		//Check if the object is colliding with the player
 		//Todo: Move this into general collision
-		int checkPlayerCollision(double playerMovefraction, int playerMovedir);
 		virtual void doLogic();
 		//Gets the sprite to be drawn on the screen
 		SDL_Surface *getSprite();
