@@ -76,42 +76,6 @@ struct Coordinate
 			}
 			return false;
 		}
-		//Check if the object is colliding with the player
-		//Todo: Move this into general collision
-		int Object::checkPlayerCollision(double playerMovefraction, int playerMovedir)
-		{
-			double objMoveFractionx = 0;
-			double objMoveFractiony = 0;
-			double playerMovefractionx = 0;
-			double playerMovefractiony = 0;
-			int totalx = 0;
-			int totaly = 0;
-			int playertotalx = 0;
-			int playertotaly = 0;
-			if (objMoveDir == D_LEFT)
-				objMoveFractionx = this->objMoveFraction*-1;
-			else if (objMoveDir == D_RIGHT)
-				objMoveFractionx = this->objMoveFraction;
-			else if (objMoveDir == D_UP)
-				objMoveFractiony = this->objMoveFraction*-1;
-			else if (objMoveDir == D_DOWN)
-				objMoveFractiony = this->objMoveFraction;
-			if (playerMovedir == D_LEFT)
-				playerMovefractionx = playerMovefraction*-1;
-			else if (playerMovedir == D_RIGHT)
-				playerMovefractionx = playerMovefraction;
-			else if (playerMovedir == D_UP)
-				playerMovefractiony = playerMovefraction*-1;
-			else if (playerMovedir == D_DOWN)
-				playerMovefractiony = playerMovefraction;
-			totalx = (x*tileSize)+(objMoveFractionx);
-			totaly = (y*tileSize)+(objMoveFractiony);
-			playertotalx=(posX*tileSize)+(playerMovefractionx);
-			playertotaly=(posY*tileSize)+(playerMovefractiony);
-			if (abs(totalx-playertotalx) < tileSize && abs(totaly-playertotaly) < tileSize)
-				return 1;
-			else return 0;
-		}
 		void Object::doLogic()
 		{
 		}
