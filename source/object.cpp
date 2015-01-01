@@ -74,6 +74,7 @@ struct Coordinate
 				objMoveDir = dir;
 				objMoveFraction += tempSpeed*delta;
 			}
+			addMoveRequest(this,checkX,checkY,checkX,checkY);
 			return false;
 		}
 		void Object::doLogic()
@@ -212,18 +213,17 @@ struct Coordinate
 			Level *lev = getCurrentLevel();
 			lev->assignObject(x,y,NULL);
 			if (objMoveDir == D_LEFT)
-				x-=1;
+				checkX = -1;
 			else if (objMoveDir == D_RIGHT)
-				x+=1;
+				checkX = 1;
 			else if (objMoveDir == D_UP)
-				y-=1;
+				checkY = -1;
 			else if (objMoveDir == D_DOWN)
-				y+=1;
+				checkY = 1;
 			if (this->frozen == 0)
 				objMoveDir = D_NONE;
+			addMoveRequest(this,x,y,checkX,checkY);
 			objMoveFraction = 0;
-			lev->assignObject(x,y,this);
-			lev->mapLayer[lev->convertIndex(x,y)]->OnEnter(this);
 		}
 	}
 	void Movable::doLogic()
@@ -231,6 +231,8 @@ struct Coordinate
 	}
 	void Movable::startMove(int dir)
 	{
+		if (dir == D_NONE)
+			return;
 		objMoveDir = dir;
 		tempSpeed = (double) 3*fpsModifier;
 	}

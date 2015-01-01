@@ -1,29 +1,54 @@
-#include "objectDef.h"
+#include "base.h"
 #include <list>
-
-struct Request
+#include "objectDef.h"
+#include "level.h"
+Level* getCurrentLevel();
+bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
+struct MoveRequest
 {
-	int xReq;
-	int yReq;
 	Object *obj;
+	int x,y;
+	int checkX,checkY;
 };
-void tryPlace(Request req);
-std::list<Request> moveRequests;
+std::list<MoveRequest*> moveQueue;
 
-void enqueue(Request req)
+void resetMoveQueue()
 {
-	moveRequests.push_back(req);
-	//moveRequests.emplace_back(req);
+	moveQueue.clear();
 }
-void tryRequests()
+void queuePlaceAll()
 {
-	for (std::list<Request>::iterator it = moveRequests.begin();
-		it != moveRequests.end(); it++)
+	MoveRequest *tmp;
+	Level *level = getCurrentLevel();
+	int size = moveQueue.size();
+	int x;
+	int y; 
+	for (int i = 0; i < size; i++)
 	{
-		tryPlace(*it);
+		tmp = moveQueue.front();
+		x = tmp->x+tmp->checkX;
+		y = tmp->y+tmp->checkY;
+		moveQueue.pop_front();
+		if (level->getObject(x,y) == NULL)
+		{
+			tmp->obj->x = x;
+			tmp->obj->y = y;
+			level->assignObject(x,y,tmp->obj);
+		}
+		else
+		{
+			moveQueue.push_back(tmp);
+		}
 	}
 }
-void tryPlace(Request req)
+void addMoveRequest(Object *obj, int x, int y, int checkX, int checkY)
 {
-
+	MoveRequest *tmpReq = new MoveRequest();
+	tmpReq->obj = obj;
+	tmpReq->x = x;
+	tmpReq->y = y;
+	tmpReq->checkX = checkX;
+	tmpReq->checkY = checkY;
+	moveQueue.push_back(tmpReq);
+	queuePlaceAll();
 }

@@ -16,6 +16,13 @@ extern string levelName;
 extern bool displayName;
 extern int conveyorSpeed;
 extern int levelChange;
+extern string startLevelName;
+//The current frame
+int frame = 0;
+//The last frame to recieve input
+int lastInputFrame = 0;
+Object* player;
+int lastMoveDir;
 //Whether or not a player has been placed yet
 //Used to determine which one to make active
 bool playerPlaced = 0;
@@ -40,16 +47,10 @@ extern FILE* outputFile;
 SDL_Surface* pickSprite(int id, int dir, int moveFraction);
 void moveLine(int, int, int);
 int compareCoordinates(Object*,Object*);
+void addMoveRequest(Object *obj, int x, int y, int checkX, int checkY);
 //Player stuff
 int getInput();
 //The last input to be recieved
 int lastInput = INPUT_NONE;
 extern int currentLevel;
 void switchLevel(int);
-extern string startLevelName;
-//The current frame
-int frame = 0;
-//The last frame to recieve input
-int lastInputFrame = 0;
-Object* player;
-int lastMoveDir;
