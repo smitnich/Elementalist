@@ -21,8 +21,8 @@ void queuePlaceAll()
 	MoveRequest *tmp;
 	Level *level = getCurrentLevel();
 	int size = moveQueue.size();
-	int x;
-	int y; 
+	int x = 0;
+	int y = 0; 
 	for (int i = 0; i < size; i++)
 	{
 		tmp = moveQueue.front();
@@ -50,5 +50,4 @@ void addMoveRequest(Object *obj, int x, int y, int checkX, int checkY)
 	tmpReq->checkX = checkX;
 	tmpReq->checkY = checkY;
 	moveQueue.push_back(tmpReq);
-	queuePlaceAll();
 }

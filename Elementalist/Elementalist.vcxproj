@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Itanium">
       <Configuration>Debug</Configuration>
@@ -28,7 +28,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Itanium'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -40,6 +40,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Itanium'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -199,14 +200,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\checkspace.cpp" />
-    <ClCompile Include="..\source\classicinput.cpp" />
     <ClCompile Include="..\source\config.cpp" />
     <ClCompile Include="..\source\conveyor.cpp" />
     <ClCompile Include="..\source\crate.cpp" />
     <ClCompile Include="..\source\event.cpp" />
     <ClCompile Include="..\source\files.cpp" />
     <ClCompile Include="..\source\font.cpp" />
-    <ClCompile Include="..\source\gcInput.cpp" />
     <ClCompile Include="..\source\gfx.cpp" />
     <ClCompile Include="..\source\globals.cpp" />
     <ClCompile Include="..\source\input.cpp" />
@@ -218,15 +217,12 @@
     <ClCompile Include="..\source\map.cpp" />
     <ClCompile Include="..\source\misc.cpp" />
     <ClCompile Include="..\source\mouse.cpp" />
+    <ClCompile Include="..\source\moveQueue.cpp" />
     <ClCompile Include="..\source\object.cpp" />
     <ClCompile Include="..\source\player.cpp" />
-    <ClCompile Include="..\source\smb.cpp" />
     <ClCompile Include="..\source\sound.cpp" />
     <ClCompile Include="..\source\terrain.cpp" />
     <ClCompile Include="..\source\textbox.cpp" />
-    <ClCompile Include="..\source\winput.cpp" />
-    <ClCompile Include="..\source\writelog.cpp" />
-    <ClCompile Include="source\moveQueue.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\Output\gfx\app.rc" />

@@ -28,7 +28,6 @@ extern Mix_Music* levelMusic[MAX_LEVEL];
 bool loadLevel(string levelName,int levelNum);
 void clearObjects();
 void doTextBox(int);
-void outputLog(const char[]);
 class Terrain *instantiateTerrain(int input);
 extern int currentLevelNum;
 void changeText();
@@ -44,7 +43,6 @@ Level::Level(FILE* inFile, int levelNum)
 	fgets(buffer,128,inFile);
 	if (strncmp(buffer,header,strlen(header)) != 0)
 	{
-		outputLog("Unable to find header string, aborting");
 		return;
 	}
 	string name;
@@ -126,7 +124,6 @@ void Level::loadLayer(FILE* inFile, string str, int xSize, int ySize)
 	char buffer[1024] = {0};
 	string name;
 	string value;
-//Wii problem is HERE
 	size_t split = str.find("=");
 	if (split == string::npos)
 		return;
@@ -173,7 +170,6 @@ void Level::loadMapLayer(FILE *inFile,vector<char> *layer,int xSize, int ySize)
 			}
 			if (numRead == 0)
 			{
-				outputLog("Something went wrong");
 				return;
 			}
 			it += numRead;
@@ -225,7 +221,6 @@ void switchLevel(int levelNum)
 	changeText();
 	if (loadLevel(tempLevel,levelNum) == 0)
 	{
-		outputLog("Unable to load level, exiting\n");
 		exit(0);
 	}
 	displayName = 1;
@@ -241,7 +236,6 @@ string constructLevelName(int levelNum)
 	string tempLevel = levelPath;
 	tempLevel.append(LevelStrings[levelNum]);
 	tempLevel.append(".ele");
-	outputLog(tempLevel.c_str());
 	return tempLevel;
 }
 class Level* getCurrentLevel()

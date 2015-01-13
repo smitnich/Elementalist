@@ -2,6 +2,7 @@
 void init(int argc, char* argv[])
 {
 	#ifdef GEKKO
+	__exception_setreload(8);
 	SYS_SetResetCallback(WiiResetPressed);
 	SYS_SetPowerCallback(WiiPowerPressed);
 	WPAD_SetPowerButtonCallback(WiimotePowerPressed);
@@ -40,13 +41,10 @@ void init(int argc, char* argv[])
 	fileInit();
 #ifdef GEKKO
 	if (smbInit() == 0)
-		outputLog("Unable to initialize SMB\n");
 #endif
-	outputLog(const_cast <char *> ("Files Initialized\n"));
 	if ( SDL_Init( SDL_INIT_EVERYTHING) < 0 )
 	{
 		fprintf(stderr, "Unable to init SDL: %s\n", SDL_GetError() );
-		outputLog("Unable to init SDL\r\n");
 		SDL_Delay( 5000 );
 		exit(EXIT_FAILURE);
 	}
@@ -55,7 +53,6 @@ void init(int argc, char* argv[])
 	SDL_WM_SetCaption("Elementalist", 0 );
 	SDL_WM_SetIcon(IMG_Load("gfx/icon_large.png"), NULL);
 #endif
-	outputLog("SDL Initialized\r\n");
 	if (fullScreen == false)
 		screen = SDL_SetVideoMode(videoSizeX, videoSizeY, bitDepth, SDL_HWSURFACE|SDL_DOUBLEBUF);
 	else
@@ -66,11 +63,8 @@ void init(int argc, char* argv[])
 		SDL_Delay( 5000 );
 		exit(EXIT_FAILURE);
 	}
-	outputLog("Screen initialized\r\n");
 	gfxInit();
-	outputLog("Graphics Loaded\r\n");
-	if (fontInit() == 0)
-		outputLog("Font not loaded");
+	fontInit();
 	switchLevel(1);
 	//fprintf(stderr, "\n\n\n\n\n");
 	atexit(SDL_Quit);
@@ -94,8 +88,6 @@ void cleanup(){
 	clearObjects();
 	SDL_Quit();
 	freeSurface();
-	fclose(outputFile);
-	outputLog("Cleanup complete");
 #ifdef GEKKO
 	MOUSE_Deinit();
 	if (HWButton == -1)

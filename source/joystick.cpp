@@ -8,8 +8,6 @@
 #include "input_def.h"
 #define JOYSTICK_MAX 32767;
 #define MAX_BUTTONS 32
-void outputLog(int);
-void outputLog(const char*);
 //The direction that the hat is currently facing
 int hatDirection = -1;
 //What value the magnitude of the stick must reach in order to be an event

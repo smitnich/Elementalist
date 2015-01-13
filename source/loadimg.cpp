@@ -2,7 +2,6 @@
 #include "sdlFiles.h"
 #include "sprites.h"
 #define COLORKEY 0xFF00DC
-void outputLog(const char[]);
 extern string appPath;
 SDL_Surface* loadOptimizedIMG(string);
 //Load a whole bunch of images
@@ -118,8 +117,6 @@ SDL_Surface* loadOptimizedIMG(string fileName)
 	SDL_Surface *loadedImage = IMG_Load(fileName.c_str());
 	if (loadedImage == NULL)
 	{
-		outputLog(fileName.c_str());
-		outputLog(" was not loaded properly.\r\n");
 		exit(0);
 		return NULL;
 	}

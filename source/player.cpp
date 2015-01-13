@@ -13,7 +13,6 @@ extern bool won;
 extern int lastInput;
 extern int currentLevelNum;
 extern int levelChange;
-//extern char solidArray[MAP_SIZE][MAP_SIZE];
 extern string startLevelName;
 void moveLine(int, int, int);
 void startMove(int dir);
@@ -23,8 +22,6 @@ extern int levelStartCounter;
 int getInput();
 void cleanup();
 class Level* getCurrentLevel();
-void outputLog(char[]);
-void outputLog(int);
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 char checkSolid(int x,int y,int xOff, int yOff);
 extern double delta;
@@ -90,7 +87,9 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 					startLevelName.assign("");
 				}
 				if (levelStartCounter <= 0)
+				{
 					displayName = false;
+				}
 			}
 		}
 		else

@@ -10,9 +10,5 @@ int ntfsCount = 0;
 #endif
 extern string appPath;
 void parseConfig(char[]);
-void outputLog(const char[]);
-void outputLog(char[]);
-void outputLog(int);
 //Where the output is written
-FILE *outputFile = NULL;
 bool markCard[2] = {false,false};

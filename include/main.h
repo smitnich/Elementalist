@@ -11,13 +11,13 @@
 s8 HWButton = -1;
 #include <ogc/usbmouse.h>
 #include "callback.h"
+extern "C" {
+extern void __exception_setreload(int t);
+}
 #endif
 #include "tiles.h"
 unsigned int lastTicks = 0;
 double delta = 0.0;
-void outputLog(char[]);
-void outputLog(const char[]);
-void outputLog(int);
 void clearObjects();
 void parseConfig(char[]);
 void inputInit();
@@ -25,7 +25,6 @@ int getControlType();
 int getInput();
 void objectLogic();
 bool checkWall(int x, int y, char map[MAP_SIZE][MAP_SIZE]);
-void outputLog(int);
 void musicInit();
 extern Mix_Chunk *pushBlock;
 bool playSound(Mix_Chunk *);
@@ -42,7 +41,6 @@ string convertInt(int);
 void updateDelta();
 void freeSurface();
 void doPlayer();
-extern FILE *outputFile;
 //The initial video resolution
 //Can be overridden by config.txt or command line args
 extern int videoSizeX;

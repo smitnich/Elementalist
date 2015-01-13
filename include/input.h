@@ -17,7 +17,6 @@ int wupcInput(int wpadnum);
 u16 WButtonsDown[4];
 int wpadnum = 0;
 bool mouseConnected = 0;
-extern FILE *outputFile;
 ir_t ir;
 #include <wiikeyboard/keyboard.h>
 #include <ogc/usbmouse.h>
@@ -34,8 +33,6 @@ int controltype = CONTROLLER_NONE;
 bool checkGC();
 int keyInput();
 int secondaryControl;
-void outputLog(const char*);
-void outputLog(int);
 int joyInput();
 extern int chosenController;
 extern int hatDirection;

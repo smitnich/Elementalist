@@ -18,14 +18,11 @@ int pickControls()
 	int i;
 	for (i = 0; i < 4; i++)
 	{
-		int tmp = wupcInput(i);
-		if (tmp != INPUT_NONE)
+		/*if (wupcInput(i) != INPUT_NONE)
 		{
-			outputLog("Button for picked controls is: \r\n");
-			outputLog(tmp);
 			wpadnum = i;
 			return CONTROLLER_WUPC;
-		}
+		}*/
 		WPAD_Probe(i, &exp_type);
 		if (WInput(WButtonsDown[i],1,i) != INPUT_NONE)
 		{
@@ -88,15 +85,15 @@ void inputInit()
 	//If a mouse is connected, use it
 	if (MOUSE_IsConnected())
 	{
-		outputLog("Mouse Connected\n");
-		fclose(outputFile);
-		mouseConnected = 1;
+		mouseConnected = true;
 		showCursor = true;
 		//MOUSE_Init();
 		secondaryControl = CONTROLLER_MOUSE;
 	}
 	else
+	{
 		secondaryControl = CONTROLLER_POINTER;
+	}
 	pointerX = 0;
 	pointerY = 0;
 	//Initialize the Wiimote data
@@ -104,7 +101,7 @@ void inputInit()
 	WPAD_SetVRes(0, 640, 480);
 	//Initialize the various control schemes
 	KEYBOARD_Init(NULL);
-	WUPC_Init();
+	//WUPC_Init();
 	WPAD_Init();
 	PAD_Init();
 }
@@ -136,12 +133,6 @@ int getInput()
 	{
 	case CONTROLLER_NONE:
 		controltype = pickControls();
-		if (controltype != CONTROLLER_NONE)
-		{
-			outputLog("Using control type: ");
-			outputLog(controltype);
-			outputLog("\r\n");
-		}
 		return INPUT_NONE;
 		break;
 	case CONTROLLER_CLASSIC:

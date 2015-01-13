@@ -78,6 +78,6 @@ int classicInput(int wpadnum)
 		return B_ANY;
 	if (classic->btns_h & WPAD_CLASSIC_BUTTON_ZL || classic->btns_h & WPAD_CLASSIC_BUTTON_ZR)
 		return B_ANY;
-	return 0;
+	return INPUT_NONE;
 }
 #endif

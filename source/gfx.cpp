@@ -2,8 +2,6 @@
 #include "level.h"
 #include "objectDef.h"
 extern Object *player;
-extern FILE* outputFile;
-void outputLog(const char[]);
 SDL_Rect borderRect[4];
 Level *getCurrentLevel();
 struct tile
@@ -136,35 +134,6 @@ void drawScreen()
 			}
 			//Choose which static feature sprite to use
 			toApply[applyCount++] = currentLevel->mapLayer[currentLevel->convertIndex(x,y)]->sprite;
-			/*switch (map[x][y])
-			{
-			case m_floor:
-				toApply[applyCount++] = tiles;
-				break;
-			case m_wall:
-				toApply[applyCount++] = wall[varMap[x][y]];
-				break;
-			case m_exit:
-				toApply[applyCount++] = exitTile;
-				break;
-			case m_pressure:
-				toApply[applyCount++] = pressureTile;
-				break;
-			case m_conveyorw:
-				toApply[applyCount++] = conveyorew[0];
-				break;
-			case m_conveyore:
-				toApply[applyCount++] = conveyorew[3];
-				break;
-			case m_conveyorn:
-				toApply[applyCount++] = conveyorns[0];
-				break;
-			case m_conveyors:
-				toApply[applyCount++] = conveyorns[3];
-				break;
-			default:
-				toApply[applyCount++] = error;
-			}*/
 			//Determine whether to cut off the image due to it being on the edge of the screen
 			if (x == placeX-doDir[D_LEFT-1])
 			{

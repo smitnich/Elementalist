@@ -43,6 +43,5 @@ extern double movespeed;
 extern int tilesX;
 extern int tilesY;
 extern string musicPath;
-void outputLog(const char[]);
 void parseConfig(char input[]);
 void loadLevelFromArg(string strConfig);

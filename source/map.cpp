@@ -26,19 +26,15 @@ bool loadLevel(string fileName, int levelNum)
 	int y = 0;
 	FILE *ftemp;
 	sprintf(buffer,"\nFileName: %s\n",fileName.c_str());
-	outputLog(buffer);
 	ftemp = fopen(fileName.c_str(),"rb");
 	//ftemp = fopen("levels\\test.txt","r");
 	if (ftemp == NULL)
 	{
-		outputLog("\r\nFailed to open file\r\n");
 		exit(0);
 	}
 	class Level *tmp = new class Level(ftemp,levelNum);
 	if (tmp == NULL)
 	{
-		outputLog("Failed to open map: ");
-		outputLog(buffer);
 		exit(0);
 	}
 	for (x = 0; x < tmp->width; x++)

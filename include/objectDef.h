@@ -4,11 +4,11 @@
 class Object;
 class Object
 {
-public: int x, y,  objMoveDir, solid, pushable, frozen, numFrames;
+public: int x, y,  objMoveDir, solid, pushable, frozen, numFrames, faceDir;
 		double moveSpeed, tempSpeed, objMoveFraction;
 		bool isPlayer;
-		int faceDir;
 		class Level *level;
+		Object();
 		Object* nextObject;
 		Object* prevObject;
 		Object* ownAddress;
@@ -16,7 +16,6 @@ public: int x, y,  objMoveDir, solid, pushable, frozen, numFrames;
 		SDL_Surface *spriteew[6];
 		SDL_Surface *stationary;
 		unsigned int lastTicks;
-		Object();
 		//Adds objects to be added to the front of the queue and objects to be deleted to the back
 		//Clean up the object and reorganize the linked list
 		void deleteMe();
@@ -30,9 +29,6 @@ public: int x, y,  objMoveDir, solid, pushable, frozen, numFrames;
 		virtual void doLogic();
 		//Gets the sprite to be drawn on the screen
 		SDL_Surface *getSprite();
-		Object* getNext();
-		void setNext(Object* temp);
-		void setPrev(Object* temp);
 		virtual bool requestEntry(Object* other, int dir);
 };
 class SolidObject : public Object {

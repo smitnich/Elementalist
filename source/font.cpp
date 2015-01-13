@@ -14,8 +14,9 @@ bool fontInit()
 	font = TTF_OpenFont( fontpath, 32 );
 	fontSmall = TTF_OpenFont(fontpath,16);
 	if (font == NULL || fontSmall == NULL)
-	return 0;
-	else return 1;
+		return 0;
+	else
+		return 1;
 }
 void fontCleanup()
 {

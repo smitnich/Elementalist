@@ -99,7 +99,6 @@ void parseConfig(char config[])
 	else if (name == "musicPath")
 	{
 		musicPath.assign(value);
-		outputLog("Music path changed");
 	}
 	//Wii only
 #ifdef GEKKO
@@ -139,18 +138,6 @@ void parseConfig(char config[])
 	else if (name == "resolutionY" || name == "resolutiony")
 	{
 		videoSizeY = atoi(value.c_str());
-	}
-	//The refresh rate of the game
-	else if (name == "FPS")
-	{
-		framesPerSecond = atoi(value.c_str());
-		fpsModifier = (double) 60/framesPerSecond;
-		movespeed = (double) 3*fpsModifier;
-	}
-	else if (name == "NUM_TILES")
-	{
-		tilesX = atoi(value.c_str());
-		tilesY = tilesX;
 	}
 #endif
 }

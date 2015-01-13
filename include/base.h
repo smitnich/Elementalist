@@ -12,6 +12,7 @@
 #include <iostream>
 using namespace std;
 #ifndef GEKKO
+#include <algorithm>
 #include <sys/stat.h>
 #include <stdio.h>
 #endif

@@ -32,23 +32,14 @@ void musicInit()
 	musicPath.assign("sound/");
 	if (Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
 	{
-		outputLog("Unable to open audio");
-		outputLog(Mix_AllocateChannels(-1));
 	}
 }
 Mix_Music* loadMusic(char *fileName)
 {
 	Mix_Music* music;
 	char buffer[80];
-	outputLog("Music path is: ");
-	outputLog(musicPath.c_str());
-	sprintf(buffer,"%c%c",musicPath.c_str(),fileName);
+	sprintf(buffer,"%s%s",musicPath.c_str(),fileName);
 	music = Mix_LoadMUS(fileName);
-	if (music == NULL)
-	{
-		outputLog("Failed to load ");
-		outputLog(buffer);
-	}
 	return music;
 }
 //Todo: Add Sound
