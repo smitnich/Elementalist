@@ -212,6 +212,11 @@ class Terrain *instantiateTerrain(int input)
 		case m_conveyorn:
 			out = new Conveyor(D_UP);
 			break;
+		case m_exit:
+			out = new Exit();
+			break;
+		default:
+			exit(0);
 	}
 	return out;
 }

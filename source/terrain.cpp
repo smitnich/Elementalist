@@ -1,6 +1,10 @@
 #include "terrain.h"
+#include "level.h"
+void switchLevel(int levelNum);
+extern int currentLevelNum;
 extern SDL_Surface *wall[];
 extern SDL_Surface *tiles;
+extern SDL_Surface *exitTile;
 bool Floor::requestEntry(Object *other, int dir)
 {
 	return true;
@@ -81,3 +85,11 @@ void Wall::onCreate()
 {
 	return;
 };
+void Exit::onEnter(Object *other)
+{
+
+}
+Exit::Exit()
+{
+	this->sprite = exitTile;
+}
