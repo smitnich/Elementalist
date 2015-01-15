@@ -80,7 +80,7 @@ bool Object::requestEntry(Object *other, int dir)
 SDL_Surface* Object::getSprite()
 {
 	int newFraction = 0;
-	if (objMoveFraction < 48)
+	if (objMoveFraction < tileSize)
 		newFraction = floor(objMoveFraction);
 	int value = newFraction*numFrames / tileSize;
 	if (faceDir != 0 && objMoveFraction == 0)
@@ -231,6 +231,13 @@ void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, in
 //Gets the coordinates for the object and draws it to the screen
 void doDraw(Object *drawObject, int moveFractionX, int moveFractionY, bool doDir[4])
 {
+	int posX = 0;
+	int posY = 0;
+	if (player != NULL)
+	{
+		posX = player->x;
+		posY = player->y;
+	}
 	SDL_Surface *toDraw = drawObject->getSprite();
 	int x = drawObject->getX();
 	int y = drawObject->getY();
@@ -322,19 +329,24 @@ Object* objectInit(char id, int x, int y)
 		//newObject = new IceBall(x,y,D_LEFT,0);
 		break;
 	default:
-		sprintf(buffer, "Unable to initialize object %d", id);
 		return NULL;
-		break;
 	}
 	Level *curLevel = getCurrentLevel();
 	curLevel->assignObject(x, y, newObject);
 	return newObject;
 }
-//Clears all objects as well as the linked list and sentinels
 void clearObjects()
 {
+	Level *curLevel = getCurrentLevel();
+	if (curLevel == NULL)
+		return;
+	for (int i = 0; i < curLevel->height*curLevel->width; i++)
+	{
+		Object *tmp = curLevel->objectLayer.at(i);
+		if (tmp != NULL)
+			delete(tmp);
+	}
 }
-//Iterates through the object linked list and draws all of them
 void objectDraw()
 {
 	int moveFractionX = 0;
@@ -380,25 +392,4 @@ double getPlayerMoveFraction()
 int getPlayerMoveDir()
 {
 	return player->getMoveDir();
-}
-//Checks which object should be placed first (North most = higher, westmost for same y coordinate)
-//Returns 1 if one is greater, -1 if two is greater, 0 if they are the same
-int compareCoordinates(Object* one, Object* two)
-{
-	int x1 = one->getX();
-	int y1 = one->getY();
-	int x2 = two->getX();
-	int y2 = two->getY();
-	if (y1 > y2)
-		return 1;
-	else if (y1 < y2)
-		return -1;
-	else
-	{
-		if (x1 > x2)
-			return 1;
-		if (x1 < x2)
-			return -1;
-	}
-	return 0;
 }

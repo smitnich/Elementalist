@@ -24,6 +24,12 @@ void drawScreen()
 	Level *currentLevel = getCurrentLevel();
 	int x = 0;
 	int y = 0;
+	int posX, posY;
+	if (player != NULL)
+	{
+		posX = player->x;
+		posY = player->y;
+	}
 	int moveFractionX = 0;
 	int moveFractionY = 0;
 	int moveBy = 0;
