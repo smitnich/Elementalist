@@ -118,6 +118,10 @@ Object* Level::getObject(int x, int y)
 {
 	return objectLayer[convertIndex(x,y)];
 }
+Terrain* Level::getTerrain(int x, int y)
+{
+	return mapLayer[convertIndex(x, y)];
+}
 void Level::loadLayer(FILE* inFile, string str, int xSize, int ySize)
 {
 	char buffer[1024] = {0};

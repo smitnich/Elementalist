@@ -20,7 +20,7 @@ bool Conveyor::requestExit(Object* other, int objDir)
 }
 void Conveyor::OnEnter(Object* other)
 {
-	other->tryMove(other->x,other->y,dir);
+	other->startMove(dir);
 }
 void Conveyor::OnExit(Object* other)
 {

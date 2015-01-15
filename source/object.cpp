@@ -64,13 +64,20 @@ bool Object::tryMove(int x, int y, int dir)
 	{
 		objMoveDir = dir;
 		objMoveFraction += tempSpeed*delta;
-		addMoveRequest(this, checkX, checkY, checkX, checkY);
+		addMoveRequest(this, x, y, checkX, checkY);
 		return true;
 	}
 	return false;
 }
 void Object::doLogic()
 {
+}
+void Object::startMove(int dir)
+{
+	if (dir == D_NONE)
+		return;
+	objMoveDir = dir;
+	tempSpeed = (double)3 * fpsModifier;
 }
 bool Object::requestEntry(Object *other, int dir)
 {
@@ -195,13 +202,6 @@ void Movable::objMove()
 }
 void Movable::doLogic()
 {
-}
-void Movable::startMove(int dir)
-{
-	if (dir == D_NONE)
-		return;
-	objMoveDir = dir;
-	tempSpeed = (double)3 * fpsModifier;
 }
 //Takes in pointers to ovefractionx and y and modifies their values based on direction
 void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY, bool *doDir)
