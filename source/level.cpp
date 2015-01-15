@@ -97,11 +97,10 @@ void Level::loadObjects()
 			char tmp = origObjectLayer[convertIndex(x, y)];
 			if (tmp != 0)
 			{
-				Object* newObject = objectInit(tmp,x,y);
+				objectInit(tmp,x,y);
 			}
 		}
 	}
-
 }
 int Level::convertIndex(int x, int y)
 {

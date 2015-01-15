@@ -41,8 +41,6 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 		this->isPlayer = 1;
 		this->x = x2;
 		this->y = y2;
-		posX = x2;
-		posY = y2;
 		this->objMoveDir = 0;
 		this->objMoveFraction = 0;
 		this->solid = 0;
@@ -168,10 +166,8 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 				lastInput = B_UP;
 				break;
 			default:
-				//lastInput = 0;
+				//lastInput = B_NONE;
 				break;
 			}
-			posX = this->x;
-			posY = this->y;
 		}
 	}
