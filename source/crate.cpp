@@ -2,10 +2,12 @@
 #include "objectDef.h"
 #include "base.h"
 #include "sprites.h"
+#include "level.h"
 extern Object *player;
 extern int pressureCount;
 void moveLine(int, int, int);
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
+Level* getCurrentLevel();
 void objMove();
 	Crate::Crate()
 	{
@@ -70,6 +72,18 @@ void objMove();
 	}
 	bool HeavyCrate::requestEntry(Object *other, int dir)
 	{
-		return Crate::requestEntry(other,dir);
-		return false;
+		int xdir = 0;
+		int ydir = 0;
+		if (dir == D_LEFT)
+			xdir = -1;
+		else if (dir == D_RIGHT)
+			xdir = 1;
+		if (dir == D_UP)
+			ydir = -1;
+		else if (dir == D_DOWN)
+			ydir = 1;
+		if (getCurrentLevel()->getObject(x + xdir, y + ydir) == NULL)
+			return Crate::requestEntry(other, dir);
+		else
+			return false;
 	}

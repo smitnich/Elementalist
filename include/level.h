@@ -19,15 +19,20 @@ class Level
 	vector<char> origObjectLayer;
 	vector<Terrain *> mapLayer;
 	vector<Object *> objectLayer;
+	vector<int> receivers[MAX_CONNECTIONS];
+	int senders[MAX_CONNECTIONS];
 	char **connectionLayer;
 	Level(FILE* inFile, int levelNum);
 	void loadAllLayers(char *buffer,FILE *inFile);
 	void loadObjects();
 	int convertIndex(int x, int y);
-	void loadLayer(FILE* inFile, string str, int xSize, int ySize);
+	void loadLayer(FILE *inFile, string str, int xSize, int ySize);
 	void loadMapLayer(FILE *inFile,vector<char> *layer,int xSize, int ySize);
 	void reloadMapLayer();
 	bool assignObject(int x, int y, Object *obj);
 	Object* getObject(int x, int y);
+	Terrain* getTerrain(int x, int y);
+	void loadConnections(FILE *inFile, int xSize, int ySize);
+	void makeConnections();
 };
 #endif

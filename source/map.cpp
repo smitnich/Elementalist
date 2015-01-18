@@ -18,6 +18,7 @@ bool loadLevel(string fileName, int levelNum)
 		Level *tmp = getCurrentLevel();
 		tmp->reloadMapLayer();
 		tmp->loadObjects();
+		tmp->makeConnections();
 		changeText();
 		return true;
 	}

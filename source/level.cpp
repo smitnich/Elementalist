@@ -3,6 +3,8 @@
 #include "level.h"
 #include "objectDef.h"
 #include "terrain.h"
+#include "pointerContainer.h"
+#include <queue>
 //The number of objects created
 extern unsigned int numObjects;
 extern const char* header;
@@ -38,6 +40,10 @@ class Level *allLevels[MAX_LEVEL];
 Level::Level(FILE* inFile, int levelNum)
 {
 	allLevels[levelNum] = this;
+	for (int i = 0; i < MAX_CONNECTIONS; i++)
+	{
+		senders[i] = -1;
+	}
 	int numHeaderLines = 4;
 	char buffer[128] = {0};
 	fgets(buffer,128,inFile);
@@ -64,7 +70,7 @@ Level::Level(FILE* inFile, int levelNum)
 		{
 			height = atoi(value.c_str());
 		}
-		else if (name == "tileheight" || name == "tilewidth")
+		else if (name == "tileheight" || name == "tilewidth" || name == "orientation")
 		{
 			//Who cares, we don't need this information currently
 		}
@@ -86,6 +92,7 @@ void Level::loadAllLayers(char *buffer,FILE *inFile)
 	fclose(inFile);
 	loadObjects();
 	reloadMapLayer();
+	makeConnections();
 }
 void Level::loadObjects()
 {
@@ -99,6 +106,25 @@ void Level::loadObjects()
 			{
 				objectInit(tmp,x,y);
 			}
+		}
+	}
+}
+void Level::makeConnections()
+{
+	Trigger *tmp;
+	for (int i = 0; i < MAX_CONNECTIONS; i++)
+	{
+		if (senders[i] == -1)
+			continue;
+		//If the connector wasn't placed over a valid trigger,
+		//skip it
+		Terrain *test = mapLayer.at(senders[i]);
+		if (test->isTrigger == false)
+			continue;
+		tmp = (Trigger*) mapLayer.at(senders[i]);
+		for (int j = 0; j < receivers[i].size(); j++)
+		{
+			tmp->connections.insert(tmp->connections.begin(),mapLayer.at(receivers[i].at(j)));
 		}
 	}
 }
@@ -148,6 +174,12 @@ void Level::loadLayer(FILE* inFile, string str, int xSize, int ySize)
 		fgetc(inFile);
 		loadMapLayer(inFile,&origObjectLayer,xSize,ySize);
 	}
+	else if (value == "Connections")
+	{
+		fgets(buffer, strlen("data=\r\n"), inFile);
+		fgetc(inFile);
+		loadConnections(inFile,xSize,ySize);
+	}
 }
 void Level::loadMapLayer(FILE *inFile,vector<char> *layer,int xSize, int ySize)
 {
@@ -180,6 +212,48 @@ void Level::loadMapLayer(FILE *inFile,vector<char> *layer,int xSize, int ySize)
 		}
 	}
 	delete[] buffer;
+}
+void Level::loadConnections(FILE *inFile, int xSize, int ySize)
+{
+	int maxChars = 4;
+	int maxLine = xSize*maxChars;
+	char *buffer = new char[maxLine];
+	int val = 0;
+	int numRead = 0;
+	char *it = buffer;
+	//Since objects have not been initialied at this point, store just the index
+	//of the object to be used, and fill it in later
+	for (int y = 0; y < ySize; y++)
+	{
+		it = buffer;
+		if (!fgets(buffer, maxLine, inFile))
+		{
+			exit(0);
+		}
+		for (int x = 0; x < xSize; x++)
+		{
+			if (sscanf(it, "%d,%n", &val, &numRead) == EOF)
+			{
+				exit(0);
+			}
+			if (numRead == 0)
+			{
+				return;
+			}
+			if (val != 0)
+			{
+				if (val == m_receiver1)
+				{
+					receivers[0].push_back(convertIndex(x,y));
+				}
+				else if (val == m_sender1)
+				{
+					senders[0] = convertIndex(x, y);
+				}
+			}
+			it += numRead;
+		}
+	}
 }
 void Level::reloadMapLayer()
 {
@@ -215,8 +289,12 @@ class Terrain *instantiateTerrain(int input)
 		case m_exit:
 			out = new Exit();
 			break;
+		case m_pressure:
+			out = new PressureSwitch();
+			break;
 		default:
-			exit(0);
+			out = new Floor();
+			break;
 	}
 	return out;
 }
@@ -235,7 +313,7 @@ void switchLevel(int levelNum)
 	startLevelName = "";
 	doTextBox(posY);
 	changeText();
-	won = 0;
+	won = false;
 	lastInputFrame = frame;
 }
 //Make the level name given the number

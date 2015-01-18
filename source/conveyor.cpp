@@ -10,6 +10,8 @@ bool Conveyor::requestEntry(Object* other, int objDir)
 }
 bool Conveyor::requestExit(Object* other, int objDir)
 {
+	if (disabled)
+		return true;
 	if (objDir == D_UP && this->dir == D_DOWN ||
 	   (objDir == D_DOWN && this->dir == D_UP) ||
 	   (objDir == D_LEFT && this->dir == D_RIGHT) ||
@@ -18,23 +20,15 @@ bool Conveyor::requestExit(Object* other, int objDir)
 	else
 		return true;
 }
-void Conveyor::OnEnter(Object* other)
+void Conveyor::activate()
 {
-	other->startMove(dir);
+	disabled = true;
 }
-void Conveyor::OnExit(Object* other)
+void Conveyor::deactivate()
 {
-	return;
+	disabled = false;
 }
-bool Conveyor::isSolid()
-{
-	return false;
-}
-void Conveyor::onActivate()
-{
-	return;
-}
-void Conveyor::onDeactivate()
+void Conveyor::onCreate()
 {
 	return;
 }
@@ -42,12 +36,23 @@ void Conveyor::onDestroy()
 {
 	return;
 }
-void Conveyor::onCreate()
+void Conveyor::onEnter(Object* other)
+{
+	if (!disabled)
+		other->startMove(dir);
+}
+void Conveyor::onExit(Object* other)
 {
 	return;
 }
+bool Conveyor::isSolid()
+{
+	return true;
+}
 Conveyor::Conveyor(int direction)
 {
+	disabled = false;
+	isTrigger = false;
 	this->dir = direction;
 	switch (this->dir)
 	{

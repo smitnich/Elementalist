@@ -34,7 +34,7 @@ void queuePlaceAll()
 			tmp->obj->x = x;
 			tmp->obj->y = y;
 			level->assignObject(x, y, tmp->obj);
-			level->getTerrain(x, y)->OnEnter(tmp->obj);
+			level->getTerrain(x, y)->onEnter(tmp->obj);
 		}
 		else
 		{
@@ -48,6 +48,7 @@ void addMoveRequest(Object *obj, int x, int y, int checkX, int checkY)
 	tmpReq->obj = obj;
 	tmpReq->x = x;
 	tmpReq->y = y;
+	getCurrentLevel()->getTerrain(x, y)->onExit(tmpReq->obj);
 	tmpReq->checkX = checkX;
 	tmpReq->checkY = checkY;
 	moveQueue.push_back(tmpReq);

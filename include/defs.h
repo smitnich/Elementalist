@@ -2,11 +2,12 @@
 #define defs
 #include "wallnames.h"
 enum tiles_t
-{ m_floor = 3,
-m_wall = 4,
+{
 m_exit = 1,
-m_barrier = 128,
 m_pressure = 2,
+m_floor = 3,
+m_wall = 4,
+m_barrier = 128,
 m_conveyorn = 6,
 m_conveyors = 7,
 m_conveyorw = 8,
@@ -14,7 +15,11 @@ m_conveyore = 5,
 m_any,
 m_error
 };
-
+enum connectors_t
+{
+	m_sender1 = 17,
+	m_receiver1 = 18
+};
 #define MAP_SIZE 48
 enum directions_t
 {

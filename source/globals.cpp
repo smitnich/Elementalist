@@ -67,6 +67,6 @@ bool displayName = 1;
 bool fullScreen = false;
 //Set to true when the level is completed
 //Shows a simple you won message
-bool won = 0;
+bool won = false;
 int prevFrame = 0;
 int curFrame = 0;

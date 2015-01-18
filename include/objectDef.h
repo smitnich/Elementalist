@@ -23,6 +23,7 @@ public: int x, y,  objMoveDir, solid, pushable, frozen, numFrames, faceDir;
 		double getMoveFraction();
 		int getX();
 		int getY();
+		void startMove(int dir);
 		bool tryMove(int x, int y, int dir);
 		//Check if the object is colliding with the player
 		//Todo: Move this into general collision
@@ -39,7 +40,6 @@ public:
 class Movable : public SolidObject{
 public:
 	Movable();
-	void startMove(int dir);
 	void specialLogic();
 	void doLogic();
 	void objMove();
