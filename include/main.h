@@ -1,4 +1,4 @@
-#include "base.h"
+/*#include "base.h"
 #include "sdlFiles.h"
 #ifdef _WIN32
 #include <direct.h>
@@ -16,7 +16,6 @@ extern void __exception_setreload(int t);
 }
 #endif
 #include "tiles.h"
-unsigned int lastTicks = 0;
 double delta = 0.0;
 void clearObjects();
 void parseConfig(char[]);
@@ -117,3 +116,4 @@ extern int frame;
 extern int prevFrame;
 extern int curFrame;
 extern string musicPath;
+*/

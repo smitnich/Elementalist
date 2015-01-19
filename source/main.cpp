@@ -1,4 +1,43 @@
-#include "main.h"
+#include "base.h"
+#include "sdlFiles.h"
+#ifdef _WIN32
+#include <direct.h>
+#elif LINUX
+#include <unistd.h>
+#endif
+#include "input_def.h"
+//If wii
+#ifdef GEKKO
+s8 HWButton = -1;
+#include <ogc/usbmouse.h>
+#include "callback.h"
+extern "C" {
+	extern void __exception_setreload(int t);
+}
+#endif
+extern string directorySymbol;
+void parseConfig(char argv[]);
+void musicInit();
+void fileInit();
+void inputInit();
+void joystickInit();
+void gfxInit();
+bool fontInit();
+void switchLevel(int level);
+void clearObjects();
+void freeSurface();
+void checkEvents();
+void drawScreen();
+void objectLogic();
+void doPlayer();
+extern bool defaultPath, fullScreen, done, displayName;
+extern string levelPath, appPath;
+extern SDL_Surface *screen;
+extern int videoSizeX, videoSizeY, bitDepth, argumentCount, frame, lastInputFrame, lastInput, \
+framesPerSecond, levelChange, levelStartCounter;
+unsigned int lastTicks = 0;
+double delta = 0.0;
+
 void init(int argc, char* argv[])
 {
 	#ifdef GEKKO
@@ -83,7 +122,6 @@ void cleanup(){
 #endif
 	SDL_FillRect(screen, 0, SDL_MapRGB(screen->format, 0, 0, 0));
 	SDL_Flip(screen);
-	Mix_FreeChunk(pushBlock);
 	Mix_CloseAudio();
 	clearObjects();
 	SDL_Quit();
@@ -102,6 +140,12 @@ void cleanup(){
 int getCenter(int surfaceSize, int itemSize)
 {
 	return ((surfaceSize/2)-(itemSize/2));
+}
+void updateDelta()
+{
+	unsigned int curTime = SDL_GetTicks();
+	delta = ((double)(curTime - lastTicks)) / (1000.0 / ((float)framesPerSecond));
+	lastTicks = curTime;
 }
 int main(int argc, char* argv[]){
 	argumentCount = argc;
@@ -134,10 +178,4 @@ int main(int argc, char* argv[]){
 		frame++;
 	}
 	return 0;
-}
-void updateDelta()
-{
-	 unsigned int curTime = SDL_GetTicks();
-	 delta = ((double) (curTime - lastTicks))/(1000.0/((float) framesPerSecond));
-	 lastTicks = curTime;
 }

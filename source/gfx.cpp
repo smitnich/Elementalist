@@ -4,20 +4,6 @@
 extern Object *player;
 SDL_Rect borderRect[4];
 Level *getCurrentLevel();
-struct tile
-{
-	SDL_Surface *contents[NUM_TILE_IMAGES];
-	int *xOffset;
-	int *yOffset;
-	int xWrap;
-	int yWrap;
-};
-void renderTile(int x, int y, int centerX, int centerY, int moveFractionX, int moveFractionY)
-{
-	int drawX = (x-centerX)*TILE_SIZE+xInitial;
-	int drawY = (y-centerY)*TILE_SIZE+yInitial;
-	apply_surface(drawX,drawY,0,0,tiles,screen);
-}
 //Draws the static map features, the objects, the player, and the textbox on the screen
 void drawScreen()
 {
@@ -97,8 +83,7 @@ void drawScreen()
 	{
 		for (y = placeY-doDir[D_UP-1]; y < tilesY*2+1+placeY+doDir[D_DOWN-1]; y++)
 		{
-			SDL_Surface *toApply[5];
-			int applyCount = 0;
+			SDL_Surface *toApply;
 			//Move the player if the screen is not moving due to being on the edge of the screen
 			if (moveFractionX != 0)
 			{
@@ -139,28 +124,25 @@ void drawScreen()
 				applyY = (y-placeY)*tileSize+yInitial;
 			}
 			//Choose which static feature sprite to use
-			toApply[applyCount++] = currentLevel->mapLayer[currentLevel->convertIndex(x,y)]->sprite;
+			toApply = currentLevel->mapLayer[currentLevel->convertIndex(x,y)]->sprite;
 			//Determine whether to cut off the image due to it being on the edge of the screen
 			if (x == placeX-doDir[D_LEFT-1])
 			{
 				//Make sure the value to be drawn is negative
 				if (moveFractionX > 0)
 				{
-					for (int i = 0; i < applyCount; i++)
-						apply_surface(applyX,applyY,(tileSize-moveFractionX)*-1,0,toApply[i],screen);
+					apply_surface(applyX,applyY,(tileSize-moveFractionX)*-1,0,toApply,screen);
 					continue;
 				}
 				else if (moveFractionX < 0)
 				{
-					for (int i = 0; i < applyCount; i++)
-						apply_surface(applyX,applyY,moveFractionX,0,toApply[i],screen);
+					apply_surface(applyX,applyY,moveFractionX,0,toApply,screen);
 					continue;
 				}
 				//Check if we're also at the top or bottom of the map
 				else if (!((y == placeY-doDir[D_UP-1]||y == tilesY*2+placeY+doDir[D_DOWN-1]) && moveFractionY != 0))
 				{
-					for (int i = 0; i < applyCount; i++)
-						apply_surface(applyX,applyY,toApply[i],screen);
+					apply_surface(applyX,applyY,toApply,screen);
 					continue;
 				}
 			}
@@ -169,20 +151,17 @@ void drawScreen()
 			{
 				if (moveFractionX > 0)
 				{
-					for (int i = 0; i < applyCount; i++)
-						apply_surface(applyX,applyY,moveFractionX,0,toApply[i],screen);
+					apply_surface(applyX,applyY,moveFractionX,0,toApply,screen);
 					continue;
 				}
 				else if (moveFractionX < 0)
 				{
-					for (int i = 0; i < applyCount; i++)
-						apply_surface(applyX,applyY,tileSize+moveFractionX,0,toApply[i],screen);
+					apply_surface(applyX,applyY,tileSize+moveFractionX,0,toApply,screen);
 					continue;
 				}
 				else if (!((y == placeY-doDir[D_UP-1]||y == tilesY*2+1+placeY+doDir[D_DOWN-1]-1) && moveFractionY != 0))
 				{
-					for (int i = 0; i < applyCount; i++)
-						apply_surface(applyX,applyY,toApply[i],screen);
+					apply_surface(applyX,applyY,toApply,screen);
 					continue;
 				}
 			}
@@ -190,20 +169,17 @@ void drawScreen()
 			{
 				if (moveFractionY > 0)
 				{
-					for (int i = 0; i < applyCount; i++)
-						apply_surface(applyX,applyY,0,(tileSize-moveFractionY)*-1,toApply[i],screen);
+					apply_surface(applyX,applyY,0,(tileSize-moveFractionY)*-1,toApply,screen);
 					continue;
 				}
 				else if (moveFractionY < 0)
 				{
-					for (int i = 0; i < applyCount; i++)
-						apply_surface(applyX,applyY,0,moveFractionY,toApply[i],screen);
+					apply_surface(applyX,applyY,0,moveFractionY,toApply,screen);
 					continue;
 				}
 				else
 				{
-					for (int i = 0; i < applyCount; i++)
-						apply_surface(applyX,applyY,toApply[i],screen);
+					apply_surface(applyX,applyY,toApply,screen);
 					continue;
 				}
 			}
@@ -211,26 +187,23 @@ void drawScreen()
 			{
 				if (moveFractionY > 0)
 				{
-					for (int i = 0; i < applyCount; i++)
-						apply_surface(applyX,applyY,0,moveFractionY,toApply[i],screen);
-					continue;
+						apply_surface(applyX,applyY,0,moveFractionY,toApply,screen);
 				}
 				else if (moveFractionY < 0)
 				{
-					for (int i = 0; i < applyCount; i++)
-						apply_surface(applyX,applyY,0,tileSize+moveFractionY,toApply[i],screen);
+						apply_surface(applyX,applyY,0,tileSize+moveFractionY,toApply,screen);
 					continue;
 				}
 				else
 				{
-					for (int i = 0; i < applyCount; i++)
-						apply_surface(applyX,applyY,toApply[i],screen);
+						apply_surface(applyX,applyY,toApply,screen);
 					continue;
 				}
 			}
 			else
-				for (int i = 0; i < applyCount; i++)
-					apply_surface(applyX,applyY,toApply[i],screen);
+			{
+				apply_surface(applyX, applyY, toApply, screen);
+			}
 		}
 	}
 	int drawX = 0;

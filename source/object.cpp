@@ -203,26 +203,30 @@ void Movable::objMove()
 void Movable::doLogic()
 {
 }
-//Takes in pointers to ovefractionx and y and modifies their values based on direction
+//Takes in pointers to movefractionx and y and modifies their values based on direction
 void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY, bool *doDir)
 {
 	switch (moveDir)
 	{
 	case D_UP:
 		*moveFractionY = moveFraction*-1;
-		doDir[D_UP - 1] = 1;
+		if (doDir != NULL)
+			doDir[D_UP - 1] = 1;
 		break;
 	case D_DOWN:
 		*moveFractionY = moveFraction;
-		doDir[D_DOWN - 1] = 1;
+		if (doDir != NULL)
+			doDir[D_DOWN - 1] = 1;
 		break;
 	case D_LEFT:
 		*moveFractionX = moveFraction*-1;
-		doDir[D_LEFT - 1] = 1;
+		if (doDir != NULL)
+			doDir[D_LEFT - 1] = 1;
 		break;
 	case D_RIGHT:
 		*moveFractionX = moveFraction;
-		doDir[D_RIGHT - 1] = 1;
+		if (doDir != NULL)
+			doDir[D_RIGHT - 1] = 1;
 		break;
 	default:
 		break;
