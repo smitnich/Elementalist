@@ -2,6 +2,7 @@
 #include "base.h"
 #include "sprites.h"
 #include "input_def.h"
+#include "level.h"
 extern int posX, posY;
 extern int pressureCount;
 extern int lastMoveDir;
@@ -62,6 +63,28 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 	}
 	bool Person::requestEntry(Object *other, int dir)
 	{
+		int checkX = 0;
+		int checkY = 0;
+		switch (dir)
+		{
+		case D_UP:
+			checkY = -1;
+			break;
+		case D_DOWN:
+			checkY = 1;
+			break;
+		case D_LEFT:
+			checkX = -1;
+			break;
+		case D_RIGHT:
+			checkX = 1;
+			break;
+		}
+		if (!requestMove(x, y, checkX, checkY, level->getObject(x + checkX, y + checkY)))
+		{
+			return false;
+		}
+		startMove(dir);
 		return true;
 	}
 	//Moves, gets input if needed and checks for forces on the player eg conveyor belts
