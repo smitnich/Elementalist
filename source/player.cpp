@@ -98,21 +98,20 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 			int input = getInput();
 			if (input != INPUT_NONE && input != lastInput)
 			{
-				if (won == true)
-				{
-					if (currentLevelNum >= MAX_LEVEL-1)
-						exit(0);
-					else
-						currentLevelNum++;
-					levelChange = currentLevelNum;
-					startLevelName.assign("");
-				}
 				if (levelStartCounter <= 0)
 				{
 					displayName = false;
 				}
 			}
 		}
+		else if (won == true)
+		{
+			if (currentLevelNum >= MAX_LEVEL - 1)
+				exit(0);
+			levelChange = currentLevelNum+1;
+			startLevelName.assign("");
+		}
+
 		else
 		{
 			int input = getInput();
