@@ -4,6 +4,7 @@
 extern Object *player;
 SDL_Rect borderRect[4];
 Level *getCurrentLevel();
+void queueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY, bool *doDir);
 //Draws the static map features, the objects, the player, and the textbox on the screen
 void drawScreen()
 {
@@ -55,6 +56,7 @@ void drawScreen()
 				doDraw(obj, xOffset, yOffset, doDir);
 		}
 	}
+	queueDrawAll(screen, xOffset, yOffset, doDir);
 	if (pointerX > -1 && pointerY > -1 && showCursor == true)
 		apply_surface(pointerX,pointerY,cursor,screen);
 	drawBorders();
