@@ -7,18 +7,38 @@ Level *getCurrentLevel();
 //Draws the static map features, the objects, the player, and the textbox on the screen
 void drawScreen()
 {
-	int x, y, xOffset = 0, yOffset = 0;
+	int x, y, xOffset = 0, yOffset = 0, xStart = player->x, yStart = player->y;
 	Level *currentLevel = getCurrentLevel();
 	bool doDir[4] = { 0, 0, 0, 0 };
 	Terrain *terrain = NULL;
 	Object *obj = NULL;
+	calculateMoveFraction(player->objMoveDir, player->objMoveFraction, &xOffset, &yOffset, doDir);
+	if (player->x < NUM_TILES || (player->x == NUM_TILES && doDir[D_RIGHT - 1] != true))
+	{
+		xOffset = 0;
+		xStart = NUM_TILES;
+	}
+	else if (player->x > currentLevel->width - NUM_TILES-1 || (player->x == currentLevel->width - NUM_TILES-1 && doDir[D_LEFT - 1] != true))
+	{
+		xOffset = 0;
+		xStart = currentLevel->width - NUM_TILES;
+	}
+	if (player->y < NUM_TILES || (player->y == NUM_TILES && doDir[D_DOWN - 1] != true))
+	{
+		yOffset = 0;
+		yStart = NUM_TILES;
+	}
+	else if (player->y > currentLevel->height - NUM_TILES - 1 || (player->y == currentLevel->height - NUM_TILES - 1 && doDir[D_UP - 1] != true))
+	{
+		yOffset = 0;
+		yStart = currentLevel->height - NUM_TILES;
+	}
 	//Do one tile more than we need so that we get partially drawn tiles correctly
 	for (x = -NUM_TILES-1; x <= NUM_TILES+1; x++)
 	{
 		for (y = -NUM_TILES-1; y <= NUM_TILES+1; y++)
 		{
-			terrain = currentLevel->getTerrain(player->x + x, player->y + y);
-			calculateMoveFraction(player->objMoveDir, player->objMoveFraction, &xOffset, &yOffset, doDir);
+			terrain = currentLevel->getTerrain(xStart + x, yStart + y);
 			if (terrain != NULL)
 				terrain->draw(screen, x + NUM_TILES, y + NUM_TILES, -xOffset, -yOffset);
 		}
@@ -30,7 +50,7 @@ void drawScreen()
 	{
 		for (y = -NUM_TILES - 1; y <= NUM_TILES + 1; y++)
 		{
-			obj = currentLevel->getObject(player->x + x, player->y + y);
+			obj = currentLevel->getObject(xStart + x, yStart + y);
 			if (obj != NULL)
 				doDraw(obj, xOffset, yOffset, doDir);
 		}

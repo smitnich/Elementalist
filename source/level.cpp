@@ -145,10 +145,14 @@ bool Level::assignObject(int x, int y, Object *obj)
 }
 Object* Level::getObject(int x, int y)
 {
+	if (x < 0 || y < 0)
+		return NULL;
 	return objectLayer[convertIndex(x,y)];
 }
 Terrain* Level::getTerrain(int x, int y)
 {
+	if (x < 0 || y < 0)
+		return NULL;
 	return mapLayer[convertIndex(x, y)];
 }
 void Level::loadLayer(FILE* inFile, string str, int xSize, int ySize)
