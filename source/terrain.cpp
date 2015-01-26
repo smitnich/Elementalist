@@ -11,10 +11,6 @@ Floor::Floor()
 	isTrigger = false;
 	this->sprite = tiles;
 }
-void Floor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
-{
-	return;
-}
 bool Wall::requestEntry(Object *other, int dir)
 {
 	return false;
@@ -28,10 +24,6 @@ Wall::Wall()
 	isTrigger = false;
 	this->sprite = wall[v_wallbase];
 }
-void Wall::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
-{
-	return;
-}
 void Exit::onEnter(Object *other)
 {
 	if (other->isPlayer)
@@ -41,8 +33,4 @@ Exit::Exit()
 {
 	isTrigger = false;
 	this->sprite = exitTile;
-}
-void Exit::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
-{
-	return;
 }

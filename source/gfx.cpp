@@ -7,227 +7,37 @@ Level *getCurrentLevel();
 //Draws the static map features, the objects, the player, and the textbox on the screen
 void drawScreen()
 {
+	int x, y, xOffset = 0, yOffset = 0;
 	Level *currentLevel = getCurrentLevel();
-	int x = 0;
-	int y = 0;
-	int posX, posY;
-	if (player != NULL)
+	bool doDir[4] = { 0, 0, 0, 0 };
+	Terrain *terrain = NULL;
+	Object *obj = NULL;
+	//Do one tile more than we need so that we get partially drawn tiles correctly
+	for (x = -NUM_TILES-1; x <= NUM_TILES+1; x++)
 	{
-		posX = player->x;
-		posY = player->y;
-	}
-	int moveFractionX = 0;
-	int moveFractionY = 0;
-	int moveBy = 0;
-	int applyX = 0;
-	int applyY = 0;
-	int doDir[4] = {0,0,0,0};
-	//Determine the value to offset all sprites by
-	if (player->objMoveDir == D_UP)
-	{
-		moveFractionY = player->objMoveFraction*-1;
-		doDir[D_UP-1] = 1;
-	}
-	else if (player->objMoveDir == D_DOWN)
-	{
-		moveFractionY = player->objMoveFraction;
-		doDir[D_DOWN-1] = 1;
-	}
-	else if (player->objMoveDir == D_LEFT)
-	{
-		moveFractionX = player->objMoveFraction*-1;
-		doDir[D_LEFT-1] = 1;
-	}
-	else if (player->objMoveDir == D_RIGHT)
-	{
-		moveFractionX = player->objMoveFraction;
-		doDir[D_RIGHT-1] = 1;
-	}
-	int placeX = -1;
-	int placeY = -1;
-	if (posX < tilesX+1)
-		placeX = 0;
-	if (posY < tilesY+1)
-		placeY = 0;
-	if (posY > MAP_SIZE-tilesY-1)
-		placeY = MAP_SIZE-tilesY*2-1;
-	if (posX > MAP_SIZE-tilesX-1)
-		placeX = MAP_SIZE-tilesX*2-1;
-	if (placeX == -1)
-		placeX = posX-tilesX;
-	if (placeY == -1)
-		placeY = posY-tilesY;
-	//Don't do the offset if the player is moving towards the edge of the map
-	if (placeX == 0||placeX == MAP_SIZE-tilesX*2-1)
-	{
-		if (!((posX == tilesX && player->objMoveDir == D_RIGHT)||(posX == MAP_SIZE-tilesX-1 && player->objMoveDir == D_LEFT)))
+		for (y = -NUM_TILES-1; y <= NUM_TILES+1; y++)
 		{
-			moveFractionX = 0;
-			doDir[D_LEFT-1] = 0;
-			doDir[D_RIGHT-1] = 0;
+			terrain = currentLevel->getTerrain(player->x + x, player->y + y);
+			calculateMoveFraction(player->objMoveDir, player->objMoveFraction, &xOffset, &yOffset, doDir);
+			if (terrain != NULL)
+				terrain->draw(screen, x + NUM_TILES, y + NUM_TILES, -xOffset, -yOffset);
 		}
 	}
-	//Don't do the offset if the player is moving towards the edge of the map
-	if (placeY == 0||placeY == MAP_SIZE-tilesY*2-1)
-	{
-		if (!((posY == tilesY && player->objMoveDir == D_DOWN)||(posY == MAP_SIZE-tilesY-1 && player->objMoveDir == D_UP)))
-		{
-			moveFractionY = 0;
-			doDir[D_UP-1] = 0;
-			doDir[D_DOWN-1] = 0;
-		}
-	}
-
-	//Draw every tile within the players line of sight, including partially visible tiles
-	for (x = placeX-doDir[D_LEFT-1]; x < tilesX*2+1+placeX+doDir[D_RIGHT-1]; x++)
-	{
-		for (y = placeY-doDir[D_UP-1]; y < tilesY*2+1+placeY+doDir[D_DOWN-1]; y++)
-		{
-			SDL_Surface *toApply;
-			//Move the player if the screen is not moving due to being on the edge of the screen
-			if (moveFractionX != 0)
-			{
-				if (placeX == 0||placeX == MAP_SIZE-tilesX*2-1)
-				{
-					if (posX == tilesX && player->objMoveDir == D_RIGHT)
-						moveBy = moveFractionX;
-					else if (posX == MAP_SIZE-tilesX-1 && player->objMoveDir == D_LEFT)
-						moveBy = moveFractionX;
-					else
-						moveBy = 0;
-				}
-				else
-					moveBy = moveFractionX;
-				applyX = (x-placeX)*tileSize+xInitial-moveBy;
-				applyY = (y-placeY)*tileSize+yInitial;
-			}
-			//Move the player if the screen is not moving due to being on the edge of the screen
-			else if (moveFractionY != 0)
-			{
-				if (placeY == 0||placeY == MAP_SIZE-tilesY*2-1)
-				{
-					if (posY == tilesY && player->objMoveDir == D_DOWN)
-						moveBy = moveFractionY;
-					else if (posY == MAP_SIZE-tilesY-1 && player->objMoveDir == D_UP)
-						moveBy = moveFractionY;
-					else
-						moveBy = 0;
-				}
-				else
-					moveBy = moveFractionY;
-				applyX = (x-placeX)*tileSize+xInitial;
-				applyY = (y-placeY)*tileSize+yInitial-moveBy;
-			}
-			else
-			{
-				applyX = (x-placeX)*tileSize+xInitial;
-				applyY = (y-placeY)*tileSize+yInitial;
-			}
-			//Choose which static feature sprite to use
-			toApply = currentLevel->mapLayer[currentLevel->convertIndex(x,y)]->sprite;
-			//Determine whether to cut off the image due to it being on the edge of the screen
-			if (x == placeX-doDir[D_LEFT-1])
-			{
-				//Make sure the value to be drawn is negative
-				if (moveFractionX > 0)
-				{
-					apply_surface(applyX,applyY,(tileSize-moveFractionX)*-1,0,toApply,screen);
-					continue;
-				}
-				else if (moveFractionX < 0)
-				{
-					apply_surface(applyX,applyY,moveFractionX,0,toApply,screen);
-					continue;
-				}
-				//Check if we're also at the top or bottom of the map
-				else if (!((y == placeY-doDir[D_UP-1]||y == tilesY*2+placeY+doDir[D_DOWN-1]) && moveFractionY != 0))
-				{
-					apply_surface(applyX,applyY,toApply,screen);
-					continue;
-				}
-			}
-			//If we're at the east end of the map, cut off the sprite
-			if (x == placeX+tilesX*2+doDir[D_RIGHT-1])
-			{
-				if (moveFractionX > 0)
-				{
-					apply_surface(applyX,applyY,moveFractionX,0,toApply,screen);
-					continue;
-				}
-				else if (moveFractionX < 0)
-				{
-					apply_surface(applyX,applyY,tileSize+moveFractionX,0,toApply,screen);
-					continue;
-				}
-				else if (!((y == placeY-doDir[D_UP-1]||y == tilesY*2+1+placeY+doDir[D_DOWN-1]-1) && moveFractionY != 0))
-				{
-					apply_surface(applyX,applyY,toApply,screen);
-					continue;
-				}
-			}
-			if (y == placeY-doDir[D_UP-1])
-			{
-				if (moveFractionY > 0)
-				{
-					apply_surface(applyX,applyY,0,(tileSize-moveFractionY)*-1,toApply,screen);
-					continue;
-				}
-				else if (moveFractionY < 0)
-				{
-					apply_surface(applyX,applyY,0,moveFractionY,toApply,screen);
-					continue;
-				}
-				else
-				{
-					apply_surface(applyX,applyY,toApply,screen);
-					continue;
-				}
-			}
-			if (y == placeY+tilesY*2+doDir[D_DOWN-1])
-			{
-				if (moveFractionY > 0)
-				{
-						apply_surface(applyX,applyY,0,moveFractionY,toApply,screen);
-				}
-				else if (moveFractionY < 0)
-				{
-						apply_surface(applyX,applyY,0,tileSize+moveFractionY,toApply,screen);
-					continue;
-				}
-				else
-				{
-						apply_surface(applyX,applyY,toApply,screen);
-					continue;
-				}
-			}
-			else
-			{
-				apply_surface(applyX, applyY, toApply, screen);
-			}
-		}
-	}
-	int drawX = 0;
-	int drawY = 0;
-	int xDisplacement = 0;
-	int ydisplacement = 0;
-	SDL_Surface *toDraw = NULL;
-	drawX = (posX-placeX)*tileSize+xInitial+xDisplacement;
-	drawY = (posY-placeY)*tileSize+yInitial+ydisplacement;
-	objectDraw();
-	//Draw the level name in a text box
-	if (displayName == 1)
-	{
-		doTextBox(posY);
-		if (posY < 3)
-			apply_surface(xInitial+tileSize*2+getCenter((tilesX+1)*tileSize,text->w),yInitial,text,screen);
-		else
-			apply_surface(xInitial+getCenter(tilesX*2+1,5)*tileSize+getCenter(tileSize*5,text->w),yInitial+(tilesX+2)*tileSize,text,screen);
-
-	}
-	drawSprite(drawX,drawY,toDraw);
 	//Draw the mouse if it is within bounds and should be drawn
+	//Now do this again with objects; because objects can be drawn across two tiles, we want to make sure that
+	//we don't draw over any of them.
+	for (x = -NUM_TILES - 1; x <= NUM_TILES + 1; x++)
+	{
+		for (y = -NUM_TILES - 1; y <= NUM_TILES + 1; y++)
+		{
+			obj = currentLevel->getObject(player->x + x, player->y + y);
+			if (obj != NULL)
+				doDraw(obj, xOffset, yOffset, doDir);
+		}
+	}
 	if (pointerX > -1 && pointerY > -1 && showCursor == true)
 		apply_surface(pointerX,pointerY,cursor,screen);
+	drawBorders();
 }
 void drawWrappedSprite(int x, int y, SDL_Surface* source, SDL_Surface* destination, int xWrap, int yWrap)
 {
