@@ -78,7 +78,7 @@ void drawWrappedSprite(int x, int y, SDL_Surface* source, SDL_Surface* destinati
 		if (portion[i]->h == 0)
 			portion[i]->h = tileSize;
 		if (portion[i]->w == 0)
-			portion[i]->h = tileSize;
+			portion[i]->w = tileSize;
 		SDL_BlitSurface( source, portion[i], destination, offset[i] );
 		free(offset[i]);
 		free(portion[i]);
