@@ -59,7 +59,6 @@ public:
 		int xStart = xTile*TILE_SIZE + xInitial+xOff;
 		int yStart = yTile*TILE_SIZE + yInitial+yOff;
 		apply_surface(xStart, yStart, sprite, drawTo);
-		return;
 	}
 };
 class Floor : public Terrain{
@@ -80,6 +79,7 @@ public:
 class Conveyor : public Terrain
 {
 private:
+	double moveFraction;
 	bool disabled;
 public:
 	int dir;
@@ -90,8 +90,7 @@ public:
 	bool isSolid();
 	void activate();
 	void deactivate();
-	void onDestroy();
-	void onCreate();
+	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	//void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	Conveyor();
 	Conveyor(int direction);

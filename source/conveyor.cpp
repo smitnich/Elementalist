@@ -2,8 +2,11 @@
 #include "sdlFiles.h"
 #include "terrain.h"
 #include "objectDef.h"
+void drawWrappedSprite(int x, int y, SDL_Surface* source, SDL_Surface* destination, int xWrap, int yWrap);
 extern SDL_Surface *conveyorew[6];
 extern SDL_Surface *conveyorns[6];
+extern double delta, fpsModifier;
+extern int conveyorSpeed;
 bool Conveyor::requestEntry(Object* other, int objDir)
 {
 	return true;
@@ -28,14 +31,6 @@ void Conveyor::deactivate()
 {
 	disabled = false;
 }
-void Conveyor::onCreate()
-{
-	return;
-}
-void Conveyor::onDestroy()
-{
-	return;
-}
 void Conveyor::onEnter(Object* other)
 {
 	if (!disabled)
@@ -51,6 +46,7 @@ bool Conveyor::isSolid()
 }
 Conveyor::Conveyor(int direction)
 {
+	moveFraction = 0;
 	disabled = false;
 	isTrigger = false;
 	this->dir = direction;
@@ -69,4 +65,31 @@ Conveyor::Conveyor(int direction)
 		this->sprite = conveyorns[3];
 		break;
 	}
+}
+void Conveyor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
+{
+	int xWrap = 0;
+	int yWrap = 0;
+	if (!disabled)
+		moveFraction += delta*fpsModifier;
+	if (moveFraction >= TILE_SIZE)
+		moveFraction -= TILE_SIZE;
+	int xStart = xTile*TILE_SIZE + xInitial + xOff;
+	int yStart = yTile*TILE_SIZE + yInitial + yOff;
+	switch (dir)
+	{
+	case D_UP:
+		yWrap = TILE_SIZE-moveFraction;
+		break;
+	case D_DOWN:
+		yWrap = moveFraction;
+		break;
+	case D_LEFT:
+		xWrap = TILE_SIZE-moveFraction;
+		break;
+	case D_RIGHT:
+		xWrap = moveFraction;
+		break;
+	}
+	drawWrappedSprite(xStart, yStart, sprite, drawTo,xWrap,yWrap);
 }
