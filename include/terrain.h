@@ -15,53 +15,63 @@ public:
 	{
 		this->sprite = sp;
 	}
-	virtual bool requestEntry(Object* other, int dir) = 0;
-	virtual bool requestExit(Object* other, int dir) = 0;
-	virtual void onEnter(Object* other) = 0;
-	virtual void onExit(Object* other) = 0;
-	virtual bool isSolid() = 0;
-	virtual void activate() = 0;
-	virtual void deactivate() = 0;
-	virtual void onDestroy() = 0;
-	virtual void onCreate() = 0;
+	virtual bool requestEntry(Object* other, int dir)
+	{
+		return true;
+	}
+	virtual bool requestExit(Object* other, int dir)
+	{
+		return true;
+	}
+	virtual void onEnter(Object* other)
+	{
+		return;
+	}
+	virtual void onExit(Object* other)
+	{
+		return;
+	}
+	virtual bool isSolid()
+	{
+		return false;
+	}
+	virtual void activate()
+	{
+		return;
+	}
+	virtual void deactivate()
+	{
+		return;
+	}
+	virtual void onDestroy()
+	{
+		return;
+	}
+	virtual void onCreate()
+	{
+		return;
+	}
+	virtual void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
+	{
+		return;
+	}
 };
 class Floor : public Terrain{
 public:
 	Floor();
-	bool requestEntry(Object* other, int dir);
-	bool requestExit(Object* other, int dir);
-	void onEnter(Object* other);
-	void onExit(Object* other);
-	bool isSolid();
-	void activate();
-	void deactivate();
-	void onDestroy();
-	void onCreate();
+	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 };
 class Wall : public Terrain{
 public:
 	bool requestEntry(Object* other, int dir);
-	bool requestExit(Object* other, int dir);
-	void onEnter(Object* other);
-	void onExit(Object* other);
 	bool isSolid();
-	void activate();
-	void deactivate();
-	void onDestroy();
-	void onCreate();	
+	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	Wall();
 };
 class Exit : public Floor{
 public:
-	bool requestEntry(Object* other, int dir);
-	bool requestExit(Object* other, int dir);
 	void onEnter(Object* other);
-	void onExit(Object* other);
-	bool isSolid();
-	void activate();
-	void deactivate();
-	void onDestroy();
-	void onCreate();
+	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	Exit();
 };
 class Conveyor : public Terrain
@@ -79,6 +89,7 @@ public:
 	void deactivate();
 	void onDestroy();
 	void onCreate();
+	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	Conveyor();
 	Conveyor(int direction);
 };
@@ -91,15 +102,9 @@ public:
 class PressureSwitch : public Trigger
 {
 public:
-	bool requestEntry(Object* other, int dir);
-	bool requestExit(Object* other, int dir);
 	void onEnter(Object* other);
 	void onExit(Object* other);
-	bool isSolid();
-	void activate();
-	void deactivate();
-	void onDestroy();
-	void onCreate();
+	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	PressureSwitch();
 };
 #endif
