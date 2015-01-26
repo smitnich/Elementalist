@@ -70,3 +70,4 @@ bool fullScreen = false;
 bool won = false;
 int prevFrame = 0;
 int curFrame = 0;
+bool showCursor = false;

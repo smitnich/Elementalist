@@ -69,5 +69,4 @@ Conveyor::Conveyor(int direction)
 		this->sprite = conveyorns[3];
 		break;
 	}
-	
 }

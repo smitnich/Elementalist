@@ -111,7 +111,6 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 			levelChange = currentLevelNum+1;
 			startLevelName.assign("");
 		}
-
 		else
 		{
 			int input = getInput();

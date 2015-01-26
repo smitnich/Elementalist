@@ -14,6 +14,7 @@ s8 HWButton = -1;
 extern "C" {
 	extern void __exception_setreload(int t);
 }
+bool smbInit();
 #endif
 extern string directorySymbol;
 void parseConfig(char argv[]);

@@ -24,7 +24,3 @@ PressureSwitch::PressureSwitch()
 	isTrigger = true;
 	sprite = pressureTile;
 }
-void PressureSwitch::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
-{
-	return;
-}

@@ -211,22 +211,22 @@ void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, in
 	case D_UP:
 		*moveFractionY = moveFraction*-1;
 		if (doDir != NULL)
-			doDir[D_UP - 1] = 1;
+			doDir[D_UP - 1] = true;
 		break;
 	case D_DOWN:
 		*moveFractionY = moveFraction;
 		if (doDir != NULL)
-			doDir[D_DOWN - 1] = 1;
+			doDir[D_DOWN - 1] = true;
 		break;
 	case D_LEFT:
 		*moveFractionX = moveFraction*-1;
 		if (doDir != NULL)
-			doDir[D_LEFT - 1] = 1;
+			doDir[D_LEFT - 1] = true;
 		break;
 	case D_RIGHT:
 		*moveFractionX = moveFraction;
 		if (doDir != NULL)
-			doDir[D_RIGHT - 1] = 1;
+			doDir[D_RIGHT - 1] = true;
 		break;
 	default:
 		break;

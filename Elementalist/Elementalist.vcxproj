@@ -180,14 +180,11 @@
     <ClInclude Include="..\include\defs.h" />
     <ClInclude Include="..\include\files.h" />
     <ClInclude Include="..\include\font.h" />
-    <ClInclude Include="..\include\freesurface.h" />
     <ClInclude Include="..\include\gfx.h" />
     <ClInclude Include="..\include\input.h" />
     <ClInclude Include="..\include\input_def.h" />
     <ClInclude Include="..\include\keyinput.h" />
     <ClInclude Include="..\include\level.h" />
-    <ClInclude Include="..\include\main.h" />
-    <ClInclude Include="..\include\map.h" />
     <ClInclude Include="..\include\object.h" />
     <ClInclude Include="..\include\objectDef.h" />
     <ClInclude Include="..\include\resource.h" />
@@ -215,7 +212,6 @@
     <ClCompile Include="..\source\loadimg.cpp" />
     <ClCompile Include="..\source\main.cpp" />
     <ClCompile Include="..\source\map.cpp" />
-    <ClCompile Include="..\source\misc.cpp" />
     <ClCompile Include="..\source\mouse.cpp" />
     <ClCompile Include="..\source\moveQueue.cpp" />
     <ClCompile Include="..\source\object.cpp" />
@@ -223,6 +219,8 @@
     <ClCompile Include="..\source\sound.cpp" />
     <ClCompile Include="..\source\terrain.cpp" />
     <ClCompile Include="..\source\textbox.cpp" />
+    <ClCompile Include="..\source\tileSprites.cpp" />
+    <ClCompile Include="..\source\triggers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\Output\gfx\app.rc" />
