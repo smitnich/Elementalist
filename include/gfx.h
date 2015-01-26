@@ -2,7 +2,10 @@
 #include "sdlFiles.h"
 #include "input_def.h"
 #include "font.h"
+#include "objectDef.h"
 void doWall(int type,int x,int y, int moveFractionX, int moveFractionY);
+void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY, bool *doDir);
+void doDraw(Object *drawObject, int moveFractionX, int moveFractionY, bool doDir[4]);
 int getCenter(int a, int b);
 int getControlType();
 void apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination);
@@ -34,7 +37,7 @@ extern int framesPerSecond;
 extern int xMax, yMax;
 #include "level.h"
 #include "sprites.h"
-bool showCursor;
+extern bool showCursor;
 extern int frame;
 //The font to show the level name in
 extern TTF_Font *font;

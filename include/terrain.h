@@ -3,6 +3,9 @@
 #define MAX_CONNECTIONS 9
 #include "objectDef.h"
 #include "base.h"
+extern int xInitial;
+extern int yInitial;
+void apply_surface(int x, int y, SDL_Surface *apply, SDL_Surface *dest);
 class Terrain
 {
 public:
@@ -53,25 +56,25 @@ public:
 	}
 	virtual void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
 	{
+		int xStart = xTile*TILE_SIZE + xInitial+xOff;
+		int yStart = yTile*TILE_SIZE + yInitial+yOff;
+		apply_surface(xStart, yStart, sprite, drawTo);
 		return;
 	}
 };
 class Floor : public Terrain{
 public:
 	Floor();
-	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 };
 class Wall : public Terrain{
 public:
 	bool requestEntry(Object* other, int dir);
 	bool isSolid();
-	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	Wall();
 };
 class Exit : public Floor{
 public:
 	void onEnter(Object* other);
-	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	Exit();
 };
 class Conveyor : public Terrain
@@ -89,7 +92,7 @@ public:
 	void deactivate();
 	void onDestroy();
 	void onCreate();
-	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
+	//void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	Conveyor();
 	Conveyor(int direction);
 };
@@ -104,7 +107,7 @@ class PressureSwitch : public Trigger
 public:
 	void onEnter(Object* other);
 	void onExit(Object* other);
-	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
+	//void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	PressureSwitch();
 };
 #endif
