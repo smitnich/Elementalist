@@ -18,8 +18,6 @@ int levelChange = -1;
 //The default starting position of the player
 int posX = 10;
 int posY = 10;
-//The speed of conveyour belts
-int conveyorSpeed = 3;
 //The default framerate of the game
 //Can be overriden by config.txt or command line args
 int framesPerSecond = 60;

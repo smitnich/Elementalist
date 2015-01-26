@@ -74,31 +74,7 @@
     <ClCompile Include="..\elementalist\source\wupc.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\elementalist\include\base.h" />
-    <ClInclude Include="..\elementalist\include\callback.h" />
-    <ClInclude Include="..\elementalist\include\config.h" />
-    <ClInclude Include="..\elementalist\include\defs.h" />
-    <ClInclude Include="..\elementalist\include\files.h" />
-    <ClInclude Include="..\elementalist\include\font.h" />
-    <ClInclude Include="..\elementalist\include\freesurface.h" />
     <ClInclude Include="..\elementalist\include\gcinput.h" />
-    <ClInclude Include="..\elementalist\include\gfx.h" />
-    <ClInclude Include="..\elementalist\include\input.h" />
-    <ClInclude Include="..\elementalist\include\input_def.h" />
-    <ClInclude Include="..\elementalist\include\keyinput.h" />
-    <ClInclude Include="..\elementalist\include\level.h" />
-    <ClInclude Include="..\elementalist\include\main.h" />
-    <ClInclude Include="..\elementalist\include\map.h" />
-    <ClInclude Include="..\elementalist\include\move.h" />
-    <ClInclude Include="..\elementalist\include\object.h" />
-    <ClInclude Include="..\elementalist\include\objectDef.h" />
-    <ClInclude Include="..\elementalist\include\resource.h" />
-    <ClInclude Include="..\elementalist\include\sdlFiles.h" />
-    <ClInclude Include="..\elementalist\include\sprites.h" />
-    <ClInclude Include="..\elementalist\include\terrain.h" />
-    <ClInclude Include="..\elementalist\include\tiles.h" />
-    <ClInclude Include="..\elementalist\include\wall.h" />
-    <ClInclude Include="..\elementalist\include\wallnames.h" />
     <ClInclude Include="..\elementalist\include\wii.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

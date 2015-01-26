@@ -65,5 +65,4 @@ void addMoveRequest(Object *obj, int x, int y, int checkX, int checkY)
 	tmpReq->obj->x = x+checkX;
 	tmpReq->obj->y = y+checkY;
 	moveQueue.push_back(tmpReq);
-	//queuePlaceAll();
 }
