@@ -191,6 +191,7 @@
     <ClInclude Include="..\include\sdlFiles.h" />
     <ClInclude Include="..\include\sprites.h" />
     <ClInclude Include="..\include\terrain.h" />
+    <ClInclude Include="..\include\tileEnum.h" />
     <ClInclude Include="..\include\tiles.h" />
     <ClInclude Include="..\include\wallnames.h" />
     <ClInclude Include="..\include\wii.h" />

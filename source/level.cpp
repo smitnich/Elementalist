@@ -3,7 +3,7 @@
 #include "level.h"
 #include "objectDef.h"
 #include "terrain.h"
-#include "pointerContainer.h"
+#include "tileEnum.h"
 #include <queue>
 //The number of objects created
 extern unsigned int numObjects;
