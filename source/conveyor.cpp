@@ -70,7 +70,7 @@ void Conveyor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOf
 {
 	int xWrap = 0;
 	int yWrap = 0;
-	if (!disabled)
+	if (!disabled || moveFraction >= 1)
 		moveFraction += delta*fpsModifier;
 	if (moveFraction >= TILE_SIZE)
 		moveFraction -= TILE_SIZE;
