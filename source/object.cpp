@@ -121,21 +121,6 @@ void SolidObject::doLogic()
 {
 
 }
-//The barrier that opens when all switches are depressed
-Barrier::Barrier(int x2, int y2) : SolidObject()
-{
-	this->x = x2;
-	this->y = y2;
-	this->stationary = barrierTile;
-	level = getCurrentLevel();
-}
-void Barrier::doLogic()
-{
-}
-bool Barrier::requestEntry(Object *other, int dir)
-{
-	return false;
-}
 //Objects that move in some way
 Movable::Movable() : SolidObject()
 {

@@ -76,6 +76,18 @@ public:
 	void onEnter(Object* other);
 	Exit();
 };
+class Barrier : public Terrain
+{
+private:
+	bool disabled;
+public:
+	bool requestEntry(Object* other, int dir);
+	bool isSolid();
+	void activate();
+	void deactivate();
+	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
+	Barrier();
+};
 class Conveyor : public Terrain
 {
 private:

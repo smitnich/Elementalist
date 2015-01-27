@@ -44,12 +44,6 @@ public:
 	void doLogic();
 	void objMove();
 };
-class Barrier : public SolidObject{
-public:
-	Barrier(int x, int y);
-	void doLogic();
-	bool requestEntry(Object* other, int dir);
-};
 class Crate : public Movable{
 public:
 	Crate();

@@ -299,6 +299,9 @@ class Terrain *instantiateTerrain(int input)
 		case m_pressure:
 			out = new PressureSwitch();
 			break;
+		case m_barrier:
+			out = new Barrier();
+			break;
 		default:
 			out = new Floor();
 			break;
