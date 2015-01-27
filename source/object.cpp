@@ -22,8 +22,6 @@ Object::Object()
 	tempSpeed = 0;
 	frozen = 0;
 	this->frozen = 0;
-	this->nextObject = NULL;
-	ownAddress = this;
 	numFrames = 1;
 	faceDir = 0;
 	lastTicks = 0;
