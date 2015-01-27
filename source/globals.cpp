@@ -29,8 +29,8 @@ double movespeed = 3*fpsModifier;
 int levelStartCounter = 0;
 //The maximum rendering coordinates
 //Can be overriden by config.txt or command line args
-int xMax = 457;
-int yMax = 457;
+int xMax = 456;
+int yMax = 456;
 //The bitdepth, can be changed to 8bit for an odd effect
 int bitDepth = 0;
 //The current level
