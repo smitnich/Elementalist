@@ -20,7 +20,7 @@ extern int currentLevel;
 //The current frame
 int frame = 0;
 //The last frame to recieve input
-int lastInputFrame = 0;
+long lastInputTime = 0;
 Object* player;
 int lastMoveDir;
 //Whether or not a player has been placed yet

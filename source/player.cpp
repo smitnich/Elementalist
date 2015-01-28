@@ -6,7 +6,7 @@
 extern int posX, posY;
 extern int pressureCount;
 extern int lastMoveDir;
-extern int lastInputFrame;
+extern long lastInputTime;
 extern int frame;
 extern bool playerPlaced;
 extern bool displayName;
@@ -90,7 +90,7 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 	//Moves, gets input if needed and checks for forces on the player eg conveyor belts
 	void Person::doLogic()
 	{
-		if (active == 0 && objMoveDir == D_NONE)
+		if (active == false && objMoveDir == D_NONE)
 			return;
 		objMove();
 		if (displayName == true)
@@ -98,10 +98,8 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 			int input = getInput();
 			if (input != INPUT_NONE && input != lastInput)
 			{
-				if (levelStartCounter <= 0)
-				{
+				if (SDL_GetTicks() - lastInputTime > 1000)
 					displayName = false;
-				}
 			}
 		}
 		else if (won == true)
@@ -114,6 +112,8 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 		else
 		{
 			int input = getInput();
+			if (input != INPUT_NONE)
+				lastInputTime = SDL_GetTicks();
 			switch (input){
 			case BUTTON_MENU:
 				cleanup();

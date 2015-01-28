@@ -34,9 +34,10 @@ void doPlayer();
 extern bool defaultPath, fullScreen, done, displayName;
 extern string levelPath, appPath;
 extern SDL_Surface *screen;
-extern int videoSizeX, videoSizeY, bitDepth, argumentCount, frame, lastInputFrame, lastInput, \
+extern int videoSizeX, videoSizeY, bitDepth, argumentCount, frame, lastInput, \
 framesPerSecond, levelChange, levelStartCounter;
-unsigned int lastTicks = 0;
+unsigned long lastTicks = 0;
+extern long lastInputTime;
 double delta = 0.0;
 
 void init(int argc, char* argv[])
@@ -152,9 +153,6 @@ int main(int argc, char* argv[]){
 	while (!done)
 	{
 		updateDelta();
-		/*Fix this*/
-		if (frame > lastInputFrame+(framesPerSecond/2) && lastInput != INPUT_NONE)
-			lastInput = INPUT_NONE;
 		checkEvents();
 #ifdef GEKKO
 		if (HWButton != -1)
@@ -165,8 +163,6 @@ int main(int argc, char* argv[]){
 		else
 			doPlayer();
 		drawScreen();
-		if (levelStartCounter > 0)
-			levelStartCounter--;
 		if (levelChange != -1)
 		{
 			switchLevel(levelChange);

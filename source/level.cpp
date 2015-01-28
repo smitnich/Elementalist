@@ -17,8 +17,8 @@ int levelNum = 1;
 extern string levelPath;
 //The name of the starting level
 extern string startLevelName;
-//The last frame to have user input
-extern int lastInputFrame;
+//The last time to have user input
+extern long lastInputTime;
 //The last movement of the player
 extern int lastMoveDir;
 //Whether to display the level name
@@ -27,7 +27,6 @@ extern bool displayName;
 extern int posY;
 //Whether or not the player has won the level
 extern bool won;
-extern int lastInputFrame;
 extern int frame;
 extern Mix_Music* levelMusic[MAX_LEVEL];
 bool loadLevel(string levelName,int levelNum);
@@ -319,12 +318,12 @@ void switchLevel(int levelNum)
 	{
 		exit(0);
 	}
-	displayName = 1;
+	displayName = true;
 	startLevelName = "";
 	doTextBox(posY);
 	changeText();
 	won = false;
-	lastInputFrame = frame;
+	lastInputTime = SDL_GetTicks();
 }
 //Make the level name given the number
 string constructLevelName(int levelNum)
