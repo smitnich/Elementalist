@@ -60,7 +60,7 @@ bool alignLeft = 0;
 bool done = false;
 //Whether or not to display the level name
 //Set to false when any input occurs
-bool displayName = 1;
+bool displayName = true;
 //Whether or not to display in fullScreen
 bool fullScreen = false;
 //Set to true when the level is completed

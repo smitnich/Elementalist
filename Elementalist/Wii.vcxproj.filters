@@ -24,9 +24,6 @@
     <ClCompile Include="..\elementalist\source\winput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\elementalist\source\wupc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\elementalist\include\gcinput.h">

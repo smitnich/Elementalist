@@ -70,7 +70,6 @@
     <ClCompile Include="..\elementalist\source\gcInput.cpp" />
     <ClCompile Include="..\elementalist\source\mouse.cpp" />
     <ClCompile Include="..\elementalist\source\winput.cpp" />
-    <ClCompile Include="..\elementalist\source\wupc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\elementalist\include\gcinput.h" />

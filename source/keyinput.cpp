@@ -42,7 +42,7 @@ bool checkKeyBoard()
 int keyInput()
 {
 	if (checkKeyBoard() == 1)
-	return BUTTON_MENU;
+		return BUTTON_MENU;
 	if (won == true && keyMap[winningKey] == 1)
 		return INPUT_NONE;
 	if (keyMap[keyControls[keyMinimize]] == 1)
