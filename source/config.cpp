@@ -100,26 +100,7 @@ void parseConfig(char config[])
 	{
 		musicPath.assign(value);
 	}
-	//Wii only
-#ifdef GEKKO
-	//Check for various Samba information for loading files over the network
-	else if (name == "smbUserName")
-	{
-		smbUserName.assign(value);
-	}
-	else if (name == "smbPassword")
-	{
-		smbPassword.assign(value);
-	}
-	else if (name == "smbIp")
-	{
-		smbIp.assign(value);
-	}
-	else if (name == "smbFolder")
-	{
-		smbFolderName.assign(value);
-	}
-#else
+#ifndef GEKKO
 	//Not Wii
 	//Change whether to run in fullScreen
 	else if (name == "fullScreen")

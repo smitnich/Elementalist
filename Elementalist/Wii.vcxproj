@@ -69,7 +69,6 @@
   <ItemGroup>
     <ClCompile Include="..\elementalist\source\gcInput.cpp" />
     <ClCompile Include="..\elementalist\source\mouse.cpp" />
-    <ClCompile Include="..\elementalist\source\smb.cpp" />
     <ClCompile Include="..\elementalist\source\winput.cpp" />
     <ClCompile Include="..\elementalist\source\wupc.cpp" />
   </ItemGroup>

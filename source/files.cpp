@@ -62,7 +62,7 @@ void fileInit()
 	fatMountSimple("carda",&__io_gcsda);
 	if (markCard[1] == true)
 	fatMountSimple("cardb",&__io_gcsdb);
-	ntfsCount = ntfsMountAll(&mounts, NTFS_DEFAULT | NTFS_RECOVER);
+	//ntfsCount = ntfsMountAll(&mounts, NTFS_DEFAULT | NTFS_RECOVER);
 	chdir(appPath.data());
 #endif
 	//Open the output file, print which operating system is in use

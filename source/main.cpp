@@ -79,9 +79,6 @@ void init(int argc, char* argv[])
 	}
 	musicInit();
 	fileInit();
-#ifdef GEKKO
-	if (smbInit() == 0)
-#endif
 	if ( SDL_Init( SDL_INIT_EVERYTHING) < 0 )
 	{
 		fprintf(stderr, "Unable to init SDL: %s\n", SDL_GetError() );
