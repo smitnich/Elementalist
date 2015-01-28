@@ -57,6 +57,8 @@ void drawScreen()
 		}
 	}
 	queueDrawAll(screen, xOffset, yOffset, doDir);
+	if (displayName)
+		doTextBox(player->y);
 	if (pointerX > -1 && pointerY > -1 && showCursor == true)
 		apply_surface(pointerX,pointerY,cursor,screen);
 	drawBorders();
@@ -193,7 +195,7 @@ void changeText()
 void changeTextToWin()
 {
 	SDL_FreeSurface(text);
-	displayName = 1;
+	displayName = true;
 	text = TTF_RenderText_Solid(font, "You win!", textColor);
 }
 //Free all the surfaces loaded

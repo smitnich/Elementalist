@@ -1,6 +1,7 @@
 #include "sdlFiles.h"
-extern struct SDL_Surface *textBox[];
-extern struct SDL_Surface *screen;
+extern SDL_Surface *textBox[];
+extern SDL_Surface *screen;
+extern SDL_Surface *text;
 extern int xInitial;
 extern int yInitial;
 extern int tileSize;
@@ -56,4 +57,5 @@ void doTextBox(int posY)
 			}
 		}
 	}
+	apply_surface(x+tileSize, y+tileSize, text, screen);
 }
