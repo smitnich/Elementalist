@@ -222,6 +222,7 @@
     <ClCompile Include="..\source\textbox.cpp" />
     <ClCompile Include="..\source\tileSprites.cpp" />
     <ClCompile Include="..\source\triggers.cpp" />
+    <ClCompile Include="ice.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\Output\gfx\app.rc" />

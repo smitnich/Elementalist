@@ -301,6 +301,9 @@ class Terrain *instantiateTerrain(int input)
 		case m_barrier:
 			out = new Barrier();
 			break;
+		case m_icefloor:
+			out = new IceFloor();
+			break;
 		default:
 			out = new Floor();
 			break;

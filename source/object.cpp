@@ -170,6 +170,7 @@ void Movable::objMove()
 	{
 		Level *lev = getCurrentLevel();
 		lev->assignObject(x, y, NULL);
+		prevMove = objMoveDir;
 		if (objMoveDir == D_LEFT)
 			checkX = -1;
 		else if (objMoveDir == D_RIGHT)

@@ -121,4 +121,13 @@ public:
 	//void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	PressureSwitch();
 };
+class IceFloor : public Terrain
+{
+public:
+	void onEnter(Object *other);
+	bool isSolid();
+	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
+	//void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
+	IceFloor();
+};
 #endif

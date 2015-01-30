@@ -23,3 +23,4 @@ SDL_Surface *iceBallew[6] = { NULL };
 SDL_Surface *error = NULL;
 SDL_Surface *conveyorew[6] = { NULL };
 SDL_Surface *conveyorns[6] = { NULL };
+SDL_Surface *iceFloor = NULL;

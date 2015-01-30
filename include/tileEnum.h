@@ -9,7 +9,7 @@ enum tiles_t
 	m_conveyors,
 	m_conveyorw,
 	m_barrier,
-
+	m_icefloor,
 	OBJ_BLOCK,
 	OBJ_HEAVY_BLOCK,
 	OBJ_ICE_BLOCK,
