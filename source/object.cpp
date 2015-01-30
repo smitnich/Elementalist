@@ -47,27 +47,6 @@ int Object::getY()
 {
 	return y;
 }
-bool Object::tryMove(int x, int y, int dir)
-{
-	int checkX = 0;
-	int checkY = 0;
-	if (dir == D_LEFT)
-		checkX = -1;
-	else if (dir == D_RIGHT)
-		checkX = 1;
-	else if (dir == D_DOWN)
-		checkY = 1;
-	else if (dir == D_UP)
-		checkY = -1;
-	if (requestMove(x, y, checkX, checkY, this))
-	{
-		objMoveDir = dir;
-		objMoveFraction += tempSpeed*delta;
-		addMoveRequest(this, x, y, checkX, checkY);
-		return true;
-	}
-	return false;
-}
 void Object::doLogic()
 {
 }
@@ -179,7 +158,7 @@ void Movable::objMove()
 			checkY = -1;
 		else if (objMoveDir == D_DOWN)
 			checkY = 1;
-		if (this->frozen == 0)
+		if (this->frozen == false)
 			objMoveDir = D_NONE;
 		objMoveFraction = 0;
 		addMoveRequest(this, x, y, checkX, checkY);
