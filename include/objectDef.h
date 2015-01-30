@@ -6,6 +6,7 @@ class Object
 {
 public: int x, y,  objMoveDir, solid, pushable, frozen, numFrames, faceDir;
 		double moveSpeed, tempSpeed, objMoveFraction;
+		int prevMove = 0;
 		bool isPlayer;
 		class Level *level;
 		Object();
@@ -21,7 +22,6 @@ public: int x, y,  objMoveDir, solid, pushable, frozen, numFrames, faceDir;
 		int getX();
 		int getY();
 		void startMove(int dir);
-		bool tryMove(int x, int y, int dir);
 		//Check if the object is colliding with the player
 		//Todo: Move this into general collision
 		virtual void doLogic();
