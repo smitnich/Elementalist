@@ -224,44 +224,40 @@ void doDraw(Object *drawObject, int moveFractionX, int moveFractionY, bool doDir
 		objectMoveFractiony = drawObject->getMoveFraction();
 	int drawPortionX = 0;
 	int drawPortionY = 0;
-	//If the object is within the window
-	if ((x + 1 > posX - (tilesX)-doDir[D_LEFT - 1]) && (x - 1 < posX + (tilesX)+doDir[D_RIGHT - 1]) && (y + 1 > posY - (tilesY)-doDir[D_UP - 1]) && (y - 1 < posY + (tilesY)+doDir[D_DOWN - 1]))
+	int drawX = (x - posX + tilesX)*tileSize + xInitial - moveFractionX + objectMoveFractionx;
+	int drawY = (y - posY + tilesY)*tileSize + yInitial - moveFractionY + objectMoveFractiony;
+	//Keep rendering window still when moving towards the edges
+	if (posX <= 3 || (posX == tilesX && player->objMoveDir != D_RIGHT))
+		drawX = x*tileSize + xInitial + objectMoveFractionx;
+	else if (posX >= MAP_SIZE - tilesX || (posX == MAP_SIZE - tilesX - 1 && player->objMoveDir != D_LEFT))
+		drawX = (x - MAP_SIZE + tilesX * 2 + 1)*tileSize + xInitial + objectMoveFractionx;
+	if (posY <= 3 || (posY == 4 && player->objMoveDir != D_DOWN))
+		drawY = y*tileSize + yInitial + objectMoveFractiony;
+	else if (posY >= MAP_SIZE - tilesX || (posY == MAP_SIZE - tilesX - 1 && player->objMoveDir != D_UP))
+		drawY = (y - MAP_SIZE + tilesX * 2 + 1)*tileSize + yInitial + objectMoveFractiony;
+	//Determine which portion of the tile to be rendered when on the edge
+	if (drawX <= xInitial && drawX >= xInitial - tileSize)
 	{
-		int drawX = (x - posX + tilesX)*tileSize + xInitial - moveFractionX + objectMoveFractionx;
-		int drawY = (y - posY + tilesY)*tileSize + yInitial - moveFractionY + objectMoveFractiony;
-		//Keep rendering window still when moving towards the edges
-		if (posX <= 3 || (posX == tilesX && player->objMoveDir != D_RIGHT))
-			drawX = x*tileSize + xInitial + objectMoveFractionx;
-		else if (posX >= MAP_SIZE - tilesX || (posX == MAP_SIZE - tilesX - 1 && player->objMoveDir != D_LEFT))
-			drawX = (x - MAP_SIZE + tilesX * 2 + 1)*tileSize + xInitial + objectMoveFractionx;
-		if (posY <= 3 || (posY == 4 && player->objMoveDir != D_DOWN))
-			drawY = y*tileSize + yInitial + objectMoveFractiony;
-		else if (posY >= MAP_SIZE - tilesX || (posY == MAP_SIZE - tilesX - 1 && player->objMoveDir != D_UP))
-			drawY = (y - MAP_SIZE + tilesX * 2 + 1)*tileSize + yInitial + objectMoveFractiony;
-		//Determine which portion of the tile to be rendered when on the edge
-		if (drawX <= xInitial && drawX >= xInitial - tileSize)
-		{
-			drawPortionX = -tileSize + xInitial - drawX;
-		}
-		else if (drawX >= xInitial + (tileSize*(tilesX * 2 + 1)) - tileSize)
-		{
-			drawPortionX = xInitial + (tileSize*(tilesX * 2 + 1)) - drawX;
-		}
-		if (drawY <= yInitial && drawY >= yInitial - tileSize)
-		{
-			drawPortionY = -tileSize + yInitial - drawY;
-		}
-		else if (drawY >= yInitial + (tileSize*(tilesY * 2 + 1)) - tileSize)
-		{
-			drawPortionY = yInitial + (tileSize*(tilesY * 2 + 1)) - drawY;
-		}
-		//if (drawX >= xInitial && drawX < (tilesX*tileSize)+xInitial && drawY >= yInitial && drawY < (tilesY*tileSize)+yInitial)
-		apply_surface(drawX, drawY, drawPortionX, drawPortionY, toDraw, screen);
-		//Overlay the iceblock graphic if the object is frozen
-		if (drawObject->frozen == 1)
-		{
-			apply_surface(drawX, drawY, drawPortionX, drawPortionY, iceBlock, screen);
-		}
+		drawPortionX = -tileSize + xInitial - drawX;
+	}
+	else if (drawX >= xInitial + (tileSize*(tilesX * 2 + 1)) - tileSize)
+	{
+		drawPortionX = xInitial + (tileSize*(tilesX * 2 + 1)) - drawX;
+	}
+	if (drawY <= yInitial && drawY >= yInitial - tileSize)
+	{
+		drawPortionY = -tileSize + yInitial - drawY;
+	}
+	else if (drawY >= yInitial + (tileSize*(tilesY * 2 + 1)) - tileSize)
+	{
+		drawPortionY = yInitial + (tileSize*(tilesY * 2 + 1)) - drawY;
+	}
+	//if (drawX >= xInitial && drawX < (tilesX*tileSize)+xInitial && drawY >= yInitial && drawY < (tilesY*tileSize)+yInitial)
+	apply_surface(drawX, drawY, drawPortionX, drawPortionY, toDraw, screen);
+	//Overlay the iceblock graphic if the object is frozen
+	if (drawObject->frozen == 1)
+	{
+		apply_surface(drawX, drawY, drawPortionX, drawPortionY, iceBlock, screen);
 	}
 }
 Object* objectInit(char id, int x, int y)
