@@ -34,6 +34,7 @@ void queuePlaceAll()
 		{
 			level->assignObject(x, y, tmp->obj);
 			level->getTerrain(x, y)->onEnter(tmp->obj);
+			delete tmp;
 		}
 		else
 		{
