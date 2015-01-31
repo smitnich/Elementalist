@@ -7,6 +7,7 @@ void outputLog(int);
 bool channelArray[MAX_CHANNELS];
 bool levelMusicLoaded[MAX_LEVEL];
 Mix_Music *levelMusic[MAX_LEVEL];
+char *musicNames[MAX_LEVEL] = {"Dystopic-Factory.mp3"};
 extern string appPath;
 string musicPath;
 Mix_Music* loadMusic(char *fileName);
@@ -29,26 +30,39 @@ void musicInit()
 		levelMusicLoaded[i] = 0;
 		levelMusic[i] = NULL;
 	}
-	musicPath.assign("sound/");
+	musicPath.assign("music/");
 	if (Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
 	{
 	}
 }
-Mix_Music* loadMusic(char *fileName)
+void freeMusic(int levelNum)
 {
-	Mix_Music* music;
+	if (levelNum < 0 || levelNum > MAX_LEVEL || levelMusic[levelNum-1] == NULL)
+		return;
+	Mix_HaltMusic();
+	Mix_FreeMusic(levelMusic[levelNum - 1]);
+	levelMusic[levelNum - 1] = NULL;
+}
+void playMusic(int levelNum)
+{
+	if (levelNum < 0 || levelNum > MAX_LEVEL)
+		return;
+	char *fileName = musicNames[levelNum-1];
+	if (fileName == NULL)
+		return;
 	char buffer[80];
-	sprintf(buffer,"%s%s",musicPath.c_str(),fileName);
-	music = Mix_LoadMUS(fileName);
-	return music;
+	if (levelMusic[levelNum - 1] == NULL)
+	{
+		sprintf(buffer, "%s%s", musicPath.c_str(), fileName);
+		levelMusic[levelNum - 1] = Mix_LoadMUS(buffer);
+	}
+	Mix_PlayMusic(levelMusic[levelNum-1], -1);
 }
 //Todo: Add Sound
 bool playSound(Mix_Chunk *input)
 {
 	if (Mix_PlayChannel( 0, input, 0 ) == -1)
-		return 0;
+		return false;
 	else
-	{
-		return 1;
-	}
+		return true;
 }

@@ -29,9 +29,11 @@ extern int posY;
 extern bool won;
 extern int frame;
 extern Mix_Music* levelMusic[MAX_LEVEL];
+void freeMusic(int levelNum);
 bool loadLevel(string levelName,int levelNum);
 void clearObjects();
 void doTextBox(int);
+void playMusic(int level);
 class Terrain *instantiateTerrain(int input);
 extern int currentLevelNum;
 void changeText();
@@ -313,6 +315,11 @@ class Terrain *instantiateTerrain(int input)
 //Clear the current level and load the next
 void switchLevel(int levelNum)
 {
+	//On most systems we can probably afford to keep the music in memory
+	//On the Wii not so much
+#ifndef GEKKO
+	 freeMusic(currentLevelNum);
+#endif
 	currentLevelNum = levelNum;
 	string tempLevel = constructLevelName(levelNum);
 	clearObjects();
@@ -327,6 +334,7 @@ void switchLevel(int levelNum)
 	changeText();
 	won = false;
 	lastInputTime = SDL_GetTicks();
+	playMusic(levelNum);
 }
 //Make the level name given the number
 string constructLevelName(int levelNum)
