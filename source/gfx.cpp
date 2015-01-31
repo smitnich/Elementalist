@@ -191,10 +191,17 @@ void changeText()
 	SDL_FreeSurface(text);
 	text = TTF_RenderText_Solid( font, textName.c_str(), textColor );
 }
+void changeTextToDead()
+{
+	if (text != NULL)
+		SDL_FreeSurface(text);
+	text = TTF_RenderText_Solid(font, "You died...", textColor);
+}
 //Draw the level text again, but with a message saying that you won
 void changeTextToWin()
 {
-	SDL_FreeSurface(text);
+	if (text != NULL)
+		SDL_FreeSurface(text);
 	displayName = true;
 	text = TTF_RenderText_Solid(font, "You win!", textColor);
 }

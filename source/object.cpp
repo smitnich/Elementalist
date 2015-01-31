@@ -25,11 +25,13 @@ Object::Object()
 	numFrames = 1;
 	faceDir = 0;
 	lastTicks = 0;
-	Level *tmp = getCurrentLevel();
 }
 //Clean up the object
-void Object::deleteMe()
+//Return value of true means the object should be deleted
+void Object::die()
 {
+	getCurrentLevel()->assignObject(x, y, NULL);
+	delete this;
 }
 int Object::getMoveDir()
 {
@@ -209,8 +211,6 @@ void doDraw(Object *drawObject, int moveFractionX, int moveFractionY, bool doDir
 	SDL_Surface *toDraw = drawObject->getSprite();
 	int x = drawObject->getX();
 	int y = drawObject->getY();
-	int nextX = x + doDir[D_DOWN - 1] - doDir[D_UP - 1];
-	int nextY = y + doDir[D_RIGHT - 1] - doDir[D_LEFT - 1];
 	int ObjectMovedir = drawObject->getMoveDir();
 	int objectMoveFractionx = 0;
 	int objectMoveFractiony = 0;
@@ -262,7 +262,6 @@ void doDraw(Object *drawObject, int moveFractionX, int moveFractionY, bool doDir
 }
 Object* objectInit(char id, int x, int y)
 {
-	char buffer[1024];
 	Object *newObject;
 	switch (id)
 	{

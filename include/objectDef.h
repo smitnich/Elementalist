@@ -6,7 +6,7 @@ class Object
 {
 public: int x, y,  objMoveDir, solid, pushable, frozen, numFrames, faceDir;
 		double moveSpeed, tempSpeed, objMoveFraction;
-		int prevMove = 0;
+		int prevMove;
 		bool isPlayer;
 		class Level *level;
 		Object();
@@ -14,16 +14,12 @@ public: int x, y,  objMoveDir, solid, pushable, frozen, numFrames, faceDir;
 		SDL_Surface *spriteew[6];
 		SDL_Surface *stationary;
 		unsigned int lastTicks;
-		//Adds objects to be added to the front of the queue and objects to be deleted to the back
-		//Clean up the object and reorganize the linked list
-		void deleteMe();
 		int getMoveDir();
 		double getMoveFraction();
 		int getX();
 		int getY();
 		void startMove(int dir);
-		//Check if the object is colliding with the player
-		//Todo: Move this into general collision
+		void die();
 		virtual void doLogic();
 		//Gets the sprite to be drawn on the screen
 		SDL_Surface *getSprite();
@@ -72,5 +68,6 @@ public:
 	char element;
 	void doLogic();
 	bool requestEntry(Object* other, int dir);
+	void die();
 };
 #endif

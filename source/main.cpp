@@ -39,6 +39,7 @@ framesPerSecond, levelChange, levelStartCounter;
 unsigned long lastTicks = 0;
 extern long lastInputTime;
 double delta = 0.0;
+extern bool playerDead;
 
 void init(int argc, char* argv[])
 {
@@ -158,7 +159,7 @@ int main(int argc, char* argv[]){
 		if (HWButton != -1)
 			cleanup();
 #endif
-		if (displayName == false)
+		if (displayName == false && playerDead == false)
 			objectLogic();
 		else
 			doPlayer();

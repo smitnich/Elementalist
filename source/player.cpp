@@ -20,8 +20,10 @@ void startMove(int dir);
 extern double movespeed;
 extern int framesPerSecond;
 extern int levelStartCounter;
+bool playerDead = false;
 int getInput();
 void cleanup();
+void changeTextToDead();
 class Level* getCurrentLevel();
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 char checkSolid(int x,int y,int xOff, int yOff);
@@ -61,6 +63,12 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 	{
 		return;
 	}
+	void Person::die()
+	{
+		playerDead = true;
+		stationary = deadPerson;
+		changeTextToDead();
+	}
 	bool Person::requestEntry(Object *other, int dir)
 	{
 		int checkX = 0;
@@ -96,7 +104,7 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 		if (displayName == true)
 		{
 			int input = getInput();
-			if (input != INPUT_NONE)
+			if (input != INPUT_NONE || input != lastInput)
 			{
 				if (SDL_GetTicks() - lastInputTime > 1000)
 					displayName = false;
@@ -108,6 +116,19 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 				exit(0);
 			levelChange = currentLevelNum+1;
 			startLevelName.assign("");
+		}
+		else if (playerDead == true)
+		{
+			int input = getInput();
+			if (input != INPUT_NONE)
+			{
+				if (SDL_GetTicks() - lastInputTime > 1000 || input != lastInput)
+				{
+					playerDead = false;
+					levelChange = currentLevelNum;
+				}
+			}
+
 		}
 		else
 		{

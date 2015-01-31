@@ -25,6 +25,7 @@ void imgInit()
 	personew[3] = loadOptimizedIMG("gfx/persone1.png");
 	personew[4] = loadOptimizedIMG("gfx/persone2.png");
 	personew[5] = loadOptimizedIMG("gfx/persone3.png");
+	deadPerson = loadOptimizedIMG("gfx//persondead.png");
 	wall[0] = loadOptimizedIMG("gfx/wall/wallbase.png");
 	wall[1] = loadOptimizedIMG("gfx/wall/wall1.png");
 	wall[2] = loadOptimizedIMG("gfx/wall/wall2.png");

@@ -8,6 +8,7 @@ SDL_Surface *background = NULL;
 SDL_Surface *selector = NULL;
 SDL_Surface *personns[6] = { NULL };
 SDL_Surface *personew[6] = { NULL };
+SDL_Surface *deadPerson = NULL;
 SDL_Surface *wall[47] = { NULL };
 SDL_Surface *textBox[9] = { NULL };
 SDL_Surface *text = NULL;
