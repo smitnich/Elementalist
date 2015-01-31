@@ -44,7 +44,6 @@ void drawScreen()
 				terrain->draw(screen, x + NUM_TILES, y + NUM_TILES, -xOffset, -yOffset);
 		}
 	}
-	//Draw the mouse if it is within bounds and should be drawn
 	//Now do this again with objects; because objects can be drawn across two tiles, we want to make sure that
 	//we don't draw over any of them.
 	for (x = -NUM_TILES - 1; x <= NUM_TILES + 1; x++)
@@ -59,6 +58,7 @@ void drawScreen()
 	queueDrawAll(screen, xOffset, yOffset, doDir);
 	if (displayName)
 		doTextBox(player->y);
+	//Draw the mouse if it is within bounds and should be drawn
 	if (pointerX > -1 && pointerY > -1 && showCursor == true)
 		apply_surface(pointerX,pointerY,cursor,screen);
 	drawBorders();

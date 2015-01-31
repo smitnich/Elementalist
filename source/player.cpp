@@ -96,7 +96,7 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 		if (displayName == true)
 		{
 			int input = getInput();
-			if (input != INPUT_NONE && input != lastInput)
+			if (input != INPUT_NONE)
 			{
 				if (SDL_GetTicks() - lastInputTime > 1000)
 					displayName = false;
