@@ -100,6 +100,7 @@ void Level::loadAllLayers(char *buffer,FILE *inFile)
 }
 void Level::loadObjects()
 {
+	objectLayer.clear();
 	objectLayer.resize(height*width);
 	for (int x = 0; x < width; x++)
 	{
@@ -223,6 +224,8 @@ void Level::loadMapLayer(FILE *inFile,vector<char> *layer,int xSize, int ySize)
 }
 void Level::loadConnections(FILE *inFile, int xSize, int ySize)
 {
+	for (int i = 0; i < MAX_CONNECTIONS; i++)
+		receivers[i].clear();
 	int maxChars = 4;
 	int maxLine = xSize*maxChars;
 	char *buffer = new char[maxLine];
