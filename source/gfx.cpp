@@ -4,6 +4,7 @@
 extern Object *player;
 SDL_Rect borderRect[4];
 Level *getCurrentLevel();
+extern bool playerDead;
 void queueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY, bool *doDir);
 //Draws the static map features, the objects, the player, and the textbox on the screen
 void drawScreen()
@@ -22,7 +23,7 @@ void drawScreen()
 	else if (player->x > currentLevel->width - NUM_TILES-1 || (player->x == currentLevel->width - NUM_TILES-1 && doDir[D_LEFT - 1] != true))
 	{
 		xOffset = 0;
-		xStart = currentLevel->width - NUM_TILES;
+		xStart = currentLevel->width - NUM_TILES-1;
 	}
 	if (player->y < NUM_TILES || (player->y == NUM_TILES && doDir[D_DOWN - 1] != true))
 	{
@@ -32,7 +33,7 @@ void drawScreen()
 	else if (player->y > currentLevel->height - NUM_TILES - 1 || (player->y == currentLevel->height - NUM_TILES - 1 && doDir[D_UP - 1] != true))
 	{
 		yOffset = 0;
-		yStart = currentLevel->height - NUM_TILES;
+		yStart = currentLevel->height - NUM_TILES-1;
 	}
 	//Do one tile more than we need so that we get partially drawn tiles correctly
 	for (x = -NUM_TILES-1; x <= NUM_TILES+1; x++)
@@ -56,7 +57,7 @@ void drawScreen()
 		}
 	}
 	queueDrawAll(screen, xOffset, yOffset, doDir);
-	if (displayName)
+	if (displayName || playerDead)
 		doTextBox(player->y);
 	//Draw the mouse if it is within bounds and should be drawn
 	if (pointerX > -1 && pointerY > -1 && showCursor == true)

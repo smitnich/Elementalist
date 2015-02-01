@@ -48,7 +48,6 @@ Level::Level(FILE* inFile, int levelNum)
 	{
 		senders[i] = -1;
 	}
-	int numHeaderLines = 4;
 	char buffer[128] = {0};
 	fgets(buffer,128,inFile);
 	if (strncmp(buffer,header,strlen(header)) != 0)
@@ -127,7 +126,7 @@ void Level::makeConnections()
 		if (test->isTrigger == false)
 			continue;
 		tmp = (Trigger*) mapLayer.at(senders[i]);
-		for (int j = 0; j < receivers[i].size(); j++)
+		for (unsigned int j = 0; j < receivers[i].size(); j++)
 		{
 			tmp->connections.insert(tmp->connections.begin(),mapLayer.at(receivers[i].at(j)));
 		}
@@ -147,13 +146,13 @@ bool Level::assignObject(int x, int y, Object *obj)
 }
 Object* Level::getObject(int x, int y)
 {
-	if (x < 0 || y < 0)
+	if (x < 0 || y < 0 || x >= width || y >= height)
 		return NULL;
 	return objectLayer[convertIndex(x,y)];
 }
 Terrain* Level::getTerrain(int x, int y)
 {
-	if (x < 0 || y < 0)
+	if (x < 0 || y < 0 || x >= width || y >= height)
 		return NULL;
 	return mapLayer[convertIndex(x, y)];
 }
@@ -315,6 +314,9 @@ class Terrain *instantiateTerrain(int input)
 		case m_icefloor:
 			out = new IceFloor();
 			break;
+		case m_bomb:
+			out = new Bomb();
+			break;
 		default:
 			out = new Floor();
 			break;
@@ -359,10 +361,7 @@ class Level* getCurrentLevel()
 }
 bool loadLevel(string fileName, int levelNum)
 {
-	bool loadFromFile = true;
 	char buffer[BUFFERLENGTH];
-	char c;
-	int i;
 	playerPlaced = 0;
 	if (mapLoaded[levelNum] == 1)
 	{
@@ -373,8 +372,6 @@ bool loadLevel(string fileName, int levelNum)
 		changeText();
 		return true;
 	}
-	int x = 0;
-	int y = 0;
 	FILE *ftemp;
 	sprintf(buffer, "\nFileName: %s\n", fileName.c_str());
 	ftemp = fopen(fileName.c_str(), "rb");
