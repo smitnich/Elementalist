@@ -99,6 +99,7 @@ void imgInit()
 	iceBallns[4] = loadOptimizedIMG("gfx/elementals/iceballs2.png");
 	iceBallns[5] = loadOptimizedIMG("gfx/elementals/iceballs3.png");
 	iceFloor = loadOptimizedIMG("gfx/icefloor.png");
+	spr_bomb = loadOptimizedIMG("gfx/bomb.png");
 	//Temporary graphics
 	int i;
 	for (i = 0; i < 3; i++)

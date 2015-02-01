@@ -5,3 +5,4 @@ extern SDL_Surface *iceBallew[6], *iceBallns[6];
 extern SDL_Surface *conveyorew[6], *conveyorns[6];
 extern SDL_Surface *iceFloor;
 extern SDL_Surface *error;
+extern SDL_Surface *spr_bomb;

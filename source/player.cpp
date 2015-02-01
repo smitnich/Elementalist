@@ -65,6 +65,7 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 	}
 	void Person::die()
 	{
+		faceDir = objMoveDir = D_NONE;
 		playerDead = true;
 		stationary = deadPerson;
 		changeTextToDead();

@@ -27,7 +27,6 @@ Object::Object()
 	lastTicks = 0;
 }
 //Clean up the object
-//Return value of true means the object should be deleted
 void Object::die()
 {
 	getCurrentLevel()->assignObject(x, y, NULL);

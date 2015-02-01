@@ -1,12 +1,17 @@
 #include "terrain.h"
 #include "level.h"
+#include "tileEnum.h"
 void switchLevel(int levelNum);
+bool playSound(Mix_Chunk *input);
 extern int currentLevelNum;
 extern SDL_Surface *wall[];
 extern SDL_Surface *tiles;
 extern SDL_Surface *exitTile;
 extern SDL_Surface *barrierTile;
+extern SDL_Surface *spr_bomb;
+extern Mix_Chunk* snd_explode;
 extern bool won;
+Terrain* instantiateTerrain(int newTerrain);
 Floor::Floor()
 {
 	isTrigger = false;
@@ -63,4 +68,26 @@ void Barrier::deactivate()
 bool Barrier::isSolid()
 {
 	return !disabled;
+}
+Bomb::Bomb()
+{
+	sprite = spr_bomb;
+}
+void swapTerrain(Terrain *orig, int newTerrain)
+{
+	delete(orig);
+	orig = instantiateTerrain(newTerrain);
+}
+void Bomb::onEnter(Object *other)
+{
+	other->die();
+	swapTerrain(this, m_floor);
+	playSound(snd_explode);
+}
+void Bomb::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
+{
+	int xStart = xTile*TILE_SIZE + xInitial + xOff;
+	int yStart = yTile*TILE_SIZE + yInitial + yOff;
+	apply_surface(xStart, yStart, tiles, drawTo);
+	apply_surface(xStart, yStart, sprite, drawTo);
 }

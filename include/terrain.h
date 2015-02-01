@@ -65,6 +65,12 @@ class Floor : public Terrain{
 public:
 	Floor();
 };
+class Bomb : public Floor {
+public:
+	Bomb();
+	void onEnter(Object *other);
+	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
+};
 class Wall : public Terrain{
 public:
 	bool requestEntry(Object* other, int dir);
@@ -93,6 +99,7 @@ class Conveyor : public Terrain
 private:
 	double moveFraction;
 	bool disabled;
+	Object *lastEntered;
 public:
 	int dir;
 	bool requestEntry(Object* other, int dir);

@@ -10,6 +10,8 @@ enum tiles_t
 	m_conveyorw,
 	m_barrier,
 	m_icefloor,
+	m_bomb,
+
 	OBJ_BLOCK,
 	OBJ_HEAVY_BLOCK,
 	OBJ_ICE_BLOCK,
@@ -21,6 +23,12 @@ enum tiles_t
 
 	m_sender1,
 	m_receiver1,
+	m_sender2,
+	m_receiver2,
+	m_sender3,
+	m_receiver3,
+	m_sender4,
+	m_receiver4,
 
 	m_any = 255,
 	m_error = 0

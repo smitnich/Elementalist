@@ -19,7 +19,7 @@ public: int x, y,  objMoveDir, solid, pushable, frozen, numFrames, faceDir;
 		int getX();
 		int getY();
 		void startMove(int dir);
-		void die();
+		virtual void die();
 		virtual void doLogic();
 		//Gets the sprite to be drawn on the screen
 		SDL_Surface *getSprite();

@@ -11,6 +11,7 @@ char *musicNames[MAX_LEVEL] = {"Dystopic-Factory.mp3"};
 extern string appPath;
 string musicPath;
 Mix_Music* loadMusic(char *fileName);
+Mix_Chunk* snd_explode = NULL;
 /*SDL WII bug avoidance*/
 void setPanning(unsigned int channel, unsigned int right)
 {
@@ -34,6 +35,7 @@ void musicInit()
 	if (Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
 	{
 	}
+	snd_explode = Mix_LoadWAV("sound/explode.wav");
 }
 void freeMusic(int levelNum)
 {
@@ -58,9 +60,10 @@ void playMusic(int levelNum)
 	}
 	Mix_PlayMusic(levelMusic[levelNum-1], -1);
 }
-//Todo: Add Sound
 bool playSound(Mix_Chunk *input)
 {
+	if (input == NULL)
+		return false;
 	if (Mix_PlayChannel( 0, input, 0 ) == -1)
 		return false;
 	else
