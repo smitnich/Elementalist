@@ -30,15 +30,18 @@ void Conveyor::activate()
 void Conveyor::deactivate()
 {
 	disabled = false;
+	if (lastEntered != NULL)
+		lastEntered->startMove(dir);
 }
 void Conveyor::onEnter(Object* other)
 {
 	if (!disabled)
 		other->startMove(dir);
+	lastEntered = other;
 }
 void Conveyor::onExit(Object* other)
 {
-	return;
+	lastEntered = NULL;
 }
 bool Conveyor::isSolid()
 {
@@ -46,6 +49,7 @@ bool Conveyor::isSolid()
 }
 Conveyor::Conveyor(int direction)
 {
+	lastEntered = NULL;
 	moveFraction = 0;
 	disabled = false;
 	isTrigger = false;
