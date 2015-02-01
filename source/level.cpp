@@ -253,13 +253,19 @@ void Level::loadConnections(FILE *inFile, int xSize, int ySize)
 			}
 			if (val != 0)
 			{
-				if (val == m_receiver1)
+				//Subtract the value of this receiver from the lowest possible value:
+				//if the modulus is 0, then it is a sender, otherwise it is a receiver.
+				//Since there are both senders and receivers for each index, divide the 
+				//difference by two in order to get the proper offsets.
+				//This is used because it allows for up to the connection limit without
+				//needing to modify the code.
+				if (val >= m_sender1 && ((val-m_sender1) % 2) == 1)
 				{
-					receivers[0].push_back(convertIndex(x,y));
+					receivers[(val - m_sender1) / 2].push_back(convertIndex(x,y));
 				}
-				else if (val == m_sender1)
+				else if (val >= m_sender1 && ((val - m_sender1) % 2) == 0)
 				{
-					senders[0] = convertIndex(x, y);
+					senders[(val - m_sender1) / 2] = convertIndex(x, y);
 				}
 			}
 			it += numRead;
