@@ -21,6 +21,7 @@ void PressureSwitch::onExit(Object* other)
 }
 PressureSwitch::PressureSwitch()
 {
+	index = 0;
 	isTrigger = true;
 	sprite = pressureTile;
 }

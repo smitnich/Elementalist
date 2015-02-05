@@ -49,6 +49,7 @@ bool Conveyor::isSolid()
 }
 Conveyor::Conveyor(int direction)
 {
+	index = 0;
 	lastEntered = NULL;
 	moveFraction = 0;
 	disabled = false;

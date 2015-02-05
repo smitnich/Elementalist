@@ -10,6 +10,7 @@ class Terrain
 {
 public:
 	bool isTrigger;
+	int index;
 	SDL_Surface *sprite;
 	Terrain()
 	{

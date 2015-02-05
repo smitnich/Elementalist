@@ -34,7 +34,7 @@ bool loadLevel(string levelName,int levelNum);
 void clearObjects();
 void doTextBox(int);
 void playMusic(int level);
-class Terrain *instantiateTerrain(int input);
+class Terrain *instantiateTerrain(int input, int offset);
 extern int currentLevelNum;
 void changeText();
 
@@ -285,10 +285,10 @@ void Level::reloadMapLayer()
 	mapLayer.resize( origMapLayer.capacity());
 	for (unsigned int i = 0; i < origMapLayer.capacity(); i++)
 	{
-		mapLayer[i] = instantiateTerrain(origMapLayer[i]);
+		mapLayer[i] = instantiateTerrain(origMapLayer[i],i);
 	}
 }
-class Terrain *instantiateTerrain(int input)
+class Terrain *instantiateTerrain(int input, int i)
 {
 	Terrain *out = NULL;
 	switch(input)
@@ -328,6 +328,10 @@ class Terrain *instantiateTerrain(int input)
 			out = baseFloor;
 			break;
 	}
+	//Set the index, but only for objects which don't have it set to -1
+	//(meaning the singleton objects)
+	if (out->index != -1)
+		out->index = i;
 	return out;
 }
 //Create the global instances to be used for all objects of their type

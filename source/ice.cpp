@@ -3,6 +3,7 @@
 #include "sprites.h"
 IceFloor::IceFloor()
 {
+	index = -1;
 	sprite = iceFloor;
 }
 void IceFloor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff){

@@ -11,9 +11,11 @@ extern SDL_Surface *barrierTile;
 extern SDL_Surface *spr_bomb;
 extern Mix_Chunk* snd_explode;
 extern bool won;
-Terrain* instantiateTerrain(int newTerrain);
+Level *getCurrentLevel();
+Terrain* instantiateTerrain(int newTerrain, int offset);
 Floor::Floor()
 {
+	index = -1;
 	isTrigger = false;
 	this->sprite = tiles;
 }
@@ -27,6 +29,7 @@ bool Wall::isSolid()
 }
 Wall::Wall()
 {
+	index = -1;
 	isTrigger = false;
 	this->sprite = wall[v_wallbase];
 }
@@ -37,11 +40,13 @@ void Exit::onEnter(Object *other)
 }
 Exit::Exit()
 {
+	index = -1;
 	isTrigger = false;
 	this->sprite = exitTile;
 }
 Barrier::Barrier()
 {
+	index = 0;
 	disabled = false;
 	this->sprite = barrierTile;
 }
@@ -71,12 +76,15 @@ bool Barrier::isSolid()
 }
 Bomb::Bomb()
 {
+	index = 0;
 	sprite = spr_bomb;
 }
 void swapTerrain(Terrain *orig, int newTerrain)
 {
+	int i = orig->index;
 	delete(orig);
-	orig = instantiateTerrain(newTerrain);
+	orig = instantiateTerrain(newTerrain,i);
+	getCurrentLevel()->mapLayer[i] = orig;
 }
 void Bomb::onEnter(Object *other)
 {
