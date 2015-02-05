@@ -31,6 +31,7 @@ void checkEvents();
 void drawScreen();
 void objectLogic();
 void doPlayer();
+void doTerrainChanges();
 void createGlobalInstances();
 void freeGlobalInstances();
 extern bool defaultPath, fullScreen, done, displayName;
@@ -167,6 +168,7 @@ int main(int argc, char* argv[]){
 			objectLogic();
 		else
 			doPlayer();
+		doTerrainChanges();
 		drawScreen();
 		if (levelChange != -1)
 		{
