@@ -38,6 +38,15 @@ class Terrain *instantiateTerrain(int input);
 extern int currentLevelNum;
 void changeText();
 
+//For objects that don't have any state, it is pointless
+//to create a new instance for each one, so just create
+//one instance that all pointers refer to
+Terrain *baseWall = NULL;
+Terrain *baseFloor = NULL;
+Terrain *baseExit = NULL;
+Terrain *baseIceFloor = NULL;
+
+
 Object* objectInit(char id, int x, int y);
 string constructLevelName(int);
 class Level *allLevels[MAX_LEVEL];
@@ -285,10 +294,7 @@ class Terrain *instantiateTerrain(int input)
 	switch(input)
 	{
 		case m_wall:
-			out = new Wall();
-			break;
-		case m_floor:
-			out = new Floor();
+			out = baseWall;
 			break;
 		case m_conveyorw:
 			out = new Conveyor(D_LEFT);
@@ -303,7 +309,7 @@ class Terrain *instantiateTerrain(int input)
 			out = new Conveyor(D_UP);
 			break;
 		case m_exit:
-			out = new Exit();
+			out = baseExit;
 			break;
 		case m_pressure:
 			out = new PressureSwitch();
@@ -312,16 +318,32 @@ class Terrain *instantiateTerrain(int input)
 			out = new Barrier();
 			break;
 		case m_icefloor:
-			out = new IceFloor();
+			out = baseIceFloor;
 			break;
 		case m_bomb:
 			out = new Bomb();
 			break;
+		case m_floor:
 		default:
-			out = new Floor();
+			out = baseFloor;
 			break;
 	}
 	return out;
+}
+//Create the global instances to be used for all objects of their type
+void createGlobalInstances()
+{
+	baseFloor = new Floor();
+	baseWall = new Wall();
+	baseExit = new Exit();
+	baseIceFloor = new IceFloor();
+}
+void freeGlobalInstances()
+{
+	delete baseFloor;
+	delete baseWall;
+	delete baseExit;
+	delete baseIceFloor;
 }
 //Clear the current level and load the next
 void switchLevel(int levelNum)

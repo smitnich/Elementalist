@@ -31,6 +31,8 @@ void checkEvents();
 void drawScreen();
 void objectLogic();
 void doPlayer();
+void createGlobalInstances();
+void freeGlobalInstances();
 extern bool defaultPath, fullScreen, done, displayName;
 extern string levelPath, appPath;
 extern SDL_Surface *screen;
@@ -103,6 +105,7 @@ void init(int argc, char* argv[])
 		exit(EXIT_FAILURE);
 	}
 	gfxInit();
+	createGlobalInstances();
 	fontInit();
 	switchLevel(1);
 	//fprintf(stderr, "\n\n\n\n\n");
@@ -124,6 +127,7 @@ void cleanup(){
 	SDL_Flip(screen);
 	Mix_CloseAudio();
 	clearObjects();
+	freeGlobalInstances();
 	SDL_Quit();
 	freeSurface();
 #ifdef GEKKO
