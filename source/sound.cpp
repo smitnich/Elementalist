@@ -12,6 +12,7 @@ extern string appPath;
 string musicPath;
 Mix_Music* loadMusic(char *fileName);
 Mix_Chunk* snd_explode = NULL;
+bool audioEnabled = true;
 /*SDL WII bug avoidance*/
 void setPanning(unsigned int channel, unsigned int right)
 {
@@ -34,11 +35,15 @@ void musicInit()
 	musicPath.assign("music/");
 	if (Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
 	{
+		audioEnabled = false;
+		return;
 	}
 	snd_explode = Mix_LoadWAV("sound/explode.wav");
 }
 void freeMusic(int levelNum)
 {
+	if (!audioEnabled)
+		return;
 	if (levelNum < 0 || levelNum > MAX_LEVEL || levelMusic[levelNum-1] == NULL)
 		return;
 	Mix_HaltMusic();
@@ -47,6 +52,8 @@ void freeMusic(int levelNum)
 }
 void playMusic(int levelNum)
 {
+	if (!audioEnabled)
+		return;
 	if (levelNum < 0 || levelNum > MAX_LEVEL)
 		return;
 	char *fileName = musicNames[levelNum-1];
@@ -62,6 +69,8 @@ void playMusic(int levelNum)
 }
 bool playSound(Mix_Chunk *input)
 {
+	if (!audioEnabled)
+		return false;
 	if (input == NULL)
 		return false;
 	if (Mix_PlayChannel( 0, input, 0 ) == -1)
