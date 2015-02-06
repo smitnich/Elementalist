@@ -109,6 +109,7 @@ void Level::loadAllLayers(char *buffer,FILE *inFile)
 }
 void Level::loadObjects()
 {
+	Object *tmpObj;
 	objectLayer.clear();
 	objectLayer.resize(height*width);
 	for (int x = 0; x < width; x++)
@@ -118,7 +119,8 @@ void Level::loadObjects()
 			char tmp = origObjectLayer[convertIndex(x, y)];
 			if (tmp != 0)
 			{
-				objectInit(tmp,x,y);
+				tmpObj = objectInit(tmp,x,y);
+				mapLayer[convertIndex(x, y)]->onEnter(tmpObj);
 			}
 		}
 	}
