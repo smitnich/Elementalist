@@ -173,6 +173,7 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 					makeElement(true);
 					lastInput = BUTTON_2;
 				}
+				break;
 			case B_RIGHT:
 				if (x < MAP_SIZE && objMoveFraction == 0)
 				{
