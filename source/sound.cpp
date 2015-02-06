@@ -7,7 +7,7 @@ void outputLog(int);
 bool channelArray[MAX_CHANNELS];
 bool levelMusicLoaded[MAX_LEVEL];
 Mix_Music *levelMusic[MAX_LEVEL];
-char *musicNames[MAX_LEVEL] = {"Dystopic-Factory.mp3"};
+char *musicNames[MAX_LEVEL] = {"Dystopic-Factory.mp3","Puzzle-Game-5.mp3"};
 extern string appPath;
 string musicPath;
 Mix_Music* loadMusic(char *fileName);

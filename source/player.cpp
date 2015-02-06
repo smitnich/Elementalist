@@ -41,17 +41,17 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 			this->spritens[i] = personns[i];
 		}
 		this->element = 0;
-		this->isPlayer = 1;
+		this->isPlayer = true;
 		this->x = x2;
 		this->y = y2;
 		this->objMoveDir = 0;
 		this->objMoveFraction = 0;
 		this->solid = 0;
 		this->faceDir = 0;
-		if (playerPlaced == 0)
+		if (playerPlaced == false)
 		{
 			active = 1;
-			playerPlaced = 1;
+			playerPlaced = true;
 		}
 		else
 		{
