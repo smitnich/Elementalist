@@ -9,6 +9,7 @@ extern SDL_Surface *conveyorns[6];
 extern double delta, fpsModifier;
 extern int conveyorSpeed;
 extern int framesPerSecond;
+extern bool displayName;
 bool Conveyor::requestEntry(Object* other, int objDir)
 {
 	return true;
@@ -51,7 +52,7 @@ bool Conveyor::isSolid()
 }
 Conveyor::Conveyor(int direction)
 {
-	lastRender = getTicks();
+	lastRender = -1;
 	index = 0;
 	lastEntered = NULL;
 	moveFraction = 0;
@@ -76,11 +77,14 @@ Conveyor::Conveyor(int direction)
 }
 void Conveyor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
 {
+	if (lastRender == -1 && displayName)
+		lastRender = getTicks();
 	double lastRenderDelta = ((double) getTicks() - lastRender)/(1000.0/(float) framesPerSecond);
-	lastRender = getTicks();
+	if (!displayName)
+		lastRender = getTicks();
 	int xWrap = 0;
 	int yWrap = 0;
-	if (!disabled || moveFraction >= 1)
+	if (!displayName && (!disabled || moveFraction >= 1))
 		moveFraction += lastRenderDelta*fpsModifier;
 	if (moveFraction >= TILE_SIZE)
 		moveFraction -= TILE_SIZE;
