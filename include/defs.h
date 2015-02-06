@@ -11,10 +11,6 @@ enum directions_t
 	D_LEFT,
 	D_RIGHT
 };
-enum objects_t
-{
-
-};
 #define MAX_LEVEL 5
 #define NUM_FRAMES 3
 #define NUM_TILES 4

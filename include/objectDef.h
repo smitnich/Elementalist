@@ -1,7 +1,6 @@
 #ifndef _OBJECTDEF
 #define _OBJECTDEF
 #include "sdlFiles.h"
-class Object;
 class Object
 {
 public: int x, y,  objMoveDir, solid, pushable, frozen, numFrames, faceDir;
