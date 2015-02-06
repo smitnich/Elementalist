@@ -101,6 +101,7 @@ private:
 	double moveFraction;
 	bool disabled;
 	Object *lastEntered;
+	long lastRender;
 public:
 	int dir;
 	bool requestEntry(Object* other, int dir);

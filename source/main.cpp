@@ -43,6 +43,16 @@ unsigned long lastTicks = 0;
 extern long lastInputTime;
 double delta = 0.0;
 extern bool playerDead;
+long ticks = 0;
+//Keep every event that occurs during a frame to the same tick value
+void setTicks()
+{
+	ticks = SDL_GetTicks();
+}
+long getTicks()
+{
+	return ticks;
+}
 
 void init(int argc, char* argv[])
 {
@@ -148,7 +158,7 @@ int getCenter(int surfaceSize, int itemSize)
 }
 void updateDelta()
 {
-	unsigned int curTime = SDL_GetTicks();
+	unsigned int curTime = getTicks();
 	delta = ((double)(curTime - lastTicks)) / (1000.0 / ((float)framesPerSecond));
 	lastTicks = curTime;
 }
@@ -158,6 +168,7 @@ int main(int argc, char* argv[]){
 	//Main game loop
 	while (!done)
 	{
+		setTicks();
 		updateDelta();
 		checkEvents();
 #ifdef GEKKO

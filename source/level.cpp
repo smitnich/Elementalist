@@ -37,6 +37,7 @@ void playMusic(int level);
 class Terrain *instantiateTerrain(int input, int offset);
 extern int currentLevelNum;
 void changeText();
+long getTicks();
 
 //For objects that don't have any state, it is pointless
 //to create a new instance for each one, so just create
@@ -102,8 +103,8 @@ void Level::loadAllLayers(char *buffer,FILE *inFile)
 		loadLayer(inFile,str,width,height);
 	}
 	fclose(inFile);
-	loadObjects();
 	reloadMapLayer();
+	loadObjects();
 	makeConnections();
 }
 void Level::loadObjects()
@@ -370,7 +371,7 @@ void switchLevel(int levelNum)
 	doTextBox(posY);
 	changeText();
 	won = false;
-	lastInputTime = SDL_GetTicks();
+	lastInputTime = getTicks();
 	playMusic(levelNum);
 }
 //Make the level name given the number
@@ -387,9 +388,10 @@ class Level* getCurrentLevel()
 }
 bool loadLevel(string fileName, int levelNum)
 {
+	currentLevelNum = levelNum;
 	char buffer[BUFFERLENGTH];
-	playerPlaced = 0;
-	if (mapLoaded[levelNum] == 1)
+	playerPlaced = false;
+	if (mapLoaded[levelNum] == true)
 	{
 		Level *tmp = getCurrentLevel();
 		tmp->reloadMapLayer();
@@ -411,7 +413,7 @@ bool loadLevel(string fileName, int levelNum)
 	{
 		exit(0);
 	}
-	mapLoaded[levelNum] = 1;
+	mapLoaded[levelNum] = true;
 	fclose(ftemp);
 	changeText();
 	return true;

@@ -3,10 +3,12 @@
 #include "terrain.h"
 #include "objectDef.h"
 void drawWrappedSprite(int x, int y, SDL_Surface* source, SDL_Surface* destination, int xWrap, int yWrap);
+long getTicks();
 extern SDL_Surface *conveyorew[6];
 extern SDL_Surface *conveyorns[6];
 extern double delta, fpsModifier;
 extern int conveyorSpeed;
+extern int framesPerSecond;
 bool Conveyor::requestEntry(Object* other, int objDir)
 {
 	return true;
@@ -49,6 +51,7 @@ bool Conveyor::isSolid()
 }
 Conveyor::Conveyor(int direction)
 {
+	lastRender = getTicks();
 	index = 0;
 	lastEntered = NULL;
 	moveFraction = 0;
@@ -73,10 +76,12 @@ Conveyor::Conveyor(int direction)
 }
 void Conveyor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
 {
+	double lastRenderDelta = ((double) getTicks() - lastRender)/(1000.0/(float) framesPerSecond);
+	lastRender = getTicks();
 	int xWrap = 0;
 	int yWrap = 0;
 	if (!disabled || moveFraction >= 1)
-		moveFraction += delta*fpsModifier;
+		moveFraction += lastRenderDelta*fpsModifier;
 	if (moveFraction >= TILE_SIZE)
 		moveFraction -= TILE_SIZE;
 	int xStart = xTile*TILE_SIZE + xInitial + xOff;

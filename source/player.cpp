@@ -26,7 +26,7 @@ void cleanup();
 void changeTextToDead();
 class Level* getCurrentLevel();
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
-char checkSolid(int x,int y,int xOff, int yOff);
+long getTicks();
 extern double delta;
 Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 //The player
@@ -107,7 +107,7 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 			int input = getInput();
 			if (input != INPUT_NONE || input != lastInput)
 			{
-				if (SDL_GetTicks() - lastInputTime > 1000)
+				if (getTicks() - lastInputTime > 1000)
 					displayName = false;
 			}
 		}
@@ -123,7 +123,7 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 			int input = getInput();
 			if (input != INPUT_NONE)
 			{
-				if (SDL_GetTicks() - lastInputTime > 1000 || input != lastInput)
+				if (getTicks() - lastInputTime > 1000 || input != lastInput)
 				{
 					playerDead = false;
 					levelChange = currentLevelNum;
@@ -135,7 +135,7 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 		{
 			int input = getInput();
 			if (input != INPUT_NONE)
-				lastInputTime = SDL_GetTicks();
+				lastInputTime = getTicks();
 			switch (input){
 			case BUTTON_MENU:
 				cleanup();
