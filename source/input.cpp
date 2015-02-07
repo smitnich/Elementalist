@@ -12,17 +12,18 @@ int wupcInput(int);
 //Wiimote with classic controller
 //USB keyboard
 //Gamecube controller
+//Wii U Pro Controller
 //Uses the first input channel that recieves data as well
 int pickControls()
 {
 	int i;
 	for (i = 0; i < 4; i++)
 	{
-		/*if (wupcInput(i) != INPUT_NONE)
+		if (wupcInput(i) != INPUT_NONE)
 		{
 			wpadnum = i;
 			return CONTROLLER_WUPC;
-		}*/
+		}
 		WPAD_Probe(i, &exp_type);
 		if (WInput(WButtonsDown[i],1,i) != INPUT_NONE)
 		{
@@ -101,7 +102,7 @@ void inputInit()
 	WPAD_SetVRes(0, 640, 480);
 	//Initialize the various control schemes
 	KEYBOARD_Init(NULL);
-	//WUPC_Init();
+	WUPC_Init();
 	WPAD_Init();
 	PAD_Init();
 }
