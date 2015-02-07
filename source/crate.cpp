@@ -27,6 +27,7 @@ void objMove();
 		this->objMoveFraction = 0;
 		this->solid = 2;
 		this->faceDir = 0;
+		this->prevMove = D_NONE;
 	}
 	void Crate::doLogic()
 	{

@@ -48,6 +48,7 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 		this->objMoveFraction = 0;
 		this->solid = 0;
 		this->faceDir = 0;
+		this->prevMove = D_NONE;
 		if (playerPlaced == false)
 		{
 			active = 1;
@@ -88,6 +89,10 @@ Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 		case D_RIGHT:
 			checkX = 1;
 			break;
+		//If we're not approaching in any direction, then we are at level initilization and wish
+		//to allow the object to enter
+		case -1:
+			return true;
 		}
 		if (!requestMove(x, y, checkX, checkY, level->getObject(x + checkX, y + checkY)))
 		{
