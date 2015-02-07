@@ -206,6 +206,7 @@
     <ClCompile Include="..\source\font.cpp" />
     <ClCompile Include="..\source\gfx.cpp" />
     <ClCompile Include="..\source\globals.cpp" />
+    <ClCompile Include="..\source\ice.cpp" />
     <ClCompile Include="..\source\input.cpp" />
     <ClCompile Include="..\source\joystick.cpp" />
     <ClCompile Include="..\source\keyinput.cpp" />
@@ -222,7 +223,6 @@
     <ClCompile Include="..\source\textbox.cpp" />
     <ClCompile Include="..\source\tileSprites.cpp" />
     <ClCompile Include="..\source\triggers.cpp" />
-    <ClCompile Include="ice.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\Output\gfx\app.rc" />
