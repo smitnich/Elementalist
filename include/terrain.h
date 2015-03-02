@@ -130,6 +130,13 @@ public:
 	//void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	PressureSwitch();
 };
+class ToggleSwitch : public Trigger
+{
+public:
+	bool enabled;
+	void onEnter(Object *other);
+	ToggleSwitch(bool enabled);
+};
 class IceFloor : public Terrain
 {
 public:

@@ -38,6 +38,7 @@ class Terrain *instantiateTerrain(int input, int offset);
 extern int currentLevelNum;
 void changeText();
 long getTicks();
+void doActivateQueue();
 
 //For objects that don't have any state, it is pointless
 //to create a new instance for each one, so just create
@@ -143,6 +144,7 @@ void Level::makeConnections()
 			tmp->connections.insert(tmp->connections.begin(),mapLayer.at(receivers[i].at(j)));
 		}
 	}
+	doActivateQueue();
 }
 int Level::convertIndex(int x, int y)
 {
@@ -282,6 +284,7 @@ void Level::loadConnections(FILE *inFile, int xSize, int ySize)
 			it += numRead;
 		}
 	}
+	//Some connections should be triggered as soon as the level starts; this does so
 }
 void Level::reloadMapLayer()
 {
@@ -325,6 +328,12 @@ class Terrain *instantiateTerrain(int input, int i)
 			break;
 		case m_bomb:
 			out = new Bomb();
+			break;
+		case m_toggleOff:
+			out = new ToggleSwitch(false);
+			break;
+		case m_toggleOn:
+			out = new ToggleSwitch(true);
 			break;
 		case m_floor:
 		default:

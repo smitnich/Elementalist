@@ -100,6 +100,8 @@ void imgInit()
 	iceBallns[5] = loadOptimizedIMG("gfx/elementals/iceballs3.png");
 	iceFloor = loadOptimizedIMG("gfx/icefloor.png");
 	spr_bomb = loadOptimizedIMG("gfx/bomb.png");
+	spr_pressureToggle[0] = loadOptimizedIMG("gfx/pressureToggleOff.png");
+	spr_pressureToggle[1] = loadOptimizedIMG("gfx/pressureToggleOn.png");
 	//Temporary graphics
 	int i;
 	for (i = 0; i < 3; i++)

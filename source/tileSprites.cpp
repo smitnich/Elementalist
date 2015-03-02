@@ -26,3 +26,4 @@ SDL_Surface *conveyorew[6] = { NULL };
 SDL_Surface *conveyorns[6] = { NULL };
 SDL_Surface *iceFloor = NULL;
 SDL_Surface *spr_bomb = NULL;
+SDL_Surface *spr_pressureToggle[2] = { NULL, NULL };

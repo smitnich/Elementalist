@@ -11,6 +11,8 @@ enum tiles_t
 	m_barrier,
 	m_icefloor,
 	m_bomb,
+	m_toggleOff,
+	m_toggleOn,
 
 	OBJ_BLOCK,
 	OBJ_HEAVY_BLOCK,
