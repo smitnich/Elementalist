@@ -4,6 +4,7 @@
 #include "objectDef.h"
 #include "terrain.h"
 #include "tileEnum.h"
+#include "wallLookup.h"
 #include <queue>
 //The number of objects created
 extern unsigned int numObjects;
@@ -43,7 +44,6 @@ void doActivateQueue();
 //For objects that don't have any state, it is pointless
 //to create a new instance for each one, so just create
 //one instance that all pointers refer to
-Terrain *baseWall = NULL;
 Terrain *baseFloor = NULL;
 Terrain *baseExit = NULL;
 Terrain *baseIceFloor = NULL;
@@ -284,61 +284,61 @@ void Level::loadConnections(FILE *inFile, int xSize, int ySize)
 			it += numRead;
 		}
 	}
-	//Some connections should be triggered as soon as the level starts; this does so
+//Some connections should be triggered as soon as the level starts; this does so
 }
 void Level::reloadMapLayer()
 {
-	mapLayer.resize( origMapLayer.capacity());
+	mapLayer.resize(origMapLayer.capacity());
 	for (unsigned int i = 0; i < origMapLayer.capacity(); i++)
 	{
-		mapLayer[i] = instantiateTerrain(origMapLayer[i],i);
+		mapLayer[i] = instantiateTerrain(origMapLayer[i], i);
 	}
 }
 class Terrain *instantiateTerrain(int input, int i)
 {
 	Terrain *out = NULL;
-	switch(input)
+	switch (input)
 	{
-		case m_wall:
-			out = baseWall;
-			break;
-		case m_conveyorw:
-			out = new Conveyor(D_LEFT);
-			break;
-		case m_conveyors:
-			out = new Conveyor(D_DOWN);
-			break;
-		case m_conveyore:
-			out = new Conveyor(D_RIGHT);
-			break;
-		case m_conveyorn:
-			out = new Conveyor(D_UP);
-			break;
-		case m_exit:
-			out = baseExit;
-			break;
-		case m_pressure:
-			out = new PressureSwitch();
-			break;
-		case m_barrier:
-			out = new Barrier();
-			break;
-		case m_icefloor:
-			out = baseIceFloor;
-			break;
-		case m_bomb:
-			out = new Bomb();
-			break;
-		case m_toggleOff:
-			out = new ToggleSwitch(false);
-			break;
-		case m_toggleOn:
-			out = new ToggleSwitch(true);
-			break;
-		case m_floor:
-		default:
-			out = baseFloor;
-			break;
+	case m_wall:
+		out = new Wall(i);
+		break;
+	case m_conveyorw:
+		out = new Conveyor(D_LEFT);
+		break;
+	case m_conveyors:
+		out = new Conveyor(D_DOWN);
+		break;
+	case m_conveyore:
+		out = new Conveyor(D_RIGHT);
+		break;
+	case m_conveyorn:
+		out = new Conveyor(D_UP);
+		break;
+	case m_exit:
+		out = baseExit;
+		break;
+	case m_pressure:
+		out = new PressureSwitch();
+		break;
+	case m_barrier:
+		out = new Barrier();
+		break;
+	case m_icefloor:
+		out = baseIceFloor;
+		break;
+	case m_bomb:
+		out = new Bomb();
+		break;
+	case m_toggleOff:
+		out = new ToggleSwitch(false);
+		break;
+	case m_toggleOn:
+		out = new ToggleSwitch(true);
+		break;
+	case m_floor:
+	default:
+		out = baseFloor;
+		break;
 	}
 	//Set the index, but only for objects which don't have it set to -1
 	//(meaning the singleton objects)
@@ -346,18 +346,35 @@ class Terrain *instantiateTerrain(int input, int i)
 		out->index = i;
 	return out;
 }
+unsigned char lookupWall(int index)
+{
+	Level *level = getCurrentLevel();
+	int x = index % level->width;
+	int y = index / level->width;
+	unsigned char tmp = 0;
+	int addBy = 1;
+	for (int i = x - 1; i <= x + 1; i++)
+		for (int j = y - 1; j <= y + 1; j++)
+		{
+			if (i == x && j == y)
+				continue;
+			if (i < 0 || i >= level->width || j < 0 || j >= level->height
+				|| level->origMapLayer.at(level->convertIndex(i, j)) == m_wall)
+				tmp += addBy;
+			addBy *= 2;
+		}
+	return lookupTable[tmp];
+}
 //Create the global instances to be used for all objects of their type
 void createGlobalInstances()
 {
 	baseFloor = new Floor();
-	baseWall = new Wall();
 	baseExit = new Exit();
 	baseIceFloor = new IceFloor();
 }
 void freeGlobalInstances()
 {
 	delete baseFloor;
-	delete baseWall;
 	delete baseExit;
 	delete baseIceFloor;
 }

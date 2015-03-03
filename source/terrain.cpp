@@ -4,6 +4,7 @@
 #include <list>
 void switchLevel(int levelNum);
 bool playSound(Mix_Chunk *input);
+unsigned char lookupWall(int index);
 extern int currentLevelNum;
 extern SDL_Surface *wall[];
 extern SDL_Surface *tiles;
@@ -53,15 +54,11 @@ bool Wall::requestEntry(Object *other, int dir)
 {
 	return false;
 }
-bool Wall::isSolid()
+Wall::Wall(int _index)
 {
-	return true;
-}
-Wall::Wall()
-{
-	index = -1;
+	index = _index;
 	isTrigger = false;
-	this->sprite = wall[v_wallbase];
+	this->sprite = wall[lookupWall(index)];
 }
 void Exit::onEnter(Object *other)
 {
@@ -99,10 +96,6 @@ void Barrier::activate()
 void Barrier::deactivate()
 {
 	disabled = false;
-}
-bool Barrier::isSolid()
-{
-	return !disabled;
 }
 Bomb::Bomb()
 {

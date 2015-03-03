@@ -6,7 +6,7 @@ extern bool won;
 //The base object class, all gameplay elements derive from this
 class Object;
 //The map which places Object pointers in their actual game locations, used for collision detection
-extern int xInitial, yInitial, posX, posY, tilesX, tilesY, tileSize;
+extern int xInitial, yInitial, posX, posY, tilesX, tilesY;
 extern int framesPerSecond;
 extern int levelStartCounter;
 extern double movespeed;

@@ -17,7 +17,3 @@ void IceFloor::onEnter(Object *other)
 	if (other->prevMove != D_NONE)
 		other->startMove(other->prevMove);
 }
-bool IceFloor::isSolid()
-{
-	return false;
-}

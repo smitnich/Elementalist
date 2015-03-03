@@ -23,7 +23,7 @@ SDL_Rect* rectMake(int x, int y, int h, int w);
 SDL_Surface* loadOptimizedIMG(string);
 extern int lastMoveDir;
 extern int videoSizeY,videoSizeX;
-extern int xInitial, yInitial, tileSize, tilesX, tilesY, tileSize;
+extern int xInitial, yInitial, tilesSizeX, tilesX, tilesY, tileSizeY;
 extern int pointerX, pointerY, currentLevelNum;
 extern string appPath;
 extern string levelPath;
