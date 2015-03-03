@@ -66,22 +66,22 @@ void drawScreen()
 }
 void drawWrappedSprite(int x, int y, SDL_Surface* source, SDL_Surface* destination, int xWrap, int yWrap)
 {
-	//Make sure we're not over the tileSize
+	//Make sure we're not over the TILE_SIZE
 	int i;
-	xWrap %= tileSize;
-	yWrap %= tileSize;
+	xWrap %= TILE_SIZE;
+	yWrap %= TILE_SIZE;
 	SDL_Rect *offset[2];
 	SDL_Rect *portion[2];
-	portion[0] = rectMake(0,0,tileSize-yWrap,tileSize-xWrap);
-	portion[1] = rectMake((tileSize-xWrap) % tileSize, (tileSize-yWrap) % tileSize, yWrap, xWrap);
-	offset[0] = rectMake(xWrap+x,yWrap+y,tileSize-yWrap,tileSize-xWrap);
+	portion[0] = rectMake(0,0,TILE_SIZE-yWrap,TILE_SIZE-xWrap);
+	portion[1] = rectMake((TILE_SIZE-xWrap) % TILE_SIZE, (TILE_SIZE-yWrap) % TILE_SIZE, yWrap, xWrap);
+	offset[0] = rectMake(xWrap+x,yWrap+y,TILE_SIZE-yWrap,TILE_SIZE-xWrap);
 	offset[1] = rectMake(x,y,yWrap,xWrap);
 	for (i = 0; i < 2; i++)
 	{
 		if (portion[i]->h == 0)
-			portion[i]->h = tileSize;
+			portion[i]->h = TILE_SIZE;
 		if (portion[i]->w == 0)
-			portion[i]->w = tileSize;
+			portion[i]->w = TILE_SIZE;
 		SDL_BlitSurface( source, portion[i], destination, offset[i] );
 		free(offset[i]);
 		free(portion[i]);
@@ -108,7 +108,7 @@ void gfxInit()
 {
 	if (xInitial == 0)
 		xInitial = 24;
-	yInitial = getCenter(videoSizeY,tileSize*(tilesY*2+1));
+	yInitial = getCenter(videoSizeY,(tilesY*2+1)*TILE_SIZE);
 	imgInit();
 	SDL_FillRect(screen, 0, SDL_MapRGB(screen->format, 91, 91, 255));
 	SDL_Flip(screen);
@@ -121,9 +121,9 @@ void gfxInit()
 void apply_surface(int x, int y, int width, int height, SDL_Surface* source, SDL_Surface* destination)
 {
 	if (width == 0)
-		width = tileSize;
+		width = TILE_SIZE;
 	if (height == 0)
-		height = tileSize;
+		height = TILE_SIZE;
 	SDL_Rect offset;
 	offset.x = x;
 	offset.y = y;
@@ -140,8 +140,8 @@ void apply_surface(int x, int y, int width, int height, SDL_Surface* source, SDL
 	else if (width < 0)
 	{
 		width*=-1;
-		portion.x = tileSize-width;
-		offset.x += tileSize-width;
+		portion.x = TILE_SIZE-width;
+		offset.x += TILE_SIZE-width;
 		portion.w = width;
 	}
 	if (height > 0)
@@ -152,8 +152,8 @@ void apply_surface(int x, int y, int width, int height, SDL_Surface* source, SDL
 	else if (height < 0)
 	{
 		height*=-1;
-		portion.y = tileSize-height;
-		offset.y += tileSize-height;
+		portion.y = TILE_SIZE-height;
+		offset.y += TILE_SIZE-height;
 		portion.h = height;
 	}
 	SDL_BlitSurface( source, &portion, destination, &offset );
@@ -169,7 +169,7 @@ void drawBorders()
 //Draw a wall based on the type value passed in
 void doWall(int type, int x, int y, int moveFractionX, int moveFractionY)
 {
-	apply_surface(x*tileSize+xInitial-moveFractionX,y*tileSize+yInitial-moveFractionY,wall[type],screen);
+	apply_surface(x*TILE_SIZE+xInitial-moveFractionX,y*TILE_SIZE+yInitial-moveFractionY,wall[type],screen);
 }
 //Draw a sprite at a given position
 void drawSprite(int drawX,int drawY,SDL_Surface* toDraw)

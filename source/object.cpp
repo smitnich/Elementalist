@@ -66,9 +66,9 @@ bool Object::requestEntry(Object *other, int dir)
 SDL_Surface* Object::getSprite()
 {
 	int newFraction = 0;
-	if (objMoveFraction < tileSize)
+	if (objMoveFraction < TILE_SIZE)
 		newFraction = floor(objMoveFraction);
-	int value = newFraction*numFrames / tileSize;
+	int value = newFraction*numFrames / TILE_SIZE;
 	if (faceDir != 0 && objMoveFraction == 0)
 	{
 		if (faceDir == D_RIGHT)
@@ -146,7 +146,7 @@ void Movable::objMove()
 	}
 	/*If the object has reached the next tile, reset its move variable
 	and increment its position variable*/
-	if (objMoveFraction >= tileSize)
+	if (objMoveFraction >= TILE_SIZE)
 	{
 		Level *lev = getCurrentLevel();
 		lev->assignObject(x, y, NULL);
@@ -223,35 +223,35 @@ void doDraw(Object *drawObject, int moveFractionX, int moveFractionY, bool doDir
 		objectMoveFractiony = drawObject->getMoveFraction();
 	int drawPortionX = 0;
 	int drawPortionY = 0;
-	int drawX = (x - posX + tilesX)*tileSize + xInitial - moveFractionX + objectMoveFractionx;
-	int drawY = (y - posY + tilesY)*tileSize + yInitial - moveFractionY + objectMoveFractiony;
+	int drawX = (x - posX + tilesX)*TILE_SIZE + xInitial - moveFractionX + objectMoveFractionx;
+	int drawY = (y - posY + tilesY)*TILE_SIZE + yInitial - moveFractionY + objectMoveFractiony;
 	//Keep rendering window still when moving towards the edges
 	if (posX <= 3 || (posX == tilesX && player->objMoveDir != D_RIGHT))
-		drawX = x*tileSize + xInitial + objectMoveFractionx;
+		drawX = x*TILE_SIZE + xInitial + objectMoveFractionx;
 	else if (posX >= MAP_SIZE - tilesX || (posX == MAP_SIZE - tilesX - 1 && player->objMoveDir != D_LEFT))
-		drawX = (x - MAP_SIZE + tilesX * 2 + 1)*tileSize + xInitial + objectMoveFractionx;
+		drawX = (x - MAP_SIZE + tilesX * 2 + 1)*TILE_SIZE + xInitial + objectMoveFractionx;
 	if (posY <= 3 || (posY == 4 && player->objMoveDir != D_DOWN))
-		drawY = y*tileSize + yInitial + objectMoveFractiony;
+		drawY = y*TILE_SIZE + yInitial + objectMoveFractiony;
 	else if (posY >= MAP_SIZE - tilesX || (posY == MAP_SIZE - tilesX - 1 && player->objMoveDir != D_UP))
-		drawY = (y - MAP_SIZE + tilesX * 2 + 1)*tileSize + yInitial + objectMoveFractiony;
+		drawY = (y - MAP_SIZE + tilesX * 2 + 1)*TILE_SIZE + yInitial + objectMoveFractiony;
 	//Determine which portion of the tile to be rendered when on the edge
-	if (drawX <= xInitial && drawX >= xInitial - tileSize)
+	if (drawX <= xInitial && drawX >= xInitial - TILE_SIZE)
 	{
-		drawPortionX = -tileSize + xInitial - drawX;
+		drawPortionX = -TILE_SIZE + xInitial - drawX;
 	}
-	else if (drawX >= xInitial + (tileSize*(tilesX * 2 + 1)) - tileSize)
+	else if (drawX >= xInitial + (TILE_SIZE*(tilesX * 2 + 1)) - TILE_SIZE)
 	{
-		drawPortionX = xInitial + (tileSize*(tilesX * 2 + 1)) - drawX;
+		drawPortionX = xInitial + (TILE_SIZE*(tilesX * 2 + 1)) - drawX;
 	}
-	if (drawY <= yInitial && drawY >= yInitial - tileSize)
+	if (drawY <= yInitial && drawY >= yInitial - TILE_SIZE)
 	{
-		drawPortionY = -tileSize + yInitial - drawY;
+		drawPortionY = -TILE_SIZE + yInitial - drawY;
 	}
-	else if (drawY >= yInitial + (tileSize*(tilesY * 2 + 1)) - tileSize)
+	else if (drawY >= yInitial + (TILE_SIZE*(tilesY * 2 + 1)) - TILE_SIZE)
 	{
-		drawPortionY = yInitial + (tileSize*(tilesY * 2 + 1)) - drawY;
+		drawPortionY = yInitial + (TILE_SIZE*(tilesY * 2 + 1)) - drawY;
 	}
-	//if (drawX >= xInitial && drawX < (tilesX*tileSize)+xInitial && drawY >= yInitial && drawY < (tilesY*tileSize)+yInitial)
+	//if (drawX >= xInitial && drawX < (tilesX*TILE_SIZE)+xInitial && drawY >= yInitial && drawY < (tilesY*TILE_SIZE)+yInitial)
 	apply_surface(drawX, drawY, drawPortionX, drawPortionY, toDraw, screen);
 	//Overlay the iceblock graphic if the object is frozen
 	if (drawObject->frozen == 1)

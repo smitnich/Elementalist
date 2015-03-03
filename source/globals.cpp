@@ -5,8 +5,6 @@ int videoSizeX = 640;
 int videoSizeY = 480;
 //The number of arguments passed into the Exe
 int argumentCount = 0;
-//The number of pixels per tile
-int tileSize = 48;
 //The number of tiles viewable horizontally and vertically, from the player
 int tilesX = 4;
 int tilesY = 4;
