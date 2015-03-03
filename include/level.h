@@ -35,4 +35,5 @@ class Level
 	void loadConnections(FILE *inFile, int xSize, int ySize);
 	void makeConnections();
 };
+Level *getCurrentLevel();
 #endif

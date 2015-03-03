@@ -35,10 +35,6 @@ public:
 	{
 		return;
 	}
-	virtual bool isSolid()
-	{
-		return false;
-	}
 	virtual void activate()
 	{
 		return;
@@ -75,8 +71,7 @@ public:
 class Wall : public Terrain{
 public:
 	bool requestEntry(Object* other, int dir);
-	bool isSolid();
-	Wall();
+	Wall(int index);
 };
 class Exit : public Floor{
 public:
@@ -89,7 +84,6 @@ private:
 	bool disabled;
 public:
 	bool requestEntry(Object* other, int dir);
-	bool isSolid();
 	void activate();
 	void deactivate();
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
@@ -108,7 +102,6 @@ public:
 	bool requestExit(Object* other, int dir);
 	void onEnter(Object* other);
 	void onExit(Object* other);
-	bool isSolid();
 	void activate();
 	void deactivate();
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
@@ -141,7 +134,6 @@ class IceFloor : public Terrain
 {
 public:
 	void onEnter(Object *other);
-	bool isSolid();
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	//void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	IceFloor();

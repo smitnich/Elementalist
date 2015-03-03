@@ -192,6 +192,7 @@
     <ClInclude Include="..\include\sprites.h" />
     <ClInclude Include="..\include\terrain.h" />
     <ClInclude Include="..\include\tileEnum.h" />
+    <ClInclude Include="..\include\wallLookup.h" />
     <ClInclude Include="..\include\wallnames.h" />
     <ClInclude Include="..\include\wii.h" />
   </ItemGroup>

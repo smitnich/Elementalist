@@ -46,10 +46,6 @@ void Conveyor::onExit(Object* other)
 {
 	lastEntered = NULL;
 }
-bool Conveyor::isSolid()
-{
-	return true;
-}
 Conveyor::Conveyor(int direction)
 {
 	lastRender = -1;
