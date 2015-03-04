@@ -62,6 +62,7 @@ class Person : public Movable
 {
 public:
 	int active;
+	Person(const Person &other);
 	Person(int x, int y);
 	void makeElement(bool doSecond);
 	char element;

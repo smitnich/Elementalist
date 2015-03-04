@@ -335,6 +335,12 @@ class Terrain *instantiateTerrain(int input, int i)
 	case m_toggleOn:
 		out = new ToggleSwitch(true);
 		break;
+	case m_dupeN:
+	case m_dupeS:
+	case m_dupeW:
+	case m_dupeE:
+		out = new Duplicator(input - m_dupeN + 1);
+		break;
 	case m_floor:
 	default:
 		out = baseFloor;

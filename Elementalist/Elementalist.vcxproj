@@ -202,6 +202,7 @@
     <ClCompile Include="..\source\config.cpp" />
     <ClCompile Include="..\source\conveyor.cpp" />
     <ClCompile Include="..\source\crate.cpp" />
+    <ClCompile Include="..\source\duplicator.cpp" />
     <ClCompile Include="..\source\event.cpp" />
     <ClCompile Include="..\source\files.cpp" />
     <ClCompile Include="..\source\font.cpp" />

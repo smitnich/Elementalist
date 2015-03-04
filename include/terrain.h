@@ -105,7 +105,6 @@ public:
 	void activate();
 	void deactivate();
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
-	//void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	Conveyor();
 	Conveyor(int direction);
 };
@@ -120,7 +119,6 @@ class PressureSwitch : public Trigger
 public:
 	void onEnter(Object* other);
 	void onExit(Object* other);
-	//void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	PressureSwitch();
 };
 class ToggleSwitch : public Trigger
@@ -135,7 +133,17 @@ class IceFloor : public Terrain
 public:
 	void onEnter(Object *other);
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
-	//void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	IceFloor();
+};
+class Duplicator : public Terrain
+{
+public:
+	int dir;
+	Object *copyObj;
+	void onEnter(Object *other);
+	void onExit(Object *other);
+	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
+	void activate();
+	Duplicator(int dir);
 };
 #endif

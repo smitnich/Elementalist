@@ -115,6 +115,10 @@ void imgInit()
 		conveyorns[i] = loadOptimizedIMG("gfx/conveyor/conveyors1.png");
 	}
 	error = loadOptimizedIMG("gfx/iamerror.png");
+	spr_dupe[0] = loadOptimizedIMG("gfx/dupeN.png");
+	spr_dupe[1] = loadOptimizedIMG("gfx/dupeS.png");
+	spr_dupe[2] = loadOptimizedIMG("gfx/dupeW.png");
+	spr_dupe[3] = loadOptimizedIMG("gfx/dupeE.png");
 }
 //Optimize the image for proper depth and for transparecny
 SDL_Surface* loadOptimizedIMG(string fileName)

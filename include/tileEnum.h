@@ -13,6 +13,10 @@ enum tiles_t
 	m_bomb,
 	m_toggleOff,
 	m_toggleOn,
+	m_dupeN,
+	m_dupeS,
+	m_dupeW,
+	m_dupeE,
 
 	OBJ_BLOCK,
 	OBJ_HEAVY_BLOCK,

@@ -30,6 +30,10 @@ long getTicks();
 extern double delta;
 Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 //The player
+Person::Person(const Person &other)
+{
+	active = false;
+}
 	Person::Person(int x2, int y2)
 	{
 		level = getCurrentLevel();
