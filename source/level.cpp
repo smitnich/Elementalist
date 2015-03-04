@@ -357,15 +357,20 @@ unsigned char lookupWall(int index)
 	Level *level = getCurrentLevel();
 	int x = index % level->width;
 	int y = index / level->width;
-	unsigned char tmp = 0;
 	int addBy = 1;
+	unsigned char tmp = 0;
 	for (int i = x - 1; i <= x + 1; i++)
 		for (int j = y - 1; j <= y + 1; j++)
 		{
 			if (i == x && j == y)
 				continue;
-			if (i < 0 || i >= level->width || j < 0 || j >= level->height
-				|| level->origMapLayer.at(level->convertIndex(i, j)) == m_wall)
+			if (i < 0 || i >= level->width || j < 0 || j >= level->height)
+			{
+				addBy *= 2;
+				continue;
+			}
+			if (level->origMapLayer.at(level->convertIndex(i, j)) == m_wall
+				|| i < 0 || i >= level->width || j < 0 || j >= level->height)
 				tmp += addBy;
 			addBy *= 2;
 		}
