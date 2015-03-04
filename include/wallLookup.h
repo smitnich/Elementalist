@@ -1,6 +1,6 @@
 unsigned char lookupTable[] = {
 	0,
-	v_walln,
+	29,
 	19,
 	19,
 	0,

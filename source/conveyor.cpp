@@ -83,7 +83,11 @@ void Conveyor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOf
 	if (!displayName && (!disabled || moveFraction >= 1))
 		moveFraction += lastRenderDelta*fpsModifier;
 	if (moveFraction >= TILE_SIZE)
+	{
 		moveFraction -= TILE_SIZE;
+		if (disabled)
+			moveFraction = 0;
+	}
 	int xStart = xTile*TILE_SIZE + xInitial + xOff;
 	int yStart = yTile*TILE_SIZE + yInitial + yOff;
 	switch (dir)
