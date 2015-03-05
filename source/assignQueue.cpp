@@ -19,6 +19,7 @@ void doAssignQueue()
 	{
 		tmp = (Object *)assignQueue.front();
 		getCurrentLevel()->assignObject(tmp->x, tmp->y, tmp);
+		getCurrentLevel()->getTerrain(tmp->x, tmp->y)->onEnter(tmp);
 		assignQueue.pop_front();
 	}
 }
