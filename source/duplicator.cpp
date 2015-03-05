@@ -33,6 +33,8 @@ void Duplicator::activate()
 		x -= 1;
 	else if (dir == D_RIGHT)
 		x += 1;
+	if (getCurrentLevel()->getObject(x, y) != NULL)
+		return;
 	Object *tmp = copyObj->clone(x,y);
 	addAssignQueue(tmp);
 
