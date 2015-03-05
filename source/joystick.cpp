@@ -92,7 +92,6 @@ void updateJoystick(SDL_Event event, int controllerCheck)
 		if (controllerCheck == -1)
 		{
 			chosenController = event.jhat.which;
-			return;
 		}
 		if (event.jhat.which == controllerCheck)
 		{
@@ -104,7 +103,7 @@ void updateJoystick(SDL_Event event, int controllerCheck)
 				hatDirection = B_UP;
 			else if (event.jhat.value & SDL_HAT_DOWN)
 				hatDirection = B_DOWN;
-            else if (event.jhat.value == 0)
+            else if (event.jhat.value == SDL_HAT_CENTERED)
                 hatDirection = 0;
 		}
 	}

@@ -16,9 +16,6 @@ extern int chosenController;
 void checkEvents()
 {
 	SDL_Event event;
-	#if !(defined GEKKO) && !(defined LINUX)
-	hatDirection = 0;
-	#endif
 	while (SDL_PollEvent(&event))
 	{
 		switch(event.type)
