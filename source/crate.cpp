@@ -33,6 +33,15 @@ void objMove();
 	{
 		Movable::specialLogic();
 	}
+	Object* Crate::clone(int _x, int _y)
+	{
+		Object *tmp = new Crate();
+		//Copy all of the contents of this object over to the new one
+		memcpy(tmp, this, sizeof(*this));
+		tmp->x = _x;
+		tmp->y = _y;
+		return tmp;
+	}
 	bool Crate::requestEntry(Object *other, int dir)
 	{
 		int xdir = 0;
@@ -55,6 +64,14 @@ void objMove();
 //Can't be moved in a line
 	HeavyCrate::HeavyCrate() : Crate()
 	{
+	}
+	Object* HeavyCrate::clone(int _x, int _y)
+	{
+		Object *tmp = new HeavyCrate();
+		memcpy(tmp, this, sizeof(this));
+		tmp->x = _x;
+		tmp->y = _y;
+		return tmp;
 	}
 	HeavyCrate::HeavyCrate(int x2, int y2)
 	{

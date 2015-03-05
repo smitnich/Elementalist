@@ -17,14 +17,32 @@ Object::Object()
 	objMoveFraction = 0;
 	objMoveDir = 0;
 	solid = 0;
-	pushable = 0;
 	moveSpeed = 0;
 	tempSpeed = 0;
 	frozen = 0;
-	this->frozen = 0;
 	numFrames = 1;
 	faceDir = 0;
-	lastTicks = 0;
+}
+Object::Object(Object &other, int _x, int _y)
+{
+	level = other.level;
+	isPlayer = other.isPlayer;
+	x = _x;
+	y = _y;
+	objMoveFraction = 0;
+	objMoveDir = 0;
+	solid = other.solid;
+	moveSpeed = other.moveSpeed;
+	tempSpeed = 0;
+	frozen = other.frozen;
+	numFrames = other.numFrames;
+	for (int i = 0; i < 6; i++)
+	{
+		spriteew[i] = other.spriteew[i];
+		spritens[i] = other.spritens[i];
+	}
+	stationary = other.stationary;
+	faceDir = 0;
 }
 //Clean up the object
 void Object::die()

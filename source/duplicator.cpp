@@ -1,6 +1,9 @@
 #include "objectDef.h"
 #include "terrain.h"
 #include "sprites.h"
+#include "level.h"
+void addAssignQueue(Object *in);
+
 void Duplicator::onEnter(Object *other)
 {
 	copyObj = other;
@@ -18,6 +21,20 @@ void Duplicator::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int y
 }
 void Duplicator::activate()
 {
+	if (copyObj == NULL)
+		return;
+	int x = copyObj->x;
+	int y = copyObj->y;
+	if (dir == D_UP)
+		y -= 1;
+	else if (dir == D_DOWN)
+		y += 1;
+	else if (dir == D_LEFT)
+		x -= 1;
+	else if (dir == D_RIGHT)
+		x += 1;
+	Object *tmp = copyObj->clone(x,y);
+	addAssignQueue(tmp);
 
 }
 Duplicator::Duplicator(int _dir)

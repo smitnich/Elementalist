@@ -5,6 +5,7 @@
 void switchLevel(int levelNum);
 bool playSound(Mix_Chunk *input);
 unsigned char lookupWall(int index);
+void doAssignQueue();
 extern int currentLevelNum;
 extern SDL_Surface *wall[];
 extern SDL_Surface *tiles;
@@ -43,6 +44,7 @@ void doTerrainChanges()
 		changeReqs.pop_front();
 		swapTerrain(req->index, req->changeTo);
 	}
+	doAssignQueue();
 }
 Floor::Floor()
 {

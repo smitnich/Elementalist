@@ -30,9 +30,30 @@ long getTicks();
 extern double delta;
 Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
 //The player
-Person::Person(const Person &other)
+Person::Person(const Person &other, int _x, int _y)
 {
 	active = false;
+	level = other.level;
+	isPlayer = other.isPlayer;
+	x = _x;
+	y = _y;
+	objMoveFraction = 0;
+	objMoveDir = 0;
+	solid = other.solid;
+	moveSpeed = other.moveSpeed;
+	tempSpeed = 0;
+	frozen = other.frozen;
+	numFrames = other.numFrames;
+	faceDir = 0;
+	for (int i = 0; i < 6; i++)
+	{
+		spriteew[i] = other.spriteew[i];
+		spritens[i] = other.spritens[i];
+	}
+}
+Object* Person::clone(int _x, int _y)
+{
+	return new Person(*this,_x,_y);
 }
 	Person::Person(int x2, int y2)
 	{
