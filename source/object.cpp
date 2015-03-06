@@ -6,6 +6,7 @@ class Level* getCurrentLevel();
 extern double delta;
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 Level *getCurrentLevel();
+void checkTransitQueue();
 
 //The basic template for the Objects in the game
 Object::Object()
@@ -111,33 +112,8 @@ SDL_Surface* Object::getSprite()
 	else
 		return stationary;
 }
-//Objects that stop the player from moving into them
-SolidObject::SolidObject()
-{
-	this->isPlayer = 0;
-	solid = 1;
-	level = getCurrentLevel();
-}
-void SolidObject::doLogic()
-{
-
-}
 //Objects that move in some way
-Movable::Movable() : SolidObject()
-{
-	objMoveDir = 0;
-	objMoveFraction = 0;
-	moveSpeed = 0;
-	tempSpeed = 0;
-	frozen = 0;
-	faceDir = 0;
-	level = getCurrentLevel();
-}
-void Movable::specialLogic()
-{
-	objMove();
-}
-void Movable::objMove()
+void Object::objMove()
 {
 	int checkX = 0;
 	int checkY = 0;
@@ -171,7 +147,8 @@ void Movable::objMove()
 	if (objMoveFraction >= TILE_SIZE)
 	{
 		Level *lev = getCurrentLevel();
-		lev->assignObject(x, y, NULL);
+		if (lev->getObject(x,y) == this)
+			lev->assignObject(x, y, NULL);
 		prevMove = objMoveDir;
 		if (objMoveDir == D_LEFT)
 			checkX = -1;
@@ -186,9 +163,6 @@ void Movable::objMove()
 		objMoveFraction = 0;
 		addMoveRequest(this, x, y, checkX, checkY);
 	}
-}
-void Movable::doLogic()
-{
 }
 //Takes in pointers to movefractionx and y and modifies their values based on direction
 void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY, bool *doDir)
@@ -363,6 +337,7 @@ void objectLogic()
 			tmp->doLogic();
 	}
 	queuePlaceAll();
+	checkTransitQueue();
 }
 void doPlayer()
 {

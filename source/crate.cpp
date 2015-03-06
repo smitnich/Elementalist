@@ -31,7 +31,7 @@ void objMove();
 	}
 	void Crate::doLogic()
 	{
-		Movable::specialLogic();
+		objMove();
 	}
 	Object* Crate::clone(int _x, int _y)
 	{
