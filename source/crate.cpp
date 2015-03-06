@@ -54,7 +54,7 @@ void objMove();
 			ydir = -1;
 		else if (dir == D_DOWN)
 			ydir = 1;
-		if (requestMove(this->x, this->y, xdir, ydir, other))
+		if (requestMove(this->x, this->y, xdir, ydir, this))
 		{
 			startMove(dir);
 			return true;
