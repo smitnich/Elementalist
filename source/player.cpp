@@ -28,7 +28,7 @@ class Level* getCurrentLevel();
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 long getTicks();
 extern double delta;
-Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
+Object* objectInit(unsigned int id, int x, int y, int moveDir, int moveFraction);
 //The player
 Person::Person(const Person &other, int _x, int _y)
 {

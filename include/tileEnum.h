@@ -21,7 +21,7 @@ enum tiles_t
 	m_raisedFloor,
 	m_electricFloor,
 
-	OBJ_BLOCK,
+	OBJ_BLOCK = 1001,
 	OBJ_HEAVY_BLOCK,
 	OBJ_ICE_BLOCK,
 	OBJ_PLAYER,
@@ -30,7 +30,7 @@ enum tiles_t
 	OBJ_ICE_ELEMENT_S,
 	OBJ_ICE_ELEMENT_W,
 
-	m_sender1,
+	m_sender1 = 2001,
 	m_receiver1,
 	m_sender2,
 	m_receiver2,

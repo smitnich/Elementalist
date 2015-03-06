@@ -49,7 +49,7 @@ Terrain *baseExit = NULL;
 Terrain *baseIceFloor = NULL;
 
 
-Object* objectInit(char id, int x, int y);
+Object* objectInit(unsigned int id, int x, int y);
 string constructLevelName(int);
 class Level *allLevels[MAX_LEVEL];
 Level::Level(FILE* inFile, int levelNum)
@@ -113,11 +113,11 @@ void Level::loadObjects()
 	Object *tmpObj;
 	objectLayer.clear();
 	objectLayer.resize(height*width);
-	for (int x = 0; x < width; x++)
+	for (unsigned int x = 0; x < width; x++)
 	{
-		for (int y = 0; y < height; y++)
+		for (unsigned int y = 0; y < height; y++)
 		{
-			char tmp = origObjectLayer[convertIndex(x, y)];
+			unsigned int tmp = origObjectLayer[convertIndex(x, y)];
 			if (tmp != 0)
 			{
 				tmpObj = objectInit(tmp,x,y);
@@ -129,7 +129,7 @@ void Level::loadObjects()
 void Level::makeConnections()
 {
 	Trigger *tmp;
-	for (int i = 0; i < MAX_CONNECTIONS; i++)
+	for (unsigned int i = 0; i < MAX_CONNECTIONS; i++)
 	{
 		if (senders[i] == -1)
 			continue;
@@ -203,7 +203,7 @@ void Level::loadLayer(FILE* inFile, string str, int xSize, int ySize)
 		loadConnections(inFile,xSize,ySize);
 	}
 }
-void Level::loadMapLayer(FILE *inFile,vector<char> *layer,int xSize, int ySize)
+void Level::loadMapLayer(FILE *inFile,vector<unsigned int> *layer,int xSize, int ySize)
 {
 	int maxChars = 4;
 	int maxLine = xSize*maxChars;

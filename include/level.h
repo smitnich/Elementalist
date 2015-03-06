@@ -15,8 +15,8 @@ class Level
 	public:
 	int width;
 	int height;
-	vector<char> origMapLayer;
-	vector<char> origObjectLayer;
+	vector<unsigned int> origMapLayer;
+	vector<unsigned int> origObjectLayer;
 	vector<Terrain *> mapLayer;
 	vector<Object *> objectLayer;
 	vector<int> receivers[MAX_CONNECTIONS];
@@ -27,7 +27,7 @@ class Level
 	void loadObjects();
 	int convertIndex(int x, int y);
 	void loadLayer(FILE *inFile, string str, int xSize, int ySize);
-	void loadMapLayer(FILE *inFile,vector<char> *layer,int xSize, int ySize);
+	void loadMapLayer(FILE *inFile,vector<unsigned int> *layer,int xSize, int ySize);
 	void reloadMapLayer();
 	bool assignObject(int x, int y, Object *obj);
 	Object* getObject(int x, int y);

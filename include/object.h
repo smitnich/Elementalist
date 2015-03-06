@@ -46,4 +46,4 @@ int getInput();
 //The last input to be recieved
 void switchLevel(int);
 void queuePlaceAll();
-Object* objectInit(char id, int x, int y, int moveDir, int moveFraction);
+Object* objectInit(unsigned int id, int x, int y, int moveDir, int moveFraction);

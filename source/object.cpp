@@ -255,7 +255,7 @@ void doDraw(Object *drawObject, int moveFractionX, int moveFractionY, bool doDir
 		apply_surface(drawX, drawY, drawPortionX, drawPortionY, iceBlock, screen);
 	}
 }
-Object* objectInit(char id, int x, int y)
+Object* objectInit(unsigned int id, int x, int y)
 {
 	Object *newObject;
 	switch (id)
