@@ -9,6 +9,10 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		bool isPlayer;
 		class Level *level;
 		virtual bool isMovableBlock();
+		virtual bool isInsulated()
+		{
+			return false;
+		}
 		Object();
 		Object(Object &other, int x, int y);
 		SDL_Surface *spritens[6];
@@ -18,6 +22,7 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		double getMoveFraction();
 		int getX();
 		int getY();
+		void objMove();
 		void startMove(int dir);
 		virtual void die();
 		virtual void doLogic();
@@ -26,21 +31,13 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		SDL_Surface *getSprite();
 		virtual bool requestEntry(Object* other, int dir);
 };
-class SolidObject : public Object {
-public:
-	void doLogic();
-	SolidObject();
-};
-class Movable : public SolidObject{
-public:
-	Movable();
-	void specialLogic();
-	void doLogic();
-	void objMove();
-};
-class Crate : public Movable{
+class Crate : public Object{
 public:
 	Crate();
+	bool isInsulated()
+	{
+		return true;
+	}
 	bool isMovableBlock()
 	{
 		return true;
@@ -57,7 +54,7 @@ public:
 	bool requestEntry(Object* other, int dir);
 	Object *clone(int x, int y);
 };
-class IceBall : public Movable{
+class IceBall : public Object{
 public:
 	~IceBall();
 	IceBall();
@@ -67,7 +64,7 @@ public:
 	bool requestEntry(Object* other, int dir);
 	Object *clone(int x, int y);
 };
-class Person : public Movable
+class Person : public Object
 {
 public:
 	int active;

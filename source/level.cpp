@@ -347,6 +347,9 @@ class Terrain *instantiateTerrain(int input, int i)
 	case m_raisedFloor:
 		out = new RaisedFloor();
 		break;
+	case m_electricFloor:
+		out = new ElectricFloor(true);
+		break;
 	case m_floor:
 	default:
 		out = baseFloor;

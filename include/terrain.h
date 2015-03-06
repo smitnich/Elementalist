@@ -158,4 +158,14 @@ public:
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	BlackHole();
 };
+class ElectricFloor : public Terrain
+{
+public:
+	bool enabled;
+	void onEnter(Object *other);
+	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
+	void activate();
+	void deactivate();
+	ElectricFloor(bool _enabled);
+};
 #endif
