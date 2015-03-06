@@ -19,7 +19,7 @@ extern string levelPath;
 //The name of the starting level
 extern string startLevelName;
 //The last time to have user input
-extern long lastInputTime;
+extern Uint32 lastInputTime;
 //The last movement of the player
 extern int lastMoveDir;
 //Whether to display the level name
