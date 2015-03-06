@@ -6,9 +6,12 @@ SDL_Rect borderRect[4];
 Level *getCurrentLevel();
 extern bool playerDead;
 void queueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY, bool *doDir);
+void transitQueueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY, bool *doDir);
 //Draws the static map features, the objects, the player, and the textbox on the screen
 void drawScreen()
 {
+	if (player == NULL)
+		exit(0);
 	int x, y, xOffset = 0, yOffset = 0, xStart = player->x, yStart = player->y;
 	Level *currentLevel = getCurrentLevel();
 	bool doDir[4] = { 0, 0, 0, 0 };
@@ -57,6 +60,7 @@ void drawScreen()
 		}
 	}
 	queueDrawAll(screen, xOffset, yOffset, doDir);
+	transitQueueDrawAll(screen, xOffset, yOffset, doDir);
 	if (displayName || playerDead)
 		doTextBox(player->y);
 	//Draw the mouse if it is within bounds and should be drawn

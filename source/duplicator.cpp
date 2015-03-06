@@ -2,7 +2,7 @@
 #include "terrain.h"
 #include "sprites.h"
 #include "level.h"
-void addAssignQueue(Object *in);
+void addTransitQueue(Object *in);
 
 void Duplicator::onEnter(Object *other)
 {
@@ -10,7 +10,8 @@ void Duplicator::onEnter(Object *other)
 }
 void Duplicator::onExit(Object *other)
 {
-	copyObj = NULL;
+	if (other == copyObj)
+		copyObj = NULL;
 }
 void Duplicator::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
 {
@@ -33,11 +34,12 @@ void Duplicator::activate()
 		x -= 1;
 	else if (dir == D_RIGHT)
 		x += 1;
-	if (getCurrentLevel()->getObject(x, y) != NULL)
+	Object *other = getCurrentLevel()->getObject(x, y);
+	if (other != NULL && !other->requestEntry(copyObj,dir))
 		return;
-	Object *tmp = copyObj->clone(x,y);
-	addAssignQueue(tmp);
-
+	Object *tmp = copyObj->clone(copyObj->x,copyObj->y);
+	tmp->startMove(dir);
+	addTransitQueue(tmp);
 }
 Duplicator::Duplicator(int _dir)
 {
