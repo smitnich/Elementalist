@@ -4,6 +4,7 @@
 #define COLORKEY 0xFF00DC
 extern string appPath;
 SDL_Surface* loadOptimizedIMG(string);
+
 //Load a whole bunch of images
 //Todo: Merge all image files into one and blit the portions of it onto individual sprites
 void imgInit()
@@ -18,7 +19,7 @@ void imgInit()
 	personns[2] = loadOptimizedIMG("gfx/personn3.png");
 	personns[3] = loadOptimizedIMG("gfx/persons1.png");
 	personns[4] = loadOptimizedIMG("gfx/persons2.png");
-	personns[5] = loadOptimizedIMG("gfx/persons3.png");
+	personns[5] = loadOptimizedIMG("gfx/persons3.png"); 
 	personew[0] = loadOptimizedIMG("gfx/personw1.png");
 	personew[1] = loadOptimizedIMG("gfx/personw2.png");
 	personew[2] = loadOptimizedIMG("gfx/personw3.png");
@@ -119,6 +120,8 @@ void imgInit()
 	spr_dupe[1] = loadOptimizedIMG("gfx/dupeS.png");
 	spr_dupe[2] = loadOptimizedIMG("gfx/dupeW.png");
 	spr_dupe[3] = loadOptimizedIMG("gfx/dupeE.png");
+	spr_blackHole = loadOptimizedIMG("gfx/blackHole.png");
+	spr_raisedFloor = loadOptimizedIMG("gfx/raisedTile.png");
 }
 //Optimize the image for proper depth and for transparecny
 SDL_Surface* loadOptimizedIMG(string fileName)

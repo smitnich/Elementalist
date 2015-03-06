@@ -17,6 +17,8 @@ enum tiles_t
 	m_dupeS,
 	m_dupeW,
 	m_dupeE,
+	m_blackHole,
+	m_raisedFloor,
 
 	OBJ_BLOCK,
 	OBJ_HEAVY_BLOCK,

@@ -62,6 +62,11 @@ class Floor : public Terrain{
 public:
 	Floor();
 };
+class RaisedFloor : public Terrain{
+public:
+	RaisedFloor();
+	bool requestEntry(Object *other, int dir);
+};
 class Bomb : public Floor {
 public:
 	Bomb();
@@ -145,5 +150,12 @@ public:
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	void activate();
 	Duplicator(int dir);
+};
+class BlackHole : public Terrain
+{
+public:
+	void onEnter(Object *other);
+	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
+	BlackHole();
 };
 #endif

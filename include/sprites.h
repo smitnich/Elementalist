@@ -8,3 +8,5 @@ extern SDL_Surface *error;
 extern SDL_Surface *spr_bomb;
 extern SDL_Surface *spr_pressureToggle[2];
 extern SDL_Surface *spr_dupe[4];
+extern SDL_Surface *spr_blackHole;
+extern SDL_Surface *spr_raisedFloor;

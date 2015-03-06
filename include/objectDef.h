@@ -8,6 +8,7 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		int prevMove;
 		bool isPlayer;
 		class Level *level;
+		virtual bool isMovableBlock();
 		Object();
 		Object(Object &other, int x, int y);
 		SDL_Surface *spritens[6];
@@ -40,6 +41,10 @@ public:
 class Crate : public Movable{
 public:
 	Crate();
+	bool isMovableBlock()
+	{
+		return true;
+	};
 	Crate(int x, int y);
 	void doLogic();
 	bool requestEntry(Object* other, int dir);
