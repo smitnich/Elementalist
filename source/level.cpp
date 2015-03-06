@@ -341,6 +341,12 @@ class Terrain *instantiateTerrain(int input, int i)
 	case m_dupeE:
 		out = new Duplicator(input - m_dupeN + 1);
 		break;
+	case m_blackHole:
+		out = new BlackHole();
+		break;
+	case m_raisedFloor:
+		out = new RaisedFloor();
+		break;
 	case m_floor:
 	default:
 		out = baseFloor;

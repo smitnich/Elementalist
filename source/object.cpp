@@ -69,6 +69,10 @@ int Object::getY()
 void Object::doLogic()
 {
 }
+bool Object::isMovableBlock()
+{
+	return false;
+}
 void Object::startMove(int dir)
 {
 	if (dir == D_NONE)

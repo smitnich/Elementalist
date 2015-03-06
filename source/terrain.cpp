@@ -11,6 +11,7 @@ extern SDL_Surface *wall[];
 extern SDL_Surface *tiles;
 extern SDL_Surface *exitTile;
 extern SDL_Surface *barrierTile;
+SDL_Surface *spr_raisedFloor = NULL;
 extern SDL_Surface *spr_bomb;
 extern Mix_Chunk *snd_explode;
 extern bool won;
@@ -116,4 +117,14 @@ void Bomb::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
 	int yStart = yTile*TILE_SIZE + yInitial + yOff;
 	apply_surface(xStart, yStart, tiles, drawTo);
 	apply_surface(xStart, yStart, sprite, drawTo);
+}
+RaisedFloor::RaisedFloor()
+{
+	sprite = spr_raisedFloor;
+}
+bool RaisedFloor::requestEntry(Object *other, int dir)
+{
+	if (other == NULL)
+		return true;
+	return !other->isMovableBlock();
 }

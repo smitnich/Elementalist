@@ -199,6 +199,7 @@
   <ItemGroup>
     <ClCompile Include="..\source\activateQueue.cpp" />
     <ClCompile Include="..\source\assignQueue.cpp" />
+    <ClCompile Include="..\source\terrainHazards.cpp" />
     <ClCompile Include="..\source\checkspace.cpp" />
     <ClCompile Include="..\source\config.cpp" />
     <ClCompile Include="..\source\conveyor.cpp" />
