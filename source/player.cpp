@@ -3,6 +3,7 @@
 #include "sprites.h"
 #include "input_def.h"
 #include "level.h"
+#include "debugText.h"
 extern int posX, posY;
 extern int pressureCount;
 extern int lastMoveDir;
@@ -193,6 +194,7 @@ Object* Person::clone(int _x, int _y)
 			case BUTTON_1:
 				if (lastInput != BUTTON_1)
 				{
+					debugOn = !debugOn;
 					makeElement(false);
 					lastInput = BUTTON_1;
 				}

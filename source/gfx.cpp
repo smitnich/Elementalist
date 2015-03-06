@@ -1,6 +1,7 @@
 #include "gfx.h"
 #include "level.h"
 #include "objectDef.h"
+#include "debugText.h"
 extern Object *player;
 SDL_Rect borderRect[4];
 Level *getCurrentLevel();
@@ -67,6 +68,8 @@ void drawScreen()
 	if (pointerX > -1 && pointerY > -1 && showCursor == true)
 		apply_surface(pointerX,pointerY,cursor,screen);
 	drawBorders();
+	if (debugOn)
+		apply_surface(0, 32, renderDebugText(), screen);
 }
 void drawWrappedSprite(int x, int y, SDL_Surface* source, SDL_Surface* destination, int xWrap, int yWrap)
 {
