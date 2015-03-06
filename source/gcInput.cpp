@@ -19,16 +19,12 @@ int GCInput(u16 GCButtonsDown)
 	int leveldir = 0;
 	int xdir = 0;
 	int ydir = 0;
-	//if (PAD_StickY(padnum-1) >= gcsensitivity && PAD_StickX(padnum-1) <= gcsensitivity/2 && PAD_StickX(padnum-1) >= gcsensitivity*-.5)
 	if (checkpaddir(D_UP))
 		ydir -= 1;
-	//if (PAD_StickY(padnum-1) <= gcsensitivity*-1 && PAD_StickX(padnum-1) <= gcsensitivity/2 && PAD_StickX(padnum-1) >= gcsensitivity*-.5)
 	if (checkpaddir(D_DOWN))
 		ydir += 1;
-	//if (PAD_StickX(padnum-1) >= gcsensitivity && PAD_StickY(padnum-1) <= gcsensitivity/2 && PAD_StickY(padnum-1) >= gcsensitivity*-.5)
 	if (checkpaddir(D_RIGHT))
 		xdir += 1;
-	//if (PAD_StickX(padnum-1) <= gcsensitivity*-1 && PAD_StickY(padnum-1) <= gcsensitivity/2 && PAD_StickY(padnum-1) >= gcsensitivity*-.5)
 	if (checkpaddir(D_LEFT))
 		xdir -= 1;
 	if (GCButtonsDown & PAD_BUTTON_START)

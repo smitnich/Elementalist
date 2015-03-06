@@ -53,7 +53,6 @@ long getTicks()
 {
 	return ticks;
 }
-
 void init(int argc, char* argv[])
 {
 	#ifdef GEKKO

@@ -23,5 +23,4 @@ enum directions_t
 #define TILE_SIZE 48
 #define EMPTY 0
 #define SOLID 1
-#define PUSHABLE 2
 #endif
