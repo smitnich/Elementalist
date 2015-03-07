@@ -87,9 +87,7 @@ void init(int argc, char* argv[])
 		levelPath.append(directorySymbol);
 		appPath.assign(tempFileName);
 		//Change to the app directory, necessary for running levels outside of the folder
-	//#ifndef GEKKO
 		chdir(appPath.data());
-	//#endif
 	}
 	musicInit();
 	fileInit();

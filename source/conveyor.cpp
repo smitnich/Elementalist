@@ -48,7 +48,7 @@ void Conveyor::onExit(Object* other)
 }
 Conveyor::Conveyor(int direction)
 {
-	lastRender = -1;
+	lastRender = 0;
 	index = 0;
 	lastEntered = NULL;
 	moveFraction = 0;

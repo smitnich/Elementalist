@@ -60,7 +60,6 @@ bool joyButtonsDown[MAX_BUTTONS] = {0};
 //controllerCheck makes sure that the event comes from the proper controller
 void updateJoystick(SDL_Event event, int controllerCheck)
 {
-	int x = event.type;
 	if (event.type == SDL_JOYAXISMOTION)
 	{
 		//If a controller hasn't been chosen, use this controller and return
@@ -147,7 +146,6 @@ int joyInput()
 	int xdir = 0;
 	int ydir = 0;
 	int levelDir = 0;
-	int x = joyButtonsDown[buttonExit];
 	if (joyButtonsDown[buttonExit])
 		return BUTTON_MENU;
 	if (joystickX >= sensitivityThreshold)
