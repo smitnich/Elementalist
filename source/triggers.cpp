@@ -45,10 +45,10 @@ void ToggleSwitch::onEnter(Object *other)
 }
 ToggleSwitch::ToggleSwitch(bool isEnabled)
 {
+	enabled = isEnabled;
 	index = 0;
 	isTrigger = true;
 	if (enabled)
 		addActivateQueue(this);
-	enabled = isEnabled;
 	sprite = spr_pressureToggle[enabled];
 }
