@@ -200,6 +200,9 @@
     <ClCompile Include="..\source\freezer.cpp">
       <Filter>Source Files\Machines</Filter>
     </ClCompile>
+    <ClCompile Include="..\source\pickup.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\Output\gfx\app.rc">
