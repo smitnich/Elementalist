@@ -123,6 +123,7 @@ void imgInit()
 	spr_blackHole = loadOptimizedIMG("gfx/blackHole.png");
 	spr_raisedFloor = loadOptimizedIMG("gfx/raisedTile.png");
 	spr_electricFloor = loadOptimizedIMG("gfx/electricFloor.png");
+	spr_freezer = loadOptimizedIMG("gfx/freezerFloor.png");
 }
 //Optimize the image for proper depth and for transparecny
 SDL_Surface* loadOptimizedIMG(string fileName)

@@ -11,3 +11,4 @@ extern SDL_Surface *spr_dupe[4];
 extern SDL_Surface *spr_blackHole;
 extern SDL_Surface *spr_raisedFloor;
 extern SDL_Surface *spr_electricFloor;
+extern SDL_Surface *spr_freezer;

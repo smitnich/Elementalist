@@ -168,4 +168,16 @@ public:
 	void deactivate();
 	ElectricFloor(bool _enabled);
 };
+class Freezer : public Terrain
+{
+public:
+	Object *freezeObj;
+	bool enabled;
+	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
+	void onEnter(Object *other);
+	void onExit(Object *other);
+	void activate();
+	void deactivate();
+	Freezer(bool _enabled);
+};
 #endif

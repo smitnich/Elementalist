@@ -24,6 +24,10 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		int getY();
 		void objMove();
 		void startMove(int dir);
+		virtual void freeze()
+		{
+			frozen = true;
+		}
 		virtual void die();
 		virtual void doLogic();
 		virtual Object* clone(int x, int y) = 0;
