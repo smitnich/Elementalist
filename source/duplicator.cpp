@@ -38,6 +38,8 @@ void Duplicator::activate()
 	if (other != NULL && !other->requestEntry(copyObj,dir))
 		return;
 	Object *tmp = copyObj->clone(copyObj->x,copyObj->y);
+	if (tmp == NULL)
+		return;
 	tmp->startMove(dir);
 	addTransitQueue(tmp);
 }
