@@ -40,16 +40,16 @@ extern SDL_Surface *screen;
 extern int videoSizeX, videoSizeY, bitDepth, argumentCount, frame, lastInput, \
 framesPerSecond, levelChange, levelStartCounter;
 unsigned long lastTicks = 0;
-extern long lastInputTime;
+extern Uint32 lastInputTime;
 double delta = 0.0;
 extern bool playerDead;
-long ticks = 0;
+Uint32 ticks = 0;
 //Keep every event that occurs during a frame to the same tick value
 void setTicks()
 {
 	ticks = SDL_GetTicks();
 }
-long getTicks()
+Uint32 getTicks()
 {
 	return ticks;
 }
