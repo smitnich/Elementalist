@@ -2,7 +2,7 @@
 #include "sdlFiles.h"
 #include "terrain.h"
 SDL_Surface *spr_blackHole = NULL;
-SDL_Surface *spr_electricFloor = NULL;
+SDL_Surface *spr_electricFloor[2] = { NULL, NULL };
 extern SDL_Surface *tiles;
 
 BlackHole::BlackHole()
@@ -22,7 +22,8 @@ void BlackHole::onEnter(Object *other)
 }
 void ElectricFloor::onEnter(Object *other)
 {
-	other->electrocute();
+	if (enabled)
+		other->electrocute();
 }
 void ElectricFloor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
 {
@@ -35,13 +36,15 @@ void ElectricFloor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, in
 void ElectricFloor::activate()
 {
 	enabled = !enabled;
+	sprite = spr_electricFloor[enabled];
 }
 void ElectricFloor::deactivate()
 {
 	enabled = !enabled;
+	sprite = spr_electricFloor[enabled];
 }
 ElectricFloor::ElectricFloor(bool _enabled)
 {
-	sprite = spr_electricFloor;
+	sprite = spr_electricFloor[_enabled];
 	enabled = _enabled;
 }
