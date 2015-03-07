@@ -122,9 +122,12 @@ void imgInit()
 	spr_dupe[3] = loadOptimizedIMG("gfx/dupeE.png");
 	spr_blackHole = loadOptimizedIMG("gfx/blackHole.png");
 	spr_raisedFloor = loadOptimizedIMG("gfx/raisedTile.png");
-	spr_electricFloor = loadOptimizedIMG("gfx/electricFloor.png");
+	spr_electricFloor[0] = loadOptimizedIMG("gfx/electricFloorOff.png");
+	spr_electricFloor[1] = loadOptimizedIMG("gfx/electricFloor.png");
 	spr_freezer[1] = loadOptimizedIMG("gfx/freezerFloor.png");
 	spr_freezer[0] = loadOptimizedIMG("gfx/freezerFloorOff.png");
+	spr_pickup = loadOptimizedIMG("gfx/pickup.png");
+	spr_pickupWall = loadOptimizedIMG("gfx/pickupWall.png");
 }
 //Optimize the image for proper depth and for transparecny
 SDL_Surface* loadOptimizedIMG(string fileName)

@@ -10,5 +10,7 @@ extern SDL_Surface *spr_pressureToggle[2];
 extern SDL_Surface *spr_dupe[4];
 extern SDL_Surface *spr_blackHole;
 extern SDL_Surface *spr_raisedFloor;
-extern SDL_Surface *spr_electricFloor;
+extern SDL_Surface *spr_electricFloor[2];
 extern SDL_Surface *spr_freezer[2];
+extern SDL_Surface *spr_pickup;
+extern SDL_Surface *spr_pickupWall;

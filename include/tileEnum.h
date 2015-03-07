@@ -20,6 +20,7 @@ enum tiles_t
 	m_blackHole,
 	m_raisedFloor,
 	m_electricFloor,
+	m_electricFloorOff,
 	m_water,
 	m_freezerFloor,
 	m_freezerFloorOff,
@@ -32,6 +33,8 @@ enum tiles_t
 	OBJ_ICE_ELEMENT_N,
 	OBJ_ICE_ELEMENT_S,
 	OBJ_ICE_ELEMENT_W,
+	OBJ_PICKUP,
+	OBJ_PICKUP_WALL,
 
 	m_sender1 = 2001,
 	m_receiver1,

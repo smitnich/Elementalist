@@ -10,6 +10,7 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		class Level *level;
 		virtual bool isMovableBlock();
 		Object();
+		~Object();
 		Object(Object &other, int x, int y);
 		SDL_Surface *spritens[6];
 		SDL_Surface *spriteew[6];
@@ -79,6 +80,22 @@ public:
 	void doLogic();
 	bool requestEntry(Object* other, int dir);
 	void die();
+	Object *clone(int x, int y);
+};
+class Pickup : public Object
+{
+public:
+	void die();
+	bool requestEntry(Object *other, int dir);
+	Pickup::Pickup(int x, int y);
+	Object *clone(int x, int y);
+};
+class PickupWall : public Object
+{
+public:
+	void doLogic();
+	bool requestEntry(Object *other, int dir);
+	PickupWall::PickupWall(int x, int y);
 	Object *clone(int x, int y);
 };
 #endif

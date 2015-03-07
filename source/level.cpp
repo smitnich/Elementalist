@@ -54,6 +54,7 @@ string constructLevelName(int);
 class Level *allLevels[MAX_LEVEL];
 Level::Level(FILE* inFile, int levelNum)
 {
+	pickupCount = 0;
 	allLevels[levelNum] = this;
 	for (int i = 0; i < MAX_CONNECTIONS; i++)
 	{
@@ -113,9 +114,9 @@ void Level::loadObjects()
 	Object *tmpObj;
 	objectLayer.clear();
 	objectLayer.resize(height*width);
-	for (unsigned int x = 0; x < width; x++)
+	for (int x = 0; x < width; x++)
 	{
-		for (unsigned int y = 0; y < height; y++)
+		for (int y = 0; y < height; y++)
 		{
 			unsigned int tmp = origObjectLayer[convertIndex(x, y)];
 			if (tmp != 0)
@@ -349,6 +350,9 @@ class Terrain *instantiateTerrain(int input, int i)
 		break;
 	case m_electricFloor:
 		out = new ElectricFloor(true);
+		break;
+	case m_electricFloorOff:
+		out = new ElectricFloor(false);
 		break;
 	case m_freezerFloorOff:
 		out = new Freezer(false);

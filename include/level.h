@@ -15,6 +15,7 @@ class Level
 	public:
 	int width;
 	int height;
+	unsigned int pickupCount;
 	vector<unsigned int> origMapLayer;
 	vector<unsigned int> origObjectLayer;
 	vector<Terrain *> mapLayer;

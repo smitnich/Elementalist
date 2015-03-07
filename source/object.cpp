@@ -260,7 +260,7 @@ void doDraw(Object *drawObject, int moveFractionX, int moveFractionY, bool doDir
 }
 Object* objectInit(unsigned int id, int x, int y)
 {
-	Object *newObject;
+	Object *newObject = NULL;
 	switch (id)
 	{
 	case OBJ_HEAVY_BLOCK:
@@ -288,6 +288,12 @@ Object* objectInit(unsigned int id, int x, int y)
 		break;
 	case OBJ_ICE_ELEMENT_W:
 		//newObject = new IceBall(x,y,D_LEFT,0);
+		break;
+	case OBJ_PICKUP:
+		newObject = new Pickup(x,y);
+		break;
+	case OBJ_PICKUP_WALL:
+		newObject = new PickupWall(x, y);
 		break;
 	default:
 		return NULL;
