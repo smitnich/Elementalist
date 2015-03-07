@@ -101,8 +101,8 @@ void imgInit()
 	iceBallns[5] = loadOptimizedIMG("gfx/elementals/iceballs3.png");
 	iceFloor = loadOptimizedIMG("gfx/icefloor.png");
 	spr_bomb = loadOptimizedIMG("gfx/bomb.png");
-	spr_pressureToggle[0] = loadOptimizedIMG("gfx/pressureToggleOff.png");
-	spr_pressureToggle[1] = loadOptimizedIMG("gfx/pressureToggleOn.png");
+	spr_pressureToggle[1] = loadOptimizedIMG("gfx/pressureToggleOff.png");
+	spr_pressureToggle[0] = loadOptimizedIMG("gfx/pressureToggleOn.png");
 	//Temporary graphics
 	int i;
 	for (i = 0; i < 3; i++)
@@ -123,7 +123,8 @@ void imgInit()
 	spr_blackHole = loadOptimizedIMG("gfx/blackHole.png");
 	spr_raisedFloor = loadOptimizedIMG("gfx/raisedTile.png");
 	spr_electricFloor = loadOptimizedIMG("gfx/electricFloor.png");
-	spr_freezer = loadOptimizedIMG("gfx/freezerFloor.png");
+	spr_freezer[1] = loadOptimizedIMG("gfx/freezerFloor.png");
+	spr_freezer[0] = loadOptimizedIMG("gfx/freezerFloorOff.png");
 }
 //Optimize the image for proper depth and for transparecny
 SDL_Surface* loadOptimizedIMG(string fileName)

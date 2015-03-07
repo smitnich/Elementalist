@@ -22,6 +22,7 @@ enum tiles_t
 	m_electricFloor,
 	m_water,
 	m_freezerFloor,
+	m_freezerFloorOff,
 
 	OBJ_BLOCK = 1001,
 	OBJ_HEAVY_BLOCK,

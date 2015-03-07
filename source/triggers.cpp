@@ -41,23 +41,14 @@ void ToggleSwitch::onEnter(Object *other)
 		else
 			connections.at(i)->deactivate();
 	}
-	if (enabled)
-		sprite = spr_pressureToggle[1];
-	else
-		sprite = spr_pressureToggle[0];
+	sprite = spr_pressureToggle[enabled];
 }
 ToggleSwitch::ToggleSwitch(bool isEnabled)
 {
 	index = 0;
 	isTrigger = true;
-	if (isEnabled)
-	{
-		sprite = spr_pressureToggle[1];
+	if (enabled)
 		addActivateQueue(this);
-	}
-	else
-	{
-		sprite = spr_pressureToggle[0];
-	}
 	enabled = isEnabled;
+	sprite = spr_pressureToggle[enabled];
 }

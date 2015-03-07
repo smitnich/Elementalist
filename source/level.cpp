@@ -350,6 +350,9 @@ class Terrain *instantiateTerrain(int input, int i)
 	case m_electricFloor:
 		out = new ElectricFloor(true);
 		break;
+	case m_freezerFloorOff:
+		out = new Freezer(false);
+		break;
 	case m_freezerFloor:
 		out = new Freezer(true);
 		break;

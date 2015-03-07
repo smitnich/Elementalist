@@ -24,21 +24,24 @@ void Freezer::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff
 }
 void Freezer::activate()
 {
+	enabled = !enabled;
+	sprite = spr_freezer[enabled];
 	if (freezeObj == NULL)
 		return;
 	int x = freezeObj->x;
 	int y = freezeObj->y;
 	getCurrentLevel()->getObject(x, y)->freeze();
-	enabled = true;
 }
 void Freezer::deactivate()
 {
-	enabled = false;
+	enabled = !enabled;
+	sprite = spr_freezer[enabled];
 }
 Freezer::Freezer(bool _enabled)
 {
 	freezeObj = NULL;
 	enabled = _enabled;
-	sprite = spr_freezer;
 	index = 0;
+	//If we're enabled, use the second sprite
+	sprite = spr_freezer[enabled];
 }

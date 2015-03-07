@@ -22,8 +22,7 @@ void BlackHole::onEnter(Object *other)
 }
 void ElectricFloor::onEnter(Object *other)
 {
-	if (enabled && !other->isInsulated())
-		other->die();
+	other->electrocute();
 }
 void ElectricFloor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
 {

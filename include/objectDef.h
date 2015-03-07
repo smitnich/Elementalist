@@ -9,10 +9,6 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		bool isPlayer;
 		class Level *level;
 		virtual bool isMovableBlock();
-		virtual bool isInsulated()
-		{
-			return false;
-		}
 		Object();
 		Object(Object &other, int x, int y);
 		SDL_Surface *spritens[6];
@@ -28,6 +24,11 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		{
 			frozen = true;
 		}
+		virtual void electrocute()
+		{
+			if (!frozen)
+				die();
+		}
 		virtual void die();
 		virtual void doLogic();
 		virtual Object* clone(int x, int y) = 0;
@@ -38,14 +39,13 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 class Crate : public Object{
 public:
 	Crate();
-	bool isInsulated()
-	{
-		return true;
-	}
 	bool isMovableBlock()
 	{
 		return true;
 	};
+	void electrocute(){
+
+	}
 	Crate(int x, int y);
 	void doLogic();
 	bool requestEntry(Object* other, int dir);
