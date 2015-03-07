@@ -207,7 +207,7 @@ Object* Person::clone(int _x, int _y)
 				}
 				break;
 			case B_RIGHT:
-				if (x < MAP_SIZE && objMoveFraction == 0)
+				if (x < MAP_SIZE && objMoveFraction == 0 && !frozen)
 				{
 					startMove(D_RIGHT);
 					lastMoveDir = D_RIGHT;
@@ -215,7 +215,7 @@ Object* Person::clone(int _x, int _y)
 				}
 				break;
 			case B_LEFT:
-				if (x > 0 && objMoveFraction == 0)
+				if (x > 0 && objMoveFraction == 0 && !frozen)
 				{
 					startMove(D_LEFT);
 					lastMoveDir = D_LEFT;
@@ -224,7 +224,7 @@ Object* Person::clone(int _x, int _y)
 				lastInput = B_LEFT;
 				break;
 			case B_DOWN:
-				if (y < MAP_SIZE && objMoveFraction == 0)
+				if (y < MAP_SIZE && objMoveFraction == 0 && !frozen)
 				{
 					startMove(D_DOWN);
 					faceDir = D_DOWN;
@@ -233,7 +233,7 @@ Object* Person::clone(int _x, int _y)
 				lastInput = B_DOWN;
 				break;
 			case B_UP:
-				if (y > 0 && objMoveFraction == 0)
+				if (y > 0 && objMoveFraction == 0 && !frozen)
 				{
 					startMove(D_UP);
 					faceDir = D_UP;
