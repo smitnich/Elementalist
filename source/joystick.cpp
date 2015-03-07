@@ -9,7 +9,7 @@
 #define JOYSTICK_MAX 32767;
 #define MAX_BUTTONS 32
 //The direction that the hat is currently facing
-int hatDirection = -1;
+int hatDirection = SDL_HAT_CENTERED;
 //What value the magnitude of the stick must reach in order to be an event
 int sensitivityThreshold = 0;
 //The coordinates of the joystick

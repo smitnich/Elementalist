@@ -136,10 +136,12 @@ Object* Person::clone(int _x, int _y)
 		if (displayName == true)
 		{
 			int input = getInput();
-			if (input != INPUT_NONE || input != lastInput)
+			if (input != INPUT_NONE)
 			{
 				if (getTicks() - lastInputTime > 1000)
+				{
 					displayName = false;
+				}
 			}
 		}
 		else if (won == true)
@@ -195,14 +197,12 @@ Object* Person::clone(int _x, int _y)
 				if (lastInput != BUTTON_1)
 				{
 					debugOn = !debugOn;
-					makeElement(false);
 					lastInput = BUTTON_1;
 				}
 				break;
 			case BUTTON_2:
 				if (lastInput != BUTTON_2)
 				{
-					makeElement(true);
 					lastInput = BUTTON_2;
 				}
 				break;

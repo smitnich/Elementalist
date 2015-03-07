@@ -118,11 +118,6 @@ void init(int argc, char* argv[])
 	createGlobalInstances();
 	fontInit();
 	switchLevel(1);
-//There's a graphical glitch relating to conveyor belts that only occurs the first time a level is loaded,
-//but only on the Wii
-#ifdef GEKKO
-//	switchLevel(1);
-#endif
 	//fprintf(stderr, "\n\n\n\n\n");
 	atexit(SDL_Quit);
 	//parseDoc("levels/xml.ele");
