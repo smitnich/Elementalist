@@ -111,6 +111,7 @@ void Level::loadAllLayers(char *buffer,FILE *inFile)
 }
 void Level::loadObjects()
 {
+	pickupCount = 0;
 	Object *tmpObj;
 	objectLayer.clear();
 	objectLayer.resize(height*width);
