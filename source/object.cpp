@@ -48,8 +48,11 @@ Object::Object(Object &other, int _x, int _y)
 //Clean up the object
 void Object::die()
 {
-	getCurrentLevel()->assignObject(x, y, NULL);
 	delete this;
+}
+Object::~Object()
+{
+	getCurrentLevel()->assignObject(x, y, NULL);
 }
 int Object::getMoveDir()
 {
