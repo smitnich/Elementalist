@@ -232,6 +232,7 @@
     <ClCompile Include="..\source\tileSprites.cpp" />
     <ClCompile Include="..\source\transitQueue.cpp" />
     <ClCompile Include="..\source\triggers.cpp" />
+    <ClCompile Include="..\source\water.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\Output\gfx\app.rc" />

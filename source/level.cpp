@@ -361,6 +361,9 @@ class Terrain *instantiateTerrain(int input, int i)
 	case m_freezerFloor:
 		out = new Freezer(true);
 		break;
+	case m_water:
+		out = new Water(i);
+		break;
 	case m_floor:
 	default:
 		out = baseFloor;
@@ -462,7 +465,6 @@ bool loadLevel(string fileName, int levelNum)
 	FILE *ftemp;
 	sprintf(buffer, "\nFileName: %s\n", fileName.c_str());
 	ftemp = fopen(fileName.c_str(), "rb");
-	//ftemp = fopen("levels\\test.txt","r");
 	if (ftemp == NULL)
 	{
 		exit(0);

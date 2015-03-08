@@ -140,6 +140,12 @@ public:
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	IceFloor();
 };
+class Water : public Terrain
+{
+public:
+	void onEnter(Object *other);
+	Water(int _index);
+};
 class Duplicator : public Terrain
 {
 public:

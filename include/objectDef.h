@@ -5,6 +5,7 @@ class Object
 {
 public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		double moveSpeed, tempSpeed, objMoveFraction;
+		bool hovering = false;
 		int prevMove;
 		bool isPlayer;
 		class Level *level;
@@ -21,6 +22,10 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		int getY();
 		void objMove();
 		void startMove(int dir);
+		virtual void drown()
+		{
+			die();
+		}
 		virtual void freeze()
 		{
 			frozen = true;
@@ -87,7 +92,7 @@ class Pickup : public Object
 public:
 	void die();
 	bool requestEntry(Object *other, int dir);
-	Pickup::Pickup(int x, int y);
+	Pickup(int x, int y);
 	Object *clone(int x, int y);
 };
 class PickupWall : public Object
@@ -95,7 +100,7 @@ class PickupWall : public Object
 public:
 	void doLogic();
 	bool requestEntry(Object *other, int dir);
-	PickupWall::PickupWall(int x, int y);
+	PickupWall(int x, int y);
 	Object *clone(int x, int y);
 };
 #endif
