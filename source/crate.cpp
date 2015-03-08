@@ -100,7 +100,7 @@ void objMove();
 			ydir = -1;
 		else if (dir == D_DOWN)
 			ydir = 1;
-		if (getCurrentLevel()->getObject(x + xdir, y + ydir) == NULL)
+		if (getCurrentLevel()->getObject(x + xdir, y + ydir) == NULL && other->isMovableBlock() == false)
 			return Crate::requestEntry(other, dir);
 		else
 			return false;
