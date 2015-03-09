@@ -5,7 +5,7 @@ class Object
 {
 public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		double moveSpeed, tempSpeed, objMoveFraction;
-		bool hovering = false;
+		bool hovering;
 		int prevMove;
 		bool isPlayer;
 		class Level *level;
@@ -44,7 +44,6 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 };
 class Crate : public Object{
 public:
-	Crate();
 	bool isMovableBlock()
 	{
 		return true;
@@ -59,18 +58,7 @@ public:
 };
 class HeavyCrate : public Crate{
 public:
-	HeavyCrate();
 	HeavyCrate(int x, int y);
-	bool requestEntry(Object* other, int dir);
-	Object *clone(int x, int y);
-};
-class IceBall : public Object{
-public:
-	~IceBall();
-	IceBall();
-	IceBall(int x2, int y2, int moveDir, int moveFraction);
-	void objMove();
-	void doLogic();
 	bool requestEntry(Object* other, int dir);
 	Object *clone(int x, int y);
 };
@@ -81,7 +69,6 @@ public:
 	Person(const Person &other, int x, int y);
 	Person(int x, int y);
 	void makeElement(bool doSecond);
-	char element;
 	void doLogic();
 	bool requestEntry(Object* other, int dir);
 	void die();
@@ -102,5 +89,22 @@ public:
 	bool requestEntry(Object *other, int dir);
 	PickupWall(int x, int y);
 	Object *clone(int x, int y);
+};
+class IceElemental : public Object
+{
+public:
+	void die();
+	void freeze()
+	{
+		return;
+	}
+	void electrocute()
+	{
+		return;
+	}
+	IceElemental(int x, int y, int dir);
+	bool requestEntry(Object *other, int dir);
+	void doLogic();
+	Object *clone();
 };
 #endif

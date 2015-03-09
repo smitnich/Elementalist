@@ -2,6 +2,7 @@
 #include "terrain.h"
 #include "sprites.h"
 #include "level.h"
+SDL_Surface *spr_freezer[2] = { NULL, NULL };
 void addTransitQueue(Object *in);
 
 void Freezer::onEnter(Object *other)

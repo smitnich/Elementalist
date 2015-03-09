@@ -3,6 +3,7 @@
 #include "objectDef.h"
 #include "debugText.h"
 extern Object *player;
+SDL_Surface *iceBlock = NULL;
 SDL_Rect borderRect[4];
 Level *getCurrentLevel();
 extern bool playerDead;

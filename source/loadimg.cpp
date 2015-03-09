@@ -3,12 +3,17 @@
 #include "sprites.h"
 #define COLORKEY 0xFF00DC
 extern string appPath;
-SDL_Surface* loadOptimizedIMG(string);
+SDL_Surface* loadOptimizedIMG(string fileName);
+
+#include <list>
+struct TerrainChangeRequest;
+extern std::list<TerrainChangeRequest *> changeReqs;
 
 //Load a whole bunch of images
 //Todo: Merge all image files into one and blit the portions of it onto individual sprites
 void imgInit()
 {
+	int ignore = changeReqs.size();
 	tiles = loadOptimizedIMG("gfx/tile.png");
 	selector = loadOptimizedIMG("gfx/selector.png");
 	crate = loadOptimizedIMG("gfx/block.png");
@@ -87,34 +92,15 @@ void imgInit()
 	exitTile = loadOptimizedIMG("gfx/exit.png");
 	barrierTile = loadOptimizedIMG("gfx/wall/barrier.png");
 	pressureTile = loadOptimizedIMG("gfx/pressure.png");
-	iceBallew[0] = loadOptimizedIMG("gfx/elementals/iceballw1.png");
-	iceBallew[1] = loadOptimizedIMG("gfx/elementals/iceballw2.png");
-	iceBallew[2] = loadOptimizedIMG("gfx/elementals/iceballw3.png");
-	iceBallew[3] = loadOptimizedIMG("gfx/elementals/iceballe1.png");
-	iceBallew[4] = loadOptimizedIMG("gfx/elementals/iceballe2.png");
-	iceBallew[5] = loadOptimizedIMG("gfx/elementals/iceballe3.png");
-	iceBallns[0] = loadOptimizedIMG("gfx/elementals/iceballn1.png");
-	iceBallns[1] = loadOptimizedIMG("gfx/elementals/iceballn2.png");
-	iceBallns[2] = loadOptimizedIMG("gfx/elementals/iceballn3.png");
-	iceBallns[3] = loadOptimizedIMG("gfx/elementals/iceballs1.png");
-	iceBallns[4] = loadOptimizedIMG("gfx/elementals/iceballs2.png");
-	iceBallns[5] = loadOptimizedIMG("gfx/elementals/iceballs3.png");
 	iceFloor = loadOptimizedIMG("gfx/icefloor.png");
 	spr_bomb = loadOptimizedIMG("gfx/bomb.png");
 	spr_pressureToggle[1] = loadOptimizedIMG("gfx/pressureToggleOff.png");
 	spr_pressureToggle[0] = loadOptimizedIMG("gfx/pressureToggleOn.png");
 	//Temporary graphics
-	int i;
-	for (i = 0; i < 3; i++)
-	{
-		conveyorew[i] = loadOptimizedIMG("gfx/conveyor/conveyorw1.png");
-		conveyorns[i] = loadOptimizedIMG("gfx/conveyor/conveyorn1.png");
-	}
-	for (i = 3; i < 6; i++)
-	{
-		conveyorew[i] = loadOptimizedIMG("gfx/conveyor/conveyore1.png");
-		conveyorns[i] = loadOptimizedIMG("gfx/conveyor/conveyors1.png");
-	}
+	conveyor[D_LEFT-1] = loadOptimizedIMG("gfx/conveyor/conveyorw1.png");
+	conveyor[D_UP-1] = loadOptimizedIMG("gfx/conveyor/conveyorn1.png");
+	conveyor[D_RIGHT-1] = loadOptimizedIMG("gfx/conveyor/conveyore1.png");
+	conveyor[D_DOWN-1] = loadOptimizedIMG("gfx/conveyor/conveyors1.png");
 	error = loadOptimizedIMG("gfx/iamerror.png");
 	spr_dupe[0] = loadOptimizedIMG("gfx/dupeN.png");
 	spr_dupe[1] = loadOptimizedIMG("gfx/dupeS.png");
@@ -137,7 +123,6 @@ SDL_Surface* loadOptimizedIMG(string fileName)
 	if (loadedImage == NULL)
 	{
 		exit(0);
-		return NULL;
 	}
 	SDL_Surface *newImage = SDL_DisplayFormat( loadedImage );
 	Uint32 colorkey = SDL_MapRGB( newImage->format, 0xFF, 0x00, 0xDC );

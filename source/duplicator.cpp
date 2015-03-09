@@ -2,6 +2,7 @@
 #include "terrain.h"
 #include "sprites.h"
 #include "level.h"
+SDL_Surface *spr_dupe[4] = { NULL, NULL, NULL, NULL };
 void addTransitQueue(Object *in);
 
 void Duplicator::onEnter(Object *other)

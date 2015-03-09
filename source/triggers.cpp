@@ -3,11 +3,10 @@
 #include "terrain.h"
 #include "objectDef.h"
 #include <list>
-extern SDL_Surface *pressureTile;
-extern SDL_Surface *spr_pressureToggle[2];
+SDL_Surface *spr_pressureToggle[2] = { NULL, NULL };
+SDL_Surface *pressureTile = NULL;
 extern std::list<Trigger*> activateQueue;
-void addActivateQueue(Trigger *in)
-;
+void addActivateQueue(Trigger *in);
 void PressureSwitch::onEnter(Object *other)
 {
 	int length = connections.size();

@@ -17,6 +17,7 @@ void Pickup::die()
 }
 Pickup::Pickup(int _x, int _y)
 {
+	hovering = true;
 	x = _x;
 	y = _y;
 	getCurrentLevel()->pickupCount++;

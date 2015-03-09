@@ -7,12 +7,12 @@ bool playSound(Mix_Chunk *input);
 unsigned char lookupWall(int index);
 void doAssignQueue();
 extern int currentLevelNum;
-extern SDL_Surface *wall[];
-extern SDL_Surface *tiles;
-extern SDL_Surface *exitTile;
-extern SDL_Surface *barrierTile;
+SDL_Surface *wall[47] = { NULL };
+SDL_Surface *tiles = NULL;
+SDL_Surface *exitTile = NULL;
+SDL_Surface *barrierTile = NULL;
 SDL_Surface *spr_raisedFloor = NULL;
-extern SDL_Surface *spr_bomb;
+SDL_Surface *spr_bomb = NULL;
 extern Mix_Chunk *snd_explode;
 extern bool won;
 struct TerrainChangeRequest

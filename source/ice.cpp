@@ -1,6 +1,7 @@
 #include "SDLFiles.h"
 #include "terrain.h"
 #include "sprites.h"
+SDL_Surface *iceFloor = NULL;
 IceFloor::IceFloor()
 {
 	index = -1;

@@ -4,8 +4,7 @@
 #include "objectDef.h"
 void drawWrappedSprite(int x, int y, SDL_Surface* source, SDL_Surface* destination, int xWrap, int yWrap);
 Uint32 getTicks();
-extern SDL_Surface *conveyorew[6];
-extern SDL_Surface *conveyorns[6];
+SDL_Surface *conveyor[4] = { NULL };
 extern double delta, fpsModifier;
 extern int conveyorSpeed;
 extern int framesPerSecond;
@@ -54,22 +53,8 @@ Conveyor::Conveyor(int direction)
 	moveFraction = 0;
 	disabled = false;
 	isTrigger = false;
-	this->dir = direction;
-	switch (this->dir)
-	{
-	case D_LEFT:
-		this->sprite = conveyorew[0];
-		break;
-	case D_RIGHT:
-		this->sprite = conveyorew[3];
-		break;
-	case D_UP:
-		this->sprite = conveyorns[0];
-		break;
-	case D_DOWN:
-		this->sprite = conveyorns[3];
-		break;
-	}
+	dir = direction;
+	sprite = conveyor[dir-1];
 }
 void Conveyor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
 {

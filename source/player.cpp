@@ -59,22 +59,22 @@ Object* Person::clone(int _x, int _y)
 	Person::Person(int x2, int y2)
 	{
 		level = getCurrentLevel();
-		this->stationary = personns[3];
-		this->numFrames = 3;
-		for (int i = 0; i < numFrames*2; i++)
+		stationary = personns[3];
+		numFrames = 3;
+		for (int i = 0; i < numFrames * 2; i++)
 		{
 			this->spriteew[i] = personew[i];
 			this->spritens[i] = personns[i];
 		}
-		this->element = 0;
-		this->isPlayer = true;
-		this->x = x2;
-		this->y = y2;
-		this->objMoveDir = 0;
-		this->objMoveFraction = 0;
-		this->solid = 0;
-		this->faceDir = 0;
-		this->prevMove = D_NONE;
+		isPlayer = true;
+		x = x2;
+		y = y2;
+		objMoveDir = 0;
+		objMoveFraction = 0;
+		solid = 0;
+		faceDir = 0;
+		prevMove = D_NONE;
+		hovering = false;
 		if (playerPlaced == false)
 		{
 			active = 1;

@@ -2,6 +2,9 @@
 #include "objectDef.h"
 #include "level.h"
 #include "tileEnum.h"
+SDL_Surface *personns[6] = { NULL };
+SDL_Surface *personew[6] = { NULL };
+SDL_Surface *deadPerson = NULL;
 class Level* getCurrentLevel();
 extern double delta;
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);

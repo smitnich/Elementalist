@@ -1,8 +1,8 @@
 #include "sdlFiles.h"
 #include "defs.h"
-extern SDL_Surface *textBox[];
 extern SDL_Surface *screen;
 extern SDL_Surface *text;
+SDL_Surface *textBox[9] = { NULL };
 extern int xInitial;
 extern int yInitial;
 extern int tilesX;
