@@ -417,7 +417,7 @@ void switchLevel(int levelNum)
 {
 	//On most systems we can probably afford to keep the music in memory
 	//On the Wii not so much
-#ifndef GEKKO
+#ifdef GEKKO
 	 freeMusic(currentLevelNum);
 #endif
 	currentLevelNum = levelNum;
