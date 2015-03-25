@@ -115,6 +115,7 @@ void imgInit()
 	spr_pickup = loadOptimizedIMG("gfx/pickup.png");
 	spr_pickupWall = loadOptimizedIMG("gfx/pickupWall.png");
 	spr_water = loadOptimizedIMG("gfx/water.png");
+	spr_colorBarrier[0] = loadOptimizedIMG("gfx/wall/colorBarrier1.png");
 }
 //Optimize the image for proper depth and for transparecny
 SDL_Surface* loadOptimizedIMG(string fileName)

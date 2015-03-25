@@ -24,6 +24,7 @@ enum tiles_t
 	m_water,
 	m_freezerFloor,
 	m_freezerFloorOff,
+	m_colorBarrier1,
 
 	OBJ_BLOCK = 1001,
 	OBJ_HEAVY_BLOCK,

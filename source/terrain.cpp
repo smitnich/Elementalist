@@ -13,6 +13,7 @@ SDL_Surface *exitTile = NULL;
 SDL_Surface *barrierTile = NULL;
 SDL_Surface *spr_raisedFloor = NULL;
 SDL_Surface *spr_bomb = NULL;
+SDL_Surface *spr_colorBarrier[BARRIER_TYPES];
 extern Mix_Chunk *snd_explode;
 extern bool won;
 struct TerrainChangeRequest
@@ -99,6 +100,25 @@ void Barrier::activate()
 void Barrier::deactivate()
 {
 	disabled = false;
+}
+void ColorBarrier::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
+{
+	int xStart = xTile*TILE_SIZE + xInitial + xOff;
+	int yStart = yTile*TILE_SIZE + yInitial + yOff;
+	apply_surface(xStart, yStart, tiles, drawTo);
+	apply_surface(xStart, yStart, sprite, drawTo);
+}
+ColorBarrier::ColorBarrier(int type)
+{
+	index = 0;
+	colorType = type;
+	sprite = spr_colorBarrier[type];
+}
+bool ColorBarrier::requestEntry(Object *other, int dir)
+{
+	//Need to check if the other object is a block of the right
+	//color and delete this terrain as well as the block
+	return false;
 }
 Bomb::Bomb()
 {

@@ -1,6 +1,7 @@
 #ifndef _TERRAIN
 #define _TERRAIN
 #define MAX_CONNECTIONS 9
+#define BARRIER_TYPES 1
 #include "objectDef.h"
 #include "base.h"
 extern int xInitial;
@@ -93,6 +94,14 @@ public:
 	void deactivate();
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	Barrier();
+};
+class ColorBarrier : public Terrain
+{
+public:
+	int colorType;
+	bool requestEntry(Object *other, int dir);
+	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
+	ColorBarrier(int type);
 };
 class Conveyor : public Terrain
 {

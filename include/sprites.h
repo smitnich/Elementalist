@@ -15,3 +15,4 @@ extern SDL_Surface *spr_freezer[2];
 extern SDL_Surface *spr_pickup;
 extern SDL_Surface *spr_pickupWall;
 extern SDL_Surface *spr_water;
+extern SDL_Surface *spr_colorBarrier[];
