@@ -4,8 +4,10 @@
 class Object
 {
 public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
+		int id;
 		double moveSpeed, tempSpeed, objMoveFraction;
 		bool hovering;
+		int queuedMove;
 		int prevMove;
 		bool isPlayer;
 		class Level *level;
@@ -21,7 +23,7 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		int getX();
 		int getY();
 		void objMove();
-		void startMove(int dir);
+		void startMove(int dir, bool forced = false);
 		virtual void drown()
 		{
 			die();
@@ -51,10 +53,17 @@ public:
 	void electrocute(){
 
 	}
+	Crate();
 	Crate(int x, int y);
 	void doLogic();
 	bool requestEntry(Object* other, int dir);
 	Object *clone(int x, int y);
+};
+class ColorCrate1 : public Crate
+{
+public:
+	ColorCrate1();
+	ColorCrate1(int x, int y);
 };
 class HeavyCrate : public Crate{
 public:

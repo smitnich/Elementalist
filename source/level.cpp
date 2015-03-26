@@ -325,7 +325,7 @@ class Terrain *instantiateTerrain(int input, int i)
 	case m_barrier:
 		out = new Barrier();
 		break;
-	case m_colorBarrier1:
+	case m_yellowBarrier:
 		out = new ColorBarrier(0);
 		break;
 	case m_icefloor:
@@ -372,8 +372,11 @@ class Terrain *instantiateTerrain(int input, int i)
 		out = baseFloor;
 		break;
 	}
+	//Give the object the id that was used to create them
+	out->id = input;
 	//Set the index, but only for objects which don't have it set to -1
 	//(meaning the singleton objects)
+
 	if (out->index != -1)
 		out->index = i;
 	return out;

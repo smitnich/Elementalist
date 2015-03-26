@@ -10,6 +10,7 @@ extern double delta;
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 Level *getCurrentLevel();
 void checkTransitQueue();
+void writeDebugText(char* in);
 
 //The basic template for the Objects in the game
 Object::Object()
@@ -80,8 +81,10 @@ bool Object::isMovableBlock()
 {
 	return false;
 }
-void Object::startMove(int dir)
+void Object::startMove(int dir, bool forced)
 {
+	char buffer[1024];
+	writeDebugText(buffer);
 	if (dir == D_NONE)
 		return;
 	objMoveDir = dir;
@@ -298,9 +301,13 @@ Object* objectInit(unsigned int id, int x, int y)
 	case OBJ_PICKUP_WALL:
 		newObject = new PickupWall(x, y);
 		break;
+	case OBJ_YELLOW_BLOCK:
+		newObject = new ColorCrate1(x, y);
+		break;
 	default:
 		return NULL;
 	}
+	newObject->id = id;
 	Level *curLevel = getCurrentLevel();
 	curLevel->assignObject(x, y, newObject);
 	return newObject;

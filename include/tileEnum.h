@@ -24,7 +24,7 @@ enum tiles_t
 	m_water,
 	m_freezerFloor,
 	m_freezerFloorOff,
-	m_colorBarrier1,
+	m_yellowBarrier,
 
 	OBJ_BLOCK = 1001,
 	OBJ_HEAVY_BLOCK,
@@ -36,6 +36,7 @@ enum tiles_t
 	OBJ_ICE_ELEMENT_W,
 	OBJ_PICKUP,
 	OBJ_PICKUP_WALL,
+	OBJ_YELLOW_BLOCK,
 
 	m_sender1 = 2001,
 	m_receiver1,

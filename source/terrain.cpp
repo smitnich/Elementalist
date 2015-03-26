@@ -14,6 +14,7 @@ SDL_Surface *barrierTile = NULL;
 SDL_Surface *spr_raisedFloor = NULL;
 SDL_Surface *spr_bomb = NULL;
 SDL_Surface *spr_colorBarrier[BARRIER_TYPES];
+int colorBlockIds[BARRIER_TYPES] = { OBJ_YELLOW_BLOCK };
 extern Mix_Chunk *snd_explode;
 extern bool won;
 struct TerrainChangeRequest
@@ -118,7 +119,16 @@ bool ColorBarrier::requestEntry(Object *other, int dir)
 {
 	//Need to check if the other object is a block of the right
 	//color and delete this terrain as well as the block
+	if (other->id == colorBlockIds[this->colorType])
+	{
+		return true;
+	}
 	return false;
+}
+void ColorBarrier::onEnter(Object *other)
+{
+	addTerrainChange(index, m_floor);
+	other->die();
 }
 Bomb::Bomb()
 {

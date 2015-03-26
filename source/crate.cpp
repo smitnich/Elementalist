@@ -6,11 +6,16 @@
 extern Object *player;
 SDL_Surface *crate = NULL;
 SDL_Surface *heavyCrate = NULL;
+SDL_Surface *spr_colorBlock[BARRIER_TYPES] = { NULL };
 extern int pressureCount;
 void moveLine(int, int, int);
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 Level* getCurrentLevel();
 void objMove();
+Crate::Crate()
+{
+	Crate(0, 0);
+}
 Crate::Crate(int x2, int y2)
 {
 	hovering = false;
@@ -20,6 +25,24 @@ Crate::Crate(int x2, int y2)
 	{
 		this->spriteew[i] = crate;
 		this->spritens[i] = crate;
+	}
+	x = x2;
+	y = y2;
+	objMoveDir = 0;
+	objMoveFraction = 0;
+	solid = 2;
+	faceDir = 0;
+	prevMove = D_NONE;
+}
+ColorCrate1::ColorCrate1(int x2, int y2)
+{
+	hovering = false;
+	numFrames = 1;
+	stationary = spr_colorBlock[0];
+	for (int i = 0; i < 6; i++)
+	{
+		this->spriteew[i] = spr_colorBlock[0];
+		this->spritens[i] = spr_colorBlock[0];
 	}
 	x = x2;
 	y = y2;
@@ -72,6 +95,11 @@ Object* HeavyCrate::clone(int _x, int _y)
 }
 HeavyCrate::HeavyCrate(int x2, int y2) : Crate(x2,y2)
 {
+	for (int i = 0; i < 6; i++)
+	{
+		this->spriteew[i] = heavyCrate;
+		this->spritens[i] = heavyCrate;
+	}
 	stationary = heavyCrate;
 }
 bool HeavyCrate::requestEntry(Object *other, int dir)

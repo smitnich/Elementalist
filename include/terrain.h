@@ -10,6 +10,7 @@ void apply_surface(int x, int y, SDL_Surface *apply, SDL_Surface *dest);
 class Terrain
 {
 public:
+	int id;
 	bool isTrigger;
 	int index;
 	SDL_Surface *sprite;
@@ -101,6 +102,7 @@ public:
 	int colorType;
 	bool requestEntry(Object *other, int dir);
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
+	void onEnter(Object *other);
 	ColorBarrier(int type);
 };
 class Conveyor : public Terrain
