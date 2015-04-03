@@ -1,9 +1,10 @@
 #include "base.h"
 #include "sdlFiles.h"
 #include "sprites.h"
+#include "objectDef.h"
 #define COLORKEY 0xFF00DC
 extern string appPath;
-SDL_Surface* loadOptimizedIMG(string fileName);
+SDL_Surface* loadOptimizedIMG(char *fileName);
 
 #include <list>
 struct TerrainChangeRequest;
@@ -16,7 +17,7 @@ void imgInit()
 	int ignore = changeReqs.size();
 	tiles = loadOptimizedIMG("gfx/tile.png");
 	selector = loadOptimizedIMG("gfx/selector.png");
-	crate = loadOptimizedIMG("gfx/block.png");
+	Crate::loadImages();
 	heavyCrate = loadOptimizedIMG("gfx/heavyBlock.png");
 	iceBlock = loadOptimizedIMG("gfx/iceBlock.png");
 	personns[0] = loadOptimizedIMG("gfx/personn1.png");
@@ -119,9 +120,9 @@ void imgInit()
 	spr_colorBlock[0] = loadOptimizedIMG("gfx/barrierBlock1.png");
 }
 //Optimize the image for proper depth and for transparecny
-SDL_Surface* loadOptimizedIMG(string fileName)
+SDL_Surface* loadOptimizedIMG(char *fileName)
 {
-	SDL_Surface *loadedImage = IMG_Load(fileName.c_str());
+	SDL_Surface *loadedImage = IMG_Load(fileName);
 	if (loadedImage == NULL)
 	{
 		exit(0);

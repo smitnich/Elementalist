@@ -16,16 +16,13 @@ Crate::Crate()
 {
 	Crate(0, 0);
 }
+
+SPRITE_STATIONARY(Crate,"gfx/block.png")
+
 Crate::Crate(int x2, int y2)
 {
 	hovering = false;
-	stationary = crate;
 	numFrames = 1;
-	for (int i = 0; i < 6; i++)
-	{
-		this->spriteew[i] = crate;
-		this->spritens[i] = crate;
-	}
 	x = x2;
 	y = y2;
 	objMoveDir = 0;
@@ -38,12 +35,6 @@ ColorCrate1::ColorCrate1(int x2, int y2)
 {
 	hovering = false;
 	numFrames = 1;
-	stationary = spr_colorBlock[0];
-	for (int i = 0; i < 6; i++)
-	{
-		this->spriteew[i] = spr_colorBlock[0];
-		this->spritens[i] = spr_colorBlock[0];
-	}
 	x = x2;
 	y = y2;
 	objMoveDir = 0;
