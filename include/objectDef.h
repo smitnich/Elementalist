@@ -41,12 +41,13 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		//Gets the sprite to be drawn on the screen
 		virtual SDL_Surface *getSprite() = 0;
 		virtual bool requestEntry(Object* other, int dir);
+		virtual Object* createInstance(int x, int y) = 0;
 };
 #include "imageMacros.h"
 SDL_Surface* loadOptimizedIMG(char *fileName);
 class Crate : public Object{
 public:
-	IMAGE_DECLARATION(Crate)
+	IMAGE_DECLARATION(Crate,1001)
 	bool isMovableBlock()
 	{
 		return true;
@@ -62,12 +63,12 @@ public:
 class ColorCrate1 : public Crate
 {
 public:
-	ColorCrate1();
+	IMAGE_DECLARATION(ColorCrate1, 1011)
 	ColorCrate1(int x, int y);
 };
 class HeavyCrate : public Crate{
 public:
-	IMAGE_DECLARATION(HeavyCrate)
+	IMAGE_DECLARATION(HeavyCrate,1002)
 	HeavyCrate(int x, int y);
 	bool requestEntry(Object* other, int dir);
 	Object *clone(int x, int y);
@@ -75,7 +76,7 @@ public:
 class Person : public Object
 {
 public:
-	IMAGE_DECLARATION(Person)
+	IMAGE_DECLARATION(Person,1004)
 	int active;
 	Person(const Person &other, int x, int y);
 	Person(int x, int y);
@@ -88,7 +89,7 @@ public:
 class Pickup : public Object
 {
 public:
-	IMAGE_DECLARATION(Pickup)
+	IMAGE_DECLARATION(Pickup,1009)
 	void die();
 	bool requestEntry(Object *other, int dir);
 	Pickup(int x, int y);
@@ -97,7 +98,7 @@ public:
 class PickupWall : public Object
 {
 public:
-	IMAGE_DECLARATION(PickupWall)
+	IMAGE_DECLARATION(PickupWall,1010)
 	void doLogic();
 	bool requestEntry(Object *other, int dir);
 	PickupWall(int x, int y);

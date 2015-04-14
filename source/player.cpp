@@ -16,7 +16,6 @@ extern int lastInput;
 extern int currentLevelNum;
 extern int levelChange;
 extern string startLevelName;
-void moveLine(int, int, int);
 void startMove(int dir);
 extern double movespeed;
 extern int framesPerSecond;

@@ -222,7 +222,6 @@ void freeSurface()
 	SDL_FreeSurface(tiles);
 	SDL_FreeSurface(background);
 	SDL_FreeSurface(selector);
-	SDL_FreeSurface(crate);
 	SDL_FreeSurface(cursor);
 	SDL_FreeSurface(exitTile);
 	SDL_FreeSurface(barrierTile);

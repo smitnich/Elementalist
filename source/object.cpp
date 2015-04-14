@@ -11,6 +11,7 @@ bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 Level *getCurrentLevel();
 void checkTransitQueue();
 void writeDebugText(char* in);
+Object *objectList[MAX_OBJECTS] = { NULL };
 
 //The basic template for the Objects in the game
 Object::Object()
@@ -260,8 +261,8 @@ void doDraw(Object *drawObject, int moveFractionX, int moveFractionY, bool doDir
 }
 Object* objectInit(unsigned int id, int x, int y)
 {
-	Object *newObject = NULL;
-	switch (id)
+	Object *newObject = objectList[id-1000]->createInstance(x,y);
+	/*switch (id)
 	{
 	case OBJ_HEAVY_BLOCK:
 		newObject = new HeavyCrate(x, y);
@@ -300,7 +301,12 @@ Object* objectInit(unsigned int id, int x, int y)
 		break;
 	default:
 		return NULL;
-	}
+	}*/
+	if (newObject == NULL)
+		exit(0);
+	//If this is the player:
+	if (id == 1004)
+		player = newObject;
 	newObject->id = id;
 	Level *curLevel = getCurrentLevel();
 	curLevel->assignObject(x, y, newObject);

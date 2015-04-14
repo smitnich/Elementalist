@@ -38,7 +38,6 @@ void changeTextToWin();
 bool between(int, int, int);
 void cleanup();
 SDL_Surface* pickSprite(int id, int dir, int moveFraction);
-void moveLine(int, int, int);
 int compareCoordinates(Object*,Object*);
 void addMoveRequest(Object *obj, int x, int y, int checkX, int checkY);
 //Player stuff

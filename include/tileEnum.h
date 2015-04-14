@@ -37,6 +37,7 @@ enum tiles_t
 	OBJ_PICKUP,
 	OBJ_PICKUP_WALL,
 	OBJ_YELLOW_BLOCK,
+	OBJ_FLAME,
 
 	m_sender1 = 2001,
 	m_receiver1,
@@ -47,6 +48,6 @@ enum tiles_t
 	m_sender4,
 	m_receiver4,
 
-	m_any = 255,
+	m_any,
 	m_error = 0
 };

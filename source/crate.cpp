@@ -4,11 +4,6 @@
 #include "sprites.h"
 #include "level.h"
 extern Object *player;
-SDL_Surface *crate = NULL;
-SDL_Surface *heavyCrate = NULL;
-SDL_Surface *spr_colorBlock[BARRIER_TYPES] = { NULL };
-extern int pressureCount;
-void moveLine(int, int, int);
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 Level* getCurrentLevel();
 void objMove();
@@ -39,6 +34,7 @@ ColorCrate1::ColorCrate1(int x2, int y2)
 	faceDir = 0;
 	prevMove = D_NONE;
 }
+SPRITE_STATIONARY(ColorCrate1, "gfx/barrierBlock1.png")
 void Crate::doLogic()
 {
 	objMove();
@@ -83,12 +79,7 @@ Object* HeavyCrate::clone(int _x, int _y)
 }
 HeavyCrate::HeavyCrate(int x2, int y2) : Crate(x2,y2)
 {
-	for (int i = 0; i < 6; i++)
-	{
-		this->spriteew[i] = heavyCrate;
-		this->spritens[i] = heavyCrate;
-	}
-	stationary = heavyCrate;
+
 }
 bool HeavyCrate::requestEntry(Object *other, int dir)
 {
