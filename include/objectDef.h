@@ -1,8 +1,6 @@
 #ifndef _OBJECTDEF
 #define _OBJECTDEF
 #include "sdlFiles.h"
-#include "imageMacros.h"
-SDL_Surface* loadOptimizedIMG(char *fileName);
 class Object
 {
 public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
@@ -17,9 +15,6 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		Object();
 		~Object();
 		Object(Object &other, int x, int y);
-		SDL_Surface *spritens[6];
-		SDL_Surface *spriteew[6];
-		SDL_Surface *stationary;
 		int getMoveDir();
 		double getMoveFraction();
 		int getX();
@@ -42,16 +37,16 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		virtual void die();
 		virtual void doLogic();
 		virtual Object* clone(int x, int y) = 0;
+		virtual void loadImages() = 0;
 		//Gets the sprite to be drawn on the screen
-		virtual SDL_Surface *getSprite();
+		virtual SDL_Surface *getSprite() = 0;
 		virtual bool requestEntry(Object* other, int dir);
 };
+#include "imageMacros.h"
+SDL_Surface* loadOptimizedIMG(char *fileName);
 class Crate : public Object{
 public:
-	static SDL_Surface *stationary;
-	static SDL_Surface *spriteew[6];
-	static SDL_Surface *spritens[6];
-	static void loadImages();
+	IMAGE_DECLARATION(Crate)
 	bool isMovableBlock()
 	{
 		return true;
@@ -59,12 +54,10 @@ public:
 	void electrocute(){
 
 	}
-	Crate();
 	Crate(int x, int y);
 	void doLogic();
 	bool requestEntry(Object* other, int dir);
 	Object *clone(int x, int y);
-	SDL_Surface *getSprite();
 };
 class ColorCrate1 : public Crate
 {
@@ -74,6 +67,7 @@ public:
 };
 class HeavyCrate : public Crate{
 public:
+	IMAGE_DECLARATION(HeavyCrate)
 	HeavyCrate(int x, int y);
 	bool requestEntry(Object* other, int dir);
 	Object *clone(int x, int y);
@@ -81,6 +75,7 @@ public:
 class Person : public Object
 {
 public:
+	IMAGE_DECLARATION(Person)
 	int active;
 	Person(const Person &other, int x, int y);
 	Person(int x, int y);
@@ -93,6 +88,7 @@ public:
 class Pickup : public Object
 {
 public:
+	IMAGE_DECLARATION(Pickup)
 	void die();
 	bool requestEntry(Object *other, int dir);
 	Pickup(int x, int y);
@@ -101,14 +97,16 @@ public:
 class PickupWall : public Object
 {
 public:
+	IMAGE_DECLARATION(PickupWall)
 	void doLogic();
 	bool requestEntry(Object *other, int dir);
 	PickupWall(int x, int y);
 	Object *clone(int x, int y);
 };
-class IceElemental : public Object
+/*class IceElemental : public Object
 {
 public:
+	IMAGE_DECLARATION(IceElemental)
 	void die();
 	void freeze()
 	{
@@ -122,5 +120,5 @@ public:
 	bool requestEntry(Object *other, int dir);
 	void doLogic();
 	Object *clone();
-};
+};*/
 #endif

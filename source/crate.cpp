@@ -12,12 +12,8 @@ void moveLine(int, int, int);
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 Level* getCurrentLevel();
 void objMove();
-Crate::Crate()
-{
-	Crate(0, 0);
-}
 
-SPRITE_STATIONARY(Crate,"gfx/block.png")
+SPRITE_STATIONARY(Crate, "gfx/block.png")
 
 Crate::Crate(int x2, int y2)
 {
@@ -75,6 +71,7 @@ bool Crate::requestEntry(Object *other, int dir)
 	}
 	return false;
 }
+SPRITE_STATIONARY(HeavyCrate, "gfx/heavyBlock.png")
 //Can't be moved in a line
 Object* HeavyCrate::clone(int _x, int _y)
 {

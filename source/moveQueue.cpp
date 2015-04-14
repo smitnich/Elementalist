@@ -5,6 +5,7 @@
 Level* getCurrentLevel();
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 void doDraw(Object *drawObject, int moveFractionX, int moveFractionY, bool doDir[4]);
+void writeDebugText(char *in);
 struct MoveRequest
 {
 	Object *obj;
@@ -24,6 +25,7 @@ void queuePlaceAll()
 	int size = moveQueue.size();
 	int x = 0;
 	int y = 0; 
+	int tmpQueue = D_NONE;
 	for (int i = 0; i < size; i++)
 	{
 		tmp = moveQueue.front();
@@ -32,6 +34,7 @@ void queuePlaceAll()
 		moveQueue.pop_front();
 		if (level->getObject(x,y) == NULL)
 		{
+			tmpQueue = tmp->obj->queuedMove;
 			level->assignObject(x, y, tmp->obj);
 			level->getTerrain(x, y)->onEnter(tmp->obj);
 			delete tmp;

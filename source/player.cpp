@@ -31,6 +31,8 @@ Uint32 getTicks();
 extern double delta;
 Object* objectInit(unsigned int id, int x, int y, int moveDir, int moveFraction);
 //The player
+SPRITE_STATIONARY(Person, "gfx/persondead.png")
+
 Person::Person(const Person &other, int _x, int _y)
 {
 	active = false;
@@ -46,6 +48,7 @@ Person::Person(const Person &other, int _x, int _y)
 	frozen = other.frozen;
 	numFrames = other.numFrames;
 	faceDir = 0;
+	queuedMove = D_NONE;
 	for (int i = 0; i < 6; i++)
 	{
 		spriteew[i] = other.spriteew[i];
@@ -58,14 +61,9 @@ Object* Person::clone(int _x, int _y)
 }
 	Person::Person(int x2, int y2)
 	{
+		SDL_Surface *test = Person::stationary;
 		level = getCurrentLevel();
-		stationary = personns[3];
 		numFrames = 3;
-		for (int i = 0; i < numFrames * 2; i++)
-		{
-			this->spriteew[i] = personew[i];
-			this->spritens[i] = personns[i];
-		}
 		isPlayer = true;
 		x = x2;
 		y = y2;
@@ -74,6 +72,7 @@ Object* Person::clone(int _x, int _y)
 		solid = 0;
 		faceDir = 0;
 		prevMove = D_NONE;
+		queuedMove = D_NONE;
 		hovering = false;
 		if (playerPlaced == false)
 		{
@@ -213,6 +212,8 @@ Object* Person::clone(int _x, int _y)
 					lastMoveDir = D_RIGHT;
 					faceDir = D_RIGHT;
 				}
+				lastInput = B_RIGHT;
+				queuedMove = D_RIGHT;
 				break;
 			case B_LEFT:
 				if (x > 0 && objMoveFraction == 0 && !frozen)
@@ -222,6 +223,7 @@ Object* Person::clone(int _x, int _y)
 					faceDir = D_LEFT;
 				}
 				lastInput = B_LEFT;
+				queuedMove = D_LEFT;
 				break;
 			case B_DOWN:
 				if (y < MAP_SIZE && objMoveFraction == 0 && !frozen)
@@ -230,6 +232,7 @@ Object* Person::clone(int _x, int _y)
 					faceDir = D_DOWN;
 					lastMoveDir = D_DOWN;
 				}
+				queuedMove = D_DOWN;
 				lastInput = B_DOWN;
 				break;
 			case B_UP:
@@ -239,6 +242,7 @@ Object* Person::clone(int _x, int _y)
 					faceDir = D_UP;
 					lastMoveDir = D_UP;
 				}
+				queuedMove = D_UP;
 				lastInput = B_UP;
 				break;
 			default:

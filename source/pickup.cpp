@@ -4,6 +4,9 @@
 SDL_Surface *spr_pickup = NULL;
 SDL_Surface *spr_pickupWall = NULL;
 
+SPRITE_STATIONARY(Pickup, "gfx/pickup.png")
+SPRITE_STATIONARY(PickupWall, "gfx/pickupWall.png")
+
 //Pickups should be destroyed when any object enters their square
 bool Pickup::requestEntry(Object *other, int dir)
 {

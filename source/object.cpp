@@ -41,12 +41,6 @@ Object::Object(Object &other, int _x, int _y)
 	tempSpeed = 0;
 	frozen = other.frozen;
 	numFrames = other.numFrames;
-	for (int i = 0; i < 6; i++)
-	{
-		spriteew[i] = other.spriteew[i];
-		spritens[i] = other.spritens[i];
-	}
-	stationary = other.stationary;
 	faceDir = 0;
 }
 //Clean up the object
@@ -95,7 +89,7 @@ bool Object::requestEntry(Object *other, int dir)
 	return false;
 }
 //Gets the sprite to be drawn on the screen
-SDL_Surface* Object::getSprite()
+/*SDL_Surface* Object::getSprite()
 {
 	int newFraction = 0;
 	if (objMoveFraction < TILE_SIZE)
@@ -120,7 +114,7 @@ SDL_Surface* Object::getSprite()
 		return spritens[value];
 	else
 		return stationary;
-}
+}*/
 //Objects that move in some way
 void Object::objMove()
 {

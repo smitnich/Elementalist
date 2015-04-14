@@ -8,31 +8,19 @@ SDL_Surface* loadOptimizedIMG(char *fileName);
 
 #include <list>
 struct TerrainChangeRequest;
+std::list<Object *> *imagesToLoad = NULL;
 extern std::list<TerrainChangeRequest *> changeReqs;
+
+void loadAllImages();
 
 //Load a whole bunch of images
 //Todo: Merge all image files into one and blit the portions of it onto individual sprites
 void imgInit()
 {
-	int ignore = changeReqs.size();
+	loadAllImages();
 	tiles = loadOptimizedIMG("gfx/tile.png");
 	selector = loadOptimizedIMG("gfx/selector.png");
-	Crate::loadImages();
-	heavyCrate = loadOptimizedIMG("gfx/heavyBlock.png");
 	iceBlock = loadOptimizedIMG("gfx/iceBlock.png");
-	personns[0] = loadOptimizedIMG("gfx/personn1.png");
-	personns[1] = loadOptimizedIMG("gfx/personn2.png");
-	personns[2] = loadOptimizedIMG("gfx/personn3.png");
-	personns[3] = loadOptimizedIMG("gfx/persons1.png");
-	personns[4] = loadOptimizedIMG("gfx/persons2.png");
-	personns[5] = loadOptimizedIMG("gfx/persons3.png"); 
-	personew[0] = loadOptimizedIMG("gfx/personw1.png");
-	personew[1] = loadOptimizedIMG("gfx/personw2.png");
-	personew[2] = loadOptimizedIMG("gfx/personw3.png");
-	personew[3] = loadOptimizedIMG("gfx/persone1.png");
-	personew[4] = loadOptimizedIMG("gfx/persone2.png");
-	personew[5] = loadOptimizedIMG("gfx/persone3.png");
-	deadPerson = loadOptimizedIMG("gfx//persondead.png");
 	wall[0] = loadOptimizedIMG("gfx/wall/wallbase.png");
 	wall[1] = loadOptimizedIMG("gfx/wall/wall1.png");
 	wall[2] = loadOptimizedIMG("gfx/wall/wall2.png");
@@ -132,4 +120,22 @@ SDL_Surface* loadOptimizedIMG(char *fileName)
 	SDL_SetColorKey(newImage, SDL_SRCCOLORKEY, colorkey );
 	SDL_FreeSurface(loadedImage);
 	return newImage;
+}
+void addToImageList(Object *other)
+{
+	//Make sure that we're not adding the same object twice by checking
+	//if the back element of imagesToLoad is different from the current one
+	//This occurs due to derived classes calling the default constructor
+	//which calls this function a second time
+	if (imagesToLoad->size() == 0 || imagesToLoad->back() != other)
+		imagesToLoad->push_back(other);
+}
+void loadAllImages()
+{
+	while (imagesToLoad->size() > 0)
+	{
+		Object *tmp = imagesToLoad->front();
+		imagesToLoad->pop_front();
+		tmp->loadImages();
+	}
 }
