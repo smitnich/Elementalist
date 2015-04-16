@@ -34,6 +34,9 @@
     <Filter Include="Source Files\Terrain">
       <UniqueIdentifier>{304603db-ae7d-4b8c-a14d-3d426f92ae6b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Objects\Elementals">
+      <UniqueIdentifier>{2377668b-c521-42d2-8992-58dbf20bafd7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\base.h">
@@ -100,6 +103,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\debugText.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\imageMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -205,6 +211,12 @@
     </ClCompile>
     <ClCompile Include="..\source\water.cpp">
       <Filter>Source Files\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\iceElemental.cpp">
+      <Filter>Source Files\Objects\Elementals</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\flame.cpp">
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
