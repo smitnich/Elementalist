@@ -29,6 +29,10 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		{
 			frozen = true;
 		}
+		virtual void heat()
+		{
+			frozen = false;
+		}
 		virtual void electrocute()
 		{
 			if (!frozen)

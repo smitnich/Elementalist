@@ -34,5 +34,17 @@ public:
 		tmp->y = _y;
 		return tmp;
 	}
+	void doLogic()
+	{
+		for (int xMod = -1; xMod <= 1; xMod++)
+			for (int yMod = -1; yMod <= 1; yMod++)
+			{
+				if (xMod == 0 && yMod == 0)
+					continue;
+				Object *tmp = getCurrentLevel()->getObject(x + xMod, y + yMod);
+				if (tmp != NULL)
+					tmp->heat();
+			}
+	}
 };
 SPRITE_STATIONARY(Flame, "gfx/flames.png")
