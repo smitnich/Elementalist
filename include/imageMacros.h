@@ -39,7 +39,7 @@ Object *createInstance(int x, int y) \
 Object *tmp = new X(x, y); \
 return tmp; \
 } \
-int objectNum = Z;
+const static int objectNum = Z;
 
 #define SPRITE_MOVING(X,Y) SDL_Surface *X::stationary; \
 SDL_Surface *X::spriteew[6]; \
