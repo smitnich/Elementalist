@@ -98,3 +98,11 @@ bool HeavyCrate::requestEntry(Object *other, int dir)
 	else
 		return false;
 }
+class FrozenCrate : Crate {
+public:
+	IMAGE_DECLARATION(FrozenCrate,1003)
+	FrozenCrate(int x, int y) : Crate(x, y){
+		this->frozen = true;
+	}
+};
+SPRITE_STATIONARY(FrozenCrate, "gfx/iceBlock.png")
