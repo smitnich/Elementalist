@@ -1,6 +1,6 @@
 unsigned char lookupTable[] = {
 	0,
-	29,
+	0,
 	19,
 	19,
 	0,
