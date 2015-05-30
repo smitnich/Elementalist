@@ -31,7 +31,7 @@ extern double delta;
 Object* objectInit(unsigned int id, int x, int y, int moveDir, int moveFraction);
 //The player
 SPRITE_MOVING(Person)
-char *Person::imageNames[4][3] = { { "gfx/personn1.png", "gfx/personn2.png", "gfx/personn3.png" },
+const char *Person::imageNames[4][3] = { { "gfx/personn1.png", "gfx/personn2.png", "gfx/personn3.png" },
 								   { "gfx/persons1.png", "gfx/persons2.png", "gfx/persons3.png" },
 								   { "gfx/personw1.png", "gfx/personw2.png", "gfx/personw3.png" },
 								   { "gfx/persone1.png", "gfx/persone2.png", "gfx/persone3.png" }};

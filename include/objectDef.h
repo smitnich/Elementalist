@@ -48,7 +48,7 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		virtual Object* createInstance(int x, int y) = 0;
 };
 #include "imageMacros.h"
-SDL_Surface* loadOptimizedIMG(char *fileName);
+SDL_Surface* loadOptimizedIMG(const char *fileName);
 class Crate : public Object{
 public:
 	IMAGE_DECLARATION(Crate,1001)

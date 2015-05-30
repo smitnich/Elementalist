@@ -4,7 +4,7 @@
 #include "objectDef.h"
 #define COLORKEY 0xFF00DC
 extern string appPath;
-SDL_Surface* loadOptimizedIMG(char *fileName);
+SDL_Surface* loadOptimizedIMG(const char *fileName);
 
 #include <list>
 struct TerrainChangeRequest;
@@ -107,7 +107,7 @@ void imgInit()
 	spr_colorBarrier[0] = loadOptimizedIMG("gfx/wall/colorBarrier1.png");
 }
 //Optimize the image for proper depth and for transparecny
-SDL_Surface* loadOptimizedIMG(char *fileName)
+SDL_Surface* loadOptimizedIMG(const char *fileName)
 {
 	SDL_Surface *loadedImage = IMG_Load(fileName);
 	if (loadedImage == NULL)

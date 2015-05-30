@@ -31,7 +31,7 @@ class X Test##X = X();
 #define IMAGE_DECLARATION(X,Z) static SDL_Surface *stationary; \
 static SDL_Surface *spriteew[6]; \
 static SDL_Surface *spritens[6]; \
-static char *imageNames[4][3]; \
+static const char *imageNames[4][3]; \
 SDL_Surface *getSprite(); \
 void loadImages();	\
 X(); \
