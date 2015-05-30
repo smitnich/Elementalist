@@ -9,7 +9,7 @@ class Level* getCurrentLevel();
 extern double delta;
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 Level *getCurrentLevel();
-void checkTransitQueue();
+void checkCreationQueue();
 void writeDebugText(char* in);
 Object *objectList[MAX_OBJECTS] = { NULL };
 
@@ -356,7 +356,7 @@ void objectLogic()
 			tmp->doLogic();
 	}
 	queuePlaceAll();
-	checkTransitQueue();
+	checkCreationQueue();
 }
 void doPlayer()
 {

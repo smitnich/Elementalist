@@ -3,7 +3,7 @@
 #include "sprites.h"
 #include "level.h"
 SDL_Surface *spr_dupe[4] = { NULL, NULL, NULL, NULL };
-void addTransitQueue(Object *in);
+void addCreationQueue(Object *in);
 
 void Duplicator::onEnter(Object *other)
 {
@@ -42,7 +42,7 @@ void Duplicator::activate()
 	if (tmp == NULL)
 		return;
 	tmp->startMove(dir);
-	addTransitQueue(tmp);
+	addCreationQueue(tmp);
 }
 Duplicator::Duplicator(int _dir)
 {
