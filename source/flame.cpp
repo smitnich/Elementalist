@@ -6,7 +6,7 @@
 extern Object *player;
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 Level* getCurrentLevel();
-void objMove();
+bool objMove();
 
 
 class Flame : Object

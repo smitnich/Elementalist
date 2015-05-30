@@ -78,8 +78,6 @@ bool Object::isMovableBlock()
 }
 void Object::startMove(int dir, bool forced)
 {
-	char buffer[1024];
-	writeDebugText(buffer);
 	if (dir == D_NONE)
 		return;
 	objMoveDir = dir;
@@ -89,40 +87,13 @@ bool Object::requestEntry(Object *other, int dir)
 {
 	return false;
 }
-//Gets the sprite to be drawn on the screen
-/*SDL_Surface* Object::getSprite()
-{
-	int newFraction = 0;
-	if (objMoveFraction < TILE_SIZE)
-		newFraction = floor(objMoveFraction);
-	int value = newFraction*numFrames / TILE_SIZE;
-	if (faceDir != 0 && objMoveFraction == 0)
-	{
-		if (faceDir == D_RIGHT)
-			return spriteew[numFrames];
-		else if (faceDir == D_LEFT)
-			return spriteew[0];
-		else if (faceDir == D_UP)
-			return spritens[0];
-		else if (faceDir == D_DOWN)
-			return spritens[numFrames];
-	}
-	if (objMoveDir == D_RIGHT || objMoveDir == D_DOWN)
-		value += numFrames;
-	if (this->objMoveDir == D_LEFT || objMoveDir == D_RIGHT)
-		return spriteew[value];
-	else if (objMoveDir == D_UP || objMoveDir == D_DOWN)
-		return spritens[value];
-	else
-		return stationary;
-}*/
 //Objects that move in some way
-void Object::objMove()
+bool Object::objMove()
 {
 	int checkX = 0;
 	int checkY = 0;
 	if (objMoveDir == D_NONE)
-		return;
+		return false;
 	if (objMoveDir == D_LEFT)
 		checkX = -1;
 	else if (objMoveDir == D_UP)
@@ -166,7 +137,9 @@ void Object::objMove()
 			objMoveDir = D_NONE;
 		objMoveFraction = 0;
 		addMoveRequest(this, x, y, checkX, checkY);
+		return true;
 	}
+	return false;
 }
 //Takes in pointers to movefractionx and y and modifies their values based on direction
 void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY, bool *doDir)

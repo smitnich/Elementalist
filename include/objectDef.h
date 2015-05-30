@@ -13,13 +13,13 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		class Level *level;
 		virtual bool isMovableBlock();
 		Object();
-		~Object();
+		virtual ~Object();
 		Object(Object &other, int x, int y);
 		int getMoveDir();
 		double getMoveFraction();
 		int getX();
 		int getY();
-		void objMove();
+		bool objMove();
 		void startMove(int dir, bool forced = false);
 		virtual void drown()
 		{
