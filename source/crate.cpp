@@ -65,6 +65,7 @@ bool Crate::requestEntry(Object *other, int dir)
 	if (requestMove(this->x, this->y, xdir, ydir, this))
 	{
 		startMove(dir);
+		objMoveFraction = other->objMoveFraction;
 		return true;
 	}
 	return false;
