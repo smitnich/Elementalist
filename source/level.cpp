@@ -40,6 +40,9 @@ extern int currentLevelNum;
 void changeText();
 Uint32 getTicks();
 void doActivateQueue();
+void resetMoveQueue();
+void resetCreationQueue();
+void resetActivateQueue();
 
 //For objects that don't have any state, it is pointless
 //to create a new instance for each one, so just create
@@ -155,7 +158,10 @@ int Level::convertIndex(int x, int y)
 bool Level::assignObject(int x, int y, Object *obj)
 {
 	bool retVal = false;
-	if (objectLayer[convertIndex(x,y)] == NULL)
+	//TODO: Figure out why this can occur
+	if (objectLayer.size() == 0)
+		return false;
+	if (objectLayer[convertIndex(x, y)] == NULL)
 		retVal = true;
 	objectLayer[convertIndex(x,y)] = obj;
 	return retVal;
@@ -441,6 +447,9 @@ void switchLevel(int levelNum)
 	won = false;
 	lastInputTime = getTicks();
 	playMusic(levelNum);
+	resetMoveQueue();
+	resetCreationQueue();
+	resetActivateQueue();
 }
 //Make the level name given the number
 string constructLevelName(int levelNum)
