@@ -1,4 +1,4 @@
-//Basic movable object, can be moved in a line with other crates
+﻿//Basic movable object, can be moved in a line with other crates
 #include "objectDef.h"
 #include "base.h"
 #include "sprites.h"
@@ -50,6 +50,8 @@ Object* Crate::clone(int _x, int _y)
 }
 bool Crate::requestEntry(Object *other, int dir)
 {
+	if (objMoveDir != D_NONE)
+		return true;
 	int xdir = 0;
 	int ydir = 0;
 	if (dir == D_LEFT)
@@ -72,7 +74,7 @@ SPRITE_STATIONARY(HeavyCrate, "gfx/heavyBlock.png")
 Object* HeavyCrate::clone(int _x, int _y)
 {
 	Object *tmp = new HeavyCrate(_x, _y);
-	memcpy(tmp, this, sizeof(this));
+	memcpy(tmp, this, sizeof(*this));
 	tmp->x = _x;
 	tmp->y = _y;
 	return tmp;
