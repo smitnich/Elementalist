@@ -231,7 +231,7 @@
     <ClCompile Include="..\source\terrain.cpp" />
     <ClCompile Include="..\source\textbox.cpp" />
     <ClCompile Include="..\source\tileSprites.cpp" />
-    <ClCompile Include="..\source\transitQueue.cpp" />
+    <ClCompile Include="..\source\creationQueue.cpp" />
     <ClCompile Include="..\source\triggers.cpp" />
     <ClCompile Include="..\source\water.cpp" />
   </ItemGroup>
