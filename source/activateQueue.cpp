@@ -20,6 +20,7 @@ void doActivateQueue()
 		int length = tmp->connections.size();
 		for (int i = 0; i < length; i++)
 				tmp->connections.at(i)->activate();
+		delete(tmp);
 		activateQueue.pop_front();
 	}
 }

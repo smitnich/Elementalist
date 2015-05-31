@@ -12,7 +12,7 @@ struct MoveRequest
 	int x,y;
 	int checkX,checkY;
 };
-std::list<MoveRequest*> moveQueue;
+std::list<MoveRequest> moveQueue;
 
 void resetMoveQueue()
 {
@@ -20,7 +20,7 @@ void resetMoveQueue()
 }
 void queuePlaceAll()
 {
-	MoveRequest *tmp;
+	MoveRequest tmp;
 	Level *level = getCurrentLevel();
 	int size = moveQueue.size();
 	int x = 0;
@@ -29,15 +29,15 @@ void queuePlaceAll()
 	for (int i = 0; i < size; i++)
 	{
 		tmp = moveQueue.front();
-		x = tmp->x+tmp->checkX;
-		y = tmp->y+tmp->checkY;
+		x = tmp.x+tmp.checkX;
+		y = tmp.y+tmp.checkY;
 		moveQueue.pop_front();
-		if (level->getObject(x,y) == NULL)
+		Object *blockingObject = level->getObject(x, y);
+		if (blockingObject == NULL)
 		{
-			tmpQueue = tmp->obj->queuedMove;
-			level->assignObject(x, y, tmp->obj);
-			level->getTerrain(x, y)->onEnter(tmp->obj);
-			delete tmp;
+			tmpQueue = tmp.obj->queuedMove;
+			level->assignObject(x, y, tmp.obj);
+			level->getTerrain(x, y)->onEnter(tmp.obj);
 		}
 		else
 		{
@@ -47,26 +47,26 @@ void queuePlaceAll()
 }
 void queueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY,bool *doDir)
 {
-	MoveRequest *tmp;
+	MoveRequest tmp;
 	int size = moveQueue.size();
 	for (int i = 0; i < size; i++)
 	{
 		tmp = moveQueue.front();
 		moveQueue.pop_front();
-		doDraw(tmp->obj,moveFractionX,moveFractionY,doDir);
+		doDraw(tmp.obj,moveFractionX,moveFractionY,doDir);
 		moveQueue.push_back(tmp);
 	}
 }
 void addMoveRequest(Object *obj, int x, int y, int checkX, int checkY)
 {
-	MoveRequest *tmpReq = new MoveRequest();
-	tmpReq->obj = obj;
-	tmpReq->x = x;
-	tmpReq->y = y;
-	getCurrentLevel()->getTerrain(x, y)->onExit(tmpReq->obj);
-	tmpReq->checkX = checkX;
-	tmpReq->checkY = checkY;
-	tmpReq->obj->x = x+checkX;
-	tmpReq->obj->y = y+checkY;
+	MoveRequest tmpReq = MoveRequest();
+	tmpReq.obj = obj;
+	tmpReq.x = x;
+	tmpReq.y = y;
+	getCurrentLevel()->getTerrain(x, y)->onExit(tmpReq.obj);
+	tmpReq.checkX = checkX;
+	tmpReq.checkY = checkY;
+	tmpReq.obj->x = x+checkX;
+	tmpReq.obj->y = y+checkY;
 	moveQueue.push_back(tmpReq);
 }

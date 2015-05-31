@@ -8,6 +8,11 @@ void doDraw(Object *drawObject, int moveFractionX, int moveFractionY, bool doDir
 
 void resetCreationQueue()
 {
+	int size = creationQueue.size();
+	for (int i = 0; i < size; i++) {
+		delete(creationQueue.front());
+		creationQueue.pop_front();
+	}
 	creationQueue.clear();
 }
 void addCreationQueue(Object *in)
