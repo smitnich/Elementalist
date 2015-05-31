@@ -52,9 +52,9 @@ void drawScreen()
 	}
 	//Now do this again with objects; because objects can be drawn across two tiles, we want to make sure that
 	//we don't draw over any of them.
-	for (x = -NUM_TILES - 1; x <= NUM_TILES + 1; x++)
+	for (x = -NUM_TILES - 2; x <= NUM_TILES + 2; x++)
 	{
-		for (y = -NUM_TILES - 1; y <= NUM_TILES + 1; y++)
+		for (y = -NUM_TILES - 2; y <= NUM_TILES + 2; y++)
 		{
 			obj = currentLevel->getObject(xStart + x, yStart + y);
 			if (obj != NULL)
