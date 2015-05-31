@@ -58,7 +58,7 @@ Conveyor::Conveyor(int direction)
 }
 void Conveyor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
 {
-	if (lastRender == -1 && displayName)
+	if (lastRender == 0 && displayName)
 		lastRender = getTicks();
 	double lastRenderDelta = ((double) getTicks() - lastRender)/(1000.0/(float) framesPerSecond);
 	if (!displayName)

@@ -235,46 +235,6 @@ void doDraw(Object *drawObject, int moveFractionX, int moveFractionY, bool doDir
 Object* objectInit(unsigned int id, int x, int y)
 {
 	Object *newObject = objectList[id-1000]->createInstance(x,y);
-	/*switch (id)
-	{
-	case OBJ_HEAVY_BLOCK:
-		newObject = new HeavyCrate(x, y);
-		break;
-	case OBJ_BLOCK:
-		newObject = new Crate(x, y);
-		break;
-	case OBJ_ICE_BLOCK:
-		newObject = new Crate(x, y);
-		newObject->frozen = true;
-		break;
-	case OBJ_PLAYER:
-		newObject = new Person(x, y);
-		player = newObject;
-		break;
-	case OBJ_ICE_ELEMENT_E:
-		//newObject = new IceBall(x,y,D_RIGHT,0);
-		break;
-	case OBJ_ICE_ELEMENT_N:
-		//newObject = new IceBall(x,y,D_UP,0);
-		break;
-	case OBJ_ICE_ELEMENT_S:
-		//newObject = new IceBall(x,y,D_DOWN,0);
-		break;
-	case OBJ_ICE_ELEMENT_W:
-		//newObject = new IceBall(x,y,D_LEFT,0);
-		break;
-	case OBJ_PICKUP:
-		newObject = new Pickup(x,y);
-		break;
-	case OBJ_PICKUP_WALL:
-		newObject = new PickupWall(x, y);
-		break;
-	case OBJ_YELLOW_BLOCK:
-		newObject = new ColorCrate1(x, y);
-		break;
-	default:
-		return NULL;
-	}*/
 	if (newObject == NULL)
 		exit(0);
 	//If this is the player:

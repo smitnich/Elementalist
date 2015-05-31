@@ -21,6 +21,8 @@ public:
 	{
 		this->sprite = sp;
 	}
+	virtual ~Terrain() {
+	}
 	virtual bool requestEntry(Object* other, int dir)
 	{
 		return true;

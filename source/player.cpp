@@ -64,7 +64,6 @@ Object* Person::clone(int _x, int _y)
 }
 	Person::Person(int x2, int y2)
 	{
-		SDL_Surface *test = Person::stationary;
 		level = getCurrentLevel();
 		numFrames = 3;
 		isPlayer = true;

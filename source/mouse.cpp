@@ -2,7 +2,7 @@
 #ifdef GEKKO
 #include <SDL/sdl.h>
 #include <SDL/sdl_events.h>
-#else LINUX
+#else
 #include <SDL/SDL.h>
 #include <SDL/SDL_events.h>
 #endif

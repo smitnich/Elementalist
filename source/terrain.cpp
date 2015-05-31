@@ -47,7 +47,6 @@ void doTerrainChanges()
 		changeReqs.pop_front();
 		swapTerrain(req->index, req->changeTo);
 	}
-	doAssignQueue();
 }
 Floor::Floor()
 {
