@@ -103,7 +103,7 @@ bool HeavyCrate::requestEntry(Object *other, int dir)
 }
 class FrozenCrate : Crate {
 public:
-	IMAGE_DECLARATION(FrozenCrate,1003)
+	OBJECT_DECLARATION(FrozenCrate,1003)
 	FrozenCrate(int x, int y) : Crate(x, y){
 		this->frozen = true;
 	}

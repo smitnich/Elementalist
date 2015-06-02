@@ -18,6 +18,8 @@ bool requestMove(int x, int y, int xChange, int yChange, Object* obj)
 	int index = level->convertIndex(x+xChange,y+yChange);
 	Terrain *terrain = level->mapLayer.at(index);
 	Object *otherObj = level->objectLayer[level->convertIndex(x+xChange,y+yChange)];
+	if (otherObj == obj)
+		return true;
 	int dir = -1;
 	if (xChange < 0)
 		dir = D_LEFT;

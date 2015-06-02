@@ -12,7 +12,7 @@ bool objMove();
 class Flame : Object
 {
 public:
-	IMAGE_DECLARATION(Flame,1012)
+	OBJECT_DECLARATION(Flame,1012)
 
 	Flame(int x2, int y2)
 	{

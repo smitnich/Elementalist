@@ -4,7 +4,7 @@
 #include "level.h"
 Level* getCurrentLevel();
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
-void doDraw(Object *drawObject, int moveFractionX, int moveFractionY, bool doDir[4]);
+void doDraw(Object *drawObject, int moveFractionX, int moveFractionY);
 void writeDebugText(char *in);
 struct MoveRequest
 {
@@ -33,10 +33,16 @@ void queuePlaceAll()
 		y = tmp.y+tmp.checkY;
 		moveQueue.pop_front();
 		Object *blockingObject = level->getObject(x, y);
+		tmp.obj->x = x;
+		tmp.obj->y = y;
 		if (blockingObject == NULL)
 		{
 			tmpQueue = tmp.obj->queuedMove;
 			level->assignObject(x, y, tmp.obj);
+			level->getTerrain(x, y)->onEnter(tmp.obj);
+		}
+		else if (blockingObject->allowEntry()) {
+			blockingObject->onEnter(tmp.obj, tmp.checkX, tmp.checkY);
 			level->getTerrain(x, y)->onEnter(tmp.obj);
 		}
 		else
@@ -45,7 +51,7 @@ void queuePlaceAll()
 		}
 	}
 }
-void queueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY,bool *doDir)
+void queueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY)
 {
 	MoveRequest tmp;
 	int size = moveQueue.size();
@@ -53,7 +59,7 @@ void queueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY,bool *
 	{
 		tmp = moveQueue.front();
 		moveQueue.pop_front();
-		doDraw(tmp.obj,moveFractionX,moveFractionY,doDir);
+		doDraw(tmp.obj,moveFractionX,moveFractionY);
 		moveQueue.push_back(tmp);
 	}
 }

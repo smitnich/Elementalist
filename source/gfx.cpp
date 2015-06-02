@@ -7,8 +7,8 @@ SDL_Surface *iceBlock = NULL;
 SDL_Rect borderRect[4];
 Level *getCurrentLevel();
 extern bool playerDead;
-void queueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY, bool *doDir);
-void creationQueueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY, bool *doDir);
+void queueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY);
+void creationQueueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY);
 //Draws the static map features, the objects, the player, and the textbox on the screen
 void drawScreen()
 {
@@ -19,7 +19,7 @@ void drawScreen()
 	bool doDir[4] = { 0, 0, 0, 0 };
 	Terrain *terrain = NULL;
 	Object *obj = NULL;
-	calculateMoveFraction(player->objMoveDir, player->objMoveFraction, &xOffset, &yOffset, doDir);
+	calculateMoveFraction(player->objMoveDir, player->objMoveFraction, &xOffset, &yOffset);
 	if (player->x < NUM_TILES || (player->x == NUM_TILES && doDir[D_RIGHT - 1] != true))
 	{
 		xOffset = 0;
@@ -58,11 +58,11 @@ void drawScreen()
 		{
 			obj = currentLevel->getObject(xStart + x, yStart + y);
 			if (obj != NULL)
-				doDraw(obj, xOffset, yOffset, doDir);
+				obj->draw(xOffset,yOffset);
 		}
 	}
-	queueDrawAll(screen, xOffset, yOffset, doDir);
-	creationQueueDrawAll(screen, xOffset, yOffset, doDir);
+	queueDrawAll(screen, xOffset, yOffset);
+	creationQueueDrawAll(screen, xOffset, yOffset);
 	if (displayName || playerDead)
 		doTextBox(player->y);
 	//Draw the mouse if it is within bounds and should be drawn

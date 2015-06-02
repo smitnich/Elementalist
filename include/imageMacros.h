@@ -13,6 +13,8 @@ SDL_Surface *X::getSprite(){ \
 	return X::stationary; \
 } \
 X::X(){ \
+	if (objectNum < 1000) \
+		return; \
 	if (imagesToLoad == NULL) \
 		imagesToLoad = new std::list<Object *>(); \
 	addToImageList(this); \
@@ -25,10 +27,10 @@ void X::loadImages() \
 	for (int i = 0; i < 6; i++){ \
 		spriteew[i] = stationary; \
 		spritens[i] = stationary; \
-																} \
+	} \
 }\
 class X Test##X = X();
-#define IMAGE_DECLARATION(X,Z) static SDL_Surface *stationary; \
+#define OBJECT_DECLARATION(X,Z) static SDL_Surface *stationary; \
 static SDL_Surface *spriteew[6]; \
 static SDL_Surface *spritens[6]; \
 static const char *imageNames[4][3]; \
@@ -56,6 +58,8 @@ SDL_Surface *X::getSprite() { \
 		return spritens[(((int) objMoveFraction)/(TILE_SIZE / 3))+3]; \
 } \
 X::X(){ \
+	if (objectNum < 1000) \
+		return; \
 	if (imagesToLoad == NULL) \
 		imagesToLoad = new std::list<Object *>(); \
 	addToImageList(this); \

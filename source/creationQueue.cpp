@@ -4,7 +4,7 @@
 //in the same square, we need to store newly created objects in the queue before they
 //move to the next square
 std::list<Object*> creationQueue;
-void doDraw(Object *drawObject, int moveFractionX, int moveFractionY, bool doDir[4]);
+void doDraw(Object *drawObject, int moveFractionX, int moveFractionY);
 
 void resetCreationQueue()
 {
@@ -32,10 +32,10 @@ void checkCreationQueue()
 			creationQueue.push_back(tmp);
 	}
 }
-void creationQueueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY, bool *doDir)
+void creationQueueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY)
 {
 	for (std::list<Object *>::iterator it = creationQueue.begin(); it != creationQueue.end(); ++it)
 	{
-		doDraw(*it, moveFractionX, moveFractionY, doDir);
+		doDraw(*it, moveFractionX, moveFractionY);
 	}
 }

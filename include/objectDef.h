@@ -1,6 +1,7 @@
 #ifndef _OBJECTDEF
 #define _OBJECTDEF
 #include "sdlFiles.h"
+#include <stdexcept>
 class Object
 {
 public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
@@ -38,6 +39,15 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 			if (!frozen)
 				die();
 		}
+		//It should not be possible to have two different objects in one tile in
+		//most cases, so throw an exception by default
+		virtual void onEnter(Object *other, int xChange, int yChange) {
+			throw std::logic_error("Multiple objects in one tile");
+		}
+		virtual bool allowEntry() {
+			return false;
+		}
+		virtual void Object::draw(int moveFractionX, int moveFractionY);
 		virtual void die();
 		virtual void doLogic();
 		virtual Object* clone(int x, int y) = 0;
@@ -51,7 +61,7 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 SDL_Surface* loadOptimizedIMG(const char *fileName);
 class Crate : public Object{
 public:
-	IMAGE_DECLARATION(Crate,1001)
+	OBJECT_DECLARATION(Crate,1001)
 	bool isMovableBlock()
 	{
 		return true;
@@ -67,12 +77,12 @@ public:
 class ColorCrate1 : public Crate
 {
 public:
-	IMAGE_DECLARATION(ColorCrate1, 1011)
+	OBJECT_DECLARATION(ColorCrate1, 1011)
 	ColorCrate1(int x, int y);
 };
 class HeavyCrate : public Crate{
 public:
-	IMAGE_DECLARATION(HeavyCrate,1002)
+	OBJECT_DECLARATION(HeavyCrate,1002)
 	HeavyCrate(int x, int y);
 	bool requestEntry(Object* other, int dir);
 	Object *clone(int x, int y);
@@ -80,7 +90,7 @@ public:
 class Person : public Object
 {
 public:
-	IMAGE_DECLARATION(Person,1004)
+	OBJECT_DECLARATION(Person,1004)
 	int active;
 	Person(const Person &other, int x, int y);
 	Person(int x, int y);
@@ -93,7 +103,7 @@ public:
 class Pickup : public Object
 {
 public:
-	IMAGE_DECLARATION(Pickup,1009)
+	OBJECT_DECLARATION(Pickup,1009)
 	void die();
 	bool requestEntry(Object *other, int dir);
 	Pickup(int x, int y);
@@ -102,7 +112,7 @@ public:
 class PickupWall : public Object
 {
 public:
-	IMAGE_DECLARATION(PickupWall,1010)
+	OBJECT_DECLARATION(PickupWall,1010)
 	void doLogic();
 	bool requestEntry(Object *other, int dir);
 	PickupWall(int x, int y);
@@ -111,7 +121,7 @@ public:
 /*class IceElemental : public Object
 {
 public:
-	IMAGE_DECLARATION(IceElemental)
+	OBJECT_DECLARATION(IceElemental)
 	void die();
 	void freeze()
 	{

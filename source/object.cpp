@@ -142,36 +142,28 @@ bool Object::objMove()
 	return false;
 }
 //Takes in pointers to movefractionx and y and modifies their values based on direction
-void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY, bool *doDir)
+void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY)
 {
 	switch (moveDir)
 	{
 	case D_UP:
 		*moveFractionY = moveFraction*-1;
-		if (doDir != NULL)
-			doDir[D_UP - 1] = true;
 		break;
 	case D_DOWN:
 		*moveFractionY = moveFraction;
-		if (doDir != NULL)
-			doDir[D_DOWN - 1] = true;
 		break;
 	case D_LEFT:
 		*moveFractionX = moveFraction*-1;
-		if (doDir != NULL)
-			doDir[D_LEFT - 1] = true;
 		break;
 	case D_RIGHT:
 		*moveFractionX = moveFraction;
-		if (doDir != NULL)
-			doDir[D_RIGHT - 1] = true;
 		break;
 	default:
 		break;
 	}
 }
 //Gets the coordinates for the object and draws it to the screen
-void doDraw(Object *drawObject, int moveFractionX, int moveFractionY, bool doDir[4])
+void doDraw(Object *drawObject, int moveFractionX, int moveFractionY)
 {
 	int posX = 0;
 	int posY = 0;
@@ -232,6 +224,9 @@ void doDraw(Object *drawObject, int moveFractionX, int moveFractionY, bool doDir
 		apply_surface(drawX, drawY, drawPortionX, drawPortionY, iceBlock, screen);
 	}
 }
+void Object::draw(int moveFractionX, int moveFractionY) {
+	doDraw(this, moveFractionX, moveFractionY);
+}
 Object* objectInit(unsigned int id, int x, int y)
 {
 	Object *newObject = objectList[id-1000]->createInstance(x,y);
@@ -261,8 +256,7 @@ void objectDraw()
 {
 	int moveFractionX = 0;
 	int moveFractionY = 0;
-	bool doDir[4] = { 0, 0, 0, 0 };
-	calculateMoveFraction(player->objMoveDir, player->objMoveFraction, &moveFractionX, &moveFractionY, doDir);
+	calculateMoveFraction(player->objMoveDir, player->objMoveFraction, &moveFractionX, &moveFractionY);
 	Level *curLevel = getCurrentLevel();
 	if (curLevel == NULL)
 		return;
@@ -273,7 +267,7 @@ void objectDraw()
 			Object *obj = curLevel->getObject(x, y);
 			if (obj != NULL)
 			{
-				doDraw(obj, moveFractionX, moveFractionY, doDir);
+				doDraw(obj, moveFractionX, moveFractionY);
 			}
 		}
 	}

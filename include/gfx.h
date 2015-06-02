@@ -4,8 +4,8 @@
 #include "font.h"
 #include "objectDef.h"
 void doWall(int type,int x,int y, int moveFractionX, int moveFractionY);
-void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY, bool *doDir);
-void doDraw(Object *drawObject, int moveFractionX, int moveFractionY, bool doDir[4]);
+void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY);
+void doDraw(Object *drawObject, int xOffset, int yOffset);
 int getCenter(int a, int b);
 int getControlType();
 void apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination);
