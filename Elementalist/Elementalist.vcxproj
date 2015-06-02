@@ -205,6 +205,7 @@
     <ClCompile Include="..\source\flame.cpp" />
     <ClCompile Include="..\source\freezer.cpp" />
     <ClCompile Include="..\source\pickup.cpp" />
+    <ClCompile Include="..\source\pipes.cpp" />
     <ClCompile Include="..\source\terrainHazards.cpp" />
     <ClCompile Include="..\source\checkspace.cpp" />
     <ClCompile Include="..\source\config.cpp" />
@@ -234,7 +235,6 @@
     <ClCompile Include="..\source\creationQueue.cpp" />
     <ClCompile Include="..\source\triggers.cpp" />
     <ClCompile Include="..\source\water.cpp" />
-    <ClCompile Include="pipes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\Output\gfx\app.rc" />
