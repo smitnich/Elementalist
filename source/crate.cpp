@@ -50,8 +50,6 @@ Object* Crate::clone(int _x, int _y)
 }
 bool Crate::requestEntry(Object *other, int dir)
 {
-	if (objMoveDir != D_NONE)
-		return true;
 	int xdir = 0;
 	int ydir = 0;
 	if (dir == D_LEFT)
@@ -68,6 +66,8 @@ bool Crate::requestEntry(Object *other, int dir)
 		objMoveFraction = other->objMoveFraction;
 		return true;
 	}
+	if (objMoveDir != D_NONE)
+		return true;
 	return false;
 }
 SPRITE_STATIONARY(HeavyCrate, "gfx/heavyBlock.png")
