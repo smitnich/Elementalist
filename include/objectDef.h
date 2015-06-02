@@ -47,7 +47,7 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		virtual bool allowEntry() {
 			return false;
 		}
-		virtual void Object::draw(int moveFractionX, int moveFractionY);
+		virtual void draw(int moveFractionX, int moveFractionY);
 		virtual void die();
 		virtual void doLogic();
 		virtual Object* clone(int x, int y) = 0;
