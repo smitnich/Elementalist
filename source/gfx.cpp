@@ -2,6 +2,7 @@
 #include "level.h"
 #include "objectDef.h"
 #include "debugText.h"
+#include "defs.h"
 extern Object *player;
 SDL_Surface *iceBlock = NULL;
 SDL_Rect borderRect[4];
@@ -192,7 +193,7 @@ void toggleCursor(bool value)
 //Change the level text to the current level name
 void changeText()
 {
-	string textName;
+	std::string textName;
 	if (startLevelName.compare("") == 0)
 		textName.assign(LevelStrings[currentLevelNum].data());
 	else

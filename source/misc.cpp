@@ -1,4 +1,3 @@
-#include "base.h"
 //Make sure an input is between two numbers
 int clamp(int low, int high, int num)
 {
@@ -14,11 +13,4 @@ bool between(int num1, int num2, int orig)
 	else if (orig <= num1 && orig >= num2)
 		return 1;
 	else return 0;
-}
-//Convert an integer
-string convertInt(int number)
-{
-   stringstream ss;//create a stringstream
-   ss << number;//add number to the stream
-   return ss.str();//return a string with the contents of the stream
 }

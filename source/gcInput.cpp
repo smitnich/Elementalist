@@ -1,6 +1,7 @@
 #ifdef GEKKO
 #include "input_def.h"
-#include "base.h"
+#include "defs.h"
+#include "wii.h"
 extern int padnum;
 extern int gcsensitivity;
 bool checkpaddir(int dir)

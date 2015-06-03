@@ -1,6 +1,5 @@
 ﻿//Basic movable object, can be moved in a line with other crates
 #include "objectDef.h"
-#include "base.h"
 #include "sprites.h"
 #include "level.h"
 extern Object *player;

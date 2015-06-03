@@ -1,4 +1,3 @@
-#include "base.h"
 //Choose the proper SDL path based on the operating system
 #ifdef GEKKO
 #include <SDL/sdl.h>

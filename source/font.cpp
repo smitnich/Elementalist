@@ -1,5 +1,5 @@
 #include "font.h"
-#include "base.h"
+#include <iostream>
 //The font to show the level name in
 TTF_Font *font = NULL;
 //A smaller font
@@ -7,7 +7,6 @@ TTF_Font *fontSmall = NULL;
 //Let the font be black
 SDL_Color textColor = { 0, 0, 0 };
 char fontpath[] = "fonts/imagine_font.ttf";
-extern string appPath;
 bool fontInit()
 {
 	TTF_Init();

@@ -6,9 +6,15 @@
 #elif _WIN32
 #define OPERATINGSYSTEM "WINDOWS"
 #elif GEKKO
+extern std::string appPath;
 #define OPERATINGSYSTEM "WII"
 #endif
-extern string directorySymbol;
+#include <stdio.h>
+#ifndef GEKKO
+#include <sys/stat.h>
+#endif
+#include "defs.h"
+extern std::string directorySymbol;
 //Gets the length of a file passed in
 int getFileLength(char fileName[])
 {
@@ -29,7 +35,7 @@ void loadConfig()
 	int fileLength = getFileLength(const_cast <char *> ("config.txt"));
 	int i = 0;
 	int length = 0;
-	string bufferString;
+	std::string bufferString;
 	while (counter <= fileLength)
 	{
 		c = fgetc(config);

@@ -1,4 +1,3 @@
-#include "base.h"
 #include "sdlFiles.h"
 #include "terrain.h"
 SDL_Surface *spr_blackHole = NULL;

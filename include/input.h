@@ -1,5 +1,5 @@
-#include "base.h"
 #ifdef GEKKO
+#include "wii.h"
 #include <wupc/wupc.h>
 #include <ogcsys.h>
 #include <unistd.h>

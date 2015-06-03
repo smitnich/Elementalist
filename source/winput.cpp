@@ -1,6 +1,7 @@
 #ifdef GEKKO
-#include "base.h"
+#include "wii.h"
 #include "input_def.h"
+#include "defs.h"
 bool nunchuk_dir(double, int, int);
 //Which expansion is plugged in
 struct expansion_t data;

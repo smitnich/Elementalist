@@ -1,5 +1,5 @@
-#include "base.h"
 #include "sdlFiles.h"
+#include <iostream>
 #ifdef _WIN32
 #include <direct.h>
 #elif LINUX
@@ -8,6 +8,7 @@
 #include "input_def.h"
 //If wii
 #ifdef GEKKO
+#include "wii.h"
 s8 HWButton = -1;
 #include <ogc/usbmouse.h>
 #include "callback.h"
@@ -16,7 +17,7 @@ extern "C" {
 }
 bool smbInit();
 #endif
-extern string directorySymbol;
+extern std::string directorySymbol;
 void parseConfig(char argv[]);
 void musicInit();
 void fileInit();
@@ -36,7 +37,7 @@ void handleInput();
 void createGlobalInstances();
 void freeGlobalInstances();
 extern bool defaultPath, fullScreen, done, displayName;
-extern string levelPath, appPath;
+extern std::string levelPath, appPath;
 extern SDL_Surface *screen;
 extern int videoSizeX, videoSizeY, bitDepth, argumentCount, frame, lastInput, \
 framesPerSecond, levelChange, levelStartCounter;
@@ -63,11 +64,11 @@ void init(int argc, char* argv[])
 	WPAD_SetPowerButtonCallback(WiimotePowerPressed);
 	inputInit();
 	#endif
-	string tempFileName (argv[0]);
+	std::string tempFileName (argv[0]);
 	//Determine which directory symbol to use
-	if (tempFileName.find("\\") != string::npos)
+	if (tempFileName.find("\\") != std::string::npos)
 		directorySymbol = "\\";
-	else if (tempFileName.find("/") != string::npos)
+	else if (tempFileName.find("/") != std::string::npos)
 		directorySymbol = "/";
 	else
 		exit(0);
@@ -82,7 +83,7 @@ void init(int argc, char* argv[])
 	//If the path hasn't changed, generate the path from argv[0]
 	if (defaultPath == 1)
 	{
-		if (tempFileName.rfind(directorySymbol) == string::npos)
+		if (tempFileName.rfind(directorySymbol) == std::string::npos)
 			exit(0);
 		tempFileName.resize(tempFileName.rfind(directorySymbol)+1);
 		levelPath.append(directorySymbol);

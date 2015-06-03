@@ -1,4 +1,4 @@
-#include "base.h"
+#include <iostream>
 //The initial video resolution
 //Can be overridden by config.txt or command line args
 int videoSizeX = 640;
@@ -31,18 +31,18 @@ int bitDepth = 0;
 int currentLevelNum = 1;
 //The location where all other files are found from
 //Usually argv[0]
-string appPath;
+std::string appPath;
 //The location of the levels, appended onto the apppath
 //Overridable via config.txt or command line args
-string levelPath = "levels";
+std::string levelPath = "levels";
 //Which directory symbol to use
 //Found via searching argv[0] for the proper symbol
 //If neither found, exit
-string directorySymbol = "/";
+std::string directorySymbol = "/";
 //The level to start with, used when passing in as an argument
-string startLevel = "";
+std::string startLevel = "";
 //The name of the level ie the filename minues the extension
-string startLevelName = "";
+std::string startLevelName = "";
 //Whether or not to use the default executable path
 bool defaultPath = 1;
 //Whether or not to use the default level path

@@ -1,5 +1,4 @@
 #include "sdlFiles.h"
-#include "base.h"
 #include "level.h"
 #include "objectDef.h"
 #include "terrain.h"
@@ -15,15 +14,16 @@ bool mapLoaded[MAX_LEVEL] = { 0 };
 //Which level we are on
 int levelNum = 1;
 //The path to the level
-extern string levelPath;
+extern std::string levelPath;
 //The name of the starting level
-extern string startLevelName;
+extern std::string startLevelName;
 //The last time to have user input
 extern unsigned int lastInputTime;
 //The last movement of the player
 extern int lastMoveDir;
 //Whether to display the level name
 extern bool displayName;
+unsigned int levelStartTime;
 //The players y position
 extern int posY;
 //Whether or not the player has won the level
@@ -31,7 +31,7 @@ extern bool won;
 extern int frame;
 extern Mix_Music* levelMusic[MAX_LEVEL];
 void freeMusic(int levelNum);
-bool loadLevel(string levelName,int levelNum);
+bool loadLevel(std::string levelName,int levelNum);
 void clearObjects();
 void doTextBox(int);
 void playMusic(int level);
@@ -54,7 +54,7 @@ Terrain *baseIceFloor = NULL;
 
 
 Object* objectInit(unsigned int id, int x, int y);
-string constructLevelName(int);
+std::string constructLevelName(int);
 class Level *allLevels[MAX_LEVEL];
 Level::Level(FILE* inFile, int levelNum)
 {
@@ -70,17 +70,17 @@ Level::Level(FILE* inFile, int levelNum)
 	{
 		return;
 	}
-	string name;
-	string value;
+	std::string name;
+	std::string value;
 	do 
 	{
 		fgets(buffer,128,inFile);
-		string str = string(buffer);
+		std::string str = std::string(buffer);
 		size_t split = str.find("=");
-		if (split == string::npos)
+		if (split == std::string::npos)
 			continue;
 		name = (str.substr(0,split));
-		value = (str.substr(split+1,string::npos));
+		value = (str.substr(split+1,std::string::npos));
 		if (name == "width")
 		{
 			width = atoi(value.c_str());
@@ -105,7 +105,7 @@ void Level::loadAllLayers(char *buffer,FILE *inFile)
 			fgets(buffer,128,inFile);
 		}
 		fgets(buffer,128,inFile);
-		string str = string(buffer);
+		std::string str = std::string(buffer);
 		loadLayer(inFile,str,width,height);
 	}
 	fclose(inFile);
@@ -179,17 +179,17 @@ Terrain* Level::getTerrain(int x, int y)
 		return NULL;
 	return mapLayer[convertIndex(x, y)];
 }
-void Level::loadLayer(FILE* inFile, string str, int xSize, int ySize)
+void Level::loadLayer(FILE* inFile, std::string str, int xSize, int ySize)
 {
 	char buffer[1024] = {0};
-	string name;
-	string value;
+	std::string name;
+	std::string value;
 	size_t split = str.find("=");
-	if (split == string::npos)
+	if (split == std::string::npos)
 		return;
 	name = (str.substr(0,split));
-	size_t endStr = min(str.rfind('\r'),str.rfind('\n'));
-	endStr = min(endStr,str.length());
+	size_t endStr = std::min(str.rfind('\r'),str.rfind('\n'));
+	endStr = std::min(endStr,str.length());
 	value = (str.substr(split+1,endStr-(split+1)));
 	if (value == "Map")
 	{
@@ -212,7 +212,7 @@ void Level::loadLayer(FILE* inFile, string str, int xSize, int ySize)
 		loadConnections(inFile,xSize,ySize);
 	}
 }
-void Level::loadMapLayer(FILE *inFile,vector<unsigned int> *layer,int xSize, int ySize)
+void Level::loadMapLayer(FILE *inFile,std::vector<unsigned int> *layer,int xSize, int ySize)
 {
 	int maxChars = 5;
 	int maxLine = xSize*maxChars;
@@ -434,7 +434,7 @@ void switchLevel(int levelNum)
 	 freeMusic(currentLevelNum);
 #endif
 	currentLevelNum = levelNum;
-	string tempLevel = constructLevelName(levelNum);
+	std::string tempLevel = constructLevelName(levelNum);
 	clearObjects();
 	changeText();
 	if (loadLevel(tempLevel,levelNum) == 0)
@@ -453,9 +453,9 @@ void switchLevel(int levelNum)
 	resetActivateQueue();
 }
 //Make the level name given the number
-string constructLevelName(int levelNum)
+std::string constructLevelName(int levelNum)
 {
-	string tempLevel = levelPath;
+	std::string tempLevel = levelPath;
 	tempLevel.append(LevelStrings[levelNum]);
 	tempLevel.append(".ele");
 	return tempLevel;
@@ -464,7 +464,7 @@ class Level* getCurrentLevel()
 {
 	return allLevels[currentLevelNum];
 }
-bool loadLevel(string fileName, int levelNum)
+bool loadLevel(std::string fileName, int levelNum)
 {
 	currentLevelNum = levelNum;
 	char buffer[BUFFERLENGTH];

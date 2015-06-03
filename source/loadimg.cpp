@@ -1,9 +1,8 @@
-#include "base.h"
 #include "sdlFiles.h"
 #include "sprites.h"
 #include "objectDef.h"
+#include "defs.h"
 #define COLORKEY 0xFF00DC
-extern string appPath;
 SDL_Surface* loadOptimizedIMG(const char *fileName);
 
 #include <list>

@@ -1,4 +1,3 @@
-#include "base.h"
 #include "input_def.h"
 #include "keyinput.h"
 //USBKeyboard_IsConnected

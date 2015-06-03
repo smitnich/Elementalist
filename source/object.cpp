@@ -2,6 +2,7 @@
 #include "objectDef.h"
 #include "level.h"
 #include "tileEnum.h"
+#include "defs.h"
 SDL_Surface *personns[6] = { NULL };
 SDL_Surface *personew[6] = { NULL };
 SDL_Surface *deadPerson = NULL;

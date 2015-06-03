@@ -1,6 +1,7 @@
 #include "input_def.h"
 #include "input.h"
 #ifdef GEKKO
+#include "wii.h"
 #include <gccore.h>
 extern char HWButton;
 int wupcInput(int);
@@ -123,7 +124,7 @@ void updatePointer()
 //Decide which input to use and return the function
 //Input is chosen based on which input device is used first
 //Any controller number may be used
-int getInput()
+int determineInput()
 {
 	PAD_ScanPads();
 	WPAD_ScanPads();

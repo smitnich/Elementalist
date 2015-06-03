@@ -1,4 +1,3 @@
-#include "base.h"
 #ifdef GEKKO
 #include <SDL/SDL.h>
 #elif _WIN32

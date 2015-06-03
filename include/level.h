@@ -1,8 +1,10 @@
 #ifndef _LEVEL
 #define _LEVEL
 #include "terrain.h"
+#include <vector>
+#include "defs.h"
 //The levelnames of the basic "campaign"
-const string LevelStrings[MAX_LEVEL] = 
+const std::string LevelStrings[MAX_LEVEL] = 
 {
 "Dummy",//0
 "test",//1
@@ -16,19 +18,19 @@ class Level
 	int width;
 	int height;
 	unsigned int pickupCount;
-	vector<unsigned int> origMapLayer;
-	vector<unsigned int> origObjectLayer;
-	vector<Terrain *> mapLayer;
-	vector<Object *> objectLayer;
-	vector<int> receivers[MAX_CONNECTIONS];
+	std::vector<unsigned int> origMapLayer;
+	std::vector<unsigned int> origObjectLayer;
+	std::vector<Terrain *> mapLayer;
+	std::vector<Object *> objectLayer;
+	std::vector<int> receivers[MAX_CONNECTIONS];
 	int senders[MAX_CONNECTIONS];
 	char **connectionLayer;
 	Level(FILE* inFile, int levelNum);
 	void loadAllLayers(char *buffer,FILE *inFile);
 	void loadObjects();
 	int convertIndex(int x, int y);
-	void loadLayer(FILE *inFile, string str, int xSize, int ySize);
-	void loadMapLayer(FILE *inFile,vector<unsigned int> *layer,int xSize, int ySize);
+	void loadLayer(FILE *inFile, std::string str, int xSize, int ySize);
+	void loadMapLayer(FILE *inFile, std::vector<unsigned int> *layer,int xSize, int ySize);
 	void reloadMapLayer();
 	bool assignObject(int x, int y, Object *obj);
 	Object* getObject(int x, int y);

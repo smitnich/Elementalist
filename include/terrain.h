@@ -3,7 +3,8 @@
 #define MAX_CONNECTIONS 9
 #define BARRIER_TYPES 1
 #include "objectDef.h"
-#include "base.h"
+#include "defs.h"
+#include <vector>
 extern int xInitial;
 extern int yInitial;
 void apply_surface(int x, int y, SDL_Surface *apply, SDL_Surface *dest);
@@ -126,11 +127,11 @@ public:
 	Conveyor();
 	Conveyor(int direction);
 };
-extern vector<char> mapLayer;
+extern std::vector<char> mapLayer;
 class Trigger : public Terrain
 {
 public:
-	vector<Terrain*> connections;
+	std::vector<Terrain*> connections;
 };
 class PressureSwitch : public Trigger
 {

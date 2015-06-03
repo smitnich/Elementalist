@@ -1,7 +1,7 @@
-#include "base.h"
 #include "sdlFiles.h"
 #include "sprites.h"
 #include "input_def.h"
+#include <iostream>
 extern bool won;
 //The base object class, all gameplay elements derive from this
 class Object;
@@ -9,11 +9,11 @@ class Object;
 extern int xInitial, yInitial, tilesX, tilesY;
 extern int framesPerSecond;
 extern int levelStartCounter;
-extern string levelName;
+extern std::string levelName;
 extern bool displayName;
 extern int conveyorSpeed;
 extern int levelChange;
-extern string startLevelName;
+extern std::string startLevelName;
 int lastInput = INPUT_NONE;
 extern int currentLevel;
 //The current frame

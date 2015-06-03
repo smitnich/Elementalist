@@ -1,10 +1,11 @@
 #include "config.h"
+
 //Changes values that are either loaded from config.txt or through arguments
 void parseConfig(char config[])
 {
-	string strConfig(config);
+	std::string strConfig(config);
 	//Assign a level loaded through the executable
-	if (strConfig.rfind(".ele") != string::npos)
+	if (strConfig.rfind(".ele") != std::string::npos)
 	{
 		loadLevelFromArg(strConfig);
 		return;
@@ -17,23 +18,23 @@ void parseConfig(char config[])
 	//Find where the split between key and value is: either ':' or '=' characters
 	size_t split = strConfig.find(":");
 	//If the ':' is not found
-	if (split == string::npos)
+	if (split == std::string::npos)
 	{
 		split = strConfig.find("=");
-		if (split == string::npos)
+		if (split == std::string::npos)
 		{
 			//If neither character is found, abort the function
 			return;
 		}
 	}
 	//Split the string into two strings using the split value
-	string name (strConfig.substr(0,split));
-	string value (strConfig.substr(split+1,string::npos));
-	string::size_type i = 0;
+	std::string name(strConfig.substr(0, split));
+	std::string value(strConfig.substr(split + 1, std::string::npos));
+	std::string::size_type i = 0;
 	//Remove all newlines from the string to be processed
 	while (i < value.length()) {
 		i = value.find('\n', i);
-		if (i == string::npos) {
+		if (i == std::string::npos) {
 			break;
 		}
 		value.erase(i);
@@ -43,7 +44,7 @@ void parseConfig(char config[])
 	//Remove line feeds as well
 	while (i < value.length()) {
 		i = value.find('\r', i);
-		if (i == string::npos) {
+		if (i == std::string::npos) {
 			break;
 		}
 		value.erase(i);
@@ -75,9 +76,9 @@ void parseConfig(char config[])
 	else if (name == "levelPath")
 	{
 		levelPath.assign(value);
-		if (levelPath.find(":") == string::npos)
+		if (levelPath.find(":") == std::string::npos)
 		{
-			string temp (appPath);
+			std::string temp(appPath);
 			temp.append(levelPath);
 			levelPath.assign(temp);
 		}
@@ -123,7 +124,7 @@ void parseConfig(char config[])
 #endif
 }
 /*Modify the levelname and */
-void loadLevelFromArg(string strConfig)
+void loadLevelFromArg(std::string strConfig)
 {
 		startLevel.assign(strConfig);
 		size_t first = strConfig.rfind(directorySymbol);

@@ -4,7 +4,6 @@
 #elif LINUX
 #include <SDL/SDL.h>
 #endif
-#include "base.h"
 #include "input_def.h"
 #define JOYSTICK_MAX 32767;
 #define MAX_BUTTONS 32

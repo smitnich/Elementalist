@@ -1,4 +1,3 @@
-#include "base.h"
 #ifdef GEKKO
 #include <SDL/sdl.h>
 #include <SDL/sdl_events.h>

@@ -175,7 +175,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\base.h" />
     <ClInclude Include="..\include\callback.h" />
     <ClInclude Include="..\include\config.h" />
     <ClInclude Include="..\include\debugText.h" />

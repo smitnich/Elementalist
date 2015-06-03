@@ -1,4 +1,3 @@
-#include "base.h"
 #include "sdlFiles.h"
 //The original declaration of all sprites
 SDL_Surface *screen = NULL;

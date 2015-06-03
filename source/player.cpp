@@ -1,5 +1,4 @@
 #include "objectDef.h"
-#include "base.h"
 #include "sprites.h"
 #include "input_def.h"
 #include "level.h"
@@ -14,7 +13,7 @@ extern bool won;
 extern int lastInput;
 extern int currentLevelNum;
 extern int levelChange;
-extern string startLevelName;
+extern std::string startLevelName;
 void startMove(int dir);
 extern int framesPerSecond;
 extern int levelStartCounter;

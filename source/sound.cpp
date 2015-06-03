@@ -1,5 +1,6 @@
-#include "base.h"
 #include "sdlFiles.h"
+#include <iostream>
+#include "defs.h"
 Mix_Chunk *pushBlock;
 void outputLog(const char[]);
 void outputLog(char[]);
@@ -8,8 +9,8 @@ bool channelArray[MAX_CHANNELS];
 bool levelMusicLoaded[MAX_LEVEL];
 Mix_Music *levelMusic[MAX_LEVEL];
 char *musicNames[MAX_LEVEL] = {"Dystopic-Factory.mp3","Puzzle-Game-5.mp3"};
-extern string appPath;
-string musicPath;
+extern std::string appPath;
+std::string musicPath;
 Mix_Music* loadMusic(char *fileName);
 Mix_Chunk* snd_explode = NULL;
 bool audioEnabled = true;
