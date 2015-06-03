@@ -13,17 +13,12 @@ int xInitial = 0;
 int yInitial = 0;
 //Used to switch to a particular level
 int levelChange = -1;
-//The default starting position of the player
-int posX = 10;
-int posY = 10;
 //The default framerate of the game
 //Can be overriden by config.txt or command line args
 int framesPerSecond = 60;
 //The variable used to calculate the difference in movement speed
 //based on the change in frames per second
 double fpsModifier = (double) 60/framesPerSecond;
-//The movespeed of the player character
-double movespeed = 3*fpsModifier;
 int levelStartCounter = 0;
 //The maximum rendering coordinates
 //Can be overriden by config.txt or command line args

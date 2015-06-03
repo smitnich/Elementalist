@@ -2,7 +2,6 @@
 #include "objectDef.h"
 #include "terrain.h"
 #include "level.h"
-extern int posX, posY;
 extern int pressureCount;
 extern int totalPressureCount;
 extern class Level *allLevels[MAX_LEVEL];

@@ -37,8 +37,6 @@ extern bool fullScreen;
 extern int framesPerSecond;
 //The level to begin with, 0 = level loaded via opening it with the executable
 extern int currentLevelNum;
-//The speed of the player; modified by changes in fps
-extern double movespeed;
 //Number of tiles to be drawn
 extern int tilesX;
 extern int tilesY;

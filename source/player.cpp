@@ -4,7 +4,6 @@
 #include "input_def.h"
 #include "level.h"
 #include "debugText.h"
-extern int posX, posY;
 extern int pressureCount;
 extern int lastMoveDir;
 extern unsigned int lastInputTime;
@@ -17,7 +16,6 @@ extern int currentLevelNum;
 extern int levelChange;
 extern string startLevelName;
 void startMove(int dir);
-extern double movespeed;
 extern int framesPerSecond;
 extern int levelStartCounter;
 bool playerDead = false;
