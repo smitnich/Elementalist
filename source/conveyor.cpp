@@ -3,7 +3,7 @@
 #include "terrain.h"
 #include "objectDef.h"
 void drawWrappedSprite(int x, int y, SDL_Surface* source, SDL_Surface* destination, int xWrap, int yWrap);
-Uint32 getTicks();
+unsigned int getTicks();
 SDL_Surface *conveyor[4] = { NULL };
 extern double delta, fpsModifier;
 extern int conveyorSpeed;

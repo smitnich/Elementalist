@@ -19,7 +19,7 @@ extern string levelPath;
 //The name of the starting level
 extern string startLevelName;
 //The last time to have user input
-extern Uint32 lastInputTime;
+extern unsigned int lastInputTime;
 //The last movement of the player
 extern int lastMoveDir;
 //Whether to display the level name
@@ -37,8 +37,9 @@ void doTextBox(int);
 void playMusic(int level);
 class Terrain *instantiateTerrain(int input, int offset);
 extern int currentLevelNum;
+extern Object* player;
 void changeText();
-Uint32 getTicks();
+unsigned int getTicks();
 void doActivateQueue();
 void resetMoveQueue();
 void resetCreationQueue();
@@ -442,7 +443,7 @@ void switchLevel(int levelNum)
 	}
 	displayName = true;
 	startLevelName = "";
-	doTextBox(posY);
+	doTextBox(player->y);
 	changeText();
 	won = false;
 	lastInputTime = getTicks();

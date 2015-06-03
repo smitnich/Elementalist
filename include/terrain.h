@@ -113,7 +113,7 @@ private:
 	double moveFraction;
 	bool disabled;
 	Object *lastEntered;
-	Uint32 lastRender;
+	unsigned int lastRender;
 public:
 	int dir;
 	bool requestEntry(Object* other, int dir);

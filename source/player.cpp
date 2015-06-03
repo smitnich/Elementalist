@@ -7,7 +7,7 @@
 extern int posX, posY;
 extern int pressureCount;
 extern int lastMoveDir;
-extern Uint32 lastInputTime;
+extern unsigned int lastInputTime;
 extern int frame;
 extern bool playerPlaced;
 extern bool displayName;
@@ -26,7 +26,7 @@ void cleanup();
 void changeTextToDead();
 class Level* getCurrentLevel();
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
-Uint32 getTicks();
+unsigned int getTicks();
 extern double delta;
 Object* objectInit(unsigned int id, int x, int y, int moveDir, int moveFraction);
 //The player
