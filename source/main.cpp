@@ -32,6 +32,7 @@ void drawScreen();
 void objectLogic();
 void doPlayer();
 void doTerrainChanges();
+void handleInput();
 void createGlobalInstances();
 void freeGlobalInstances();
 extern bool defaultPath, fullScreen, done, displayName;
@@ -40,23 +41,23 @@ extern SDL_Surface *screen;
 extern int videoSizeX, videoSizeY, bitDepth, argumentCount, frame, lastInput, \
 framesPerSecond, levelChange, levelStartCounter;
 unsigned long lastTicks = 0;
-extern Uint32 lastInputTime;
+extern unsigned int lastInputTime;
 double delta = 0.0;
 extern bool playerDead;
-Uint32 ticks = 0;
+unsigned int ticks = 0;
 //Keep every event that occurs during a frame to the same tick value
 void setTicks()
 {
 	ticks = SDL_GetTicks();
 }
-Uint32 getTicks()
+unsigned int getTicks()
 {
 	return ticks;
 }
 void init(int argc, char* argv[])
 {
 	#ifdef GEKKO
-	__exception_setreload(8);
+	//__exception_setreload(8);
 	SYS_SetResetCallback(WiiResetPressed);
 	SYS_SetPowerCallback(WiiPowerPressed);
 	WPAD_SetPowerButtonCallback(WiimotePowerPressed);
@@ -165,6 +166,7 @@ int main(int argc, char* argv[]){
 	//Main game loop
 	while (!done)
 	{
+		handleInput();
 		setTicks();
 		updateDelta();
 		checkEvents();

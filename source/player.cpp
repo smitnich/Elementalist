@@ -134,66 +134,10 @@ Object* Person::clone(int _x, int _y)
 		if (active == false && objMoveDir == D_NONE)
 			return;
 		objMove();
-		if (displayName == true)
-		{
-			int input = getInput();
-			if (input != INPUT_NONE)
-			{
-				if (getTicks() - lastInputTime > 1000)
-				{
-					displayName = false;
-				}
-			}
-		}
-		else if (won == true)
-		{
-			if (currentLevelNum >= MAX_LEVEL - 1)
-				exit(0);
-			levelChange = currentLevelNum+1;
-			startLevelName.assign("");
-		}
-		else if (playerDead == true)
-		{
-			int input = getInput();
-			if (input != INPUT_NONE)
-			{
-				if (getTicks() - lastInputTime > 1000 || input != lastInput)
-				{
-					playerDead = false;
-					levelChange = currentLevelNum;
-				}
-			}
-
-		}
-		else
-		{
 			int input = getInput();
 			if (input != INPUT_NONE)
 				lastInputTime = getTicks();
 			switch (input){
-			case BUTTON_MENU:
-				cleanup();
-				break;
-			case BUTTON_LEVEL_NEXT:
-				if (currentLevelNum < MAX_LEVEL-1 && lastInput != BUTTON_LEVEL_NEXT)
-				{
-					lastInput = BUTTON_LEVEL_NEXT;
-					levelChange = currentLevelNum+1;
-					startLevelName.assign("");
-					return;
-				}
-				lastInput = BUTTON_LEVEL_NEXT;
-				break;
-			case BUTTON_LEVEL_PREV:
-				if (currentLevelNum > 1 && lastInput != BUTTON_LEVEL_PREV)
-				{
-					lastInput = BUTTON_LEVEL_PREV;
-					levelChange = currentLevelNum-1;
-					startLevelName.assign("");
-					return;
-				}
-				lastInput = BUTTON_LEVEL_PREV;
-				break;
 			case BUTTON_1:
 				if (lastInput != BUTTON_1)
 				{
@@ -251,5 +195,4 @@ Object* Person::clone(int _x, int _y)
 				//lastInput = B_NONE;
 				break;
 			}
-		}
 	}

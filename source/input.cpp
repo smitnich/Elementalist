@@ -161,7 +161,7 @@ int getInput()
 #endif
 #ifndef GEKKO
 //Input is chosen based on which device is used first
-int getInput()
+int determineInput()
 {
 	if (controltype == CONTROLLER_KEYBOARD)
 		return keyInput();
