@@ -48,13 +48,15 @@ const static int objectNum = Z;
 SDL_Surface *X::spriteew[6]; \
 SDL_Surface *X::spritens[6]; \
 SDL_Surface *X::getSprite() { \
-	if (objMoveDir == D_LEFT)\
+	if (objMoveDir == D_NONE) \
+		return stationary; \
+	else if (objMoveDir == D_LEFT)\
 		return spriteew[((int) objMoveFraction)/(TILE_SIZE/3)]; \
-		else if (objMoveDir == D_RIGHT) \
+	else if (objMoveDir == D_RIGHT) \
 		return spriteew[(((int) objMoveFraction)/(TILE_SIZE/3))+3]; \
-		else if (objMoveDir == D_UP) \
+	else if (objMoveDir == D_UP) \
 		return spritens[(((int) objMoveFraction)/(TILE_SIZE / 3))]; \
-		else \
+	else \
 		return spritens[(((int) objMoveFraction)/(TILE_SIZE / 3))+3]; \
 } \
 X::X(){ \
@@ -74,7 +76,7 @@ void X::loadImages() \
 		spriteew[i] = loadOptimizedIMG(imageNames[D_LEFT-1][i]); \
 		spriteew[i+3] = loadOptimizedIMG(imageNames[D_RIGHT-1][i]); \
 		} \
-	stationary = spritens[0]; \
+	stationary = spritens[3]; \
 }\
 class X Test##X = X();
 #endif

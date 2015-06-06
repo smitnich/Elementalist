@@ -86,6 +86,8 @@ public:
 	//Moves, gets input if needed and checks for forces on the player eg conveyor belts
 	void doLogic()
 	{
+		if (playerDead || displayName)
+			return;
 		if (active == false && objMoveDir == D_NONE)
 			return;
 		objMove();
@@ -115,6 +117,7 @@ public:
 			}
 			lastInput = B_RIGHT;
 			queuedMove = D_RIGHT;
+			stationary = spriteew[3];
 			break;
 		case B_LEFT:
 			if (x > 0 && objMoveFraction == 0 && !frozen)
@@ -125,6 +128,7 @@ public:
 			}
 			lastInput = B_LEFT;
 			queuedMove = D_LEFT;
+			stationary = spriteew[0];
 			break;
 		case B_DOWN:
 			if (y < MAP_SIZE && objMoveFraction == 0 && !frozen)
@@ -135,6 +139,7 @@ public:
 			}
 			queuedMove = D_DOWN;
 			lastInput = B_DOWN;
+			stationary = spritens[3];
 			break;
 		case B_UP:
 			if (y > 0 && objMoveFraction == 0 && !frozen)
@@ -142,6 +147,7 @@ public:
 				startMove(D_UP);
 				faceDir = D_UP;
 				lastMoveDir = D_UP;
+				stationary = spritens[0];
 			}
 			queuedMove = D_UP;
 			lastInput = B_UP;
