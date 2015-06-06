@@ -21,9 +21,13 @@ void handleInput() {
 	currentInput = determineInput();
 	if (displayName == true)
 	{
-		if (currentInput != INPUT_NONE && (getTicks() - lastInputTime > 1000))
+		if (currentInput != INPUT_NONE && (getTicks() - levelStartTime > 1000))
 		{
 				displayName = false;
+		}
+		else {
+			currentInput = INPUT_NONE;
+			return;
 		}
 	}
 	else if (won == true)

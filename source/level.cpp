@@ -451,6 +451,7 @@ void switchLevel(int levelNum)
 	resetMoveQueue();
 	resetCreationQueue();
 	resetActivateQueue();
+	levelStartTime = getTicks();
 }
 //Make the level name given the number
 std::string constructLevelName(int levelNum)
