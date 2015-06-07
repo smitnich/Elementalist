@@ -5,6 +5,7 @@
 void switchLevel(int levelNum);
 bool playSound(Mix_Chunk *input);
 unsigned char lookupWall(int index);
+int reverseDir(int dir);
 void doAssignQueue();
 extern int currentLevelNum;
 SDL_Surface *wall[47] = { NULL };
@@ -14,6 +15,7 @@ SDL_Surface *barrierTile = NULL;
 SDL_Surface *spr_raisedFloor = NULL;
 SDL_Surface *spr_bomb = NULL;
 SDL_Surface *spr_colorBarrier[BARRIER_TYPES];
+SDL_Surface *spr_bounceWall;
 int colorBlockIds[BARRIER_TYPES] = { OBJ_YELLOW_BLOCK };
 extern Mix_Chunk *snd_explode;
 extern bool won;
@@ -156,4 +158,24 @@ bool RaisedFloor::requestEntry(Object *other, int dir)
 	if (other == NULL)
 		return true;
 	return !other->isMovableBlock();
+}
+BounceWall::BounceWall() {
+	sprite = spr_bounceWall;
+}
+void BounceWall::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
+{
+	int xStart = xTile*TILE_SIZE + xInitial + xOff;
+	int yStart = yTile*TILE_SIZE + yInitial + yOff;
+	apply_surface(xStart, yStart, tiles, drawTo);
+	apply_surface(xStart, yStart, sprite, drawTo);
+}
+
+bool BounceWall::requestEntry(Object *other, int dir) {
+	Terrain *terrain = getCurrentLevel()->getTerrain(other->x,other->y);
+	other->prevMove = reverseDir(dir);
+	terrain->onEnter(other);
+	if (other->objMoveDir != dir)
+		return true;
+	else
+		return false;
 }

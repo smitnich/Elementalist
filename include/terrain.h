@@ -200,4 +200,10 @@ public:
 	void deactivate();
 	Freezer(bool _enabled);
 };
+class BounceWall : public Terrain {
+public:
+	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
+	BounceWall();
+	bool requestEntry(Object *other, int dir);
+};
 #endif

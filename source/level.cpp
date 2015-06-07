@@ -44,6 +44,7 @@ void doActivateQueue();
 void resetMoveQueue();
 void resetCreationQueue();
 void resetActivateQueue();
+class BounceWall;
 
 //For objects that don't have any state, it is pointless
 //to create a new instance for each one, so just create
@@ -373,6 +374,9 @@ class Terrain *instantiateTerrain(int input, int i)
 		break;
 	case m_water:
 		out = new Water(i);
+		break;
+	case m_bounceWall:
+		out = new BounceWall();
 		break;
 	case m_floor:
 	default:
