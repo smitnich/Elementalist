@@ -1,8 +1,10 @@
 #include "objectDef.h"
 #include "defs.h"
 void addMoveRequest(Object *obj, int x, int y, int checkX, int checkY);
+bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 #define PIPE_ID 1013
 void doDraw(Object *draw, int moveFractionX, int moveFractionY);
+void addRenderQueue(Object *obj);
 int reverseDir(int dir) {
 	switch (dir){
 	case D_LEFT:
@@ -57,12 +59,31 @@ public:
 		else
 			return true;
 	}
-	void onEnter(Object *other, int xChange, int yChange) {
+	void onEnter(Object *other, int _xChange, int _yChange) {
 		int moveDir = D_NONE;
+		int xChange = 0;
+		int yChange = 0;
 		moveDir = chooseDirection(reverseDir(other->prevMove));
 		within = other;
 		within->x = this->x;
 		within->y = this->y;
+		switch (moveDir) {
+		case D_LEFT:
+			xChange = -1;
+			break;
+		case D_RIGHT:
+			xChange = 1;
+			break;
+		case D_UP:
+			yChange = -1;
+			break;
+		case D_DOWN:
+			yChange = 1;
+			break;
+		}
+		if (!requestMove(x, y, xChange, yChange, other)) {
+			moveDir = reverseDir(other->prevMove);
+		}
 		within->startMove(moveDir);
 	}
 	int chooseDirection(int dir) {
@@ -79,7 +100,8 @@ public:
 	void draw(int moveFractionX, int moveFractionY) {
 		if (within != NULL)
 			doDraw(within, moveFractionX, moveFractionY);
-		doDraw(this, moveFractionX, moveFractionY);
+		addRenderQueue(this);
+		//doDraw(this, moveFractionX, moveFractionY);
 	}
 };
 SPRITE_STATIONARY(Pipe, NULL)
