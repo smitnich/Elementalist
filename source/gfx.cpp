@@ -18,7 +18,10 @@ void drawScreen()
 		exit(0);
 	int x, y, xOffset = 0, yOffset = 0, xStart = player->x, yStart = player->y;
 	Level *currentLevel = getCurrentLevel();
-	bool doDir[4] = { 0, 0, 0, 0 };
+	bool doDir[4] = { (player->objMoveDir == D_UP),
+					   (player->objMoveDir == D_DOWN),
+					   (player->objMoveDir == D_LEFT),
+					   (player->objMoveDir == D_RIGHT) };
 	Terrain *terrain = NULL;
 	Object *obj = NULL;
 	calculateMoveFraction(player->objMoveDir, player->objMoveFraction, &xOffset, &yOffset);
