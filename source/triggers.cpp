@@ -1,6 +1,6 @@
 #include "sdlFiles.h"
 #include "terrain.h"
-#include "objectDef.h"
+class Object;
 #include <list>
 SDL_Surface *spr_pressureToggle[2] = { NULL, NULL };
 SDL_Surface *pressureTile = NULL;
