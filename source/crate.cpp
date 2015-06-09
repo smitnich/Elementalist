@@ -11,24 +11,15 @@ void objMove();
 class Crate : public Object{
 public:
 	OBJECT_DECLARATION(Crate, 1001)
-		bool isMovableBlock()
+	bool isMovableBlock()
 	{
 		return true;
 	};
 	void electrocute(){
 
 	}
-	Crate(int x2, int y2)
+	Crate(int x2, int y2) : Object(x2,y2)
 	{
-		hovering = false;
-		numFrames = 1;
-		x = x2;
-		y = y2;
-		objMoveDir = 0;
-		objMoveFraction = 0;
-		solid = 2;
-		faceDir = 0;
-		prevMove = D_NONE;
 	}
 	void doLogic()
 	{
@@ -64,17 +55,9 @@ class ColorCrate1 : public Crate
 {
 public:
 	OBJECT_DECLARATION(ColorCrate1, 1011)
-	ColorCrate1(int x2, int y2)
+	ColorCrate1(int x2, int y2) : Crate(x2,y2)
 	{
-		hovering = false;
-		numFrames = 1;
-		x = x2;
-		y = y2;
-		objMoveDir = 0;
-		objMoveFraction = 0;
-		solid = 2;
-		faceDir = 0;
-		prevMove = D_NONE;
+		
 	}
 };
 
@@ -92,7 +75,9 @@ Object* Crate::clone(int _x, int _y)
 class HeavyCrate : public Crate{
 public:
 	OBJECT_DECLARATION(HeavyCrate, 1002)
-	HeavyCrate(int x2, int y2) : Crate(x2, y2) {}
+	HeavyCrate(int x2, int y2) : Crate(x2, y2) {
+		isMagnetic = true;
+	}
 	//Can't be moved in a line
 	bool requestEntry(Object *other, int dir)
 	{
@@ -106,7 +91,7 @@ public:
 			ydir = -1;
 		else if (dir == D_DOWN)
 			ydir = 1;
-		if (getCurrentLevel()->getObject(x + xdir, y + ydir) == NULL && other->isMovableBlock() == false)
+		if (getCurrentLevel()->getObject(x + xdir, y + ydir) == NULL || other->isMovableBlock() == false)
 			return Crate::requestEntry(other, dir);
 		else
 			return false;

@@ -47,3 +47,6 @@ ElectricFloor::ElectricFloor(bool _enabled)
 	sprite = spr_electricFloor[_enabled];
 	enabled = _enabled;
 }
+void ElectricFloor::whileIn(Object *other) {
+	onEnter(other);
+}

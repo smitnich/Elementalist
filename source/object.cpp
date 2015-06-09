@@ -18,7 +18,7 @@ Object *objectList[MAX_OBJECTS] = { NULL };
 Object::Object()
 {
 	level = NULL;
-	isPlayer = 0;
+	isPlayer = false;
 	x = 0;
 	y = 0;
 	objMoveFraction = 0;
@@ -29,6 +29,23 @@ Object::Object()
 	frozen = 0;
 	numFrames = 1;
 	faceDir = 0;
+	isMagnetic = false;
+}
+Object::Object(int x2, int y2)
+{
+	level = NULL;
+	isPlayer = 0;
+	x = x2;
+	y = y2;
+	objMoveFraction = 0;
+	objMoveDir = 0;
+	solid = 0;
+	moveSpeed = 0;
+	tempSpeed = 0;
+	frozen = 0;
+	numFrames = 1;
+	faceDir = 0;
+	isMagnetic = false;
 }
 Object::Object(Object &other, int _x, int _y)
 {

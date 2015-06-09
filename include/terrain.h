@@ -190,6 +190,7 @@ public:
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	void activate();
 	void deactivate();
+	void whileIn(Object *other);
 	ElectricFloor(bool _enabled);
 };
 class Freezer : public Terrain
