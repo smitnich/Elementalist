@@ -62,6 +62,9 @@ public:
 		int yStart = yTile*TILE_SIZE + yInitial+yOff;
 		apply_surface(xStart, yStart, sprite, drawTo);
 	}
+	virtual void whileIn(Object *other) {
+		return;
+	}
 };
 class Floor : public Terrain{
 public:
@@ -123,6 +126,7 @@ public:
 	void onExit(Object* other);
 	void activate();
 	void deactivate();
+	void whileIn(Object *other);
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	Conveyor();
 	Conveyor(int direction);

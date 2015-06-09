@@ -280,8 +280,10 @@ void objectLogic()
 	for (int i = 0; i < curLevel->height*curLevel->width; i++)
 	{
 		Object *tmp = curLevel->objectLayer.at(i);
-		if (tmp != NULL)
+		if (tmp != NULL) {
+			curLevel->getTerrain(tmp->x, tmp->y)->whileIn(tmp); 
 			tmp->doLogic();
+		}
 	}
 	queuePlaceAll();
 	checkCreationQueue();

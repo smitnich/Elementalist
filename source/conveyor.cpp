@@ -24,6 +24,9 @@ bool Conveyor::requestExit(Object* other, int objDir)
 	else
 		return true;
 }
+void Conveyor::whileIn(Object *other) {
+	onEnter(other);
+}
 void Conveyor::activate()
 {
 	disabled = true;
