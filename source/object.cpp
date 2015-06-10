@@ -34,7 +34,7 @@ Object::Object()
 Object::Object(int x2, int y2)
 {
 	level = NULL;
-	isPlayer = 0;
+	isPlayer = false;
 	x = x2;
 	y = y2;
 	objMoveFraction = 0;
@@ -46,6 +46,7 @@ Object::Object(int x2, int y2)
 	numFrames = 1;
 	faceDir = 0;
 	isMagnetic = false;
+	hovering = false;
 }
 Object::Object(Object &other, int _x, int _y)
 {

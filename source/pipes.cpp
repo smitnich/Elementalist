@@ -34,7 +34,6 @@ public:
 		faceDir = 0;
 		prevMove = D_NONE;
 		within = NULL;
-		hovering = false;
 	}
 	Object *clone(int _x, int _y) {
 		Object *tmp = new Pipe(_x, _y);
@@ -101,7 +100,6 @@ public:
 		if (within != NULL)
 			doDraw(within, moveFractionX, moveFractionY);
 		addRenderQueue(this);
-		//doDraw(this, moveFractionX, moveFractionY);
 	}
 };
 SPRITE_STATIONARY(Pipe, NULL)

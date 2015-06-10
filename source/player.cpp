@@ -54,20 +54,11 @@ public:
 			spritens[i] = other.spritens[i];
 		}
 	}
-	Person(int x2, int y2)
+	Person(int x2, int y2) : Object(x2,y2)
 	{
 		level = getCurrentLevel();
 		numFrames = 3;
 		isPlayer = true;
-		x = x2;
-		y = y2;
-		objMoveDir = 0;
-		objMoveFraction = 0;
-		solid = 0;
-		faceDir = 0;
-		prevMove = D_NONE;
-		queuedMove = D_NONE;
-		hovering = false;
 		if (playerPlaced == false)
 		{
 			active = 1;
