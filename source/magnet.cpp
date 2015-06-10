@@ -17,7 +17,7 @@ public:
 	bool active;
 	int dir;
 	Magnet(int x, int y) : Object(x,y) {
-		dir = D_UP;
+		active = false;
 	}
 	Object *clone(int _x, int _y) {
 		Object *tmp = new Magnet(_x, _y);
@@ -84,12 +84,51 @@ public:
 			for (int yIter = yStart; yIter < yEnd; yIter++) {
 				tmp = level->getObject(xIter, yIter);
 				if (tmp != NULL && tmp->isMagnetic) {
-					if (requestMove(tmp->x, tmp->y, xChange, yChange, tmp))
-						tmp->startMove(reverseDir(dir), true);
+					if (requestMove(tmp->x, tmp->y, xChange, yChange, tmp)) {
+						if (tmp->objMoveDir == D_NONE)
+							tmp->startMove(reverseDir(dir), true);
+					}
 				}
 			}
 		}
 	}
-	OBJECT_DECLARATION(Magnet, MAGNET_ID)
+	OBJECT_DECLARATION(Magnet, 0)
 };
-SPRITE_STATIONARY(Magnet, "gfx/magnetN.png")
+SPRITE_STATIONARY(Magnet, NULL)
+
+class MagnetN : public Magnet {
+public:
+	MagnetN(int x, int y) : Magnet(x, y) {
+		dir = D_UP;
+	}
+	OBJECT_DECLARATION(MagnetN, MAGNET_ID)
+};
+SPRITE_STATIONARY(MagnetN, "gfx/magnetN.png")
+
+class MagnetS : public Magnet {
+public:
+	MagnetS(int x, int y) : Magnet(x, y) {
+		dir = D_DOWN;
+	}
+	OBJECT_DECLARATION(MagnetS, MAGNET_ID+1)
+};
+SPRITE_STATIONARY(MagnetS, "gfx/magnetS.png")
+
+class MagnetW : public Magnet {
+public:
+	MagnetW(int x, int y) : Magnet(x, y) {
+		dir = D_LEFT;
+	}
+	OBJECT_DECLARATION(MagnetW, MAGNET_ID+2)
+};
+SPRITE_STATIONARY(MagnetW, "gfx/magnetW.png")
+
+class MagnetE : public Magnet {
+public:
+	MagnetE(int x, int y) : Magnet(x, y) {
+		dir = D_RIGHT;
+	}
+	OBJECT_DECLARATION(MagnetE, MAGNET_ID+3)
+};
+SPRITE_STATIONARY(MagnetE, "gfx/magnetE.png")
+
