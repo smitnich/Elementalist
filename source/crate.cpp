@@ -83,6 +83,7 @@ public:
 	{
 		int xdir = 0;
 		int ydir = 0;
+		Object *newLocation = NULL;
 		if (dir == D_LEFT)
 			xdir = -1;
 		else if (dir == D_RIGHT)
@@ -91,7 +92,8 @@ public:
 			ydir = -1;
 		else if (dir == D_DOWN)
 			ydir = 1;
-		if (getCurrentLevel()->getObject(x + xdir, y + ydir) == NULL || other->isMovableBlock() == false)
+		newLocation = getCurrentLevel()->getObject(x + xdir, y + ydir);
+		if (newLocation == NULL || newLocation->isMovableBlock() == false)
 			return Crate::requestEntry(other, dir);
 		else
 			return false;
