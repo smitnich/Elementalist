@@ -37,9 +37,7 @@ public:
 			ydir = -1;
 		else if (dir == D_DOWN)
 			ydir = 1;
-		if (requestMove(this->x, this->y, xdir, ydir, this))
-		{
-			startMove(dir);
+		if (startMove(dir)){
 			objMoveFraction = other->objMoveFraction;
 			return true;
 		}

@@ -20,7 +20,6 @@ void queuePlaceAll()
 	int size = moveQueue.size();
 	int x = 0;
 	int y = 0; 
-	int tmpQueue = D_NONE;
 	for (int i = 0; i < size; i++)
 	{
 		tmp = moveQueue.front();
@@ -32,7 +31,6 @@ void queuePlaceAll()
 		tmp.obj->y = y;
 		if (blockingObject == NULL)
 		{
-			tmpQueue = tmp.obj->queuedMove;
 			level->assignObject(x, y, tmp.obj);
 			level->getTerrain(x, y)->onEnter(tmp.obj);
 		}

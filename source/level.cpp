@@ -346,7 +346,7 @@ class Terrain *instantiateTerrain(int input, int i)
 		out = new ToggleSwitch(false);
 		break;
 	case m_toggleOn:
-		out = new ToggleSwitch(true);
+		out = new ToggleSwitch(1);
 		break;
 	case m_dupeN:
 	case m_dupeS:

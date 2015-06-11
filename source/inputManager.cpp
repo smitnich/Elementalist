@@ -11,6 +11,7 @@ extern int currentLevelNum, levelChange, lastInput;
 extern unsigned int lastInputTime, levelStartTime;
 extern std::string startLevelName;
 int currentInput;
+extern bool debugOn;
 
 //Store the latest input so we don't end up reading from the controllers
 //multiple times per frame
@@ -74,6 +75,8 @@ void handleInput() {
 		}
 		lastInput = BUTTON_LEVEL_PREV;
 		break;
+	case BUTTON_1:
+		debugOn = !debugOn;
 	}
 	if (currentInput != INPUT_NONE) {
 		lastInput = currentInput;
