@@ -187,6 +187,7 @@
     <ClInclude Include="..\include\input_def.h" />
     <ClInclude Include="..\include\keyinput.h" />
     <ClInclude Include="..\include\level.h" />
+    <ClInclude Include="..\include\moveRequest.h" />
     <ClInclude Include="..\include\object.h" />
     <ClInclude Include="..\include\objectDef.h" />
     <ClInclude Include="..\include\resource.h" />

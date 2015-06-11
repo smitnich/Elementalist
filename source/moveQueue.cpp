@@ -1,16 +1,12 @@
 #include <list>
 #include "objectDef.h"
 #include "level.h"
+#include "moveRequest.h"
 Level* getCurrentLevel();
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 void doDraw(Object *drawObject, int moveFractionX, int moveFractionY);
 void writeDebugText(char *in);
-struct MoveRequest
-{
-	Object *obj;
-	int x,y;
-	int checkX,checkY;
-};
+
 std::list<MoveRequest> moveQueue;
 
 void resetMoveQueue()
