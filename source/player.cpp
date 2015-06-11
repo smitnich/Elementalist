@@ -72,7 +72,12 @@ public:
 	void makeElement(bool doSecond)
 	{
 		return;
-	}	
+	}
+	void freeze() {
+		if (player == this)
+			switchPlayerFocus();
+		frozen = true;
+	}
 	//Moves, gets input if needed and checks for forces on the player eg conveyor belts
 	void doLogic()
 	{
@@ -170,7 +175,7 @@ public:
 		case -1:
 			return true;
 		}
-		if (!requestMove(x, y, checkX, checkY, level->getObject(x + checkX, y + checkY)))
+		if (!requestMove(x, y, checkX, checkY, this))
 		{
 			return false;
 		}
@@ -179,10 +184,18 @@ public:
 	}	
 	void die()
 	{
-		faceDir = objMoveDir = D_NONE;
-		playerDead = true;
-		stationary = deadPerson;
-		changeTextToDead();
+		if (player == this)
+		{
+			if (!switchPlayerFocus()) {
+				gameOver();
+			}
+			else {
+				delete this;
+			}
+		}
+		else {
+			delete this;
+		}
 	}
 	Object* clone(int _x, int _y)
 	{

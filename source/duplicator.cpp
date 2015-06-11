@@ -8,6 +8,10 @@ void addCreationQueue(Object *in);
 void Duplicator::onEnter(Object *other)
 {
 	copyObj = other;
+	if (createQueued) {
+		activate();
+		createQueued = false;
+	}
 }
 void Duplicator::onExit(Object *other)
 {
@@ -23,8 +27,10 @@ void Duplicator::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int y
 }
 void Duplicator::activate()
 {
-	if (copyObj == NULL)
+	if (copyObj == NULL) {
+		createQueued = true;
 		return;
+	}
 	int x = copyObj->x;
 	int y = copyObj->y;
 	if (dir == D_UP)
@@ -44,9 +50,15 @@ void Duplicator::activate()
 	tmp->startMove(dir);
 	addCreationQueue(tmp);
 }
+void Duplicator::deactivate() {
+	copyObj = NULL;
+	createQueued = false;
+}
 Duplicator::Duplicator(int _dir)
 {
 	dir = _dir;
 	sprite = spr_dupe[dir - 1];
 	index = 0;
+	copyObj = NULL;
+	createQueued = false;
 }

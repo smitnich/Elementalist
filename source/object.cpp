@@ -4,6 +4,7 @@
 #include "tileEnum.h"
 #include "defs.h"
 #include "moveRequest.h"
+#include <climits>
 
 SDL_Surface *personns[6] = { NULL };
 SDL_Surface *personew[6] = { NULL };
@@ -126,7 +127,7 @@ bool Object::objMove()
 	else if (objMoveDir == D_RIGHT)
 		checkX = 1;
 	//Make sure that we can move where we're trying to
-	if (requestMove(x, y, checkX, checkY, this))
+	if (getCurrentLevel()->getTerrain(x,y)->requestExit(this,objMoveDir) && requestMove(x, y, checkX, checkY, this))
 	{
 		objMoveFraction += tempSpeed*delta;
 	}
@@ -303,8 +304,12 @@ void objectLogic()
 	{
 		Object *tmp = curLevel->objectLayer.at(i);
 		if (tmp != NULL) {
-			curLevel->getTerrain(tmp->x, tmp->y)->whileIn(tmp); 
-			tmp->doLogic();
+			curLevel->getTerrain(tmp->x, tmp->y)->whileIn(tmp);
+			//The Object may have been deleted during the while in call,
+			//so reload it here
+			tmp = curLevel->objectLayer.at(i);
+			if (tmp != NULL)
+				tmp->doLogic();
 		}
 	}
 	queuePlaceAll();
@@ -322,4 +327,48 @@ double getPlayerMoveFraction()
 int getPlayerMoveDir()
 {
 	return player->getMoveDir();
+}
+//Attempt to find the next closest player to switch to
+bool switchPlayerFocus() {
+	Level *curLevel = getCurrentLevel();
+	Object *closestPlayer = NULL;
+	std::list<Object *> allPlayers;
+	int x = player->x;
+	int y = player->y;
+	unsigned int bestDist = UINT_MAX;
+	//Find all available players
+	for (int i = 0; i < curLevel->height*curLevel->width; i++)
+	{
+		Object *tmp = curLevel->objectLayer.at(i);
+		if (tmp != NULL && tmp->isPlayer && tmp != player)
+			allPlayers.push_front(tmp);
+	}
+	for (std::list<Object *>::iterator it = creationQueue.begin(); it != creationQueue.end(); ++it)
+	{
+		Object *tmp = *it;
+		if (tmp != NULL && tmp->isPlayer && tmp != player) {
+			allPlayers.push_front(tmp);
+		}
+	}
+	for (std::list<MoveRequest>::iterator it = moveQueue.begin(); it != moveQueue.end(); ++it)
+	{
+		Object *tmp = it->obj;
+		if (tmp != NULL && tmp->isPlayer && tmp != player) {
+			allPlayers.push_front(tmp);
+		}
+	}
+	if (allPlayers.size() == 0)
+		return false;
+	//Find the player closest to the previous player
+	while (allPlayers.size() > 0) {
+		Object *tmpPlayer = allPlayers.front();
+		unsigned int dist = (x - tmpPlayer->x)*(x - tmpPlayer->x) + (y - tmpPlayer->y)*(y - tmpPlayer->y);
+		if (closestPlayer == NULL || dist < bestDist) {
+			closestPlayer = tmpPlayer;
+			bestDist = dist;
+		}
+		allPlayers.pop_front();
+	}
+	player = closestPlayer;
+	return true;
 }
