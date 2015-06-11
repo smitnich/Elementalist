@@ -8,6 +8,7 @@ extern double delta, fpsModifier;
 extern int conveyorSpeed;
 extern int framesPerSecond;
 extern bool displayName;
+extern int frame;
 bool Conveyor::requestEntry(Object* other, int objDir)
 {
 	return true;
@@ -16,7 +17,7 @@ bool Conveyor::requestExit(Object* other, int objDir)
 {
 	if (disabled)
 		return true;
-	if (objDir == D_UP && this->dir == D_DOWN ||
+	if ((objDir == D_UP && this->dir == D_DOWN) ||
 	   (objDir == D_DOWN && this->dir == D_UP) ||
 	   (objDir == D_LEFT && this->dir == D_RIGHT) ||
 	   (objDir == D_RIGHT && this->dir == D_LEFT))
@@ -29,13 +30,20 @@ void Conveyor::whileIn(Object *other) {
 }
 void Conveyor::activate()
 {
-	disabled = true;
+	if (!disabled) {
+		disabled = true;
+		disableStartTime = frame;
+		moveFraction = ((frame - disabledTime) / 3) % TILE_SIZE;
+	}
 }
 void Conveyor::deactivate()
 {
-	disabled = false;
-	if (lastEntered != NULL)
-		lastEntered->startMove(dir);
+	if (disabled) {
+		disabled = false;
+		disabledTime = frame - disableStartTime;
+		if (lastEntered != NULL)
+			lastEntered->startMove(dir);
+	}
 }
 void Conveyor::onEnter(Object* other)
 {
@@ -49,7 +57,8 @@ void Conveyor::onExit(Object* other)
 }
 Conveyor::Conveyor(int direction)
 {
-	lastRender = 0;
+	disableStartTime = 0;
+	disabledTime = 0;
 	index = 0;
 	lastEntered = NULL;
 	moveFraction = 0;
@@ -60,21 +69,10 @@ Conveyor::Conveyor(int direction)
 }
 void Conveyor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
 {
-	if (lastRender == 0 && displayName)
-		lastRender = getTicks();
-	double lastRenderDelta = ((double) getTicks() - lastRender)/(1000.0/(double) framesPerSecond);
-	if (!displayName)
-		lastRender = getTicks();
 	int xWrap = 0;
 	int yWrap = 0;
-	if (!displayName && (!disabled || moveFraction >= 1))
-		moveFraction += lastRenderDelta*fpsModifier;
-	if (moveFraction >= TILE_SIZE)
-	{
-		moveFraction -= TILE_SIZE;
-		if (disabled)
-			moveFraction = 0;
-	}
+	if (!displayName && !disabled)
+		moveFraction = ((frame - disabledTime)/3) % TILE_SIZE;
 	int xStart = xTile*TILE_SIZE + xInitial + xOff;
 	int yStart = yTile*TILE_SIZE + yInitial + yOff;
 	switch (dir)

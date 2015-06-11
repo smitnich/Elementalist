@@ -117,7 +117,8 @@ private:
 	double moveFraction;
 	bool disabled;
 	Object *lastEntered;
-	unsigned int lastRender;
+	int disableStartTime;
+	int disabledTime;
 public:
 	int dir;
 	bool requestEntry(Object* other, int dir);
@@ -168,11 +169,13 @@ class Duplicator : public Terrain
 {
 public:
 	int dir;
+	bool createQueued;
 	Object *copyObj;
 	void onEnter(Object *other);
 	void onExit(Object *other);
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	void activate();
+	void deactivate();
 	Duplicator(int dir);
 };
 class BlackHole : public Terrain
