@@ -36,6 +36,7 @@ void doTerrainChanges();
 void handleInput();
 void createGlobalInstances();
 void freeGlobalInstances();
+void changeTextToDead();
 extern bool defaultPath, fullScreen, done, displayName;
 extern std::string levelPath, appPath;
 extern SDL_Surface *screen;
@@ -190,4 +191,7 @@ int main(int argc, char* argv[]){
 		frame++;
 	}
 	return 0;
+void gameOver() {
+	playerDead = true;
+	changeTextToDead();
 }

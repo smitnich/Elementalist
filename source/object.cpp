@@ -3,6 +3,8 @@
 #include "level.h"
 #include "tileEnum.h"
 #include "defs.h"
+#include "moveRequest.h"
+
 SDL_Surface *personns[6] = { NULL };
 SDL_Surface *personew[6] = { NULL };
 SDL_Surface *deadPerson = NULL;
@@ -13,6 +15,8 @@ Level *getCurrentLevel();
 void checkCreationQueue();
 void writeDebugText(char* in);
 Object *objectList[MAX_OBJECTS] = { NULL };
+extern std::list<Object*> creationQueue;
+extern std::list<MoveRequest> moveQueue;
 
 //The basic template for the Objects in the game
 Object::Object()
