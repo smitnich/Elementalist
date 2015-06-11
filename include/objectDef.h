@@ -23,7 +23,7 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		int getX();
 		int getY();
 		bool objMove();
-		void startMove(int dir, bool forced = false);
+		bool startMove(int dir, bool forced = false);
 		virtual void drown()
 		{
 			die();

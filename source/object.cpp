@@ -100,12 +100,29 @@ bool Object::isMovableBlock()
 {
 	return false;
 }
-void Object::startMove(int dir, bool forced)
+bool Object::startMove(int dir, bool forced)
 {
-	if (dir == D_NONE)
-		return;
+	int xChange = 0;
+	int yChange = 0;
+	switch (dir) {
+	case D_UP:
+		yChange = -1;
+		break;
+	case D_DOWN:
+		yChange = 1;
+		break;
+	case D_LEFT:
+		xChange = -1;
+		break;
+	case D_RIGHT:
+		xChange = 1;
+		break;
+	}
+	if (dir == D_NONE || !requestMove(x,y,xChange,yChange,this))
+		return false;
 	objMoveDir = dir;
 	tempSpeed = (double)3 * fpsModifier;
+	return true;
 }
 bool Object::requestEntry(Object *other, int dir)
 {
