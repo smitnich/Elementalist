@@ -16,6 +16,7 @@ SDL_Surface *spr_raisedFloor = NULL;
 SDL_Surface *spr_bomb = NULL;
 SDL_Surface *spr_colorBarrier[BARRIER_TYPES];
 SDL_Surface *spr_bounceWall;
+SDL_Surface *spr_risingWall;
 int colorBlockIds[BARRIER_TYPES] = { OBJ_YELLOW_BLOCK };
 extern Mix_Chunk *snd_explode;
 extern bool won;
@@ -64,7 +65,10 @@ Wall::Wall(int _index)
 {
 	index = _index;
 	isTrigger = false;
-	this->sprite = wall[lookupWall(index)];
+	if (index < 0)
+		sprite = wall[0];
+	else
+		sprite = wall[lookupWall(index)];
 }
 void Exit::onEnter(Object *other)
 {
@@ -178,4 +182,11 @@ bool BounceWall::requestEntry(Object *other, int dir) {
 		return true;
 	else
 		return false;
+}
+RisingWall::RisingWall(int _index) {
+	sprite = spr_risingWall;
+	index = _index;
+}
+void RisingWall::onExit(Object *other) {
+	addTerrainChange(index, m_defaultWall);
 }

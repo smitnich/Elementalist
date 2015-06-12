@@ -18,3 +18,4 @@ extern SDL_Surface *spr_water;
 extern SDL_Surface *spr_colorBarrier[];
 extern SDL_Surface *spr_colorBlock[];
 extern SDL_Surface *spr_bounceWall;
+extern SDL_Surface *spr_risingWall;

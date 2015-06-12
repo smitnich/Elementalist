@@ -1,5 +1,6 @@
 enum tiles_t
 {
+	m_defaultWall = 0,
 	m_exit = 1,
 	m_pressure,
 	m_floor,
@@ -26,6 +27,7 @@ enum tiles_t
 	m_freezerFloorOff,
 	m_yellowBarrier,
 	m_bounceWall,
+	m_risingWall,
 
 	OBJ_BLOCK = 1001,
 	OBJ_HEAVY_BLOCK,

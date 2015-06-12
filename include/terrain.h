@@ -214,4 +214,9 @@ public:
 	BounceWall();
 	bool requestEntry(Object *other, int dir);
 };
+class RisingWall : public Terrain {
+public:
+	RisingWall(int index);
+	void onExit(Object *other);
+};
 #endif

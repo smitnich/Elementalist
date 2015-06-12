@@ -309,6 +309,9 @@ class Terrain *instantiateTerrain(int input, int i)
 	Terrain *out = NULL;
 	switch (input)
 	{
+	case m_defaultWall:
+		out = new Wall(-1);
+		break;
 	case m_wall:
 		out = new Wall(i);
 		break;
@@ -377,6 +380,9 @@ class Terrain *instantiateTerrain(int input, int i)
 		break;
 	case m_bounceWall:
 		out = new BounceWall();
+		break;
+	case m_risingWall:
+		out = new RisingWall(i);
 		break;
 	case m_floor:
 	default:
