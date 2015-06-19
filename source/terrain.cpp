@@ -7,6 +7,7 @@ bool playSound(Mix_Chunk *input);
 unsigned char lookupWall(int index);
 int reverseDir(int dir);
 void doAssignQueue();
+bool checkIfTerrainIsGlobal(Terrain *in);
 extern int currentLevelNum;
 SDL_Surface *wall[47] = { NULL };
 SDL_Surface *tiles = NULL;
@@ -189,4 +190,15 @@ RisingWall::RisingWall(int _index) {
 }
 void RisingWall::onExit(Object *other) {
 	addTerrainChange(index, m_defaultWall);
+}
+void clearTerrain() {
+	Level *curLevel = getCurrentLevel();
+	if (curLevel == NULL)
+		return;
+	for (int i = 0; i < curLevel->height*curLevel->width; i++)
+	{
+		Terrain *tmp = curLevel->mapLayer.at(i);
+		if (tmp != NULL && !checkIfTerrainIsGlobal(tmp))
+			delete(tmp);
+	}
 }

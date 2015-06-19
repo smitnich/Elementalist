@@ -33,6 +33,7 @@ extern Mix_Music* levelMusic[MAX_LEVEL];
 void freeMusic(int levelNum);
 bool loadLevel(std::string levelName,int levelNum);
 void clearObjects();
+void clearTerrain();
 void doTextBox(int);
 void playMusic(int level);
 class Terrain *instantiateTerrain(int input, int offset);
@@ -272,6 +273,7 @@ void Level::loadConnections(FILE *inFile, int xSize, int ySize)
 			}
 			if (numRead == 0)
 			{
+				delete buffer;
 				return;
 			}
 			if (val != 0)
@@ -294,6 +296,7 @@ void Level::loadConnections(FILE *inFile, int xSize, int ySize)
 			it += numRead;
 		}
 	}
+	delete[] buffer;
 //Some connections should be triggered as soon as the level starts; this does so
 }
 void Level::reloadMapLayer()
@@ -429,6 +432,11 @@ void createGlobalInstances()
 	baseExit = new Exit();
 	baseIceFloor = new IceFloor();
 }
+bool checkIfTerrainIsGlobal(Terrain *in) {
+	if (in == NULL)
+		return false;
+	return (in == baseFloor || in == baseExit || in == baseIceFloor);
+}
 void freeGlobalInstances()
 {
 	delete baseFloor;
@@ -446,6 +454,7 @@ void switchLevel(int levelNum)
 	currentLevelNum = levelNum;
 	std::string tempLevel = constructLevelName(levelNum);
 	clearObjects();
+	clearTerrain();
 	changeText();
 	if (loadLevel(tempLevel,levelNum) == 0)
 	{
