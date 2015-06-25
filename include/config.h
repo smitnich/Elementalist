@@ -18,7 +18,7 @@ extern int videoSizeX;
 extern double fpsModifier;
 //The symbol used to indicate a folder, differs between operating systems
 //Should be automatically detected using argv[0]
-extern std::string directorySymbol;
+extern char directorySymbol;
 //Whether or not to align the interface to the left or not
 extern bool alignLeft;
 //Wii SMB data for file sharing

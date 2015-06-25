@@ -17,7 +17,7 @@ extern "C" {
 }
 bool smbInit();
 #endif
-extern std::string directorySymbol;
+extern char directorySymbol;
 void parseConfig(char argv[]);
 void musicInit();
 void fileInit();
@@ -70,13 +70,10 @@ void init(int argc, char* argv[])
 	std::string tempFileName (argv[0]);
 	//Determine which directory symbol to use
 	if (tempFileName.find("\\") != std::string::npos)
-		directorySymbol = "\\";
-	else if (tempFileName.find("/") != std::string::npos)
-		directorySymbol = "/";
+		directorySymbol = '\\';
 	else
-		exit(0);
+		directorySymbol = '/';
 	//Parse any arguments given
-
 	if (argc > 1)
 	{
 		int i = 1;
@@ -89,7 +86,7 @@ void init(int argc, char* argv[])
 		if (tempFileName.rfind(directorySymbol) == std::string::npos)
 			exit(0);
 		tempFileName.resize(tempFileName.rfind(directorySymbol)+1);
-		levelPath.append(directorySymbol);
+		levelPath += directorySymbol;
 		appPath.assign(tempFileName);
 		//Change to the app directory, necessary for running levels outside of the folder
 		chdir(appPath.data());

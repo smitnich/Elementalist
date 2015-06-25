@@ -38,7 +38,7 @@ std::string levelPath = "levels";
 //Which directory symbol to use
 //Found via searching argv[0] for the proper symbol
 //If neither found, exit
-std::string directorySymbol = "/";
+char directorySymbol = '/';
 //The level to start with, used when passing in as an argument
 std::string startLevel = "";
 //The name of the level ie the filename minues the extension

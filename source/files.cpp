@@ -14,7 +14,7 @@ extern std::string appPath;
 #include <sys/stat.h>
 #endif
 #include "defs.h"
-extern std::string directorySymbol;
+extern char directorySymbol;
 //Gets the length of a file passed in
 int getFileLength(char fileName[])
 {
