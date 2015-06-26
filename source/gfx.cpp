@@ -11,6 +11,7 @@ extern bool playerDead;
 void queueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY);
 void creationQueueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY);
 void renderHighSprites(int moveFractionX, int moveFractionY);
+void renderUserInterface(SDL_Surface *screen);
 //Draws the static map features, the objects, the player, and the textbox on the screen
 void drawScreen()
 {
@@ -77,6 +78,7 @@ void drawScreen()
 	drawBorders();
 	if (debugOn)
 		apply_surface(0, 32, renderDebugText(), screen);
+	renderUserInterface(screen);
 }
 void drawWrappedSprite(int x, int y, SDL_Surface* source, SDL_Surface* destination, int xWrap, int yWrap)
 {

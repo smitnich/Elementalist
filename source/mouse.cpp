@@ -5,13 +5,17 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_events.h>
 #endif
-extern int pointerX, pointerY;
 //Update the mouse
+void checkClick(int x, int y);
+int mouseX, mouseY;
 void doMouse(SDL_Event mouseEvent)
 {
 	if (mouseEvent.type == SDL_MOUSEMOTION)
 	{
-		pointerX = mouseEvent.motion.x;
-		pointerY = mouseEvent.motion.y;
+		mouseX = mouseEvent.motion.x;
+		mouseY = mouseEvent.motion.y;
+	}
+	if (mouseEvent.type == SDL_MOUSEBUTTONDOWN) {
+		checkClick(mouseX, mouseY);
 	}
 }

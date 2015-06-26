@@ -515,3 +515,14 @@ bool loadLevel(std::string fileName, int levelNum)
 	changeText();
 	return true;
 }
+void restartLevel() {
+	switchLevel(currentLevelNum);
+}
+void prevLevel() {
+	if (currentLevelNum > 1)
+		switchLevel(currentLevelNum - 1);
+}
+void nextLevel() {
+	if (currentLevelNum < MAX_LEVEL-1)
+		switchLevel(currentLevelNum + 1);
+}

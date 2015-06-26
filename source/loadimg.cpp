@@ -10,6 +10,7 @@ struct TerrainChangeRequest;
 std::list<Object *> *imagesToLoad = NULL;
 extern std::list<TerrainChangeRequest *> changeReqs;
 
+void createButtons();
 void loadAllImages();
 
 //Load a whole bunch of images
@@ -84,7 +85,6 @@ void imgInit()
 	spr_bomb = loadOptimizedIMG("gfx/bomb.png");
 	spr_pressureToggle[1] = loadOptimizedIMG("gfx/pressureToggleOff.png");
 	spr_pressureToggle[0] = loadOptimizedIMG("gfx/pressureToggleOn.png");
-	//Temporary graphics
 	conveyor[D_LEFT-1] = loadOptimizedIMG("gfx/conveyor/conveyorw1.png");
 	conveyor[D_UP-1] = loadOptimizedIMG("gfx/conveyor/conveyorn1.png");
 	conveyor[D_RIGHT-1] = loadOptimizedIMG("gfx/conveyor/conveyore1.png");
@@ -106,6 +106,7 @@ void imgInit()
 	spr_colorBarrier[0] = loadOptimizedIMG("gfx/wall/colorBarrier1.png");
 	spr_bounceWall = loadOptimizedIMG("gfx/wall/bounceWall.png");
 	spr_risingWall = loadOptimizedIMG("gfx/risingWall.png");
+	createButtons();
 }
 //Optimize the image for proper depth and for transparecny
 SDL_Surface* loadOptimizedIMG(const char *fileName)
