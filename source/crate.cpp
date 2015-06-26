@@ -79,6 +79,8 @@ public:
 	//Can't be moved in a line
 	bool requestEntry(Object *other, int dir)
 	{
+		if (other->isMovableBlock())
+			return false;
 		int xdir = 0;
 		int ydir = 0;
 		Object *newLocation = NULL;
