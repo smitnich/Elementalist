@@ -52,6 +52,7 @@ Object::Object(int x2, int y2)
 	faceDir = 0;
 	isMagnetic = false;
 	hovering = false;
+	inMoveRequest = false;
 }
 Object::Object(Object &other, int _x, int _y)
 {

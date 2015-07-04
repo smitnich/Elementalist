@@ -13,7 +13,7 @@ public:
 		if (getCurrentLevel()->pickupCount <= 0)
 			delete this;
 	}
-	PickupWall(int _x, int _y)
+	PickupWall(int _x, int _y) : Object(x,y)
 	{
 		x = _x;
 		y = _y;
@@ -37,7 +37,6 @@ public:
 	//Pickups should be destroyed when any object enters their square
 	bool requestEntry(Object *other, int dir)
 	{
-		die();
 		return true;
 	}
 	void die()
@@ -45,7 +44,7 @@ public:
 		getCurrentLevel()->pickupCount--;
 		delete this;
 	}
-	Pickup(int _x, int _y)
+	Pickup(int _x, int _y) : Object(x,y)
 	{
 		hovering = true;
 		x = _x;
@@ -57,6 +56,13 @@ public:
 	{
 		return NULL;
 	}
+	void onEnterStart(Object *other, int dir) {
+		die();
+	}
+	bool allowEntry() {
+		return true;
+	}
+
 };
 
 SPRITE_STATIONARY(Pickup, "gfx/pickup.png")

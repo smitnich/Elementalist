@@ -13,7 +13,7 @@ class Flame : Object
 public:
 	OBJECT_DECLARATION(Flame,1012)
 
-	Flame(int x2, int y2)
+		Flame(int x2, int y2) : Object(x2,y2)
 	{
 		hovering = false;
 		numFrames = 1;

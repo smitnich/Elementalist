@@ -11,7 +11,7 @@ enum directions_t
 	D_LEFT,
 	D_RIGHT
 };
-#define MAX_LEVEL 5
+#define MAX_LEVEL 7
 #define NUM_FRAMES 3
 #define NUM_TILES 4
 #define MAX_CHANNELS 2

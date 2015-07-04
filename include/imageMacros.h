@@ -27,7 +27,7 @@ void X::loadImages() \
 	for (int i = 0; i < 6; i++){ \
 		spriteew[i] = stationary; \
 		spritens[i] = stationary; \
-	} \
+						} \
 }\
 class X Test##X = X();
 #define OBJECT_DECLARATION(X,Z) static SDL_Surface *stationary; \
@@ -48,8 +48,18 @@ const static int objectNum = Z;
 SDL_Surface *X::spriteew[6]; \
 SDL_Surface *X::spritens[6]; \
 SDL_Surface *X::getSprite() { \
-	if (objMoveDir == D_NONE) \
-		return stationary; \
+	if (objMoveDir == D_NONE) { \
+		if (lastMoveDir == D_RIGHT) \
+			return spriteew[3]; \
+		else if (lastMoveDir == D_LEFT) \
+			return spriteew[0]; \
+		else if (lastMoveDir == D_UP) \
+			return spritens[0]; \
+		else if (lastMoveDir == D_DOWN) \
+			return spritens[3]; \
+		else \
+			return stationary; \
+	} \
 	else if (objMoveDir == D_LEFT)\
 		return spriteew[((int) objMoveFraction)/(TILE_SIZE/3)]; \
 	else if (objMoveDir == D_RIGHT) \

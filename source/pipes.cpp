@@ -24,7 +24,7 @@ public:
 	OBJECT_DECLARATION(Pipe, 0)
 	Object *within;
 	int dir1, dir2;
-	Pipe(int x2, int y2) {
+	Pipe(int x2, int y2) : Object(x2,y2) {
 		hovering = false;
 		numFrames = 1;
 		x = x2;

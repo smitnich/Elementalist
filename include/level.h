@@ -10,7 +10,9 @@ const std::string LevelStrings[MAX_LEVEL] =
 "test",//1
 "test2",//2
 "test3",//3
-"test4"//4
+"test4",//4
+"test5",
+"test6"
 };
 class Level
 {

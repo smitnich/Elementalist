@@ -35,6 +35,7 @@ class Person : public Object
 public:
 	OBJECT_DECLARATION(Person, 1004)
 	int active;
+	int lastMoveDir;
 	Person(const Person &other, int _x, int _y)
 	{
 		active = true;
@@ -62,10 +63,7 @@ public:
 		level = getCurrentLevel();
 		numFrames = 3;
 		isPlayer = true;
-		if (playerPlaced == false)
-		{
-			playerPlaced = true;
-		}
+		playerPlaced = true;
 		playerDead = false;
 		lastMoveDir = D_NONE;
 	}
@@ -112,7 +110,6 @@ public:
 			}
 			lastInput = B_RIGHT;
 			queuedMove = D_RIGHT;
-			stationary = spriteew[3];
 			break;
 		case B_LEFT:
 			if (x > 0 && objMoveFraction == 0 && !frozen)
@@ -123,7 +120,6 @@ public:
 			}
 			lastInput = B_LEFT;
 			queuedMove = D_LEFT;
-			stationary = spriteew[0];
 			break;
 		case B_DOWN:
 			if (y < MAP_SIZE && objMoveFraction == 0 && !frozen)
@@ -134,7 +130,6 @@ public:
 			}
 			queuedMove = D_DOWN;
 			lastInput = B_DOWN;
-			stationary = spritens[3];
 			break;
 		case B_UP:
 			if (y > 0 && objMoveFraction == 0 && !frozen)
@@ -142,7 +137,6 @@ public:
 				startMove(D_UP);
 				faceDir = D_UP;
 				lastMoveDir = D_UP;
-				stationary = spritens[0];
 			}
 			queuedMove = D_UP;
 			lastInput = B_UP;
