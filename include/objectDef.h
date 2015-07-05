@@ -12,7 +12,7 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		int prevMove;
 		bool isPlayer;
 		bool isMagnetic;
-		class Level *level;
+		int currentMovePriority;
 		virtual bool isMovableBlock();
 		Object(int x, int y);
 		Object();
@@ -23,7 +23,7 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		int getX();
 		int getY();
 		bool objMove();
-		bool startMove(int dir, bool forced = false);
+		bool startMove(int dir, int priority);
 		virtual void drown()
 		{
 			die();

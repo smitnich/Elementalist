@@ -83,7 +83,7 @@ public:
 		if (!requestMove(x, y, xChange, yChange, other)) {
 			moveDir = reverseDir(other->prevMove);
 		}
-		within->startMove(moveDir);
+		within->startMove(moveDir,3);
 	}
 	int chooseDirection(int dir) {
 		if (dir == dir1)

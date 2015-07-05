@@ -16,5 +16,5 @@ void IceFloor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOf
 void IceFloor::onEnter(Object *other)
 {
 	if (other->prevMove != D_NONE)
-		other->startMove(other->prevMove);
+		other->startMove(other->prevMove,2);
 }

@@ -22,7 +22,6 @@ extern std::list<MoveRequest> moveQueue;
 //The basic template for the Objects in the game
 Object::Object()
 {
-	level = NULL;
 	isPlayer = false;
 	x = 0;
 	y = 0;
@@ -38,7 +37,6 @@ Object::Object()
 }
 Object::Object(int x2, int y2)
 {
-	level = NULL;
 	isPlayer = false;
 	x = x2;
 	y = y2;
@@ -52,11 +50,10 @@ Object::Object(int x2, int y2)
 	faceDir = 0;
 	isMagnetic = false;
 	hovering = false;
-	inMoveRequest = false;
+	currentMovePriority = 0;
 }
 Object::Object(Object &other, int _x, int _y)
 {
-	level = other.level;
 	isPlayer = other.isPlayer;
 	x = _x;
 	y = _y;
@@ -101,8 +98,10 @@ bool Object::isMovableBlock()
 {
 	return false;
 }
-bool Object::startMove(int dir, bool forced)
+bool Object::startMove(int dir, int priority)
 {
+	if (priority < currentMovePriority)
+		return false;
 	int xChange = 0;
 	int yChange = 0;
 	switch (dir) {
@@ -144,6 +143,10 @@ bool Object::objMove()
 		checkY = 1;
 	else if (objMoveDir == D_RIGHT)
 		checkX = 1;
+	Object *other = getCurrentLevel()->getObject(x + checkX, y + checkY);
+	if (other != NULL) {
+		other->onEnterStart(this, objMoveDir);
+	}
 	//Make sure that we can move where we're trying to
 	if (getCurrentLevel()->getTerrain(x,y)->requestExit(this,objMoveDir) && requestMove(x, y, checkX, checkY, this))
 	{

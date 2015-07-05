@@ -39,7 +39,6 @@ public:
 	Person(const Person &other, int _x, int _y)
 	{
 		active = true;
-		level = other.level;
 		isPlayer = other.isPlayer;
 		x = _x;
 		y = _y;
@@ -60,7 +59,6 @@ public:
 	}
 	Person(int x2, int y2) : Object(x2,y2)
 	{
-		level = getCurrentLevel();
 		numFrames = 3;
 		isPlayer = true;
 		playerPlaced = true;
@@ -104,7 +102,7 @@ public:
 		case B_RIGHT:
 			if (x < MAP_SIZE && objMoveFraction == 0 && !frozen)
 			{
-				startMove(D_RIGHT);
+				startMove(D_RIGHT,1);
 				lastMoveDir = D_RIGHT;
 				faceDir = D_RIGHT;
 			}
@@ -114,7 +112,7 @@ public:
 		case B_LEFT:
 			if (x > 0 && objMoveFraction == 0 && !frozen)
 			{
-				startMove(D_LEFT);
+				startMove(D_LEFT,1);
 				lastMoveDir = D_LEFT;
 				faceDir = D_LEFT;
 			}
@@ -124,7 +122,7 @@ public:
 		case B_DOWN:
 			if (y < MAP_SIZE && objMoveFraction == 0 && !frozen)
 			{
-				startMove(D_DOWN);
+				startMove(D_DOWN,1);
 				faceDir = D_DOWN;
 				lastMoveDir = D_DOWN;
 			}
@@ -134,7 +132,7 @@ public:
 		case B_UP:
 			if (y > 0 && objMoveFraction == 0 && !frozen)
 			{
-				startMove(D_UP);
+				startMove(D_UP,1);
 				faceDir = D_UP;
 				lastMoveDir = D_UP;
 			}
@@ -173,7 +171,7 @@ public:
 		{
 			return false;
 		}
-		startMove(dir);
+		startMove(dir,2);
 		return true;
 	}	
 	void die()

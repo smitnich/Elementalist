@@ -42,13 +42,13 @@ void Conveyor::deactivate()
 		disabled = false;
 		disabledTime = frame - disableStartTime;
 		if (lastEntered != NULL)
-			lastEntered->startMove(dir);
+			lastEntered->startMove(dir,2);
 	}
 }
 void Conveyor::onEnter(Object* other)
 {
 	if (!disabled)
-		other->startMove(dir);
+		other->startMove(dir,2);
 	lastEntered = other;
 }
 void Conveyor::onExit(Object* other)

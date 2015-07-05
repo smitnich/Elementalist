@@ -47,7 +47,7 @@ void Duplicator::activate()
 	Object *tmp = copyObj->clone(copyObj->x,copyObj->y);
 	if (tmp == NULL)
 		return;
-	tmp->startMove(dir);
+	tmp->startMove(dir,3);
 	addCreationQueue(tmp);
 }
 void Duplicator::deactivate() {
