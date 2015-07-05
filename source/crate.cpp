@@ -25,6 +25,9 @@ public:
 	{
 		objMove();
 	}
+	void onEnterStart(Object *other, int dir) {
+		startMove(dir, 2);
+	}
 	bool requestEntry(Object *other, int dir)
 	{
 		int xdir = 0;
@@ -37,7 +40,7 @@ public:
 			ydir = -1;
 		else if (dir == D_DOWN)
 			ydir = 1;
-		if (startMove(dir)){
+		if (requestMove(x,y,xdir,ydir,this)){
 			objMoveFraction = other->objMoveFraction;
 			return true;
 		}

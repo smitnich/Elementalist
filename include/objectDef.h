@@ -56,7 +56,10 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		virtual void loadImages() = 0;
 		//Gets the sprite to be drawn on the screen
 		virtual SDL_Surface *getSprite() = 0;
-		virtual bool requestEntry(Object* other, int dir);
+		virtual bool requestEntry(Object *other, int dir);
+		virtual void onEnterStart(Object *other, int dir) {
+			return;
+		}
 		virtual Object* createInstance(int x, int y) = 0;
 };
 #include "imageMacros.h"
