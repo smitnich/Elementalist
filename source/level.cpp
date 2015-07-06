@@ -52,8 +52,6 @@ class BounceWall;
 //one instance that all pointers refer to
 Terrain *baseFloor = NULL;
 Terrain *baseExit = NULL;
-Terrain *baseIceFloor = NULL;
-
 
 Object* objectInit(unsigned int id, int x, int y);
 std::string constructLevelName(int);
@@ -343,7 +341,7 @@ class Terrain *instantiateTerrain(int input, int i)
 		out = new ColorBarrier(0);
 		break;
 	case m_icefloor:
-		out = baseIceFloor;
+		out = new IceFloor(baseFloor);
 		break;
 	case m_bomb:
 		out = new Bomb();
@@ -430,18 +428,16 @@ void createGlobalInstances()
 {
 	baseFloor = new Floor();
 	baseExit = new Exit();
-	baseIceFloor = new IceFloor();
 }
 bool checkIfTerrainIsGlobal(Terrain *in) {
 	if (in == NULL)
 		return false;
-	return (in == baseFloor || in == baseExit || in == baseIceFloor);
+	return (in == baseFloor || in == baseExit);
 }
 void freeGlobalInstances()
 {
 	delete baseFloor;
 	delete baseExit;
-	delete baseIceFloor;
 }
 //Clear the current level and load the next
 void switchLevel(int levelNum)

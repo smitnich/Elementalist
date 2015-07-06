@@ -155,7 +155,15 @@ public:
 class IceFloor : public Terrain
 {
 public:
+	Terrain *within;
+	IceFloor(Terrain *within);
+	bool requestEntry(Object* other, int dir);
+	bool requestExit(Object* other, int dir);
 	void onEnter(Object *other);
+	void onExit(Object *other);
+	void activate();
+	void deactivate();
+	void whileIn(Object *other);
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	IceFloor();
 };

@@ -2,19 +2,38 @@
 #include "terrain.h"
 #include "sprites.h"
 SDL_Surface *iceFloor = NULL;
-IceFloor::IceFloor()
+IceFloor::IceFloor(Terrain *within)
 {
-	index = -1;
+	this->within = within;
 	sprite = iceFloor;
 }
 void IceFloor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff){
 	int xStart = xTile*TILE_SIZE + xInitial + xOff;
 	int yStart = yTile*TILE_SIZE + yInitial + yOff;
-	apply_surface(xStart, yStart, tiles, drawTo);
+	within->draw(drawTo,xTile,yTile,xOff,yOff);
 	apply_surface(xStart, yStart, sprite, drawTo);
 }
 void IceFloor::onEnter(Object *other)
 {
+	within->onEnter(other);
 	if (other->prevMove != D_NONE)
 		other->startMove(other->prevMove,2);
+}
+void IceFloor::onExit(Object *other) {
+	within->onExit(other);
+}
+bool IceFloor::requestEntry(Object *other, int dir) {
+	return within->requestEntry(other, dir);
+}
+bool IceFloor::requestExit(Object *other, int dir) {
+	return within->requestEntry(other, dir);
+}
+void IceFloor::whileIn(Object *other) {
+	within->whileIn(other);
+}
+void IceFloor::activate() {
+	within->activate();
+}
+void IceFloor::deactivate() {
+	within->deactivate();
 }
