@@ -204,6 +204,7 @@
     <ClCompile Include="..\source\debugText.cpp" />
     <ClCompile Include="..\source\flame.cpp" />
     <ClCompile Include="..\source\freezer.cpp" />
+    <ClCompile Include="..\source\iceBall.cpp" />
     <ClCompile Include="..\source\inputManager.cpp" />
     <ClCompile Include="..\source\magnet.cpp" />
     <ClCompile Include="..\source\pickup.cpp" />

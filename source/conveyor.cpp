@@ -47,7 +47,7 @@ void Conveyor::deactivate()
 }
 void Conveyor::onEnter(Object* other)
 {
-	if (!disabled)
+	if (!disabled && !other->hovering)
 		other->startMove(dir,2);
 	lastEntered = other;
 }
