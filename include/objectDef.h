@@ -49,6 +49,8 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		virtual bool allowEntry() {
 			return false;
 		}
+		void preferLeftTurn();
+		void preferRightTurn();
 		virtual void draw(int moveFractionX, int moveFractionY);
 		virtual void die();
 		virtual void doLogic();

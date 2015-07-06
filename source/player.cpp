@@ -171,9 +171,12 @@ public:
 		{
 			return false;
 		}
-		startMove(dir,2);
 		return true;
-	}	
+	}
+	void onEnterStart(Object *other, int dir)
+	{
+		startMove(dir, 2);
+	}
 	void die()
 	{
 		if (player == this)
@@ -195,7 +198,7 @@ public:
 	}
 };
 const char *Person::imageNames[4][3] = { { "gfx/personn1.png", "gfx/personn2.png", "gfx/personn3.png" },
-{ "gfx/persons1.png", "gfx/persons2.png", "gfx/persons3.png" },
 { "gfx/personw1.png", "gfx/personw2.png", "gfx/personw3.png" },
+{ "gfx/persons1.png", "gfx/persons2.png", "gfx/persons3.png" },
 { "gfx/persone1.png", "gfx/persone2.png", "gfx/persone3.png" } };
 SPRITE_MOVING(Person)

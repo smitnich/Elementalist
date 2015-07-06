@@ -5,6 +5,7 @@
 #include "defs.h"
 #include "moveRequest.h"
 #include <climits>
+#include <algorithm>
 
 SDL_Surface *personns[6] = { NULL };
 SDL_Surface *personew[6] = { NULL };
@@ -15,6 +16,7 @@ bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 Level *getCurrentLevel();
 void checkCreationQueue();
 void writeDebugText(char* in);
+bool checkCollision(Object *first, Object *second);
 Object *objectList[MAX_OBJECTS] = { NULL };
 extern std::list<Object*> creationQueue;
 extern std::list<MoveRequest> moveQueue;
@@ -34,6 +36,7 @@ Object::Object()
 	numFrames = 1;
 	faceDir = 0;
 	isMagnetic = false;
+	prevMove = D_NONE;
 }
 Object::Object(int x2, int y2)
 {
@@ -51,6 +54,7 @@ Object::Object(int x2, int y2)
 	isMagnetic = false;
 	hovering = false;
 	currentMovePriority = 0;
+	prevMove = D_NONE;
 }
 Object::Object(Object &other, int _x, int _y)
 {
@@ -124,6 +128,32 @@ bool Object::startMove(int dir, int priority)
 	tempSpeed = (double)3 * fpsModifier;
 	return true;
 }
+//If this function is called, the object will first attempt to move
+//in the same direction as before; failing that it will rotate left
+//until it has tried all directions
+void Object::preferLeftTurn() {
+	int dir = prevMove;
+	for (int i = 0; i < 4; i++) {
+		if (dir > 4)
+			dir = 1;
+		if (startMove(dir, 1))
+			return;
+		dir++;
+	}
+}
+//If this function is called, the object will first attempt to move
+//in the same direction as before; failing that it will rotate right
+//until it has tried all directions
+void Object::preferRightTurn() {
+	int dir = objMoveDir;
+	for (int i = 0; i < 4; i++) {
+		if (dir <= 0)
+			dir = 4;
+		if (startMove(dir, 1))
+			return;
+		dir--;
+	}
+}
 bool Object::requestEntry(Object *other, int dir)
 {
 	return false;
@@ -144,8 +174,9 @@ bool Object::objMove()
 	else if (objMoveDir == D_RIGHT)
 		checkX = 1;
 	Object *other = getCurrentLevel()->getObject(x + checkX, y + checkY);
-	if (other != NULL) {
+	if (other != NULL && checkCollision(this,other)) {
 		other->onEnterStart(this, objMoveDir);
+		onEnterStart(other, objMoveDir);
 	}
 	//Make sure that we can move where we're trying to
 	if (getCurrentLevel()->getTerrain(x,y)->requestExit(this,objMoveDir) && requestMove(x, y, checkX, checkY, this))
@@ -392,4 +423,33 @@ bool switchPlayerFocus() {
 	}
 	player = closestPlayer;
 	return true;
+}
+int oppositeDir(int dir) {
+	switch (dir) {
+	case D_LEFT:
+		return D_RIGHT;
+	case D_RIGHT:
+		return D_LEFT;
+	case D_UP:
+		return D_DOWN;
+	case D_DOWN:
+		return D_UP;
+	default:
+		return D_NONE;
+	}
+}
+//Determines whether or not two objects will collide within the square that
+//first is moving towards
+//First- the object that is moving towards the second object
+bool checkCollision(Object *first, Object *second) {
+	if (second->objMoveDir == D_NONE)
+		return true;
+	if (first->objMoveDir == oppositeDir(second->objMoveDir))
+		return true;
+	float secondMoveTime = ((float) TILE_SIZE - second->objMoveFraction) / ((float) second->tempSpeed);
+	float firstMoveTime = ((float) TILE_SIZE - first->objMoveFraction) / ((float) first->tempSpeed);
+	if (firstMoveTime < secondMoveTime)
+		return true;
+	else
+		return false;
 }

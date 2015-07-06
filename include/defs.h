@@ -7,8 +7,8 @@ enum directions_t
 {
 	D_NONE,
 	D_UP,
-	D_DOWN,
 	D_LEFT,
+	D_DOWN,
 	D_RIGHT
 };
 #define MAX_LEVEL 7

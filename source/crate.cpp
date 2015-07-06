@@ -27,6 +27,7 @@ public:
 	}
 	void onEnterStart(Object *other, int dir) {
 		startMove(dir, 2);
+		objMoveFraction = other->objMoveFraction;
 	}
 	bool requestEntry(Object *other, int dir)
 	{
@@ -41,13 +42,13 @@ public:
 		else if (dir == D_DOWN)
 			ydir = 1;
 		if (requestMove(x,y,xdir,ydir,this)){
-			objMoveFraction = other->objMoveFraction;
 			return true;
 		}
 		if (objMoveDir != D_NONE)
 			return true;
 		return false;
-	}	Object *clone(int x, int y);
+	}
+	Object *clone(int x, int y);
 };
 
 SPRITE_STATIONARY(Crate, "gfx/block.png")
