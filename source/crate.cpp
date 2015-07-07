@@ -118,5 +118,8 @@ public:
 	FrozenCrate(int x, int y) : Crate(x, y){
 		this->frozen = true;
 	}
+	void freeze() {
+		return;
+	}
 };
 SPRITE_STATIONARY(FrozenCrate, "gfx/iceBlock.png")

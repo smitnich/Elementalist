@@ -174,7 +174,7 @@ class Water : public Terrain
 {
 public:
 	void onEnter(Object *other);
-	Water(int _index);
+	Water();
 };
 class Duplicator : public Terrain
 {

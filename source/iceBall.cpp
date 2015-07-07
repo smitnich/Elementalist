@@ -1,5 +1,8 @@
 #include "objectDef.h"
 #include "defs.h"
+#include "level.h"
+
+void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY);
 
 class IceBall : public Object {
 public:
@@ -24,6 +27,7 @@ public:
 		return tmp;
 	}
 	void doLogic() {
+		getCurrentLevel()->getTerrain(x, y)->freeze();
 		objMove();
 		if (objMoveFraction == D_NONE) {
 			preferLeftTurn();
