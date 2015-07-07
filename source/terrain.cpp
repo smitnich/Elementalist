@@ -7,7 +7,6 @@ bool playSound(Mix_Chunk *input);
 unsigned char lookupWall(int index);
 int reverseDir(int dir);
 void doAssignQueue();
-bool checkIfTerrainIsGlobal(Terrain *in);
 extern int currentLevelNum;
 SDL_Surface *wall[47] = { NULL };
 SDL_Surface *tiles = NULL;
@@ -38,9 +37,14 @@ void addTerrainChange(int index, int changeTo)
 }
 void swapTerrain(int index, int newTerrain)
 {
-	Terrain *terrain = instantiateTerrain(newTerrain, index);
-	delete(getCurrentLevel()->mapLayer[index]);
-	getCurrentLevel()->mapLayer[index] = terrain;
+	if (index != -1) {
+		Terrain *terrain = instantiateTerrain(newTerrain, index);
+		delete(getCurrentLevel()->mapLayer[index]);
+		getCurrentLevel()->mapLayer[index] = terrain;
+	}
+	else {
+
+	}
 }
 void doTerrainChanges()
 {
@@ -54,7 +58,7 @@ void doTerrainChanges()
 }
 Floor::Floor()
 {
-	index = -1;
+	index = 0;
 	isTrigger = false;
 	this->sprite = tiles;
 }
@@ -78,7 +82,7 @@ void Exit::onEnter(Object *other)
 }
 Exit::Exit()
 {
-	index = -1;
+	index = 0;
 	isTrigger = false;
 	this->sprite = exitTile;
 }
@@ -198,7 +202,12 @@ void clearTerrain() {
 	for (int i = 0; i < curLevel->height*curLevel->width; i++)
 	{
 		Terrain *tmp = curLevel->mapLayer.at(i);
-		if (tmp != NULL && !checkIfTerrainIsGlobal(tmp))
+		if (tmp != NULL)
 			delete(tmp);
 	}
+}
+void Terrain::freeze() {
+	Terrain *ice = new IceFloor(this);
+	ice->index = index;
+	getCurrentLevel()->mapLayer[index] = ice;
 }

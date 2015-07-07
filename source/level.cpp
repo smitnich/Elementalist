@@ -47,12 +47,6 @@ void resetCreationQueue();
 void resetActivateQueue();
 class BounceWall;
 
-//For objects that don't have any state, it is pointless
-//to create a new instance for each one, so just create
-//one instance that all pointers refer to
-Terrain *baseFloor = NULL;
-Terrain *baseExit = NULL;
-
 Object* objectInit(unsigned int id, int x, int y);
 std::string constructLevelName(int);
 class Level *allLevels[MAX_LEVEL];
@@ -329,7 +323,7 @@ class Terrain *instantiateTerrain(int input, int i)
 		out = new Conveyor(D_UP);
 		break;
 	case m_exit:
-		out = baseExit;
+		out = new Exit();
 		break;
 	case m_pressure:
 		out = new PressureSwitch();
@@ -341,7 +335,9 @@ class Terrain *instantiateTerrain(int input, int i)
 		out = new ColorBarrier(0);
 		break;
 	case m_icefloor:
-		out = new IceFloor(baseFloor);
+		tmp = new Floor();
+		tmp->index = i;
+		out = new IceFloor(tmp);
 		break;
 	case m_bomb:
 		out = new Bomb();
@@ -377,7 +373,7 @@ class Terrain *instantiateTerrain(int input, int i)
 		out = new Freezer(true);
 		break;
 	case m_water:
-		out = new Water(i);
+		out = new Water();
 		break;
 	case m_bounceWall:
 		out = new BounceWall();
@@ -387,7 +383,7 @@ class Terrain *instantiateTerrain(int input, int i)
 		break;
 	case m_floor:
 	default:
-		out = baseFloor;
+		out = new Floor();
 		break;
 	}
 	//Give the object the id that was used to create them
@@ -424,21 +420,6 @@ unsigned char lookupWall(int index)
 	return lookupTable[tmp];
 }
 //Create the global instances to be used for all objects of their type
-void createGlobalInstances()
-{
-	baseFloor = new Floor();
-	baseExit = new Exit();
-}
-bool checkIfTerrainIsGlobal(Terrain *in) {
-	if (in == NULL)
-		return false;
-	return (in == baseFloor || in == baseExit);
-}
-void freeGlobalInstances()
-{
-	delete baseFloor;
-	delete baseExit;
-}
 //Clear the current level and load the next
 void switchLevel(int levelNum)
 {
