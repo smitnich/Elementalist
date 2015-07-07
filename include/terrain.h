@@ -65,6 +65,7 @@ public:
 	virtual void whileIn(Object *other) {
 		return;
 	}
+	virtual void freeze();
 };
 class Floor : public Terrain{
 public:
@@ -156,7 +157,8 @@ class IceFloor : public Terrain
 {
 public:
 	Terrain *within;
-	IceFloor(Terrain *within);
+	~IceFloor();
+	IceFloor(int index, Terrain *within);
 	bool requestEntry(Object* other, int dir);
 	bool requestExit(Object* other, int dir);
 	void onEnter(Object *other);
@@ -164,8 +166,9 @@ public:
 	void activate();
 	void deactivate();
 	void whileIn(Object *other);
+	void freeze();
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
-	IceFloor();
+	IceFloor(Terrain *within);
 };
 class Water : public Terrain
 {

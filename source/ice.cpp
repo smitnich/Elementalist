@@ -1,7 +1,12 @@
 #include "SDLFiles.h"
 #include "terrain.h"
 #include "sprites.h"
+#include "tileEnum.h"
 SDL_Surface *iceFloor = NULL;
+IceFloor::~IceFloor() {
+	if (within != NULL)
+		delete(within);
+}
 IceFloor::IceFloor(Terrain *within)
 {
 	this->within = within;
@@ -15,7 +20,8 @@ void IceFloor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOf
 }
 void IceFloor::onEnter(Object *other)
 {
-	within->onEnter(other);
+	if (within->id != m_water)
+		within->onEnter(other);
 	if (other->prevMove != D_NONE)
 		other->startMove(other->prevMove,2);
 }
@@ -36,4 +42,7 @@ void IceFloor::activate() {
 }
 void IceFloor::deactivate() {
 	within->deactivate();
+}
+void IceFloor::freeze() {
+	return;
 }
