@@ -8,6 +8,8 @@ extern std::list<Trigger*> activateQueue;
 void addActivateQueue(Trigger *in);
 void PressureSwitch::onEnter(Object *other)
 {
+	if (other->hovering)
+		return;
 	int length = connections.size();
 	for (int i = 0; i < length; i++)
 	{
@@ -16,6 +18,8 @@ void PressureSwitch::onEnter(Object *other)
 }
 void PressureSwitch::onExit(Object *other)
 {
+	if (other->hovering)
+		return;
 	int length = connections.size();
 	for (int i = 0; i < length; i++)
 	{
@@ -30,6 +34,8 @@ PressureSwitch::PressureSwitch()
 }
 void ToggleSwitch::onEnter(Object *other)
 {
+	if (other->hovering)
+		return;
 	enabled = !enabled;
 	int length = connections.size();
 	for (int i = 0; i < length; i++)
