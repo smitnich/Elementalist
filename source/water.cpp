@@ -6,16 +6,16 @@
 void addTerrainChange(int index, int changeTo);
 SDL_Surface *spr_water = NULL;
 
-Water::Water(int _index)
+Water::Water()
 {
-	index = _index;
+	index = 0;
 	sprite = spr_water;
 }
 void Water::onEnter(Object *other)
 {
 	if (other->frozen)
 		addTerrainChange(index, m_icefloor);
-	else if (!other->isPlayer)
+	else if (!other->isPlayer && !other->hovering)
 		addTerrainChange(index, m_floor);
 	if (!other->hovering)
 		other->drown();
