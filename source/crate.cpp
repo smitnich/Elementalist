@@ -25,7 +25,7 @@ public:
 	{
 		objMove();
 	}
-	void onEnterStart(Object *other, int dir) {
+	void onCollision(Object *other, int dir) {
 		startMove(dir, 2);
 		objMoveFraction = other->objMoveFraction;
 	}

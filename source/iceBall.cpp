@@ -35,7 +35,7 @@ public:
 	void heat() {
 		die();
 	}
-	void onEnterStart(Object *other, int dir){
+	void onCollision(Object *other, int dir){
 		other->freeze();
 	}
 };

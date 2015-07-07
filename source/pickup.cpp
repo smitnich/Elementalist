@@ -35,7 +35,7 @@ class Pickup : public Object
 public:
 	OBJECT_DECLARATION(Pickup, 1009)
 	//Pickups should be destroyed when any object enters their square
-	void onEnterStart(Object *other, int dir) {
+	void onCollision(Object *other, int dir) {
 		die();
 	}
 	bool requestEntry(Object *other, int dir)

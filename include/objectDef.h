@@ -59,7 +59,7 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		//Gets the sprite to be drawn on the screen
 		virtual SDL_Surface *getSprite() = 0;
 		virtual bool requestEntry(Object *other, int dir);
-		virtual void onEnterStart(Object *other, int dir) {
+		virtual void onCollision(Object *other, int dir) {
 			return;
 		}
 		virtual Object* createInstance(int x, int y) = 0;

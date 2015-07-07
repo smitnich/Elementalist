@@ -175,8 +175,8 @@ bool Object::objMove()
 		checkX = 1;
 	Object *other = getCurrentLevel()->getObject(x + checkX, y + checkY);
 	if (other != NULL && checkCollision(this,other)) {
-		other->onEnterStart(this, objMoveDir);
-		onEnterStart(other, objMoveDir);
+		other->onCollision(this, objMoveDir);
+		onCollision(other, objMoveDir);
 	}
 	//Make sure that we can move where we're trying to
 	if (getCurrentLevel()->getTerrain(x,y)->requestExit(this,objMoveDir) && requestMove(x, y, checkX, checkY, this))
