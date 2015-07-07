@@ -39,6 +39,7 @@ class Level
 	Terrain* getTerrain(int x, int y);
 	void loadConnections(FILE *inFile, int xSize, int ySize);
 	void makeConnections();
+	void checkTerrain();
 };
 Level *getCurrentLevel();
 #endif

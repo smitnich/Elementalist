@@ -106,6 +106,7 @@ void Level::loadAllLayers(char *buffer,FILE *inFile)
 	reloadMapLayer();
 	loadObjects();
 	makeConnections();
+	checkTerrain();
 }
 void Level::loadObjects()
 {
@@ -121,7 +122,18 @@ void Level::loadObjects()
 			if (tmp != 0)
 			{
 				tmpObj = objectInit(tmp,x,y);
-				mapLayer[convertIndex(x, y)]->onEnter(tmpObj);
+			}
+		}
+	}
+}
+void Level::checkTerrain() {
+	for (int x = 0; x < width; x++)
+	{
+		for (int y = 0; y < height; y++)
+		{
+			if (origObjectLayer[convertIndex(x, y)] != 0)
+			{
+				mapLayer[convertIndex(x, y)]->onEnter(objectLayer[convertIndex(x,y)]);
 			}
 		}
 	}
@@ -171,6 +183,7 @@ Terrain* Level::getTerrain(int x, int y)
 {
 	if (x < 0 || y < 0 || x >= width || y >= height)
 		return NULL;
+	Terrain *tmp = mapLayer[convertIndex(x, y)];
 	return mapLayer[convertIndex(x, y)];
 }
 void Level::loadLayer(FILE* inFile, std::string str, int xSize, int ySize)
@@ -302,6 +315,7 @@ void Level::reloadMapLayer()
 class Terrain *instantiateTerrain(int input, int i)
 {
 	Terrain *out = NULL;
+	Terrain *tmp;
 	switch (input)
 	{
 	case m_defaultWall:
