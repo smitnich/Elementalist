@@ -13,6 +13,7 @@ SDL_Surface *deadPerson = NULL;
 class Level* getCurrentLevel();
 extern double delta;
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
+void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY);
 Level *getCurrentLevel();
 void checkCreationQueue();
 void writeDebugText(char* in);
@@ -136,8 +137,18 @@ void Object::preferLeftTurn() {
 	for (int i = 0; i < 4; i++) {
 		if (dir > 4)
 			dir = 1;
-		if (startMove(dir, 1))
+		if (startMove(dir, 1)) {
 			return;
+		}
+		else if (i == 0)
+		{
+			int moveFractionX = 0;
+			int moveFractionY = 0;
+			calculateMoveFraction(dir, 1, &moveFractionX, &moveFractionY);
+			Object *collision = getCurrentLevel()->getObject(x + moveFractionX, y + moveFractionY);
+			if (collision != NULL)
+				this->onCollision(collision, dir);
+		}
 		dir++;
 	}
 }
