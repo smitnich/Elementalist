@@ -23,9 +23,11 @@ void queuePlaceAll()
 	for (int i = 0; i < size; i++)
 	{
 		tmp = moveQueue.front();
+		moveQueue.pop_front();
+		if (tmp.obj == NULL)
+			continue;
 		x = tmp.x+tmp.checkX;
 		y = tmp.y+tmp.checkY;
-		moveQueue.pop_front();
 		Object *blockingObject = level->getObject(x, y);
 		tmp.obj->x = x;
 		tmp.obj->y = y;
@@ -60,8 +62,10 @@ void queueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY)
 	{
 		tmp = moveQueue.front();
 		moveQueue.pop_front();
-		doDraw(tmp.obj,moveFractionX,moveFractionY);
-		moveQueue.push_back(tmp);
+		if (tmp.obj != NULL) {
+			doDraw(tmp.obj, moveFractionX, moveFractionY);
+			moveQueue.push_back(tmp);
+		}
 	}
 }
 void addMoveRequest(Object *obj, int x, int y, int checkX, int checkY)
