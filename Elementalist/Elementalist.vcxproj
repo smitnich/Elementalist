@@ -202,6 +202,7 @@
   <ItemGroup>
     <ClCompile Include="..\source\activateQueue.cpp" />
     <ClCompile Include="..\source\debugText.cpp" />
+    <ClCompile Include="..\source\fireBall.cpp" />
     <ClCompile Include="..\source\flame.cpp" />
     <ClCompile Include="..\source\freezer.cpp" />
     <ClCompile Include="..\source\iceBall.cpp" />

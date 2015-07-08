@@ -2,6 +2,9 @@
 #include "terrain.h"
 #include "sprites.h"
 #include "tileEnum.h"
+
+void addTerrainChange(int index, int changeTo);
+
 SDL_Surface *iceFloor = NULL;
 IceFloor::~IceFloor() {
 	if (within != NULL)
@@ -45,4 +48,7 @@ void IceFloor::deactivate() {
 }
 void IceFloor::freeze() {
 	return;
+}
+void IceFloor::heat() {
+	addTerrainChange(index, within->id);
 }

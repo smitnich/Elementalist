@@ -66,6 +66,7 @@ public:
 		return;
 	}
 	virtual void freeze();
+	virtual void heat();
 };
 class Floor : public Terrain{
 public:
@@ -167,6 +168,7 @@ public:
 	void deactivate();
 	void whileIn(Object *other);
 	void freeze();
+	void heat();
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	IceFloor(Terrain *within);
 };
