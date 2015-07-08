@@ -42,9 +42,6 @@ void swapTerrain(int index, int newTerrain)
 		delete(getCurrentLevel()->mapLayer[index]);
 		getCurrentLevel()->mapLayer[index] = terrain;
 	}
-	else {
-
-	}
 }
 void doTerrainChanges()
 {
@@ -210,4 +207,7 @@ void Terrain::freeze() {
 	Terrain *ice = new IceFloor(this);
 	ice->index = index;
 	getCurrentLevel()->mapLayer[index] = ice;
+}
+void Terrain::heat() {
+	return;
 }

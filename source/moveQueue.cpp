@@ -32,7 +32,8 @@ void queuePlaceAll()
 		if (blockingObject == NULL)
 		{
 			level->assignObject(x, y, tmp.obj);
-			level->getTerrain(x, y)->onEnter(tmp.obj);
+			Terrain *tmpTerrain = level->getTerrain(x, y);
+			tmpTerrain->onEnter(tmp.obj);
 		}
 		else if (blockingObject->allowEntry()) {
 			blockingObject->onEnter(tmp.obj, tmp.checkX, tmp.checkY);
@@ -40,6 +41,14 @@ void queuePlaceAll()
 		else
 		{
 			moveQueue.push_back(tmp);
+		}
+	}
+}
+void removeMoveRequest(Object *remove) {
+	std::list<MoveRequest>::iterator it;
+	for (it = moveQueue.begin(); it != moveQueue.end(); ++it) {
+		if (it->obj == remove) {
+			it->obj = NULL;
 		}
 	}
 }

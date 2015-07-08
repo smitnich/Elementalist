@@ -22,6 +22,10 @@ Object *objectList[MAX_OBJECTS] = { NULL };
 extern std::list<Object*> creationQueue;
 extern std::list<MoveRequest> moveQueue;
 
+void doDeleteQueue();
+void addDeleteQueue(Object *in);
+void removeMoveRequest(Object *remove);
+
 //The basic template for the Objects in the game
 Object::Object()
 {
@@ -74,7 +78,7 @@ Object::Object(Object &other, int _x, int _y)
 //Clean up the object
 void Object::die()
 {
-	delete this;
+	addDeleteQueue(this);
 }
 Object::~Object()
 {
@@ -146,8 +150,10 @@ void Object::preferLeftTurn() {
 			int moveFractionY = 0;
 			calculateMoveFraction(dir, 1, &moveFractionX, &moveFractionY);
 			Object *collision = getCurrentLevel()->getObject(x + moveFractionX, y + moveFractionY);
-			if (collision != NULL)
+			if (collision != NULL) {
 				this->onCollision(collision, dir);
+				collision->onCollision(this, collision->objMoveDir);
+			}
 		}
 		dir++;
 	}
@@ -156,12 +162,22 @@ void Object::preferLeftTurn() {
 //in the same direction as before; failing that it will rotate right
 //until it has tried all directions
 void Object::preferRightTurn() {
-	int dir = objMoveDir;
+	int dir = prevMove;
 	for (int i = 0; i < 4; i++) {
 		if (dir <= 0)
 			dir = 4;
-		if (startMove(dir, 1))
+		if (startMove(dir, 1)) {
 			return;
+		}
+		else if (i == 0)
+		{
+			int moveFractionX = 0;
+			int moveFractionY = 0;
+			calculateMoveFraction(dir, 1, &moveFractionX, &moveFractionY);
+			Object *collision = getCurrentLevel()->getObject(x + moveFractionX, y + moveFractionY);
+			if (collision != NULL)
+				this->onCollision(collision, dir);
+		}
 		dir--;
 	}
 }
@@ -377,6 +393,7 @@ void objectLogic()
 	}
 	queuePlaceAll();
 	checkCreationQueue();
+	doDeleteQueue();
 }
 void doPlayer()
 {

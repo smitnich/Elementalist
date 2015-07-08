@@ -45,6 +45,7 @@ void doActivateQueue();
 void resetMoveQueue();
 void resetCreationQueue();
 void resetActivateQueue();
+void resetDeleteQueue();
 class BounceWall;
 
 Object* objectInit(unsigned int id, int x, int y);
@@ -111,7 +112,6 @@ void Level::loadAllLayers(char *buffer,FILE *inFile)
 void Level::loadObjects()
 {
 	pickupCount = 0;
-	Object *tmpObj;
 	objectLayer.clear();
 	objectLayer.resize(height*width);
 	for (int x = 0; x < width; x++)
@@ -121,7 +121,7 @@ void Level::loadObjects()
 			unsigned int tmp = origObjectLayer[convertIndex(x, y)];
 			if (tmp != 0)
 			{
-				tmpObj = objectInit(tmp,x,y);
+				objectInit(tmp,x,y);
 			}
 		}
 	}
@@ -183,7 +183,6 @@ Terrain* Level::getTerrain(int x, int y)
 {
 	if (x < 0 || y < 0 || x >= width || y >= height)
 		return NULL;
-	Terrain *tmp = mapLayer[convertIndex(x, y)];
 	return mapLayer[convertIndex(x, y)];
 }
 void Level::loadLayer(FILE* inFile, std::string str, int xSize, int ySize)
@@ -461,6 +460,7 @@ void switchLevel(int levelNum)
 	resetMoveQueue();
 	resetCreationQueue();
 	resetActivateQueue();
+	resetDeleteQueue();
 	levelStartTime = getTicks();
 }
 //Make the level name given the number
