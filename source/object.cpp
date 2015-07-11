@@ -44,6 +44,7 @@ Object::Object()
 	faceDir = 0;
 	isMagnetic = false;
 	prevMove = D_NONE;
+	lifetime = -1.0;
 }
 Object::Object(int x2, int y2)
 {
@@ -62,6 +63,7 @@ Object::Object(int x2, int y2)
 	hovering = false;
 	currentMovePriority = 0;
 	prevMove = D_NONE;
+	lifetime = -1;
 }
 Object::Object(Object &other, int _x, int _y)
 {

@@ -10,6 +10,7 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		bool hovering;
 		int queuedMove;
 		int prevMove;
+		double lifetime;
 		bool isPlayer;
 		bool isMagnetic;
 		int currentMovePriority;
@@ -61,6 +62,9 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		virtual bool requestEntry(Object *other, int dir);
 		virtual void onCollision(Object *other, int dir) {
 			return;
+		}
+		void setLifetime(double time) {
+			lifetime = time;
 		}
 		virtual Object* createInstance(int x, int y) = 0;
 };

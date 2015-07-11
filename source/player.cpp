@@ -196,6 +196,9 @@ public:
 	{
 		return new Person(*this, _x, _y);
 	}
+	void heat() {
+		die();
+	}
 };
 const char *Person::imageNames[4][3] = { { "gfx/personn1.png", "gfx/personn2.png", "gfx/personn3.png" },
 { "gfx/personw1.png", "gfx/personw2.png", "gfx/personw3.png" },

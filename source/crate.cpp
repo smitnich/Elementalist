@@ -1,20 +1,22 @@
 ﻿//Basic movable object, can be moved in a line with other crates
 #include "objectDef.h"
-#include "objectDef.h"
 #include "sprites.h"
 #include "level.h"
+Object *addSwitchQueue(Object *in, int switchId);
 extern Object *player;
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 Level* getCurrentLevel();
 void objMove();
 
-class Crate : public Object{
+Object* objectInit(unsigned int id, int x, int y);
+
+class Crate : public Object {
 public:
 	OBJECT_DECLARATION(Crate, 1001)
 	bool isMovableBlock()
 	{
 		return true;
-	};
+	}
 	void electrocute(){
 
 	}
@@ -48,6 +50,10 @@ public:
 			return true;
 		return false;
 	}
+	void heat() {
+		Object *newObj = addSwitchQueue(this, 1012);
+		newObj->setLifetime(60.0);
+	}
 	Object *clone(int x, int y);
 };
 
@@ -60,6 +66,9 @@ public:
 	ColorCrate1(int x2, int y2) : Crate(x2,y2)
 	{
 		
+	}
+	void heat() {
+		return;
 	}
 };
 
@@ -110,6 +119,9 @@ public:
 		tmp->y = _y;
 		return tmp;
 	}
+	void heat() {
+		return;
+	}
 };
 SPRITE_STATIONARY(HeavyCrate, "gfx/heavyBlock.png")
 class FrozenCrate : Crate {
@@ -120,6 +132,9 @@ public:
 	}
 	void freeze() {
 		return;
+	}
+	void heat() {
+		die();
 	}
 };
 SPRITE_STATIONARY(FrozenCrate, "gfx/iceBlock.png")

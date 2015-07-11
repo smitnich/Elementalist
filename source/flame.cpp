@@ -7,13 +7,13 @@ bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 Level* getCurrentLevel();
 bool objMove();
 
+extern double delta;
 
 class Flame : Object
 {
 public:
 	OBJECT_DECLARATION(Flame,1012)
-
-		Flame(int x2, int y2) : Object(x2,y2)
+	Flame(int x2, int y2) : Object(x2,y2)
 	{
 		hovering = false;
 		numFrames = 1;
@@ -35,6 +35,10 @@ public:
 	}
 	void doLogic()
 	{
+		lifetime -= delta;
+		if (lifetime < 0) {
+			die();
+		}
 		for (int xMod = -1; xMod <= 1; xMod++)
 			for (int yMod = -1; yMod <= 1; yMod++)
 			{
