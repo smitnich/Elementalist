@@ -46,7 +46,7 @@ void resetMoveQueue();
 void resetCreationQueue();
 void resetActivateQueue();
 void resetDeleteQueue();
-class BounceWall;
+void resetSwitchQueue();
 
 Object* objectInit(unsigned int id, int x, int y);
 std::string constructLevelName(int);
@@ -461,6 +461,7 @@ void switchLevel(int levelNum)
 	resetCreationQueue();
 	resetActivateQueue();
 	resetDeleteQueue();
+	resetSwitchQueue();
 	levelStartTime = getTicks();
 }
 //Make the level name given the number

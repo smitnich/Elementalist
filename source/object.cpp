@@ -26,6 +26,8 @@ void doDeleteQueue();
 void addDeleteQueue(Object *in);
 void removeMoveRequest(Object *remove);
 
+void doSwitchQueue();
+
 //The basic template for the Objects in the game
 Object::Object()
 {
@@ -394,6 +396,7 @@ void objectLogic()
 	queuePlaceAll();
 	checkCreationQueue();
 	doDeleteQueue();
+	doSwitchQueue();
 }
 void doPlayer()
 {
