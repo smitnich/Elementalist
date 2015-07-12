@@ -18,6 +18,11 @@ void resetSwitchQueue()
 }
 Object *addSwitchQueue(Object *in, int switchId)
 {
+	std::list<SwitchRequest>::iterator it;
+	for (it = objectSwitchQueue.begin(); it != objectSwitchQueue.end(); ++it) {
+		if (it->obj == in)
+			return in;
+	}
 	SwitchRequest req;
 	req.obj = in;
 	req.switchTo = objectInit(switchId, in->x, in->y);
