@@ -3,7 +3,7 @@
 #include "sprites.h"
 #include "tileEnum.h"
 
-void addTerrainChange(int index, int changeTo);
+Terrain* addTerrainChange(int index, int changeTo);
 SDL_Surface *spr_water = NULL;
 
 Water::Water()

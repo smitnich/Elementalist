@@ -23,34 +23,46 @@ extern bool won;
 struct TerrainChangeRequest
 {
 	int index;
-	int changeTo;
+	Terrain *changeTo;
 };
-std::list<TerrainChangeRequest *> changeReqs;
+std::list<TerrainChangeRequest> changeReqs;
 Level *getCurrentLevel();
 Terrain* instantiateTerrain(int newTerrain, int offset);
-void addTerrainChange(int index, int changeTo)
+Terrain *addTerrainChange(int index, int changeTo)
 {
-	TerrainChangeRequest *req = new TerrainChangeRequest;
-	req->index = index;
-	req->changeTo = changeTo;
+	TerrainChangeRequest req;
+	req.index = index;
+	req.changeTo = instantiateTerrain(changeTo, index);
 	changeReqs.push_back(req);
+	return req.changeTo;
 }
-void swapTerrain(int index, int newTerrain)
+Terrain *addTerrainChange(int index, Terrain *newTerrain) {
+	std::list<TerrainChangeRequest>::iterator it;
+	for (it = changeReqs.begin(); it != changeReqs.end(); ++it) {
+		if (it->index == index)
+			return newTerrain;
+	}
+	TerrainChangeRequest req;
+	req.index = index;
+	req.changeTo = newTerrain;
+	changeReqs.push_back(req);
+	return newTerrain;
+}
+void swapTerrain(int index, Terrain *newTerrain)
 {
 	if (index != -1) {
-		Terrain *terrain = instantiateTerrain(newTerrain, index);
 		delete(getCurrentLevel()->mapLayer[index]);
-		getCurrentLevel()->mapLayer[index] = terrain;
+		getCurrentLevel()->mapLayer[index] = newTerrain;
 	}
 }
 void doTerrainChanges()
 {
-	TerrainChangeRequest *req = NULL;
+	TerrainChangeRequest req;
 	while (!changeReqs.empty())
 	{
 		req = changeReqs.front();
 		changeReqs.pop_front();
-		swapTerrain(req->index, req->changeTo);
+		swapTerrain(req.index, req.changeTo);
 	}
 }
 Floor::Floor()
