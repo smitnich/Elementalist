@@ -347,6 +347,9 @@ Object* objectInit(unsigned int id, int x, int y)
 	curLevel->assignObject(x, y, newObject);
 	return newObject;
 }
+Object *objectInit(unsigned int id, int idx) {
+	return objectInit(id, idx % TILE_SIZE, idx / TILE_SIZE);
+}
 void clearObjects()
 {
 	Level *curLevel = getCurrentLevel();
