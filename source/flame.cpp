@@ -23,6 +23,7 @@ public:
 		objMoveFraction = 0;
 		faceDir = 0;
 		prevMove = D_NONE;
+		lifetime = nan(NULL);
 	}
 	Object* clone(int _x, int _y)
 	{
@@ -44,9 +45,12 @@ public:
 			{
 				if (xMod == 0 && yMod == 0)
 					continue;
-				Object *tmp = getCurrentLevel()->getObject(x + xMod, y + yMod);
-				if (tmp != NULL)
-					tmp->heat();
+				Object *tmpObj = getCurrentLevel()->getObject(x + xMod, y + yMod);
+				if (tmpObj != NULL)
+					tmpObj->heat();
+				Terrain *tmpTerrain = getCurrentLevel()->getTerrain(x + xMod, y + yMod);
+				if (tmpTerrain != NULL)
+					tmpTerrain->heat();
 			}
 	}
 };

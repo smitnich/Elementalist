@@ -28,6 +28,7 @@ enum tiles_t
 	m_yellowBarrier,
 	m_bounceWall,
 	m_risingWall,
+	m_oilspill,
 
 	OBJ_BLOCK = 1001,
 	OBJ_HEAVY_BLOCK,

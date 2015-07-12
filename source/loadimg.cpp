@@ -106,6 +106,7 @@ void imgInit()
 	spr_colorBarrier[0] = loadOptimizedIMG("gfx/wall/colorBarrier1.png");
 	spr_bounceWall = loadOptimizedIMG("gfx/wall/bounceWall.png");
 	spr_risingWall = loadOptimizedIMG("gfx/risingWall.png");
+	spr_oilFloor = loadOptimizedIMG("gfx/oilfloor.png");
 	createButtons();
 }
 //Optimize the image for proper depth and for transparecny

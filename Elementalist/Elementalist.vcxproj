@@ -209,6 +209,7 @@
     <ClCompile Include="..\source\iceBall.cpp" />
     <ClCompile Include="..\source\inputManager.cpp" />
     <ClCompile Include="..\source\magnet.cpp" />
+    <ClCompile Include="..\source\oil.cpp" />
     <ClCompile Include="..\source\pickup.cpp" />
     <ClCompile Include="..\source\pipes.cpp" />
     <ClCompile Include="..\source\renderQueue.cpp" />

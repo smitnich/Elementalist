@@ -394,6 +394,12 @@ class Terrain *instantiateTerrain(int input, int i)
 	case m_risingWall:
 		out = new RisingWall(i);
 		break;
+	case m_oilspill:
+		tmp = new Floor();
+		tmp->index = i;
+		tmp->id = m_floor;
+		out = new OilFloor(tmp);
+		break;
 	case m_floor:
 	default:
 		out = new Floor();
