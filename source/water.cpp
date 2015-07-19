@@ -13,6 +13,8 @@ Water::Water()
 }
 void Water::onEnter(Object *other)
 {
+	if (coveredTerrain)
+		return;
 	if (other->frozen)
 		addTerrainChange(index, m_icefloor);
 	else if (!other->isPlayer && !other->hovering)
