@@ -13,7 +13,7 @@ void PressureSwitch::onEnter(Object *other)
 	int length = connections.size();
 	for (int i = 0; i < length; i++)
 	{
-		connections.at(i)->activate();
+		connections.at(i)->activateWrapper();
 	}
 }
 void PressureSwitch::onExit(Object *other)
@@ -23,7 +23,7 @@ void PressureSwitch::onExit(Object *other)
 	int length = connections.size();
 	for (int i = 0; i < length; i++)
 	{
-		connections.at(i)->deactivate();
+		connections.at(i)->deactivateWrapper();
 	}
 }
 PressureSwitch::PressureSwitch()
@@ -41,9 +41,9 @@ void ToggleSwitch::onEnter(Object *other)
 	for (int i = 0; i < length; i++)
 	{
 		if (enabled)
-			connections.at(i)->activate();
+			connections.at(i)->activateWrapper();
 		else
-			connections.at(i)->deactivate();
+			connections.at(i)->deactivateWrapper();
 	}
 	sprite = spr_pressureToggle[enabled];
 }
