@@ -7,6 +7,10 @@
 #include <climits>
 #include <algorithm>
 
+#ifdef GEKKO
+#include <cmath>
+#endif
+
 SDL_Surface *personns[6] = { NULL };
 SDL_Surface *personew[6] = { NULL };
 SDL_Surface *deadPerson = NULL;
@@ -44,7 +48,9 @@ Object::Object()
 	faceDir = 0;
 	isMagnetic = false;
 	prevMove = D_NONE;
-	lifetime = -1.0;
+	lifeTime = 0.0;
+	timeToLive = nan("");
+	within = NULL;
 }
 Object::Object(int x2, int y2)
 {
@@ -63,7 +69,9 @@ Object::Object(int x2, int y2)
 	hovering = false;
 	currentMovePriority = 0;
 	prevMove = D_NONE;
-	lifetime = -1;
+	lifeTime = 0.0;
+	timeToLive = nan("");
+	within = NULL;
 }
 Object::Object(Object &other, int _x, int _y)
 {
@@ -87,6 +95,12 @@ void Object::die()
 Object::~Object()
 {
 	getCurrentLevel()->assignObject(x, y, NULL);
+}
+void Object::updateTime() {
+	lifeTime += delta;
+	timeToLive -= delta;
+	if (timeToLive < 0)
+		die();
 }
 int Object::getMoveDir()
 {
