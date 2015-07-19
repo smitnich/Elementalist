@@ -210,7 +210,7 @@ bool Object::objMove()
 		onCollision(other, objMoveDir);
 	}
 	//Make sure that we can move where we're trying to
-	if (getCurrentLevel()->getTerrain(x,y)->requestExit(this,objMoveDir) && requestMove(x, y, checkX, checkY, this))
+	if (getCurrentLevel()->getTerrain(x, y)->requestExitWrapper(this, objMoveDir) && requestMove(x, y, checkX, checkY, this))
 	{
 		objMoveFraction += tempSpeed*delta;
 	}
@@ -390,12 +390,12 @@ void objectLogic()
 	{
 		Object *tmp = curLevel->objectLayer.at(i);
 		if (tmp != NULL) {
-			curLevel->getTerrain(tmp->x, tmp->y)->whileIn(tmp);
+			curLevel->getTerrain(tmp->x, tmp->y)->whileInWrapper(tmp);
 			//The Object may have been deleted during the while in call,
 			//so reload it here
 			tmp = curLevel->objectLayer.at(i);
 			if (tmp != NULL)
-				tmp->doLogic();
+				tmp->update();
 		}
 	}
 	queuePlaceAll();
