@@ -22,7 +22,6 @@ int reverseDir(int dir) {
 class Pipe : public Object {
 public:
 	OBJECT_DECLARATION(Pipe, 0)
-	Object *within;
 	int dir1, dir2;
 	Pipe(int x2, int y2) : Object(x2,y2) {
 		hovering = false;
@@ -101,6 +100,11 @@ public:
 			doDraw(within, moveFractionX, moveFractionY);
 		addRenderQueue(this);
 	}
+	void update() {
+		updateTime();
+		doLogic();
+	}
+
 };
 SPRITE_STATIONARY(Pipe, NULL)
 class PipeNW : Pipe {
