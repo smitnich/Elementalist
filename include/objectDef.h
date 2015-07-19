@@ -10,10 +10,11 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		bool hovering;
 		int queuedMove;
 		int prevMove;
-		double lifetime;
+		double timeToLive, lifeTime;
 		bool isPlayer;
 		bool isMagnetic;
 		int currentMovePriority;
+		Object *within;
 		virtual bool isMovableBlock();
 		Object(int x, int y);
 		Object();
@@ -55,6 +56,13 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		virtual void draw(int moveFractionX, int moveFractionY);
 		virtual void die();
 		virtual void doLogic();
+		void updateTime();
+		virtual void update() {
+			if (within != NULL)
+				within->update();
+			updateTime();
+			doLogic();
+		}
 		virtual Object* clone(int x, int y) = 0;
 		virtual void loadImages() = 0;
 		//Gets the sprite to be drawn on the screen
@@ -63,8 +71,8 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		virtual void onCollision(Object *other, int dir) {
 			return;
 		}
-		void setLifetime(double time) {
-			lifetime = time;
+		void setTimeToLive(double time) {
+			timeToLive = time;
 		}
 		virtual Object* createInstance(int x, int y) = 0;
 };

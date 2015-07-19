@@ -29,7 +29,8 @@ public:
 	}
 	void onCollision(Object *other, int dir) {
 		startMove(dir, 2);
-		objMoveFraction = other->objMoveFraction;
+		if (other->objMoveDir != D_NONE)
+			objMoveFraction = other->objMoveFraction;
 	}
 	bool requestEntry(Object *other, int dir)
 	{
@@ -52,7 +53,7 @@ public:
 	}
 	void heat() {
 		Object *newObj = addSwitchQueue(this, 1012);
-		newObj->setLifetime(60.0);
+		newObj->setTimeToLive(60.0);
 	}
 	Object *clone(int x, int y);
 };

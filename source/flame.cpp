@@ -23,7 +23,6 @@ public:
 		objMoveFraction = 0;
 		faceDir = 0;
 		prevMove = D_NONE;
-		lifetime = nan(NULL);
 	}
 	Object* clone(int _x, int _y)
 	{
@@ -36,10 +35,8 @@ public:
 	}
 	void doLogic()
 	{
-		lifetime -= delta;
-		if (lifetime < 0) {
-			die();
-		}
+		if (lifeTime < 30.0f)
+			return;
 		for (int xMod = -1; xMod <= 1; xMod++)
 			for (int yMod = -1; yMod <= 1; yMod++)
 			{
@@ -50,7 +47,7 @@ public:
 					tmpObj->heat();
 				Terrain *tmpTerrain = getCurrentLevel()->getTerrain(x + xMod, y + yMod);
 				if (tmpTerrain != NULL)
-					tmpTerrain->heat();
+					tmpTerrain->heatWrapper();
 			}
 	}
 };
