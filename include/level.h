@@ -3,16 +3,17 @@
 #include "terrain.h"
 #include <vector>
 #include "defs.h"
-//The levelnames of the basic "campaign"
-const std::string LevelStrings[MAX_LEVEL] = 
+const std::string LevelStrings[] =
 {
-"Dummy",//0
-"test",//1
-"test2",//2
-"test3",//3
-"test4",//4
-"test5",
-"test6"
+	"Dummy",//0
+	"test",//1
+	"test2",//2
+	"test3",//3
+	"test4",//4
+	"test5",
+	"test6",
+	"test7",
+	"test8"
 };
 class Level
 {

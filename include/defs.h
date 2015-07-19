@@ -11,7 +11,6 @@ enum directions_t
 	D_DOWN,
 	D_RIGHT
 };
-#define MAX_LEVEL 7
 #define NUM_FRAMES 3
 #define NUM_TILES 4
 #define MAX_CHANNELS 2
@@ -23,4 +22,5 @@ enum directions_t
 #define TILE_SIZE 48
 #define EMPTY 0
 #define SOLID 1
+#define MAX_LEVEL 9
 #endif
