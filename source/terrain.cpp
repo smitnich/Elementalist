@@ -65,6 +65,11 @@ void doTerrainChanges()
 		swapTerrain(req.index, req.changeTo);
 	}
 }
+void Terrain::onDestroyWrapper() {
+	swapTerrain(this->index, within);
+	within = NULL;
+	onDestroy();
+}
 Floor::Floor()
 {
 	index = 0;
@@ -191,7 +196,7 @@ void BounceWall::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int y
 bool BounceWall::requestEntry(Object *other, int dir) {
 	Terrain *terrain = getCurrentLevel()->getTerrain(other->x,other->y);
 	other->prevMove = reverseDir(dir);
-	terrain->onEnter(other);
+	terrain->onEnterWrapper(other);
 	if (other->objMoveDir != dir)
 		return true;
 	else
@@ -222,4 +227,7 @@ void Terrain::freeze() {
 }
 void Terrain::heat() {
 	return;
+}
+void Terrain::placeWithin(Terrain *terrain) {
+	within = terrain;
 }

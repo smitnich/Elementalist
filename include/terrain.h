@@ -13,20 +13,102 @@ class Terrain
 public:
 	int id;
 	bool isTrigger;
+	bool coveredTerrain;
 	int index;
+	Terrain *within;
 	SDL_Surface *sprite;
 	Terrain()
 	{
+		within = NULL;
+		coveredTerrain = false;
+		isTrigger = false;
 	}
 	Terrain(SDL_Surface *sp)
 	{
+		within = NULL;
+		coveredTerrain = false;
+		isTrigger = false;
 		this->sprite = sp;
 	}
 	virtual ~Terrain() {
 	}
-	virtual bool requestEntry(Object* other, int dir)
+	void remove();
+	bool requestEntryWrapper(Object *other, int dir) {
+		return (requestEntry(other, dir) && (within == NULL || within->requestEntryWrapper(other, dir)));
+	}
+	bool requestExitWrapper(Object *other, int dir) {
+		return (requestExit(other, dir) && (within == NULL || within->requestEntryWrapper(other, dir)));
+	}
+	void onEnterWrapper(Object *other) {
+		onEnter(other);
+		if (within != NULL)
+			within->onEnterWrapper(other);
+	}
+	void onExitWrapper(Object *other) {
+		onExit(other);
+		if (within != NULL)
+			within->onExitWrapper(other);
+	}
+	void activateWrapper() {
+		activate();
+		if (within != NULL)
+			within->activate();
+	}
+	void deactivateWrapper() {
+		deactivate();
+		if (within != NULL)
+			within->activate();
+	}
+	void onDestroyWrapper();
+
+	void drawWrapper(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff) {
+		if (within != NULL)
+			within->draw(drawTo, xTile, yTile, xOff, yOff);
+		draw(drawTo, xTile, yTile, xOff, yOff);
+	}
+	void whileInWrapper(Object *other) {
+		whileIn(other);
+		if (within != NULL)
+			within->whileIn(other);
+	}
+	void freezeWrapper() {
+		freeze();
+		if (within != NULL)
+			within->freeze();
+	}
+	void heatWrapper() {
+		heat();
+		if (within != NULL)
+			within->heat();
+	}
+	void placeWithin(Terrain *terrain);
+private:
+	virtual void freeze();
+	virtual void heat();
+	virtual void whileIn(Object *other) {
+		return;
+	}
+	virtual void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
 	{
-		return true;
+		int xStart = xTile*TILE_SIZE + xInitial + xOff;
+		int yStart = yTile*TILE_SIZE + yInitial + yOff;
+		apply_surface(xStart, yStart, sprite, drawTo);
+	}
+	virtual void onDestroy()
+	{
+		return;
+	}
+	virtual void onCreate()
+	{
+		return;
+	}
+	virtual void activate()
+	{
+		return;
+	}
+	virtual void deactivate()
+	{
+		return;
 	}
 	virtual bool requestExit(Object* other, int dir)
 	{
@@ -40,33 +122,10 @@ public:
 	{
 		return;
 	}
-	virtual void activate()
+	virtual bool requestEntry(Object* other, int dir)
 	{
-		return;
+		return true;
 	}
-	virtual void deactivate()
-	{
-		return;
-	}
-	virtual void onDestroy()
-	{
-		return;
-	}
-	virtual void onCreate()
-	{
-		return;
-	}
-	virtual void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
-	{
-		int xStart = xTile*TILE_SIZE + xInitial+xOff;
-		int yStart = yTile*TILE_SIZE + yInitial+yOff;
-		apply_surface(xStart, yStart, sprite, drawTo);
-	}
-	virtual void whileIn(Object *other) {
-		return;
-	}
-	virtual void freeze();
-	virtual void heat();
 };
 class Floor : public Terrain{
 public:
@@ -157,7 +216,6 @@ public:
 class IceFloor : public Terrain
 {
 public:
-	Terrain *within;
 	~IceFloor();
 	IceFloor(int index, Terrain *within);
 	bool requestEntry(Object* other, int dir);

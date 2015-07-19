@@ -22,19 +22,19 @@ void OilFloor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOf
 	int xStart = xTile*TILE_SIZE + xInitial + xOff;
 	int yStart = yTile*TILE_SIZE + yInitial + yOff;
 	if (within != NULL)
-		within->draw(drawTo, xTile, yTile, xOff, yOff);
+		within->drawWrapper(drawTo, xTile, yTile, xOff, yOff);
 	apply_surface(xStart, yStart, sprite, drawTo);
 }
 void OilFloor::onEnter(Object *other)
 {
 	objWithin = true;
 	if (within != NULL)
-		within->onEnter(other);
+		within->onEnterWrapper(other);
 }
 void OilFloor::onExit(Object *other) {
 	objWithin = false;
 	if (within != NULL)
-		within->onExit(other);
+		within->onExitWrapper(other);
 	if (heated) {
 		addTerrainChange(index, within);
 		within = NULL;
@@ -42,22 +42,22 @@ void OilFloor::onExit(Object *other) {
 	}
 }
 bool OilFloor::requestEntry(Object *other, int dir) {
-	return (within != NULL && within->requestEntry(other, dir));
+	return (within != NULL && within->requestEntryWrapper(other, dir));
 }
 bool OilFloor::requestExit(Object *other, int dir) {
-	return (within != NULL && within->requestEntry(other, dir));
+	return (within != NULL && within->requestEntryWrapper(other, dir));
 }
 void OilFloor::whileIn(Object *other) {
 	if (within != NULL)
-		within->whileIn(other);
+		within->whileInWrapper(other);
 }
 void OilFloor::activate() {
 	if (within != NULL)
-		within->activate();
+		within->activateWrapper();
 }
 void OilFloor::deactivate() {
 	if (within != NULL)
-		within->deactivate();
+		within->deactivateWrapper();
 }
 void OilFloor::freeze() {
 	IceFloor *tmp = (IceFloor*) addTerrainChange(index, m_icefloor);
@@ -69,6 +69,6 @@ void OilFloor::heat() {
 	}
 	else {
 		addTerrainChange(index, within);
-		objectInit(1012, index);
+		objectInit(1012, index)->setTimeToLive(60.0);
 	}
 }

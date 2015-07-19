@@ -27,7 +27,7 @@ public:
 		return tmp;
 	}
 	void doLogic() {
-		getCurrentLevel()->getTerrain(x, y)->freeze();
+		getCurrentLevel()->getTerrain(x, y)->freezeWrapper();
 		objMove();
 		if (objMoveFraction == D_NONE) {
 			preferLeftTurn();
