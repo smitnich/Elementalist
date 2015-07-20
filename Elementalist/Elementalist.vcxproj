@@ -192,6 +192,7 @@
     <ClInclude Include="..\include\objectDef.h" />
     <ClInclude Include="..\include\resource.h" />
     <ClInclude Include="..\include\sdlFiles.h" />
+    <ClInclude Include="..\include\sound.h" />
     <ClInclude Include="..\include\sprites.h" />
     <ClInclude Include="..\include\terrain.h" />
     <ClInclude Include="..\include\tileEnum.h" />
@@ -201,6 +202,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\activateQueue.cpp" />
+    <ClCompile Include="..\source\basicTerrain.cpp" />
     <ClCompile Include="..\source\debugText.cpp" />
     <ClCompile Include="..\source\deleteQueue.cpp" />
     <ClCompile Include="..\source\fireBall.cpp" />

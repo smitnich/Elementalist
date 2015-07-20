@@ -4,8 +4,6 @@
 #include <list>
 void switchLevel(int levelNum);
 bool playSound(Mix_Chunk *input);
-unsigned char lookupWall(int index);
-int reverseDir(int dir);
 void doAssignQueue();
 extern int currentLevelNum;
 SDL_Surface *wall[47] = { NULL };
@@ -17,7 +15,6 @@ SDL_Surface *spr_bomb = NULL;
 SDL_Surface *spr_colorBarrier[BARRIER_TYPES];
 SDL_Surface *spr_bounceWall;
 SDL_Surface *spr_risingWall;
-int colorBlockIds[BARRIER_TYPES] = { OBJ_YELLOW_BLOCK };
 extern Mix_Chunk *snd_explode;
 extern bool won;
 struct TerrainChangeRequest
@@ -70,145 +67,6 @@ void Terrain::onDestroyWrapper() {
 	within = NULL;
 	onDestroy();
 }
-Floor::Floor()
-{
-	index = 0;
-	isTrigger = false;
-	this->sprite = tiles;
-}
-bool Wall::requestEntry(Object *other, int dir)
-{
-	return false;
-}
-Wall::Wall(int _index)
-{
-	index = _index;
-	isTrigger = false;
-	if (index < 0)
-		sprite = wall[0];
-	else
-		sprite = wall[lookupWall(index)];
-}
-void Exit::onEnter(Object *other)
-{
-	if (other->isPlayer)
-		won = true;
-}
-Exit::Exit()
-{
-	index = 0;
-	isTrigger = false;
-	this->sprite = exitTile;
-}
-Barrier::Barrier()
-{
-	index = 0;
-	disabled = false;
-	this->sprite = barrierTile;
-}
-void Barrier::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
-{
-	int xStart = xTile*TILE_SIZE + xInitial + xOff;
-	int yStart = yTile*TILE_SIZE + yInitial + yOff;
-	apply_surface(xStart, yStart, tiles, drawTo);
-	if (!disabled)
-		apply_surface(xStart, yStart, sprite, drawTo);
-}
-bool Barrier::requestEntry(Object *other, int dir)
-{
-	return disabled;
-}
-void Barrier::activate()
-{
-	disabled = true;
-}
-void Barrier::deactivate()
-{
-	disabled = false;
-}
-void ColorBarrier::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
-{
-	int xStart = xTile*TILE_SIZE + xInitial + xOff;
-	int yStart = yTile*TILE_SIZE + yInitial + yOff;
-	apply_surface(xStart, yStart, tiles, drawTo);
-	apply_surface(xStart, yStart, sprite, drawTo);
-}
-ColorBarrier::ColorBarrier(int type)
-{
-	index = 0;
-	colorType = type;
-	sprite = spr_colorBarrier[type];
-}
-bool ColorBarrier::requestEntry(Object *other, int dir)
-{
-	//Need to check if the other object is a block of the right
-	//color and delete this terrain as well as the block
-	if (other->id == colorBlockIds[this->colorType])
-	{
-		return true;
-	}
-	return false;
-}
-void ColorBarrier::onEnter(Object *other)
-{
-	addTerrainChange(index, m_floor);
-	other->die();
-}
-Bomb::Bomb()
-{
-	index = 0;
-	sprite = spr_bomb;
-}
-void Bomb::onEnter(Object *other)
-{
-	other->die();
-	addTerrainChange(index, m_floor);
-	playSound(snd_explode);
-}
-void Bomb::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
-{
-	int xStart = xTile*TILE_SIZE + xInitial + xOff;
-	int yStart = yTile*TILE_SIZE + yInitial + yOff;
-	apply_surface(xStart, yStart, tiles, drawTo);
-	apply_surface(xStart, yStart, sprite, drawTo);
-}
-RaisedFloor::RaisedFloor()
-{
-	sprite = spr_raisedFloor;
-}
-bool RaisedFloor::requestEntry(Object *other, int dir)
-{
-	if (other == NULL)
-		return true;
-	return !other->isMovableBlock();
-}
-BounceWall::BounceWall() {
-	sprite = spr_bounceWall;
-}
-void BounceWall::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
-{
-	int xStart = xTile*TILE_SIZE + xInitial + xOff;
-	int yStart = yTile*TILE_SIZE + yInitial + yOff;
-	apply_surface(xStart, yStart, tiles, drawTo);
-	apply_surface(xStart, yStart, sprite, drawTo);
-}
-
-bool BounceWall::requestEntry(Object *other, int dir) {
-	Terrain *terrain = getCurrentLevel()->getTerrain(other->x,other->y);
-	other->prevMove = reverseDir(dir);
-	terrain->onEnterWrapper(other);
-	if (other->objMoveDir != dir)
-		return true;
-	else
-		return false;
-}
-RisingWall::RisingWall(int _index) {
-	sprite = spr_risingWall;
-	index = _index;
-}
-void RisingWall::onExit(Object *other) {
-	addTerrainChange(index, m_defaultWall);
-}
 void clearTerrain() {
 	Level *curLevel = getCurrentLevel();
 	if (curLevel == NULL)
@@ -220,6 +78,67 @@ void clearTerrain() {
 			delete(tmp);
 	}
 }
+Terrain::Terrain()
+{
+	within = NULL;
+	coveredTerrain = false;
+	isTrigger = false;
+}
+Terrain::Terrain(SDL_Surface *sp)
+{
+	within = NULL;
+	coveredTerrain = false;
+	isTrigger = false;
+	this->sprite = sp;
+}
+Terrain::~Terrain() {
+}
+bool Terrain::requestEntryWrapper(Object *other, int dir) {
+	return (requestEntry(other, dir) && (within == NULL || within->requestEntryWrapper(other, dir)));
+}
+bool Terrain::requestExitWrapper(Object *other, int dir) {
+	return (requestExit(other, dir) && (within == NULL || within->requestEntryWrapper(other, dir)));
+}
+void Terrain::onEnterWrapper(Object *other) {
+	onEnter(other);
+	if (within != NULL)
+		within->onEnterWrapper(other);
+}
+void Terrain::onExitWrapper(Object *other) {
+	onExit(other);
+	if (within != NULL)
+		within->onExitWrapper(other);
+}
+void Terrain::activateWrapper() {
+	activate();
+	if (within != NULL)
+		within->activate();
+}
+void Terrain::deactivateWrapper() {
+	deactivate();
+	if (within != NULL)
+		within->activate();
+}
+void Terrain::drawWrapper(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff) {
+	if (within != NULL)
+		within->draw(drawTo, xTile, yTile, xOff, yOff);
+	draw(drawTo, xTile, yTile, xOff, yOff);
+}
+void Terrain::whileInWrapper(Object *other) {
+	whileIn(other);
+	if (within != NULL)
+		within->whileIn(other);
+}
+void Terrain::freezeWrapper() {
+	freeze();
+	if (within != NULL)
+		within->freeze();
+}
+void Terrain::heatWrapper() {
+	heat();
+	if (within != NULL)
+		within->heat();
+}
 void Terrain::freeze() {
 	Terrain *ice = new IceFloor(this);
 	ice->index = index;
@@ -230,4 +149,45 @@ void Terrain::heat() {
 }
 void Terrain::placeWithin(Terrain *terrain) {
 	within = terrain;
+}
+void Terrain::whileIn(Object *other) {
+	return;
+}
+void Terrain::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
+{
+	int xStart = xTile*TILE_SIZE + xInitial + xOff;
+	int yStart = yTile*TILE_SIZE + yInitial + yOff;
+	apply_surface(xStart, yStart, sprite, drawTo);
+}
+void Terrain::onDestroy()
+{
+	return;
+}
+void Terrain::onCreate()
+{
+	return;
+}
+void Terrain::activate()
+{
+	return;
+}
+void Terrain::deactivate()
+{
+	return;
+}
+bool Terrain::requestExit(Object* other, int dir)
+{
+	return true;
+}
+void Terrain::onEnter(Object* other)
+{
+	return;
+}
+void Terrain::onExit(Object* other)
+{
+	return;
+}
+bool Terrain::requestEntry(Object* other, int dir)
+{
+	return true;
 }

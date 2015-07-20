@@ -2,9 +2,6 @@
 #include <iostream>
 #include "defs.h"
 Mix_Chunk *pushBlock;
-void outputLog(const char[]);
-void outputLog(char[]);
-void outputLog(int);
 bool channelArray[MAX_CHANNELS];
 bool levelMusicLoaded[MAX_LEVEL];
 Mix_Music *levelMusic[MAX_LEVEL];
