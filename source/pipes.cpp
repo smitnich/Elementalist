@@ -23,7 +23,9 @@ class Pipe : public Object {
 public:
 	OBJECT_DECLARATION(Pipe, 0)
 	int dir1, dir2;
+	int moveDir;
 	Pipe(int x2, int y2) : Object(x2,y2) {
+		moveDir = D_NONE;
 		hovering = false;
 		numFrames = 1;
 		x = x2;
@@ -47,6 +49,7 @@ public:
 		if (within != NULL) {
 			moveCompleted = within->objMove();
 			if (moveCompleted) {
+				within->faceDir = moveDir;
 				within = NULL;
 			}
 		}
@@ -58,7 +61,6 @@ public:
 			return true;
 	}
 	void onEnter(Object *other, int _xChange, int _yChange) {
-		int moveDir = D_NONE;
 		int xChange = 0;
 		int yChange = 0;
 		moveDir = chooseDirection(reverseDir(other->prevMove));
