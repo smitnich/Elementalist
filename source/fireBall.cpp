@@ -9,7 +9,7 @@ void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, in
 class FireBall : public Object {
 public:
 	OBJECT_DECLARATION(FireBall, 0)
-		int lastMoveDir;
+		int prevMove;
 	FireBall(int x2, int y2) : Object(x2, y2) {
 		hovering = true;
 		x = x2;
@@ -18,7 +18,6 @@ public:
 		objMoveFraction = 0;
 		faceDir = D_LEFT;
 		prevMove = D_NONE;
-		lastMoveDir = D_NONE;
 	}
 	Object *clone(int _x, int _y) {
 		Object *tmp = new FireBall(_x, _y);

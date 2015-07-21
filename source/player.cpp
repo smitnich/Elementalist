@@ -4,7 +4,7 @@
 #include "level.h"
 #include "debugText.h"
 extern int pressureCount;
-extern int lastMoveDir;
+extern int prevMove;
 extern unsigned int lastInputTime;
 extern int frame;
 extern bool playerPlaced;
@@ -35,7 +35,6 @@ class Person : public Object
 public:
 	OBJECT_DECLARATION(Person, 1004)
 	int active;
-	int lastMoveDir;
 	Person(const Person &other, int _x, int _y)
 	{
 		active = true;
@@ -63,7 +62,7 @@ public:
 		isPlayer = true;
 		playerPlaced = true;
 		playerDead = false;
-		lastMoveDir = D_NONE;
+		prevMove = D_NONE;
 	}
 	void makeElement(bool doSecond)
 	{
@@ -103,7 +102,7 @@ public:
 			if (x < MAP_SIZE && objMoveFraction == 0 && !frozen)
 			{
 				startMove(D_RIGHT,1);
-				lastMoveDir = D_RIGHT;
+				prevMove = D_RIGHT;
 				faceDir = D_RIGHT;
 			}
 			lastInput = B_RIGHT;
@@ -113,7 +112,7 @@ public:
 			if (x > 0 && objMoveFraction == 0 && !frozen)
 			{
 				startMove(D_LEFT,1);
-				lastMoveDir = D_LEFT;
+				prevMove = D_LEFT;
 				faceDir = D_LEFT;
 			}
 			lastInput = B_LEFT;
@@ -124,7 +123,7 @@ public:
 			{
 				startMove(D_DOWN,1);
 				faceDir = D_DOWN;
-				lastMoveDir = D_DOWN;
+				prevMove = D_DOWN;
 			}
 			queuedMove = D_DOWN;
 			lastInput = B_DOWN;
@@ -134,7 +133,7 @@ public:
 			{
 				startMove(D_UP,1);
 				faceDir = D_UP;
-				lastMoveDir = D_UP;
+				prevMove = D_UP;
 			}
 			queuedMove = D_UP;
 			lastInput = B_UP;

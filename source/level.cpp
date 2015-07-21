@@ -20,7 +20,7 @@ extern std::string startLevelName;
 //The last time to have user input
 extern unsigned int lastInputTime;
 //The last movement of the player
-extern int lastMoveDir;
+extern int prevMove;
 //Whether to display the level name
 extern bool displayName;
 unsigned int levelStartTime;

@@ -49,13 +49,13 @@ SDL_Surface *X::spriteew[6]; \
 SDL_Surface *X::spritens[6]; \
 SDL_Surface *X::getSprite() { \
 	if (objMoveDir == D_NONE) { \
-		if (lastMoveDir == D_RIGHT) \
+		if (prevMove == D_RIGHT) \
 			return spriteew[3]; \
-		else if (lastMoveDir == D_LEFT) \
+		else if (prevMove == D_LEFT) \
 			return spriteew[0]; \
-		else if (lastMoveDir == D_UP) \
+		else if (prevMove == D_UP) \
 			return spritens[0]; \
-		else if (lastMoveDir == D_DOWN) \
+		else if (prevMove == D_DOWN) \
 			return spritens[3]; \
 		else \
 			return stationary; \
