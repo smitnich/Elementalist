@@ -5,6 +5,7 @@
 void switchLevel(int levelNum);
 bool playSound(Mix_Chunk *input);
 void doAssignQueue();
+void applyTerrain(int terrainNum, int index);
 extern int currentLevelNum;
 SDL_Surface *wall[47] = { NULL };
 SDL_Surface *tiles = NULL;
@@ -140,9 +141,7 @@ void Terrain::heatWrapper() {
 		within->heat();
 }
 void Terrain::freeze() {
-	Terrain *ice = new IceFloor(this);
-	ice->index = index;
-	getCurrentLevel()->mapLayer[index] = ice;
+	applyTerrain(m_icefloor,index);
 }
 void Terrain::heat() {
 	return;
