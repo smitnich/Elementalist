@@ -34,6 +34,7 @@ public:
 	void freezeWrapper();
 	void heatWrapper();
 	void placeWithin(Terrain *terrain);
+	bool checkNewTerrainPlacement(int index);
 private:
 	virtual void freeze();
 	virtual void heat();

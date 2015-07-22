@@ -199,6 +199,9 @@ bool Terrain::checkNewTerrainPlacement(int index) {
 	return true;
 }
 void applyTerrain(int input, int index) {
+	if (!getCurrentLevel()->mapLayer[index]->checkNewTerrainPlacement(input)) {
+		return;
+	}
 	Terrain *terrain = instantiateTerrain(input, index);
 	terrain->index = index;
 	terrain->within = getCurrentLevel()->mapLayer[index];
