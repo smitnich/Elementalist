@@ -524,10 +524,3 @@ void nextLevel() {
 	if (currentLevelNum < MAX_LEVEL-1)
 		switchLevel(currentLevelNum + 1);
 }
-void applyTerrain(int input, int index) {
-	Terrain *terrain = instantiateTerrain(input, index);
-	terrain->index = index;
-	terrain->within = getCurrentLevel()->mapLayer[index];
-	getCurrentLevel()->mapLayer[index] = terrain;
-	terrain->within->coveredTerrain = true;
-}

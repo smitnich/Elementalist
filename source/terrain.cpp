@@ -190,3 +190,18 @@ bool Terrain::requestEntry(Object* other, int dir)
 {
 	return true;
 }
+bool Terrain::checkNewTerrainPlacement(int index) {
+	if (within != NULL && !within->checkNewTerrainPlacement(index)) {
+		return false;
+	}
+	if (index == id)
+		return false;
+	return true;
+}
+void applyTerrain(int input, int index) {
+	Terrain *terrain = instantiateTerrain(input, index);
+	terrain->index = index;
+	terrain->within = getCurrentLevel()->mapLayer[index];
+	getCurrentLevel()->mapLayer[index] = terrain;
+	terrain->within->coveredTerrain = true;
+}
