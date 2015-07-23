@@ -1,6 +1,6 @@
 #ifdef GEKKO
 #include "wii.h"
-#include "input_def.h"
+#include "inputDef.h"
 #include "defs.h"
 bool nunchuk_dir(double, int, int);
 //Which expansion is plugged in

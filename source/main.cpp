@@ -5,7 +5,7 @@
 #elif LINUX
 #include <unistd.h>
 #endif
-#include "input_def.h"
+#include "inputDef.h"
 //If wii
 #ifdef GEKKO
 #include "wii.h"

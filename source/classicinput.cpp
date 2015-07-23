@@ -1,5 +1,5 @@
 #ifdef GEKKO
-#include "input_def.h"
+#include "inputDef.h"
 #include "wii.h"
 //The percentage of the total magnitude that the stick must be moved to register as pressed
 #define CLASSIC_SENSITIVITY 0.75

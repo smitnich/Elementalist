@@ -1,5 +1,5 @@
 #ifdef GEKKO
-#include "input_def.h"
+#include "inputDef.h"
 #include "defs.h"
 #include "wii.h"
 extern int padnum;

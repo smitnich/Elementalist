@@ -1,6 +1,6 @@
 #include "sdlFiles.h"
 #include "sprites.h"
-#include "input_def.h"
+#include "inputDef.h"
 #include <iostream>
 extern bool won;
 //The base object class, all gameplay elements derive from this

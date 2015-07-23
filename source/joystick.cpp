@@ -4,7 +4,7 @@
 #elif LINUX
 #include <SDL/SDL.h>
 #endif
-#include "input_def.h"
+#include "inputDef.h"
 #define JOYSTICK_MAX 32767;
 #define MAX_BUTTONS 32
 //The direction that the hat is currently facing

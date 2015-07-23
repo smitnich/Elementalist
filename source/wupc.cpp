@@ -1,5 +1,5 @@
 #ifdef GEKKO
-#include "input_def.h"
+#include "inputDef.h"
 #include "wii.h"
 #include <wupc/wupc.h>
 void outputLog(char[]);

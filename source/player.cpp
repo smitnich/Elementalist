@@ -1,6 +1,6 @@
 #include "objectDef.h"
 #include "sprites.h"
-#include "input_def.h"
+#include "inputDef.h"
 #include "level.h"
 #include "debugText.h"
 extern int pressureCount;
@@ -101,9 +101,9 @@ public:
 		case B_RIGHT:
 			if (x < MAP_SIZE && objMoveFraction == 0 && !frozen)
 			{
-				startMove(D_RIGHT,1);
-				prevMove = D_RIGHT;
-				faceDir = D_RIGHT;
+				if (startMove(D_RIGHT, 1)) {
+					faceDir = D_RIGHT;
+				}
 			}
 			lastInput = B_RIGHT;
 			queuedMove = D_RIGHT;
@@ -111,9 +111,9 @@ public:
 		case B_LEFT:
 			if (x > 0 && objMoveFraction == 0 && !frozen)
 			{
-				startMove(D_LEFT,1);
-				prevMove = D_LEFT;
-				faceDir = D_LEFT;
+				if (startMove(D_LEFT, 1)) {
+					faceDir = D_LEFT;
+				}
 			}
 			lastInput = B_LEFT;
 			queuedMove = D_LEFT;
@@ -121,9 +121,9 @@ public:
 		case B_DOWN:
 			if (y < MAP_SIZE && objMoveFraction == 0 && !frozen)
 			{
-				startMove(D_DOWN,1);
-				faceDir = D_DOWN;
-				prevMove = D_DOWN;
+				if (startMove(D_DOWN, 1)) {
+					faceDir = D_DOWN;
+				}
 			}
 			queuedMove = D_DOWN;
 			lastInput = B_DOWN;
@@ -131,9 +131,9 @@ public:
 		case B_UP:
 			if (y > 0 && objMoveFraction == 0 && !frozen)
 			{
-				startMove(D_UP,1);
-				faceDir = D_UP;
-				prevMove = D_UP;
+				if (startMove(D_UP, 1)) {
+					faceDir = D_UP;
+				}
 			}
 			queuedMove = D_UP;
 			lastInput = B_UP;

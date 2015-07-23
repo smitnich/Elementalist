@@ -1,4 +1,4 @@
-#include "input_def.h"
+#include "inputDef.h"
 #include "input.h"
 #ifdef GEKKO
 #include "wii.h"

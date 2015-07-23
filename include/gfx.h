@@ -1,5 +1,5 @@
 #include "sdlFiles.h"
-#include "input_def.h"
+#include "inputDef.h"
 #include "font.h"
 #include "objectDef.h"
 #include "defs.h"

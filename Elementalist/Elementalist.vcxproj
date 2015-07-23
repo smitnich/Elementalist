@@ -184,7 +184,7 @@
     <ClInclude Include="..\include\gfx.h" />
     <ClInclude Include="..\include\imageMacros.h" />
     <ClInclude Include="..\include\input.h" />
-    <ClInclude Include="..\include\input_def.h" />
+    <ClInclude Include="..\include\inputdef.h" />
     <ClInclude Include="..\include\keyinput.h" />
     <ClInclude Include="..\include\level.h" />
     <ClInclude Include="..\include\moveRequest.h" />
