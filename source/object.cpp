@@ -210,6 +210,9 @@ bool Object::objMove()
 	int checkY = 0;
 	if (objMoveDir == D_NONE)
 		return false;
+	if (objMoveFraction == 0.0) {
+		prevMove = objMoveDir;
+	}
 	if (objMoveDir == D_LEFT)
 		checkX = -1;
 	else if (objMoveDir == D_UP)
