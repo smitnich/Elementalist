@@ -24,6 +24,7 @@ void setPanning(unsigned int channel, unsigned int right)
 //Initializes the music
 void musicInit()
 {
+	numSongs = sizeof(musicNames) / sizeof(musicNames[0]);
 	int i;
 	for (i = 0; i < MAX_LEVEL; i++)
 	{
@@ -55,15 +56,16 @@ void playMusic(int levelNum)
 	if (levelNum < 0 || levelNum > MAX_LEVEL)
 		return;
 	char *fileName = musicNames[levelNum-1];
-	if (fileName == NULL)
-		return;
 	char buffer[80];
-	if (levelMusic[levelNum - 1] == NULL)
+	if (levelMusic[(levelNum - 1) % numSongs] == NULL)
 	{
+		if (levelNum - 1 >= numSongs) {
+			fileName = musicNames[(levelNum - 1) % numSongs];
+		}
 		sprintf(buffer, "%s%s", musicPath.c_str(), fileName);
 		levelMusic[levelNum - 1] = Mix_LoadMUS(buffer);
 	}
-	Mix_PlayMusic(levelMusic[levelNum-1], -1);
+	Mix_PlayMusic(levelMusic[(levelNum-1) % numSongs], -1);
 }
 bool playSound(Mix_Chunk *input)
 {
