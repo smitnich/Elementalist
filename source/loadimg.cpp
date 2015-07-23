@@ -9,6 +9,7 @@ SDL_Surface* loadOptimizedIMG(const char *fileName);
 struct TerrainChangeRequest;
 std::list<Object *> *imagesToLoad = NULL;
 extern std::list<TerrainChangeRequest *> changeReqs;
+std::list<SDL_Surface*> allImages;
 
 void createButtons();
 void loadAllImages();
@@ -107,6 +108,8 @@ void imgInit()
 	spr_bounceWall = loadOptimizedIMG("gfx/wall/bounceWall.png");
 	spr_risingWall = loadOptimizedIMG("gfx/risingWall.png");
 	spr_oilFloor = loadOptimizedIMG("gfx/oilfloor.png");
+	spr_levelButton = loadOptimizedIMG("gfx/ui/levelButton.png");
+	spr_levelButtonSelected = loadOptimizedIMG("gfx/ui/levelButtonSelected.png");
 	createButtons();
 }
 //Optimize the image for proper depth and for transparecny
@@ -120,6 +123,7 @@ SDL_Surface* loadOptimizedIMG(const char *fileName)
 	SDL_Surface *newImage = SDL_DisplayFormat( loadedImage );
 	unsigned int colorkey = SDL_MapRGB( newImage->format, 0xFF, 0x00, 0xDC );
 	SDL_SetColorKey(newImage, SDL_SRCCOLORKEY, colorkey );
+	allImages.push_front(newImage);
 	SDL_FreeSurface(loadedImage);
 	return newImage;
 }
@@ -139,5 +143,13 @@ void loadAllImages()
 		Object *tmp = imagesToLoad->front();
 		imagesToLoad->pop_front();
 		tmp->loadImages();
+	}
+}
+void freeAllImages() {
+	SDL_Surface *tmp;
+	while (allImages.size() > 0) {
+		tmp = allImages.front();
+		allImages.pop_front();
+		SDL_FreeSurface(tmp);
 	}
 }

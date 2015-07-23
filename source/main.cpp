@@ -27,7 +27,7 @@ void gfxInit();
 bool fontInit();
 void switchLevel(int level);
 void clearObjects();
-void freeSurface();
+void freeAllImages();
 void checkEvents();
 void drawScreen();
 void objectLogic();
@@ -137,7 +137,7 @@ void cleanup(){
 	Mix_CloseAudio();
 	clearObjects();
 	SDL_Quit();
-	freeSurface();
+	freeAllImages();
 #ifdef GEKKO
 	MOUSE_Deinit();
 	if (HWButton == -1)

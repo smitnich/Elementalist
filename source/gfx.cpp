@@ -3,6 +3,7 @@
 #include "objectDef.h"
 #include "debugText.h"
 #include "defs.h"
+
 extern Object *player;
 SDL_Surface *iceBlock = NULL;
 SDL_Rect borderRect[4];
@@ -221,26 +222,4 @@ void changeTextToWin()
 		SDL_FreeSurface(text);
 	displayName = true;
 	text = TTF_RenderText_Solid(font, "You win!", textColor);
-}
-//Free all the surfaces loaded
-//Todo: Update with all the surfaces
-void freeSurface()
-{
-	SDL_FreeSurface(button);
-	SDL_FreeSurface(tiles);
-	SDL_FreeSurface(background);
-	SDL_FreeSurface(selector);
-	SDL_FreeSurface(cursor);
-	SDL_FreeSurface(exitTile);
-	SDL_FreeSurface(barrierTile);
-	int i = 0;
-	for (i = 0; i < wallnum-1; i++)
-		SDL_FreeSurface(wall[i]);
-	for (i = 0; i < 6; i++)
-	{
-		SDL_FreeSurface(personns[i]);
-		SDL_FreeSurface(personew[i]);
-	}
-	for (i = 0; i < 9; i++)
-		SDL_FreeSurface(textBox[i]);
 }
