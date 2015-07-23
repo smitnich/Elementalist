@@ -60,6 +60,9 @@ public:
 		else
 			return true;
 	}
+	void freeze() {
+		return;
+	}
 	void onEnter(Object *other, int _xChange, int _yChange) {
 		int xChange = 0;
 		int yChange = 0;
