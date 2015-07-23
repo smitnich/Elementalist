@@ -5,6 +5,20 @@
 #include "tileEnum.h"
 #include "wallLookup.h"
 #include <queue>
+
+extern const std::string LevelStrings[] =
+{
+	"Dummy",//0
+	"test",//1
+	"test2",//2
+	"test3",//3
+	"test4",//4
+	"test5",
+	"test6",
+	"test7",
+	"test8"
+};
+
 //The number of objects created
 extern unsigned int numObjects;
 const char* header = "[header]";

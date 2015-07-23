@@ -116,7 +116,8 @@ void init(int argc, char* argv[])
 	}
 	gfxInit();
 	fontInit();
-	switchLevel(1);
+	makeLevelButtons();
+	switchLevel(selectLevel());
 	//fprintf(stderr, "\n\n\n\n\n");
 	atexit(SDL_Quit);
 	//parseDoc("levels/xml.ele");

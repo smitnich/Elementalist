@@ -19,4 +19,6 @@ extern SDL_Surface *spr_colorBarrier[];
 extern SDL_Surface *spr_colorBlock[];
 extern SDL_Surface *spr_bounceWall;
 extern SDL_Surface *spr_risingWall;
-extern SDL_Surface *spr_oilFloor;
+extern SDL_Surface *spr_oilFloor;extern SDL_Surface *spr_oilFloor;
+extern SDL_Surface *spr_levelButton;
+extern SDL_Surface *spr_levelButtonSelected;

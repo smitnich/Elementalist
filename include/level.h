@@ -3,18 +3,9 @@
 #include "terrain.h"
 #include <vector>
 #include "defs.h"
-const std::string LevelStrings[] =
-{
-	"Dummy",//0
-	"test",//1
-	"test2",//2
-	"test3",//3
-	"test4",//4
-	"test5",
-	"test6",
-	"test7",
-	"test8"
-};
+
+extern const std::string LevelStrings[];
+
 class Level
 {
 	public:
