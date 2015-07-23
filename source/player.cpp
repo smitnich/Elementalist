@@ -63,6 +63,7 @@ public:
 		playerPlaced = true;
 		playerDead = false;
 		prevMove = D_NONE;
+		active = true;
 	}
 	void makeElement(bool doSecond)
 	{
