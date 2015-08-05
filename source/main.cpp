@@ -1,4 +1,5 @@
 #include "sdlFiles.h"
+#include "defs.h"
 #include <iostream>
 #ifdef _WIN32
 #include <direct.h>
@@ -37,6 +38,8 @@ void handleInput();
 void createGlobalInstances();
 void freeGlobalInstances();
 void changeTextToDead();
+int selectLevel();
+void makeLevelButtons();
 extern bool defaultPath, fullScreen, done, displayName;
 extern std::string levelPath, appPath;
 extern SDL_Surface *screen;
@@ -45,6 +48,7 @@ framesPerSecond, levelChange, levelStartCounter;
 unsigned long lastTicks = 0;
 extern unsigned int lastInputTime;
 double delta = 0.0;
+int currentScreen = SCR_LEVELSELECT;
 extern bool playerDead;
 unsigned int ticks = 0;
 extern char debugString[];

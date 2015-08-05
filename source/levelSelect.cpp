@@ -14,6 +14,7 @@ extern std::list<SDL_Surface *> allImages;
 extern const std::string LevelStrings[];
 extern TTF_Font *font;
 extern int mouseX, mouseY;
+extern int currentScreen;
 extern SDL_Surface *screen;
 SDL_Surface *spr_levelButton;
 SDL_Surface *spr_levelButtonSelected;
@@ -116,6 +117,7 @@ void checkInput() {
 	}
 }
 int selectLevel() {
+	currentScreen = SCR_LEVELSELECT;
 	finished = false;
 	while (!finished) {
 		renderLevelSelectScreen();
@@ -123,5 +125,19 @@ int selectLevel() {
 		checkInput();
 		SDL_Flip(screen);
 	}
+	currentScreen = SCR_GAME;
 	return selected;
+}
+void handleLevelSelectClick(int x, int y) {
+	LevelButton tmpButton;
+	int newY = y + scrollDistance*(buttonSizeY + spacingY);
+	int i;
+	for (i = 1; i < MAX_LEVEL; i++) {
+		tmpButton = allButtons[i];
+		if ((x >= tmpButton.x) && x <= (tmpButton.x + spr_levelButton->w) && (newY >= tmpButton.y) && newY <= (tmpButton.y + spr_levelButton->h)) {
+			selected = i;
+			finished = true;
+			return;
+		}
+	}
 }

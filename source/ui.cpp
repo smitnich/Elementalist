@@ -6,7 +6,9 @@ void apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination);
 SDL_Surface* loadOptimizedIMG(const char *fileName);
 extern int xInitial;
 extern int yInitial;
+extern int currentScreen;
 
+void handleLevelSelectClick(int x, int y);
 void restartLevel();
 void nextLevel();
 void prevLevel();
@@ -47,9 +49,16 @@ void renderUserInterface(SDL_Surface *screen) {
 	}
 }
 void checkClick(int x, int y) {
-	for (std::list<InterfaceMember>::iterator it = allMembers.begin(); it != allMembers.end(); ++it)
-	{
-		if (x >= it->x && x <= (it->x + it->sprite->w) && y >= it->y && y <= (it->y + it->sprite->h))
-			it->doSomething();
+	switch (currentScreen) {
+	case SCR_GAME:
+		for (std::list<InterfaceMember>::iterator it = allMembers.begin(); it != allMembers.end(); ++it)
+		{
+			if (x >= it->x && x <= (it->x + it->sprite->w) && y >= it->y && y <= (it->y + it->sprite->h))
+				it->doSomething();
+		}
+		break;
+	case SCR_LEVELSELECT:
+		handleLevelSelectClick(x, y);
+		break;
 	}
 }
