@@ -73,9 +73,6 @@ void drawScreen()
 	renderHighSprites(xOffset, yOffset);
 	if (displayName || playerDead)
 		doTextBox(player->y);
-	//Draw the mouse if it is within bounds and should be drawn
-	if (pointerX > -1 && pointerY > -1 && showCursor == true)
-		apply_surface(pointerX,pointerY,cursor,screen);
 	drawBorders();
 	if (debugOn)
 		apply_surface(0, 32, renderDebugText(), screen);
