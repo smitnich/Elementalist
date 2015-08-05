@@ -141,3 +141,6 @@ void handleLevelSelectClick(int x, int y) {
 		}
 	}
 }
+void gotoLevelSelect() {
+	levelChange = selectLevel();
+}

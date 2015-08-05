@@ -12,6 +12,7 @@ void handleLevelSelectClick(int x, int y);
 void restartLevel();
 void nextLevel();
 void prevLevel();
+void gotoLevelSelect();
 
 struct InterfaceMember {
 	int x, y;
@@ -37,9 +38,15 @@ void createButtons() {
 	prevLevelButton.y = (nextLevelButton.y + nextLevelButton.sprite->h) + margin;
 	prevLevelButton.sprite = loadOptimizedIMG("gfx/ui/prevButton.png");
 	prevLevelButton.doSomething = &prevLevel;
+	InterfaceMember levelSelectButton;
+	levelSelectButton.x = xInitial + TILE_SIZE*(NUM_TILES * 2 + 1) + margin;
+	levelSelectButton.y = (prevLevelButton.y + prevLevelButton.sprite->h) + margin;
+	levelSelectButton.sprite = loadOptimizedIMG("gfx/ui/levelSelectButton.png");
+	levelSelectButton.doSomething = &gotoLevelSelect;
 	allMembers.push_front(restart);
 	allMembers.push_front(nextLevelButton);
 	allMembers.push_front(prevLevelButton);
+	allMembers.push_front(levelSelectButton);
 }
 
 void renderUserInterface(SDL_Surface *screen) {
