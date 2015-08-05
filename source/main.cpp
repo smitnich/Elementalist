@@ -103,6 +103,7 @@ void init(int argc, char* argv[])
 		SDL_Delay( 5000 );
 		exit(EXIT_FAILURE);
 	}
+	SDL_ShowCursor(SDL_DISABLE);
 #ifndef GEKKO
 	joystickInit();
 	SDL_WM_SetCaption("Elementalist", 0 );

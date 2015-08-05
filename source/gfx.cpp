@@ -80,6 +80,10 @@ void drawScreen()
 	if (debugOn)
 		apply_surface(0, 32, renderDebugText(), screen);
 	renderUserInterface(screen);
+	//Draw the mouse if it is within bounds and should be drawn
+	if (mouseX > -1 && mouseY > -1 && showCursor == true)
+		apply_surface(mouseX - cursor->w / 2, mouseY, cursor, screen);
+
 }
 void drawWrappedSprite(int x, int y, SDL_Surface* source, SDL_Surface* destination, int xWrap, int yWrap)
 {

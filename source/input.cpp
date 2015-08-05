@@ -89,15 +89,15 @@ void inputInit()
 	{
 		mouseConnected = true;
 		showCursor = true;
-		//MOUSE_Init();
+		MOUSE_Init();
 		secondaryControl = CONTROLLER_MOUSE;
 	}
 	else
 	{
 		secondaryControl = CONTROLLER_POINTER;
 	}
-	pointerX = 0;
-	pointerY = 0;
+	mouseX = 0;
+	mouseY = 0;
 	//Initialize the Wiimote data
 	WPAD_SetDataFormat(0, WPAD_FMT_BTNS_ACC_IR);
 	WPAD_SetVRes(0, 640, 480);
@@ -114,11 +114,9 @@ void updatePointer()
 	mouseConnected = MOUSE_IsConnected();
 	if (secondaryControl == CONTROLLER_POINTER)
 	{
-		pointerX = -50;
-		pointerY = -50;
 		WPAD_IR(wpadnum, &ir);
-		pointerX = ir.x;
-		pointerY = ir.y;
+		mouseX = ir.x;
+		mouseY = ir.y;
 	}
 }
 //Decide which input to use and return the function
@@ -130,6 +128,7 @@ int determineInput()
 	WPAD_ScanPads();
 	for (int i = 0; i < 4; i++)
 		WButtonsDown[i] = WPAD_ButtonsHeld(i);
+	updatePointer();
 	pad_set();
 	switch (controltype)
 	{

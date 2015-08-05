@@ -22,7 +22,7 @@ SDL_Rect* rectMake(int x, int y, int h, int w);
 SDL_Surface* loadOptimizedIMG(std::string);
 extern int videoSizeY,videoSizeX;
 extern int xInitial, yInitial, tilesSizeX, tilesX, tilesY, tileSizeY;
-extern int pointerX, pointerY, currentLevelNum;
+extern int mouseX, mouseY, currentLevelNum;
 extern std::string appPath;
 extern std::string levelPath;
 extern std::string startLevelName;

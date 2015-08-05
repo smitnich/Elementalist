@@ -26,8 +26,8 @@ ir_t ir;
 #endif
 //#include <SDL/SDL_events.h>
 bool useMouse = 0;
-int pointerX = 0;
-int pointerY = 0;
+extern int mouseX;
+extern int mouseY;
 extern int numJoysticks;
 int controltype = CONTROLLER_NONE;
 bool checkGC();
