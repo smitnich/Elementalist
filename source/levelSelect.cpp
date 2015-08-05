@@ -8,6 +8,9 @@
 void checkEvents();
 void drawSprite(int drawX, int drawY, SDL_Surface* toDraw);
 int determineInput();
+void switchLevel(int level);
+
+void apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination);
 
 extern std::list<SDL_Surface *> allImages;
 
@@ -19,8 +22,14 @@ extern SDL_Surface *screen;
 SDL_Surface *spr_levelButton;
 SDL_Surface *spr_levelButtonSelected;
 
+extern SDL_Surface *cursor;
+
 extern int videoSizeX;
 extern int videoSizeY;
+
+extern bool showCursor;
+
+extern int levelChange;
 
 SDL_Color defaultTextColor = { 0, 0, 0 };
 
@@ -42,6 +51,14 @@ struct LevelButton {
 	int levelNum;
 };
 LevelButton allButtons[MAX_LEVEL];
+
+bool checkWithin(LevelButton button, int x, int y) {
+	int newY = y + scrollDistance*(buttonSizeY + spacingY);
+	if ((x >= button.x) && x <= (button.x + spr_levelButton->w) && (newY >= button.y) && newY <= (button.y + spr_levelButton->h))
+		return true;
+	else
+		return false;
+}
 
 SDL_Surface *renderText(const char *text, SDL_Color textColor) {
 	return TTF_RenderText_Solid(font, text, textColor);
@@ -74,7 +91,7 @@ void renderLevelSelectScreen() {
 		if (allButtons[i].y - scrollDistance*(buttonSizeY + spacingY) >= videoSizeY){
 			break;
 		}
-		if (i == selected) {
+		if (i == selected || checkWithin(tmpButton,mouseX,mouseY)) {
 			drawSprite(tmpButton.x, tmpButton.y - scrollDistance*(buttonSizeY + spacingY), spr_levelButtonSelected);
 		}
 		else {
@@ -82,6 +99,9 @@ void renderLevelSelectScreen() {
 		}
 		drawCenteredText(tmpButton.x, tmpButton.y - scrollDistance*(buttonSizeY + spacingY), tmpButton.text, spr_levelButton);
 	}
+	//Draw the mouse if it is within bounds and should be drawn
+	if (mouseX > -1 && mouseY > -1 && showCursor == true)
+		apply_surface(mouseX - cursor->w / 2, mouseY, cursor, screen);
 }
 void checkInput() {
 	int input = determineInput();
@@ -104,7 +124,8 @@ void checkInput() {
 		}
 		break;
 	case BUTTON_1:
-		finished = true;
+		if (selected != 0)
+			finished = true;
 		break;
 	default:
 		break;
@@ -129,12 +150,9 @@ int selectLevel() {
 	return selected;
 }
 void handleLevelSelectClick(int x, int y) {
-	LevelButton tmpButton;
-	int newY = y + scrollDistance*(buttonSizeY + spacingY);
 	int i;
 	for (i = 1; i < MAX_LEVEL; i++) {
-		tmpButton = allButtons[i];
-		if ((x >= tmpButton.x) && x <= (tmpButton.x + spr_levelButton->w) && (newY >= tmpButton.y) && newY <= (tmpButton.y + spr_levelButton->h)) {
+		if (checkWithin(allButtons[i], x, y)) {
 			selected = i;
 			finished = true;
 			return;
