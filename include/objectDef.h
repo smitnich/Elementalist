@@ -43,6 +43,9 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 			if (!frozen)
 				die();
 		}
+		virtual void burn() {
+			die();
+		}
 		//It should not be possible to have two different objects in one tile in
 		//most cases, so throw an exception by default
 		virtual void onEnter(Object *other, int xChange, int yChange) {

@@ -23,4 +23,9 @@ enum directions_t
 #define EMPTY 0
 #define SOLID 1
 #define MAX_LEVEL 9
+enum screens_t
+{
+	SCR_LEVELSELECT,
+	SCR_GAME
+};
 #endif

@@ -49,7 +49,7 @@ public:
 		if (within != NULL) {
 			moveCompleted = within->objMove();
 			if (moveCompleted) {
-				within->faceDir = moveDir;
+				moveDir = D_NONE;
 				within = NULL;
 			}
 		}

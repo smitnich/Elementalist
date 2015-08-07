@@ -10,6 +10,8 @@ Level* getCurrentLevel();
 void objMove();
 void applyTerrain(int input, int index);
 
+extern Mix_Chunk* snd_explode;
+
 Object* objectInit(unsigned int id, int x, int y);
 
 class Crate : public Object {
@@ -27,7 +29,8 @@ public:
 	}
 	void doLogic()
 	{
-		objMove();
+		if (objMove())
+			playSound(snd_explode);
 	}
 	void onCollision(Object *other, int dir) {
 		startMove(dir, 2);
@@ -142,19 +145,20 @@ public:
 };
 SPRITE_STATIONARY(FrozenCrate, "gfx/iceBlock.png")
 
-class OilBarrel : public Crate {
+class OilBarrel : Crate {
 public:
 	OBJECT_DECLARATION(OilBarrel,1025)
 		OilBarrel(int x, int y) : Crate(x, y) {
 	}
 	void doLogic() {
-		objMove();
-		if (!frozen) {
+		bool moveFinished = objMove();
+		if (!frozen && moveFinished) {
 			applyTerrain(m_oilspill, getCurrentLevel()->convertIndex(x, y));
 		}
 	}
 	void heat() {
-		addSwitchQueue(this, OBJ_FLAME);
+		Object *flame = addSwitchQueue(this, OBJ_FLAME);
+		flame->setTimeToLive(120.0f);
 	}
 };
 SPRITE_STATIONARY(OilBarrel, "gfx/oilBarrel.png")

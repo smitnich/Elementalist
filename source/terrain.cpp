@@ -190,11 +190,11 @@ bool Terrain::requestEntry(Object* other, int dir)
 {
 	return true;
 }
-bool Terrain::checkNewTerrainPlacement(int index) {
-	if (within != NULL && !within->checkNewTerrainPlacement(index)) {
+bool Terrain::checkNewTerrainPlacement(int newId) {
+	if (within != NULL && !within->checkNewTerrainPlacement(newId)) {
 		return false;
 	}
-	if (index == id)
+	if (newId == id)
 		return false;
 	return true;
 }

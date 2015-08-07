@@ -10,7 +10,7 @@ SDLKey oldKey = SDLK_FIRST;
 SDLKey winningKey = SDLK_FIRST;
 //The map of all possible keys
 bool keyMap[SDLK_LAST] = {0};
-//The number of keyspushed at a time
+//The number of keys pushed at a time
 int keysPushed = 0;
 //Todo: Allow configuration of the keymap
 void updateKeys(SDL_Event event)
