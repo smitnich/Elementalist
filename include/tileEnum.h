@@ -1,7 +1,7 @@
 enum tiles_t
 {
 	m_defaultWall = 0,
-	m_exit = 1,
+	m_exit,
 	m_pressure,
 	m_floor,
 	m_wall,
@@ -42,6 +42,19 @@ enum tiles_t
 	OBJ_PICKUP_WALL,
 	OBJ_YELLOW_BLOCK,
 	OBJ_FLAME,
+	OBJ_PIPE_NW,
+	OBJ_PIPE_SW,
+	OBJ_PIPE_SE,
+	OBJ_PIPE_NE,
+	OBJ_MAGNET_N,
+	OBJ_MAGNET_S,
+	OBJ_MAGNET_W,
+	OBJ_MAGNET_E,
+	OBJ_FIRE_ELEMENT_E,
+	OBJ_FIRE_ELEMENT_N,
+	OBJ_FIRE_ELEMENT_S,
+	OBJ_FIRE_ELEMENT_W,
+	OBJ_OIL_BARREL,
 
 	m_sender1 = 2001,
 	m_receiver1,

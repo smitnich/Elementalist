@@ -2,11 +2,13 @@
 #include "objectDef.h"
 #include "sprites.h"
 #include "level.h"
+#include "tileEnum.h"
 Object *addSwitchQueue(Object *in, int switchId);
 extern Object *player;
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 Level* getCurrentLevel();
 void objMove();
+void applyTerrain(int input, int index);
 
 Object* objectInit(unsigned int id, int x, int y);
 
@@ -139,3 +141,20 @@ public:
 	}
 };
 SPRITE_STATIONARY(FrozenCrate, "gfx/iceBlock.png")
+
+class OilBarrel : public Crate {
+public:
+	OBJECT_DECLARATION(OilBarrel,1025)
+		OilBarrel(int x, int y) : Crate(x, y) {
+	}
+	void doLogic() {
+		objMove();
+		if (!frozen) {
+			applyTerrain(m_oilspill, getCurrentLevel()->convertIndex(x, y));
+		}
+	}
+	void heat() {
+		addSwitchQueue(this, OBJ_FLAME);
+	}
+};
+SPRITE_STATIONARY(OilBarrel, "gfx/oilBarrel.png")
