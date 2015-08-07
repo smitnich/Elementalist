@@ -63,6 +63,7 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 			updateTime();
 			doLogic();
 		}
+		void playSound(Mix_Chunk *sound);
 		virtual Object* clone(int x, int y) = 0;
 		virtual void loadImages() = 0;
 		//Gets the sprite to be drawn on the screen

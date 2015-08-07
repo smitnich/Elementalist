@@ -22,6 +22,7 @@ Level *getCurrentLevel();
 void checkCreationQueue();
 void writeDebugText(char* in);
 bool checkCollision(Object *first, Object *second);
+void setPanning(unsigned int channel, unsigned int right);
 Object *objectList[MAX_OBJECTS] = { NULL };
 extern std::list<Object*> creationQueue;
 extern std::list<MoveRequest> moveQueue;
@@ -32,46 +33,30 @@ void removeMoveRequest(Object *remove);
 
 void doSwitchQueue();
 
+//The distance away from the player at which the sound is fully
+//in the left or right direction
+#define SOUND_OFFSET_LENGTH 10
+
 //The basic template for the Objects in the game
 Object::Object()
 {
 	isPlayer = false;
-	x = 0;
-	y = 0;
-	objMoveFraction = 0;
-	objMoveDir = 0;
-	solid = 0;
-	moveSpeed = 0;
-	tempSpeed = 0;
-	frozen = 0;
 	numFrames = 1;
-	faceDir = 0;
 	isMagnetic = false;
 	prevMove = D_NONE;
-	lifeTime = 0.0;
 	timeToLive = nan("");
-	within = NULL;
 }
 Object::Object(int x2, int y2)
 {
+	memset(this, 0, sizeof(*this));
 	isPlayer = false;
 	x = x2;
 	y = y2;
-	objMoveFraction = 0;
-	objMoveDir = 0;
-	solid = 0;
-	moveSpeed = 0;
-	tempSpeed = 0;
-	frozen = 0;
 	numFrames = 1;
-	faceDir = 0;
 	isMagnetic = false;
 	hovering = false;
-	currentMovePriority = 0;
 	prevMove = D_NONE;
-	lifeTime = 0.0;
 	timeToLive = nan("");
-	within = NULL;
 }
 Object::Object(Object &other, int _x, int _y)
 {
@@ -505,4 +490,16 @@ bool checkCollision(Object *first, Object *second) {
 		return true;
 	else
 		return false;
+}
+void Object::playSound(Mix_Chunk *sound) {
+	const int maxPanning = 254;
+	const int defaultPanning = 127;
+	int channel = Mix_PlayChannel(-1, sound, 0);
+	int offset = player->x - x;
+	if (offset < -SOUND_OFFSET_LENGTH)
+		offset = -SOUND_OFFSET_LENGTH;
+	else if (offset > SOUND_OFFSET_LENGTH)
+		offset = SOUND_OFFSET_LENGTH;
+	int panning = defaultPanning - (offset * (maxPanning-defaultPanning)/SOUND_OFFSET_LENGTH);
+	setPanning(channel, panning);
 }
