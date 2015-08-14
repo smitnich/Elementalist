@@ -7,7 +7,7 @@
 
 void checkEvents();
 void drawSprite(int drawX, int drawY, SDL_Surface* toDraw);
-int determineInput();
+int determineInput(bool mouse);
 void switchLevel(int level);
 
 void apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination);
@@ -104,12 +104,13 @@ void renderLevelSelectScreen() {
 		apply_surface(mouseX - cursor->w / 2, mouseY, cursor, screen);
 }
 void checkInput() {
-	int input = determineInput();
+	int input = determineInput(true);
 	if (input == lastInput)
 		return;
 	lastInput = input;
 	switch (input) {
 	case B_DOWN:
+	case BUTTON_MOUSEWHEEL_DOWN:
 		selected++;
 		if (selected >= MAX_LEVEL) {
 			selected = 1;
@@ -117,6 +118,7 @@ void checkInput() {
 		}
 		break;
 	case B_UP:
+	case BUTTON_MOUSEWHEEL_UP:
 		selected--;
 		if (selected < 1) {
 			scrollDistance = MAX_LEVEL - 6;

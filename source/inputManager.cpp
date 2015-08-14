@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <iostream>
 unsigned long getTicks();
-int determineInput();
+int determineInput(bool mouse);
 void cleanup();
 extern bool playerDead, displayName, won;
 extern int currentLevelNum, levelChange, lastInput;
@@ -19,7 +19,8 @@ int getInput() {
 	return currentInput;
 }
 void handleInput() {
-	currentInput = determineInput();
+	currentInput = determineInput(false);
+	recordMove();
 	if (displayName == true)
 	{
 		if (currentInput != INPUT_NONE && (getTicks() - levelStartTime > 1000))

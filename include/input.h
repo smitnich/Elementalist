@@ -36,6 +36,7 @@ int secondaryControl;
 int joyInput();
 extern int chosenController;
 extern int hatDirection;
+extern int mouseInput;
 struct mousePosition
 {
 	int x;
