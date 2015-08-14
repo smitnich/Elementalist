@@ -32,12 +32,12 @@ extern std::string levelPath;
 //The name of the starting level
 extern std::string startLevelName;
 //The last time to have user input
-extern unsigned int lastInputTime;
+extern unsigned long lastInputTime;
 //The last movement of the player
 extern int prevMove;
 //Whether to display the level name
 extern bool displayName;
-unsigned int levelStartTime;
+unsigned long levelStartTime;
 //The players y position
 extern int posY;
 //Whether or not the player has won the level
@@ -54,7 +54,7 @@ class Terrain *instantiateTerrain(int input, int offset);
 extern int currentLevelNum;
 extern Object* player;
 void changeText();
-unsigned int getTicks();
+unsigned long getTicks();
 void doActivateQueue();
 void resetMoveQueue();
 void resetCreationQueue();

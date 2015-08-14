@@ -19,7 +19,7 @@ extern int currentLevel;
 //The current frame
 int frame = 0;
 //The last frame to recieve input
-unsigned int lastInputTime = 0;
+unsigned long lastInputTime = 0;
 Object* player;
 //Whether or not a player has been placed yet
 //Used to determine which one to make active

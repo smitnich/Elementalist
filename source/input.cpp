@@ -122,7 +122,7 @@ void updatePointer()
 //Decide which input to use and return the function
 //Input is chosen based on which input device is used first
 //Any controller number may be used
-int determineInput()
+int determineInput(bool mouse)
 {
 	PAD_ScanPads();
 	WPAD_ScanPads();
@@ -130,6 +130,14 @@ int determineInput()
 		WButtonsDown[i] = WPAD_ButtonsHeld(i);
 	updatePointer();
 	pad_set();
+	if (replayEnabled == true) {
+		return getNextReplayMove();
+	}
+	if (mouse)
+	{
+		if (mouseInput != INPUT_NONE)
+			return mouseInput;
+	}
 	switch (controltype)
 	{
 	case CONTROLLER_NONE:
@@ -161,8 +169,16 @@ int determineInput()
 #endif
 #ifndef GEKKO
 //Input is chosen based on which device is used first
-int determineInput()
+int determineInput(bool mouse)
 {
+	if (replayEnabled == true) {
+		return getNextReplayMove();
+	}
+	if (mouse)
+	{
+		if (mouseInput != INPUT_NONE)
+			return mouseInput;
+	}
 	if (controltype == CONTROLLER_KEYBOARD)
 		return keyInput();
 	else if (controltype == CONTROLLER_JOYSTICK)

@@ -3,12 +3,12 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <iostream>
-unsigned int getTicks();
+unsigned long getTicks();
 int determineInput();
 void cleanup();
 extern bool playerDead, displayName, won;
 extern int currentLevelNum, levelChange, lastInput;
-extern unsigned int lastInputTime, levelStartTime;
+extern unsigned long lastInputTime, levelStartTime;
 extern std::string startLevelName;
 int currentInput;
 extern bool debugOn;

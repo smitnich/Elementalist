@@ -5,7 +5,7 @@
 #include "debugText.h"
 extern int pressureCount;
 extern int prevMove;
-extern unsigned int lastInputTime;
+extern unsigned long lastInputTime;
 extern int frame;
 extern bool playerPlaced;
 extern bool displayName;
@@ -23,7 +23,7 @@ void cleanup();
 void changeTextToDead();
 class Level* getCurrentLevel();
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
-unsigned int getTicks();
+unsigned long getTicks();
 extern double delta;
 extern Object *player;
 void gameOver();
