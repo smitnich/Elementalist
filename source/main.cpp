@@ -121,14 +121,14 @@ void init(int argc, char* argv[])
 	}
 	gfxInit();
 	fontInit();
-	makeLevelButtons();
-	switchLevel(selectLevel());
-	//fprintf(stderr, "\n\n\n\n\n");
-	atexit(SDL_Quit);
-	//parseDoc("levels/xml.ele");
 #ifdef GEKKO
 	SDL_ShowCursor(SDL_DISABLE);
+#else
+	SDL_ShowCursor(SDL_ENABLE);
 #endif
+	makeLevelButtons();
+	switchLevel(selectLevel());
+	atexit(SDL_Quit);
 	SDL_FillRect(screen, 0, SDL_MapRGB(screen->format, 91, 91, 255));
 }
 //Clear the screen and free all remaining resources
@@ -162,7 +162,6 @@ int getCenter(int surfaceSize, int itemSize)
 void updateDelta()
 {
 	unsigned int curTime = getTicks();
-	sprintf(debugString,"Framerate: %f",frame/((SDL_GetTicks()-levelStartTime) / 1000.0f));
 	delta = ((double)(curTime - lastTicks)) / (1000.0 / ((float)framesPerSecond));
 	lastTicks = curTime;
 }

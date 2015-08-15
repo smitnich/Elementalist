@@ -100,8 +100,10 @@ void renderLevelSelectScreen() {
 		drawCenteredText(tmpButton.x, tmpButton.y - scrollDistance*(buttonSizeY + spacingY), tmpButton.text, spr_levelButton);
 	}
 	//Draw the mouse if it is within bounds and should be drawn
+#ifdef GEKKO
 	if (mouseX > -1 && mouseY > -1 && showCursor == true)
 		apply_surface(mouseX - cursor->w / 2, mouseY, cursor, screen);
+#endif
 }
 void checkInput() {
 	int input = determineInput(true);

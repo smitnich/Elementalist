@@ -2,8 +2,6 @@
 #include "inputDef.h"
 #include "wii.h"
 #include <wupc/wupc.h>
-void outputLog(char[]);
-void outputLog(int);
 //The percentage of the total magnitude that the stick must be moved to register as pressed
 #define PRO_SENSITIVITY 0.75
 //Gets the classic input
