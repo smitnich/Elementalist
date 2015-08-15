@@ -136,9 +136,6 @@ int determineInput(bool mouse)
 		WButtonsDown[i] = WPAD_ButtonsHeld(i);
 	updatePointer();
 	pad_set();
-	if (replayEnabled == true) {
-		return getNextReplayMove();
-	}
 	if (mouse)
 	{
 		if (mouseInput != INPUT_NONE)
@@ -177,9 +174,6 @@ int determineInput(bool mouse)
 //Input is chosen based on which device is used first
 int determineInput(bool mouse)
 {
-	if (replayEnabled == true) {
-		return getNextReplayMove();
-	}
 	if (mouse)
 	{
 		if (mouseInput != INPUT_NONE)

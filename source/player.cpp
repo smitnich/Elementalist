@@ -18,6 +18,7 @@ void startMove(int dir);
 extern int framesPerSecond;
 extern int levelStartCounter;
 bool playerDead = false;
+extern bool replayEnabled;
 int getInput();
 void cleanup();
 void changeTextToDead();
@@ -82,7 +83,10 @@ public:
 		if (active == false && objMoveDir == D_NONE)
 			return;
 		objMove();
-		int input = getInput();
+		int input = INPUT_NONE;
+		if (!replayEnabled || objMoveFraction == 0.0) {
+			input = getInput();
+		}
 		if (input != INPUT_NONE)
 			lastInputTime = getTicks();
 		switch (input){

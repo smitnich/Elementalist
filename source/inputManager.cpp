@@ -15,12 +15,16 @@ extern bool debugOn;
 
 void recordMove();
 bool loadMoves();
+int getNextReplayMove();
 
 bool replayEnabled = false;
 
 //Store the latest input so we don't end up reading from the controllers
 //multiple times per frame
 int getInput() {
+	if (replayEnabled) {
+		currentInput = getNextReplayMove();
+	}
 	return currentInput;
 }
 void handleInput() {
@@ -30,6 +34,7 @@ void handleInput() {
 	{
 		if (currentInput == BUTTON_2) {
 			replayEnabled = loadMoves();
+			displayName = false;
 			return;
 		}
 		else if (currentInput != INPUT_NONE && (getTicks() - levelStartTime > 1000))
@@ -48,7 +53,7 @@ void handleInput() {
 		levelChange = currentLevelNum + 1;
 		startLevelName.assign("");
 	}
-	else if (playerDead == true)
+	else if (playerDead == true && !replayEnabled)
 	{
 		int input = getInput();
 		if (input != INPUT_NONE)
