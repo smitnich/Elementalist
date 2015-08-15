@@ -62,7 +62,9 @@ bool loadMoves() {
 	}
 	while (!feof(input)) {
 		input_t inputButton = { 0, 0 };
-		fscanf(input, "%d,%d\n", &inputButton.button, &inputButton.time);
+		if (fscanf(input, "%d,%lu\n", &inputButton.button, &inputButton.time) != 2) {
+			return false;
+		}
 		inputArray.push_back(inputButton);
 	}
 	fclose(input);
