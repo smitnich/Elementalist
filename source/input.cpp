@@ -1,5 +1,7 @@
 #include "inputDef.h"
 #include "input.h"
+extern bool replayEnabled;
+int getNextReplayMove();
 #ifdef GEKKO
 #include "wii.h"
 #include <gccore.h>
@@ -117,6 +119,10 @@ void updatePointer()
 		WPAD_IR(wpadnum, &ir);
 		mouseX = ir.x;
 		mouseY = ir.y;
+		if (ir.smooth_valid == false) {
+			mouseX = -1;
+			mouseY = -1;
+		}
 	}
 }
 //Decide which input to use and return the function

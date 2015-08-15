@@ -13,6 +13,11 @@ extern std::string startLevelName;
 int currentInput;
 extern bool debugOn;
 
+void recordMove();
+bool loadMoves();
+
+bool replayEnabled = false;
+
 //Store the latest input so we don't end up reading from the controllers
 //multiple times per frame
 int getInput() {
@@ -23,9 +28,13 @@ void handleInput() {
 	recordMove();
 	if (displayName == true)
 	{
-		if (currentInput != INPUT_NONE && (getTicks() - levelStartTime > 1000))
+		if (currentInput == BUTTON_2) {
+			replayEnabled = loadMoves();
+			return;
+		}
+		else if (currentInput != INPUT_NONE && (getTicks() - levelStartTime > 1000))
 		{
-				displayName = false;
+			displayName = false;
 		}
 		else {
 			currentInput = INPUT_NONE;
@@ -68,7 +77,6 @@ void handleInput() {
 	case BUTTON_LEVEL_PREV:
 		if (currentLevelNum > 1 && (getTicks() - levelStartTime > 1000))
 		{
-			int tmp = getTicks();
 			lastInput = BUTTON_LEVEL_PREV;
 			levelChange = currentLevelNum - 1;
 			startLevelName.assign("");

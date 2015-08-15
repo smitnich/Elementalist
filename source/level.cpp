@@ -43,6 +43,7 @@ extern int posY;
 //Whether or not the player has won the level
 extern bool won;
 extern int frame;
+extern bool replayEnabled;
 extern Mix_Music* levelMusic[MAX_LEVEL];
 void freeMusic(int levelNum);
 bool loadLevel(std::string levelName,int levelNum);
@@ -61,6 +62,9 @@ void resetCreationQueue();
 void resetActivateQueue();
 void resetDeleteQueue();
 void resetSwitchQueue();
+void resetMoves();
+void dumpMoves();
+void setTicks();
 
 Object* objectInit(unsigned int id, int x, int y);
 std::string constructLevelName(int);
@@ -179,7 +183,6 @@ int Level::convertIndex(int x, int y)
 bool Level::assignObject(int x, int y, Object *obj)
 {
 	bool retVal = false;
-	//TODO: Figure out why this can occur
 	if (objectLayer.size() == 0)
 		return false;
 	if (objectLayer[convertIndex(x, y)] == NULL)
@@ -461,6 +464,8 @@ void switchLevel(int levelNum)
 #ifdef GEKKO
 	 freeMusic(currentLevelNum);
 #endif
+	setTicks();
+	dumpMoves();
 	currentLevelNum = levelNum;
 	std::string tempLevel = constructLevelName(levelNum);
 	clearObjects();
@@ -483,6 +488,8 @@ void switchLevel(int levelNum)
 	resetDeleteQueue();
 	resetSwitchQueue();
 	levelStartTime = getTicks();
+	resetMoves();
+	replayEnabled = false;
 }
 //Make the level name given the number
 std::string constructLevelName(int levelNum)
