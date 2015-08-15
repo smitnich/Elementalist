@@ -2,6 +2,12 @@ unsigned long getTicks();
 int determineInput(bool mouse);
 #include <list>
 #include "inputDef.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+void writeDebugText(char *in);
+const char *replayPath = "replays";
+extern char directorySymbol;
 
 extern int currentLevelNum;
 int lastRecordedMove;
@@ -11,7 +17,7 @@ int currentReplayInput;
 #define ARRAY_SIZE 1024*10
 
 struct input_t {
-	char button;
+	int button;
 	unsigned long time;
 };
 std::list<input_t> inputArray;
@@ -39,15 +45,16 @@ void dumpMoves() {
 		return;
 	}
 	char buffer[128];
-	sprintf(buffer, "%d.rep", currentLevelNum);
+	sprintf(buffer, "%s%c%d.rep", replayPath, directorySymbol, currentLevelNum);
 	FILE *output = fopen(buffer,"r");
 	if (output != NULL) {
 		fclose(output);
 		return;
 	}
 	output = fopen(buffer, "w");
+	int initTime = inputArray.begin()->time;
 	for (std::list<input_t>::iterator it = inputArray.begin(); it != inputArray.end(); ++it) {
-		sprintf(buffer,"%d,%d\n", (int) it->button,it->time);
+		sprintf(buffer,"%d,%lu\n", (int) it->button,it->time-initTime);
 		fputs(buffer,output);
 	}
 	fclose(output);
@@ -55,7 +62,7 @@ void dumpMoves() {
 bool loadMoves() {
 	char buffer[128];
 	resetMoves();
-	sprintf(buffer, "%d.rep", currentLevelNum);
+	sprintf(buffer, "%s%c%d.rep", replayPath, directorySymbol, currentLevelNum);
 	FILE *input = fopen(buffer, "r");
 	if (input == NULL) {
 		return false;
@@ -75,6 +82,9 @@ int getNextReplayMove() {
 		return INPUT_NONE;
 	}
 	input_t nextInput = inputArray.front();
+	char buffer[128];
+	sprintf(buffer, "Next Move: %d at %lu", nextInput.button, nextInput.time);
+	writeDebugText(buffer);
 	if (getTicks() - levelStartTime >= nextInput.time) {
 		inputArray.pop_front();
 		currentReplayInput = nextInput.button;
