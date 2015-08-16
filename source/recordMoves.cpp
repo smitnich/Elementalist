@@ -14,6 +14,7 @@ int lastRecordedMove;
 extern unsigned long levelStartTime;
 int currentReplayInput;
 
+unsigned long replayStartTime = 0;
 #define ARRAY_SIZE 1024*10
 
 struct input_t {
@@ -24,10 +25,6 @@ std::list<input_t> inputArray;
 
 void recordMove() {
 	int button = determineInput(false);
-	if (button == lastRecordedMove) {
-		lastRecordedMove = button;
-		return;
-	}
 	lastRecordedMove = button;
 	unsigned long time = getTicks() - levelStartTime;
 	input_t input;
@@ -75,6 +72,7 @@ bool loadMoves() {
 		inputArray.push_back(inputButton);
 	}
 	fclose(input);
+	replayStartTime = getTicks();
 	return true;
 }
 int getNextReplayMove() {
@@ -85,10 +83,10 @@ int getNextReplayMove() {
 	char buffer[128];
 	sprintf(buffer, "Next Move: %d at %lu", nextInput.button, nextInput.time);
 	writeDebugText(buffer);
-	if (getTicks() - levelStartTime >= nextInput.time) {
+	if (getTicks() - replayStartTime >= nextInput.time) {
 		inputArray.pop_front();
 		currentReplayInput = nextInput.button;
 		return currentReplayInput;
 	}
-	return currentReplayInput;
+	return INPUT_NONE;
 }

@@ -29,7 +29,6 @@ int getInput() {
 }
 void handleInput() {
 	currentInput = determineInput(false);
-	recordMove();
 	if (displayName == true)
 	{
 		if (currentInput == BUTTON_2) {

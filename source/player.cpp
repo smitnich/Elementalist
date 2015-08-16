@@ -30,6 +30,7 @@ extern Object *player;
 void gameOver();
 bool switchPlayerFocus();
 Object* objectInit(unsigned int id, int x, int y, int moveDir, int moveFraction);
+void recordMove();
 //The player
 class Person : public Object
 {
@@ -87,8 +88,9 @@ public:
 		if (!replayEnabled || objMoveFraction == 0.0) {
 			input = getInput();
 		}
-		if (input != INPUT_NONE)
+		if (input != INPUT_NONE) {
 			lastInputTime = getTicks();
+		}
 		switch (input){
 		case BUTTON_1:
 			if (lastInput != BUTTON_1)
@@ -108,6 +110,7 @@ public:
 			{
 				if (startMove(D_RIGHT, 1)) {
 					faceDir = D_RIGHT;
+					recordMove();
 				}
 			}
 			lastInput = B_RIGHT;
@@ -118,6 +121,7 @@ public:
 			{
 				if (startMove(D_LEFT, 1)) {
 					faceDir = D_LEFT;
+					recordMove();
 				}
 			}
 			lastInput = B_LEFT;
@@ -128,6 +132,7 @@ public:
 			{
 				if (startMove(D_DOWN, 1)) {
 					faceDir = D_DOWN;
+					recordMove();
 				}
 			}
 			queuedMove = D_DOWN;
@@ -138,6 +143,7 @@ public:
 			{
 				if (startMove(D_UP, 1)) {
 					faceDir = D_UP;
+					recordMove();
 				}
 			}
 			queuedMove = D_UP;
