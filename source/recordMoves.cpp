@@ -1,6 +1,6 @@
 unsigned long getTicks();
 int determineInput(bool mouse);
-#include <list>
+#include <vector>
 #include "inputDef.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,7 +10,7 @@ const char *replayPath = "replays";
 extern char directorySymbol;
 
 extern int currentLevelNum;
-int lastRecordedMove;
+unsigned long lastRecordTime = 0;
 extern unsigned long levelStartTime;
 int currentReplayInput;
 
@@ -21,12 +21,17 @@ struct input_t {
 	int button;
 	unsigned long time;
 };
-std::list<input_t> inputArray;
+std::vector<input_t> inputArray;
 
 void recordMove() {
 	int button = determineInput(false);
-	lastRecordedMove = button;
 	unsigned long time = getTicks() - levelStartTime;
+	//Don't record the same move multiple times if there are multiple
+	//player objects in play
+	if (time == lastRecordTime) {
+		return;
+	}
+	lastRecordTime = time;
 	input_t input;
 	input.button = (char)button;
 	input.time = time;
@@ -50,7 +55,7 @@ void dumpMoves() {
 	}
 	output = fopen(buffer, "w");
 	int initTime = inputArray.begin()->time;
-	for (std::list<input_t>::iterator it = inputArray.begin(); it != inputArray.end(); ++it) {
+	for (std::vector<input_t>::iterator it = inputArray.begin(); it != inputArray.end(); ++it) {
 		sprintf(buffer,"%d,%lu\n", (int) it->button,it->time-initTime);
 		fputs(buffer,output);
 	}
@@ -75,16 +80,15 @@ bool loadMoves() {
 	replayStartTime = getTicks();
 	return true;
 }
-int getNextReplayMove() {
+int getNextReplayMove(int i) {
 	if (inputArray.size() == 0) {
 		return INPUT_NONE;
 	}
-	input_t nextInput = inputArray.front();
+	input_t nextInput = inputArray.at(i);
 	char buffer[128];
 	sprintf(buffer, "Next Move: %d at %lu", nextInput.button, nextInput.time);
 	writeDebugText(buffer);
 	if (getTicks() - replayStartTime >= nextInput.time) {
-		inputArray.pop_front();
 		currentReplayInput = nextInput.button;
 		return currentReplayInput;
 	}

@@ -19,7 +19,7 @@ extern int framesPerSecond;
 extern int levelStartCounter;
 bool playerDead = false;
 extern bool replayEnabled;
-int getInput();
+int getInput(int index);
 void cleanup();
 void changeTextToDead();
 class Level* getCurrentLevel();
@@ -37,6 +37,7 @@ class Person : public Object
 public:
 	OBJECT_DECLARATION(Person, 1004)
 	int active;
+	int moveIndex;
 	Person(const Person &other, int _x, int _y)
 	{
 		active = true;
@@ -57,6 +58,9 @@ public:
 			spriteew[i] = other.spriteew[i];
 			spritens[i] = other.spritens[i];
 		}
+		within = NULL;
+		hovering = false;
+		moveIndex = other.moveIndex;
 	}
 	Person(int x2, int y2) : Object(x2,y2)
 	{
@@ -66,6 +70,7 @@ public:
 		playerDead = false;
 		prevMove = D_NONE;
 		active = true;
+		moveIndex = 0;
 	}
 	void makeElement(bool doSecond)
 	{
@@ -86,7 +91,10 @@ public:
 		objMove();
 		int input = INPUT_NONE;
 		if (!replayEnabled || objMoveFraction == 0.0) {
-			input = getInput();
+			input = getInput(moveIndex);
+			if (replayEnabled && input != INPUT_NONE) {
+				moveIndex++;
+			}
 		}
 		if (input != INPUT_NONE) {
 			lastInputTime = getTicks();
