@@ -91,10 +91,10 @@ void imgInit()
 	conveyor[D_RIGHT-1] = loadOptimizedIMG("gfx/conveyor/conveyore1.png");
 	conveyor[D_DOWN-1] = loadOptimizedIMG("gfx/conveyor/conveyors1.png");
 	error = loadOptimizedIMG("gfx/iamerror.png");
-	spr_dupe[0] = loadOptimizedIMG("gfx/dupeN.png");
-	spr_dupe[1] = loadOptimizedIMG("gfx/dupeS.png");
-	spr_dupe[2] = loadOptimizedIMG("gfx/dupeW.png");
-	spr_dupe[3] = loadOptimizedIMG("gfx/dupeE.png");
+	spr_dupe[D_UP-1] = loadOptimizedIMG("gfx/dupeN.png");
+	spr_dupe[D_DOWN-1] = loadOptimizedIMG("gfx/dupeS.png");
+	spr_dupe[D_LEFT-1] = loadOptimizedIMG("gfx/dupeW.png");
+	spr_dupe[D_RIGHT-1] = loadOptimizedIMG("gfx/dupeE.png");
 	spr_blackHole = loadOptimizedIMG("gfx/blackHole.png");
 	spr_raisedFloor = loadOptimizedIMG("gfx/raisedTile.png");
 	spr_electricFloor[0] = loadOptimizedIMG("gfx/electricFloorOff.png");
