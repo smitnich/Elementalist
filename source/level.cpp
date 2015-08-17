@@ -6,7 +6,7 @@
 #include "wallLookup.h"
 #include <queue>
 
-extern const std::string LevelStrings[] =
+const std::string LevelStrings[] =
 {
 	"Dummy",//0
 	"test",//1
@@ -16,7 +16,9 @@ extern const std::string LevelStrings[] =
 	"test5",
 	"test6",
 	"test7",
-	"test8"
+	"test8",
+	"test9",
+	"test10"
 };
 
 //The number of objects created
