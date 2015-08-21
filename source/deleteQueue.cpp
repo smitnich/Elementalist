@@ -3,7 +3,12 @@
 
 class Object;
 
-std::list<Object*> deleteQueue;
+struct deleteNode {
+	Object *object;
+	Terrain *terrain;
+};
+
+std::list<deleteNode> deleteQueue;
 
 void removeMoveRequest(Object *obj);
 
@@ -14,18 +19,32 @@ void resetDeleteQueue()
 }
 void addDeleteQueue(Object *in)
 {
-	deleteQueue.push_back(in);
+	deleteNode tmp = { NULL, NULL };
+	tmp.object = in;
+	deleteQueue.push_back(tmp);
+}
+void addDeleteQueue(Terrain *in) {
+	deleteNode tmp = { NULL, NULL };
+	tmp.terrain = in;
+	deleteQueue.push_back(tmp);
 }
 void doDeleteQueue()
 {
-	Object *tmp = NULL;
+	deleteNode tmpNode;
 	int size = deleteQueue.size();
 	for (int i = 0; i < size; i++)
 	{
-		tmp = (Object *)deleteQueue.front();
-		removeMoveRequest(tmp);
-		getCurrentLevel()->assignObject(tmp->x, tmp->y, NULL);
-		delete tmp;
-		deleteQueue.pop_front();
+		tmpNode = deleteQueue.front();
+		if (tmpNode.object != NULL) {
+			Object *tmp = tmpNode.object;
+			removeMoveRequest(tmp);
+			getCurrentLevel()->assignObject(tmp->x, tmp->y, NULL);
+			delete tmp;
+			deleteQueue.pop_front();
+		}
+		else if (tmpNode.terrain != NULL) {
+			delete tmpNode.terrain;
+			deleteQueue.pop_front();
+		}
 	}
 }

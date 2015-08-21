@@ -207,4 +207,13 @@ void applyTerrain(int input, int index) {
 	terrain->within = getCurrentLevel()->mapLayer[index];
 	getCurrentLevel()->mapLayer[index] = terrain;
 	terrain->within->coveredTerrain = true;
+void removeTerrain(Terrain *terrain) {
+	int index = terrain->index;
+	Terrain *tmp = getCurrentLevel()->mapLayer[index];
+	if (tmp == terrain) {
+		getCurrentLevel()->mapLayer[index] = NULL;
+	}
+	else if (tmp->id == m_manager) {
+
+	}
 }
