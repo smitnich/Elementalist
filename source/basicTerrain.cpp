@@ -137,7 +137,7 @@ void BounceWall::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int y
 bool BounceWall::requestEntry(Object *other, int dir) {
 	Terrain *terrain = getCurrentLevel()->getTerrain(other->x, other->y);
 	other->prevMove = reverseDir(dir);
-	terrain->onEnterWrapper(other);
+	terrain->onEnter(other);
 	if (other->objMoveDir != dir)
 		return true;
 	else

@@ -16,26 +16,13 @@ public:
 	bool isTrigger;
 	bool coveredTerrain;
 	int index;
-	Terrain *within;
+	bool solid;
 	SDL_Surface *sprite;
 	Terrain();
 	Terrain(SDL_Surface *sp);
 	virtual ~Terrain();
 	void remove();
-	bool requestEntryWrapper(Object *other, int dir);
-	bool requestExitWrapper(Object *other, int dir);
-	void onEnterWrapper(Object *other);
-	void onExitWrapper(Object *other);
-	void activateWrapper();
-	void deactivateWrapper();
-	void onDestroyWrapper();
-	void drawWrapper(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
-	void whileInWrapper(Object *other);
-	void freezeWrapper();
-	void heatWrapper();
-	void placeWithin(Terrain *terrain);
 	bool checkNewTerrainPlacement(int index);
-private:
 	virtual void freeze();
 	virtual void heat();
 	virtual void whileIn(Object *other);
@@ -48,6 +35,24 @@ private:
 	virtual void onEnter(Object* other);
 	virtual void onExit(Object* other);
 	virtual bool requestEntry(Object* other, int dir);
+};
+class MultipleTerrainManager : public Terrain {
+public:
+	std::vector<Terrain*> within;
+	MultipleTerrainManager();
+	void freeze();
+	void heat();
+	void whileIn(Object *other);
+	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
+	void onDestroy();
+	void onCreate();
+	void activate();
+	void deactivate();
+	bool requestExit(Object* other, int dir);
+	void onEnter(Object* other);
+	void onExit(Object* other);
+	bool requestEntry(Object* other, int dir);
+	void addTerrain(Terrain *in);
 };
 class Floor : public Terrain{
 public:
@@ -139,14 +144,8 @@ class IceFloor : public Terrain
 {
 public:
 	~IceFloor();
-	IceFloor(int index, Terrain *within);
-	bool requestEntry(Object* other, int dir);
-	bool requestExit(Object* other, int dir);
+	IceFloor();
 	void onEnter(Object *other);
-	void onExit(Object *other);
-	void activate();
-	void deactivate();
-	void whileIn(Object *other);
 	void freeze();
 	void heat();
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
@@ -216,19 +215,13 @@ class OilFloor : public Terrain {
 public:
 	bool heated;
 	bool objWithin;
-	Terrain *within;
 	~OilFloor();
-	OilFloor(int index, Terrain *within);
+	OilFloor();
 	bool requestEntry(Object* other, int dir);
 	bool requestExit(Object* other, int dir);
 	void onEnter(Object *other);
 	void onExit(Object *other);
-	void activate();
-	void deactivate();
-	void whileIn(Object *other);
-	void freeze();
 	void heat();
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
-	OilFloor(Terrain *within);
 };
 #endif

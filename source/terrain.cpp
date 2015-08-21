@@ -6,6 +6,7 @@ void switchLevel(int levelNum);
 bool playSound(Mix_Chunk *input);
 void doAssignQueue();
 void applyTerrain(int terrainNum, int index);
+void addDeleteQueue(Terrain *in);
 extern int currentLevelNum;
 SDL_Surface *wall[47] = { NULL };
 SDL_Surface *tiles = NULL;
@@ -63,11 +64,6 @@ void doTerrainChanges()
 		swapTerrain(req.index, req.changeTo);
 	}
 }
-void Terrain::onDestroyWrapper() {
-	swapTerrain(this->index, within);
-	within = NULL;
-	onDestroy();
-}
 void clearTerrain() {
 	Level *curLevel = getCurrentLevel();
 	if (curLevel == NULL)
@@ -81,73 +77,23 @@ void clearTerrain() {
 }
 Terrain::Terrain()
 {
-	within = NULL;
 	coveredTerrain = false;
 	isTrigger = false;
+	solid = true;
 }
 Terrain::Terrain(SDL_Surface *sp)
 {
-	within = NULL;
 	coveredTerrain = false;
 	isTrigger = false;
 	this->sprite = sp;
 }
 Terrain::~Terrain() {
 }
-bool Terrain::requestEntryWrapper(Object *other, int dir) {
-	return (requestEntry(other, dir) && (within == NULL || within->requestEntryWrapper(other, dir)));
-}
-bool Terrain::requestExitWrapper(Object *other, int dir) {
-	return (requestExit(other, dir) && (within == NULL || within->requestEntryWrapper(other, dir)));
-}
-void Terrain::onEnterWrapper(Object *other) {
-	onEnter(other);
-	if (within != NULL)
-		within->onEnterWrapper(other);
-}
-void Terrain::onExitWrapper(Object *other) {
-	onExit(other);
-	if (within != NULL)
-		within->onExitWrapper(other);
-}
-void Terrain::activateWrapper() {
-	activate();
-	if (within != NULL)
-		within->activate();
-}
-void Terrain::deactivateWrapper() {
-	deactivate();
-	if (within != NULL)
-		within->activate();
-}
-void Terrain::drawWrapper(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff) {
-	if (within != NULL)
-		within->draw(drawTo, xTile, yTile, xOff, yOff);
-	draw(drawTo, xTile, yTile, xOff, yOff);
-}
-void Terrain::whileInWrapper(Object *other) {
-	whileIn(other);
-	if (within != NULL)
-		within->whileIn(other);
-}
-void Terrain::freezeWrapper() {
-	freeze();
-	if (within != NULL)
-		within->freeze();
-}
-void Terrain::heatWrapper() {
-	heat();
-	if (within != NULL)
-		within->heat();
-}
 void Terrain::freeze() {
 	applyTerrain(m_icefloor,index);
 }
 void Terrain::heat() {
 	return;
-}
-void Terrain::placeWithin(Terrain *terrain) {
-	within = terrain;
 }
 void Terrain::whileIn(Object *other) {
 	return;
@@ -190,23 +136,24 @@ bool Terrain::requestEntry(Object* other, int dir)
 {
 	return true;
 }
-bool Terrain::checkNewTerrainPlacement(int newId) {
-	if (within != NULL && !within->checkNewTerrainPlacement(newId)) {
-		return false;
-	}
-	if (newId == id)
-		return false;
-	return true;
-}
 void applyTerrain(int input, int index) {
-	if (!getCurrentLevel()->mapLayer[index]->checkNewTerrainPlacement(input)) {
-		return;
-	}
+	MultipleTerrainManager *manager = NULL;
 	Terrain *terrain = instantiateTerrain(input, index);
 	terrain->index = index;
-	terrain->within = getCurrentLevel()->mapLayer[index];
+	Terrain *old = getCurrentLevel()->mapLayer.at(index);
+	if (old != NULL && old->id != m_manager) {
+		manager = (MultipleTerrainManager *) instantiateTerrain(m_manager, index);
+		manager->addTerrain(old);
+		manager->addTerrain(terrain);
+		terrain = manager;
+	}
+	else if (old != NULL && old->id == m_manager) {
+		manager = (MultipleTerrainManager *) getCurrentLevel()->mapLayer[index];
+		manager->addTerrain(terrain);
+		return;
+	}
 	getCurrentLevel()->mapLayer[index] = terrain;
-	terrain->within->coveredTerrain = true;
+}
 void removeTerrain(Terrain *terrain) {
 	int index = terrain->index;
 	Terrain *tmp = getCurrentLevel()->mapLayer[index];

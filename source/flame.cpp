@@ -47,7 +47,7 @@ public:
 					tmpObj->heat();
 				Terrain *tmpTerrain = getCurrentLevel()->getTerrain(x + xMod, y + yMod);
 				if (tmpTerrain != NULL)
-					tmpTerrain->heatWrapper();
+					tmpTerrain->heat();
 			}
 	}
 };

@@ -1,5 +1,6 @@
 enum tiles_t
 {
+	m_manager = -1,
 	m_defaultWall = 0,
 	m_exit,
 	m_pressure,

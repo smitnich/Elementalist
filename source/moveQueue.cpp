@@ -35,7 +35,7 @@ void queuePlaceAll()
 		{
 			level->assignObject(x, y, tmp.obj);
 			Terrain *tmpTerrain = level->getTerrain(x, y);
-			tmpTerrain->onEnterWrapper(tmp.obj);
+			tmpTerrain->onEnter(tmp.obj);
 		}
 		else if (blockingObject->allowEntry()) {
 			blockingObject->onEnter(tmp.obj, tmp.checkX, tmp.checkY);
@@ -74,7 +74,7 @@ void addMoveRequest(Object *obj, int x, int y, int checkX, int checkY)
 	tmpReq.obj = obj;
 	tmpReq.x = x;
 	tmpReq.y = y;
-	getCurrentLevel()->getTerrain(x, y)->onExitWrapper(tmpReq.obj);
+	getCurrentLevel()->getTerrain(x, y)->onExit(tmpReq.obj);
 	tmpReq.checkX = checkX;
 	tmpReq.checkY = checkY;
 	tmpReq.obj->x = x+checkX;

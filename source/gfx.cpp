@@ -54,7 +54,7 @@ void drawScreen()
 		{
 			terrain = currentLevel->getTerrain(xStart + x, yStart + y);
 			if (terrain != NULL)
-				terrain->drawWrapper(screen, x + NUM_TILES, y + NUM_TILES, -xOffset, -yOffset);
+				terrain->draw(screen, x + NUM_TILES, y + NUM_TILES, -xOffset, -yOffset);
 		}
 	}
 	//Now do this again with objects; because objects can be drawn across two tiles, we want to make sure that

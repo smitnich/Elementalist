@@ -34,7 +34,7 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		{
 			frozen = true;
 		}
-		virtual void heat()
+		virtual void heat(Object *heatObj = NULL)
 		{
 			frozen = false;
 		}

@@ -28,7 +28,7 @@ public:
 		return tmp;
 	}
 	void doLogic() {
-		getCurrentLevel()->getTerrain(x, y)->heatWrapper();
+		getCurrentLevel()->getTerrain(x, y)->heat();
 		objMove();
 		if (objMoveFraction == D_NONE) {
 			preferRightTurn();

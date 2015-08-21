@@ -52,6 +52,7 @@ bool loadLevel(std::string levelName,int levelNum);
 void clearObjects();
 void clearTerrain();
 void doTextBox(int);
+void applyTerrain(int input, int index);
 void playMusic(int level);
 class Terrain *instantiateTerrain(int input, int offset);
 extern int currentLevelNum;
@@ -153,7 +154,7 @@ void Level::checkTerrain() {
 		{
 			if (origObjectLayer[convertIndex(x, y)] != 0)
 			{
-				mapLayer[convertIndex(x, y)]->onEnterWrapper(objectLayer[convertIndex(x, y)]);
+				mapLayer[convertIndex(x, y)]->onEnter(objectLayer[convertIndex(x, y)]);
 			}
 		}
 	}
@@ -327,13 +328,13 @@ void Level::reloadMapLayer()
 	mapLayer.resize(origMapLayer.capacity());
 	for (unsigned int i = 0; i < origMapLayer.capacity(); i++)
 	{
-		mapLayer[i] = instantiateTerrain(origMapLayer[i], i);
+		mapLayer[i] = NULL;
+		applyTerrain(origMapLayer.at(i),i);
 	}
 }
 class Terrain *instantiateTerrain(int input, int i)
 {
 	Terrain *out = NULL;
-	Terrain *tmp;
 	switch (input)
 	{
 	case m_defaultWall:
@@ -367,9 +368,10 @@ class Terrain *instantiateTerrain(int input, int i)
 		out = new ColorBarrier(0);
 		break;
 	case m_icefloor:
-		tmp = new Floor();
-		tmp->index = i;
-		out = new IceFloor(tmp);
+		if (getCurrentLevel()->mapLayer.at(i) == NULL) {
+			applyTerrain(m_floor, i);
+		}
+		out = new IceFloor();
 		break;
 	case m_bomb:
 		out = new Bomb();
@@ -414,10 +416,13 @@ class Terrain *instantiateTerrain(int input, int i)
 		out = new RisingWall(i);
 		break;
 	case m_oilspill:
-		tmp = new Floor();
-		tmp->index = i;
-		tmp->id = m_floor;
-		out = new OilFloor(tmp);
+		if (getCurrentLevel()->mapLayer.at(i) == NULL) {
+			applyTerrain(m_floor, i);
+		}
+		out = new OilFloor();
+		break;
+	case m_manager:
+		out = new MultipleTerrainManager();
 		break;
 	case m_floor:
 	default:
@@ -428,9 +433,7 @@ class Terrain *instantiateTerrain(int input, int i)
 	out->id = input;
 	//Set the index, but only for objects which don't have it set to -1
 	//(meaning the singleton objects)
-
-	if (out->index != -1)
-		out->index = i;
+	out->index = i;
 	return out;
 }
 unsigned char lookupWall(int index)
