@@ -15,15 +15,15 @@ extern bool debugOn;
 
 void recordMove();
 bool loadMoves();
-int getNextReplayMove();
+int getNextReplayMove(int index);
 
 bool replayEnabled = false;
 
 //Store the latest input so we don't end up reading from the controllers
 //multiple times per frame
-int getInput() {
+int getInput(int index = 0) {
 	if (replayEnabled) {
-		currentInput = getNextReplayMove();
+		currentInput = getNextReplayMove(index);
 	}
 	return currentInput;
 }
