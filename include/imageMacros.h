@@ -39,8 +39,7 @@ void loadImages();	\
 X(); \
 Object *createInstance(int x, int y) \
 { \
-Object *tmp = new X(x, y); \
-return tmp; \
+return new X(x, y); \
 } \
 const static int objectNum = Z;
 

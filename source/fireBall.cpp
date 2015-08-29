@@ -30,7 +30,7 @@ public:
 	void doLogic() {
 		getCurrentLevel()->getTerrain(x, y)->heat();
 		objMove();
-		if (objMoveFraction == D_NONE) {
+		if (objMoveFraction == 0.0f) {
 			preferRightTurn();
 		}
 	}

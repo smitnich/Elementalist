@@ -212,6 +212,7 @@
     <ClCompile Include="..\source\inputManager.cpp" />
     <ClCompile Include="..\source\levelSelect.cpp" />
     <ClCompile Include="..\source\magnet.cpp" />
+    <ClCompile Include="..\source\multipleTerrainManager.cpp" />
     <ClCompile Include="..\source\oil.cpp" />
     <ClCompile Include="..\source\pickup.cpp" />
     <ClCompile Include="..\source\pipes.cpp" />

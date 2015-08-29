@@ -10,6 +10,11 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\gcInput.cpp" />
+    <ClCompile Include="..\source\winput.cpp" />
+    <ClCompile Include="..\source\wupc.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FD14A6FB-D458-4AD9-A1FB-C072960A79C1}</ProjectGuid>
     <RootNamespace>Wii</RootNamespace>

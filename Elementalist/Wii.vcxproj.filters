@@ -6,4 +6,9 @@
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\gcInput.cpp" />
+    <ClCompile Include="..\source\winput.cpp" />
+    <ClCompile Include="..\source\wupc.cpp" />
+  </ItemGroup>
 </Project>
