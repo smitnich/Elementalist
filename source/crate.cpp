@@ -126,7 +126,7 @@ public:
 		tmp->y = _y;
 		return tmp;
 	}
-	void heat() {
+	void heat(Object *heatObj = NULL) {
 		return;
 	}
 };
@@ -140,7 +140,7 @@ public:
 	void freeze() {
 		return;
 	}
-	void heat() {
+	void heat(Object *heatObj = NULL) {
 		die();
 	}
 };
