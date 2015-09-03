@@ -76,10 +76,6 @@ Level::Level(FILE* inFile, int levelNum)
 {
 	pickupCount = 0;
 	allLevels[levelNum] = this;
-	for (int i = 0; i < MAX_CONNECTIONS; i++)
-	{
-		senders[i] = -1;
-	}
 	char buffer[128] = {0};
 	fgets(buffer,128,inFile);
 	if (strncmp(buffer,header,strlen(header)) != 0)
@@ -164,17 +160,18 @@ void Level::makeConnections()
 	Trigger *tmp;
 	for (unsigned int i = 0; i < MAX_CONNECTIONS; i++)
 	{
-		if (senders[i] == -1)
-			continue;
-		//If the connector wasn't placed over a valid trigger,
-		//skip it
-		Terrain *test = mapLayer.at(senders[i]);
-		if (test->isTrigger == false)
-			continue;
-		tmp = (Trigger*) mapLayer.at(senders[i]);
-		for (unsigned int j = 0; j < receivers[i].size(); j++)
-		{
-			tmp->connections.insert(tmp->connections.begin(),mapLayer.at(receivers[i].at(j)));
+		std::vector<int> tmpSenders = senders[i];
+		for (int k = 0; k < tmpSenders.size(); k++) {
+			//If the connector wasn't placed over a valid trigger,
+			//skip it
+			Terrain *test = mapLayer.at(tmpSenders[k]);
+			if (test->isTrigger == false)
+				continue;
+			tmp = (Trigger*)mapLayer.at(tmpSenders[k]);
+			for (unsigned int j = 0; j < receivers[i].size(); j++)
+			{
+				tmp->addConnection(mapLayer.at(receivers[i].at(j)));
+			}
 		}
 	}
 	doActivateQueue();
@@ -314,7 +311,7 @@ void Level::loadConnections(FILE *inFile, int xSize, int ySize)
 				}
 				else if (val >= m_sender1 && ((val - m_sender1) % 2) == 0)
 				{
-					senders[(val - m_sender1) / 2] = convertIndex(x, y);
+					senders[(val - m_sender1) / 2].push_back(convertIndex(x, y));
 				}
 			}
 			it += numRead;

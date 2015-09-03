@@ -25,21 +25,26 @@ void Freezer::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff
 }
 void Freezer::activate()
 {
-	enabled = !enabled;
-	sprite = spr_freezer[enabled];
-	if (freezeObj == NULL)
-		return;
-	int x = freezeObj->x;
-	int y = freezeObj->y;
-	getCurrentLevel()->getObject(x, y)->freeze();
+	numConnectionsActive++;
+	if (numConnectionsActive >= totalConnections) {
+		enabled = !enabled;
+		sprite = spr_freezer[enabled];
+		if (freezeObj == NULL)
+			return;
+		int x = freezeObj->x;
+		int y = freezeObj->y;
+		getCurrentLevel()->getObject(x, y)->freeze();
+	}
 }
 void Freezer::deactivate()
 {
+	numConnectionsActive--;
 	enabled = !enabled;
 	sprite = spr_freezer[enabled];
 }
 Freezer::Freezer(bool _enabled)
 {
+	totalConnections = numConnectionsActive = 0;
 	freezeObj = NULL;
 	enabled = _enabled;
 	index = 0;

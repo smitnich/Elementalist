@@ -12,6 +12,8 @@ void apply_surface(int x, int y, SDL_Surface *apply, SDL_Surface *dest);
 class Terrain
 {
 public:
+	int totalConnections;
+	int numConnectionsActive;
 	int id;
 	bool isTrigger;
 	bool coveredTerrain;
@@ -125,6 +127,7 @@ class Trigger : public Terrain
 {
 public:
 	std::vector<Terrain*> connections;
+	void addConnection(Terrain *in);
 };
 class PressureSwitch : public Trigger
 {

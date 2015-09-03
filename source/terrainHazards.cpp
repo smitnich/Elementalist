@@ -34,16 +34,23 @@ void ElectricFloor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, in
 }
 void ElectricFloor::activate()
 {
-	enabled = !enabled;
-	sprite = spr_electricFloor[enabled];
+	numConnectionsActive++;
+	if (numConnectionsActive >= totalConnections) {
+		enabled = !enabled;
+		sprite = spr_electricFloor[enabled];
+	}
 }
 void ElectricFloor::deactivate()
 {
-	enabled = !enabled;
-	sprite = spr_electricFloor[enabled];
+	numConnectionsActive--;
+	if (numConnectionsActive == (totalConnections - 1)) {
+		enabled = !enabled;
+		sprite = spr_electricFloor[enabled];
+	}
 }
 ElectricFloor::ElectricFloor(bool _enabled)
 {
+	totalConnections = numConnectionsActive = 0;
 	sprite = spr_electricFloor[_enabled];
 	enabled = _enabled;
 }

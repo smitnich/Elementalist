@@ -30,14 +30,18 @@ void Conveyor::whileIn(Object *other) {
 }
 void Conveyor::activate()
 {
-	if (!disabled) {
-		disabled = true;
-		disableStartTime = frame;
-		moveFraction = ((frame - disabledTime) / 3) % TILE_SIZE;
+	numConnectionsActive++;
+	if (numConnectionsActive >= totalConnections) {
+		if (!disabled) {
+			disabled = true;
+			disableStartTime = frame;
+			moveFraction = ((frame - disabledTime) / 3) % TILE_SIZE;
+		}
 	}
 }
 void Conveyor::deactivate()
 {
+	numConnectionsActive--;
 	if (disabled) {
 		disabled = false;
 		disabledTime = frame - disableStartTime;
@@ -57,6 +61,7 @@ void Conveyor::onExit(Object* other)
 }
 Conveyor::Conveyor(int direction)
 {
+	totalConnections = numConnectionsActive = 0;
 	disableStartTime = 0;
 	disabledTime = 0;
 	index = 0;

@@ -6,6 +6,10 @@ SDL_Surface *spr_pressureToggle[2] = { NULL, NULL };
 SDL_Surface *pressureTile = NULL;
 extern std::list<Trigger*> activateQueue;
 void addActivateQueue(Trigger *in);
+void Trigger::addConnection(Terrain *in) {
+	connections.push_back(in);
+	in->totalConnections++;
+}
 void PressureSwitch::onEnter(Object *other)
 {
 	if (other->hovering)

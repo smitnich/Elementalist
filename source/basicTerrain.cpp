@@ -13,6 +13,8 @@ Terrain *addTerrainChange(int index, int newIndex);
 
 Floor::Floor()
 {
+	totalConnections = 0;
+	numConnectionsActive = 0;
 	index = 0;
 	isTrigger = false;
 	this->sprite = tiles;
@@ -37,12 +39,14 @@ void Exit::onEnter(Object *other)
 }
 Exit::Exit()
 {
+	totalConnections = numConnectionsActive = 0;
 	index = 0;
 	isTrigger = false;
 	this->sprite = exitTile;
 }
 Barrier::Barrier()
 {
+	totalConnections = numConnectionsActive = 0;
 	index = 0;
 	disabled = false;
 	this->sprite = barrierTile;
@@ -61,10 +65,14 @@ bool Barrier::requestEntry(Object *other, int dir)
 }
 void Barrier::activate()
 {
-	disabled = true;
+	numConnectionsActive++;
+	if (numConnectionsActive >= totalConnections) {
+		disabled = true;
+	}
 }
 void Barrier::deactivate()
 {
+	numConnectionsActive--;
 	disabled = false;
 }
 void ColorBarrier::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)

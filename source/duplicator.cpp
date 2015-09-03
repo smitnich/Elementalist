@@ -27,35 +27,40 @@ void Duplicator::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int y
 }
 void Duplicator::activate()
 {
-	if (copyObj == NULL) {
-		createQueued = true;
-		return;
+	numConnectionsActive++;
+	if (numConnectionsActive >= totalConnections) {
+		if (copyObj == NULL) {
+			createQueued = true;
+			return;
+		}
+		int x = copyObj->x;
+		int y = copyObj->y;
+		if (dir == D_UP)
+			y -= 1;
+		else if (dir == D_DOWN)
+			y += 1;
+		else if (dir == D_LEFT)
+			x -= 1;
+		else if (dir == D_RIGHT)
+			x += 1;
+		Object *other = getCurrentLevel()->getObject(x, y);
+		if (other != NULL && !other->requestEntry(copyObj, dir))
+			return;
+		Object *tmp = copyObj->clone(copyObj->x, copyObj->y);
+		if (tmp == NULL)
+			return;
+		tmp->startMove(dir, 3);
+		addCreationQueue(tmp);
 	}
-	int x = copyObj->x;
-	int y = copyObj->y;
-	if (dir == D_UP)
-		y -= 1;
-	else if (dir == D_DOWN)
-		y += 1;
-	else if (dir == D_LEFT)
-		x -= 1;
-	else if (dir == D_RIGHT)
-		x += 1;
-	Object *other = getCurrentLevel()->getObject(x, y);
-	if (other != NULL && !other->requestEntry(copyObj,dir))
-		return;
-	Object *tmp = copyObj->clone(copyObj->x,copyObj->y);
-	if (tmp == NULL)
-		return;
-	tmp->startMove(dir,3);
-	addCreationQueue(tmp);
 }
 void Duplicator::deactivate() {
+	numConnectionsActive--;
 	copyObj = NULL;
 	createQueued = false;
 }
 Duplicator::Duplicator(int _dir)
 {
+	totalConnections = numConnectionsActive = 0;
 	dir = _dir;
 	sprite = spr_dupe[dir - 1];
 	index = 0;
