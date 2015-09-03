@@ -32,7 +32,7 @@ Wall::Wall(int _index)
 	else
 		sprite = wall[lookupWall(index)];
 }
-void Exit::onEnter(Object *other)
+void Exit::onEnter(Object *other, bool solidFound)
 {
 	if (other->isPlayer)
 		won = true;
@@ -98,7 +98,7 @@ bool ColorBarrier::requestEntry(Object *other, int dir)
 	}
 	return false;
 }
-void ColorBarrier::onEnter(Object *other)
+void ColorBarrier::onEnter(Object *other, bool solidFound)
 {
 	addTerrainChange(index, m_floor);
 	other->die();
@@ -108,7 +108,7 @@ Bomb::Bomb()
 	index = 0;
 	sprite = spr_bomb;
 }
-void Bomb::onEnter(Object *other)
+void Bomb::onEnter(Object *other, bool solidFound)
 {
 	other->die();
 	addTerrainChange(index, m_floor);

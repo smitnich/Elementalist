@@ -10,7 +10,7 @@ void Trigger::addConnection(Terrain *in) {
 	connections.push_back(in);
 	in->totalConnections++;
 }
-void PressureSwitch::onEnter(Object *other)
+void PressureSwitch::onEnter(Object *other, bool solidFound)
 {
 	if (other->hovering)
 		return;
@@ -36,7 +36,7 @@ PressureSwitch::PressureSwitch()
 	isTrigger = true;
 	sprite = pressureTile;
 }
-void ToggleSwitch::onEnter(Object *other)
+void ToggleSwitch::onEnter(Object *other, bool solidFound)
 {
 	if (other->hovering)
 		return;

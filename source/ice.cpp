@@ -18,7 +18,7 @@ void IceFloor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOf
 	int yStart = yTile*TILE_SIZE + yInitial + yOff;
 	apply_surface(xStart, yStart, sprite, drawTo);
 }
-void IceFloor::onEnter(Object *other)
+void IceFloor::onEnter(Object *other, bool solidFound)
 {
 	if (other->prevMove != D_NONE)
 		other->startMove(other->prevMove,2);

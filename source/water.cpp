@@ -11,9 +11,9 @@ Water::Water()
 	index = 0;
 	sprite = spr_water;
 }
-void Water::onEnter(Object *other)
+void Water::onEnter(Object *other, bool solid)
 {
-	if (coveredTerrain)
+	if (solid)
 		return;
 	if (other->frozen)
 		addTerrainChange(index, m_icefloor);

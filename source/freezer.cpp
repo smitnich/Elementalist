@@ -5,7 +5,7 @@
 SDL_Surface *spr_freezer[2] = { NULL, NULL };
 void addTransitQueue(Object *in);
 
-void Freezer::onEnter(Object *other)
+void Freezer::onEnter(Object *other, bool solidFound)
 {
 	freezeObj = other;
 	if (enabled)

@@ -15,11 +15,11 @@ void BlackHole::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yO
 	apply_surface(xStart, yStart, tiles, drawTo);
 	apply_surface(xStart, yStart, sprite, drawTo);
 }
-void BlackHole::onEnter(Object *other)
+void BlackHole::onEnter(Object *other, bool solidFound)
 {
 	other->die();
 }
-void ElectricFloor::onEnter(Object *other)
+void ElectricFloor::onEnter(Object *other, bool solidFound)
 {
 	if (enabled)
 		other->electrocute();

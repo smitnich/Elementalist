@@ -124,7 +124,7 @@ bool Terrain::requestExit(Object* other, int dir)
 {
 	return true;
 }
-void Terrain::onEnter(Object* other)
+void Terrain::onEnter(Object* other, bool solidFound)
 {
 	return;
 }

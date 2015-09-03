@@ -5,10 +5,10 @@
 SDL_Surface *spr_dupe[4] = { NULL, NULL, NULL, NULL };
 void addCreationQueue(Object *in);
 
-void Duplicator::onEnter(Object *other)
+void Duplicator::onEnter(Object *other, bool solidFound)
 {
 	copyObj = other;
-	if (createQueued) {
+	if (createQueued || totalConnections == 0) {
 		activate();
 		createQueued = false;
 	}

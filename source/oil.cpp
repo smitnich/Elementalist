@@ -24,7 +24,7 @@ void OilFloor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOf
 	int yStart = yTile*TILE_SIZE + yInitial + yOff;
 	apply_surface(xStart, yStart, sprite, drawTo);
 }
-void OilFloor::onEnter(Object *other)
+void OilFloor::onEnter(Object *other, bool solidFound)
 {
 	objWithin = true;
 }

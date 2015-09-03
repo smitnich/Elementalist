@@ -34,6 +34,10 @@ void MultipleTerrainManager::onCreate() {
 
 }
 void MultipleTerrainManager::addTerrain(Terrain *in) {
+	for (unsigned int i = 0; i < within.size(); i++) {
+		if (within.at(i)->id == in->id)
+			return;
+	}
 	within.push_back(in);
 }
 void MultipleTerrainManager::activate() {
@@ -55,9 +59,14 @@ bool MultipleTerrainManager::requestExit(Object* other, int dir) {
 	return true;
 
 }
-void MultipleTerrainManager::onEnter(Object* other) {
-	for (unsigned int i = 0; i < within.size(); i++) {
-		within.at(i)->onEnter(other);
+void MultipleTerrainManager::onEnter(Object *other, bool solidFound) {
+	bool solid = false;
+	for (int i = within.size()-1; i >= 0; i--) {
+		within.at(i)->onEnter(other,solid);
+		//If a piece of terrain is solid, then it
+		if (within.at(i)->solid) {
+			solid = true;
+		}
 	}
 }
 void MultipleTerrainManager::onExit(Object* other) {

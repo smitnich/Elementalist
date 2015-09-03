@@ -49,7 +49,7 @@ void Conveyor::deactivate()
 			lastEntered->startMove(dir,2);
 	}
 }
-void Conveyor::onEnter(Object* other)
+void Conveyor::onEnter(Object *other, bool solidFound)
 {
 	if (!disabled && !other->hovering)
 		other->startMove(dir,2);

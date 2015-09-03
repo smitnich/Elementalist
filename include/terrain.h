@@ -34,7 +34,7 @@ public:
 	virtual void activate();
 	virtual void deactivate();
 	virtual bool requestExit(Object* other, int dir);
-	virtual void onEnter(Object* other);
+	virtual void onEnter(Object* other, bool solidFound = false);
 	virtual void onExit(Object* other);
 	virtual bool requestEntry(Object* other, int dir);
 };
@@ -51,7 +51,7 @@ public:
 	void activate();
 	void deactivate();
 	bool requestExit(Object* other, int dir);
-	void onEnter(Object* other);
+	void onEnter(Object* other, bool solidFound = false);
 	void onExit(Object* other);
 	bool requestEntry(Object* other, int dir);
 	void addTerrain(Terrain *in);
@@ -68,7 +68,7 @@ public:
 class Bomb : public Floor {
 public:
 	Bomb();
-	void onEnter(Object *other);
+	void onEnter(Object *other, bool solidFound = false);
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 };
 class Wall : public Terrain{
@@ -78,7 +78,7 @@ public:
 };
 class Exit : public Floor{
 public:
-	void onEnter(Object* other);
+	void onEnter(Object *other, bool solidFound  = false);
 	Exit();
 };
 class Barrier : public Terrain
@@ -98,7 +98,7 @@ public:
 	int colorType;
 	bool requestEntry(Object *other, int dir);
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
-	void onEnter(Object *other);
+	void onEnter(Object *other, bool solidFound = false);
 	ColorBarrier(int type);
 };
 class Conveyor : public Terrain
@@ -113,7 +113,7 @@ public:
 	int dir;
 	bool requestEntry(Object* other, int dir);
 	bool requestExit(Object* other, int dir);
-	void onEnter(Object* other);
+	void onEnter(Object* other, bool solidFound = false);
 	void onExit(Object* other);
 	void activate();
 	void deactivate();
@@ -132,7 +132,7 @@ public:
 class PressureSwitch : public Trigger
 {
 public:
-	void onEnter(Object* other);
+	void onEnter(Object* other, bool solidFound = false);
 	void onExit(Object* other);
 	PressureSwitch();
 };
@@ -140,7 +140,7 @@ class ToggleSwitch : public Trigger
 {
 public:
 	bool enabled;
-	void onEnter(Object *other);
+	void onEnter(Object *other, bool solidFound = false);
 	ToggleSwitch(bool enabled);
 };
 class IceFloor : public Terrain
@@ -148,7 +148,7 @@ class IceFloor : public Terrain
 public:
 	~IceFloor();
 	IceFloor();
-	void onEnter(Object *other);
+	void onEnter(Object *other, bool solidFound = false);
 	void freeze();
 	void heat();
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
@@ -157,7 +157,7 @@ public:
 class Water : public Terrain
 {
 public:
-	void onEnter(Object *other);
+	void onEnter(Object *other, bool solidFound = false);
 	Water();
 };
 class Duplicator : public Terrain
@@ -166,7 +166,7 @@ public:
 	int dir;
 	bool createQueued;
 	Object *copyObj;
-	void onEnter(Object *other);
+	void onEnter(Object *other, bool solidFound = false);
 	void onExit(Object *other);
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	void activate();
@@ -176,7 +176,7 @@ public:
 class BlackHole : public Terrain
 {
 public:
-	void onEnter(Object *other);
+	void onEnter(Object *other, bool solidFound = false);
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	BlackHole();
 };
@@ -184,7 +184,7 @@ class ElectricFloor : public Terrain
 {
 public:
 	bool enabled;
-	void onEnter(Object *other);
+	void onEnter(Object *other, bool solidFound = false);
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	void activate();
 	void deactivate();
@@ -197,7 +197,7 @@ public:
 	Object *freezeObj;
 	bool enabled;
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
-	void onEnter(Object *other);
+	void onEnter(Object *other, bool solidFound = false);
 	void onExit(Object *other);
 	void activate();
 	void deactivate();
@@ -222,7 +222,7 @@ public:
 	OilFloor();
 	bool requestEntry(Object* other, int dir);
 	bool requestExit(Object* other, int dir);
-	void onEnter(Object *other);
+	void onEnter(Object *other, bool solidFound = false);
 	void onExit(Object *other);
 	void heat();
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);

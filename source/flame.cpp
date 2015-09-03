@@ -1,5 +1,4 @@
 #include "sdlFiles.h"
-#include "objectDef.h"
 #include "sprites.h"
 #include "level.h"
 extern Object *player;
