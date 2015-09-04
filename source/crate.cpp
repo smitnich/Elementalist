@@ -163,7 +163,7 @@ public:
 			if (getCurrentLevel()->getTerrain(x, y + 1)->id == m_water) {
 				applyTerrain(m_oilspill, getCurrentLevel()->convertIndex(x, y + 1));
 			}
-			if (getCurrentLevel()->getTerrain(x, y - 1)->id == m_water) {
+			if (getCurrentLevel()->getTerrain(x + 1, y)->id == m_water) {
 				applyTerrain(m_oilspill, getCurrentLevel()->convertIndex(x + 1, y));
 			}
 			return;
