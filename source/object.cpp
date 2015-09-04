@@ -57,6 +57,7 @@ Object::Object(int x2, int y2)
 	hovering = false;
 	prevMove = D_NONE;
 	timeToLive = nan("");
+	dead = false;
 }
 Object::Object(Object &other, int _x, int _y)
 {
@@ -75,7 +76,9 @@ Object::Object(Object &other, int _x, int _y)
 //Clean up the object
 void Object::die()
 {
-	addDeleteQueue(this);
+	if (!dead)
+		addDeleteQueue(this);
+	dead = true;
 }
 Object::~Object()
 {

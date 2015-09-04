@@ -14,6 +14,7 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		bool isPlayer;
 		bool isMagnetic;
 		int currentMovePriority;
+		bool dead;
 		Object *within;
 		virtual bool isMovableBlock();
 		Object(int x, int y);
