@@ -22,7 +22,7 @@ enum directions_t
 #define TILE_SIZE 48
 #define EMPTY 0
 #define SOLID 1
-#define MAX_LEVEL 11
+#define MAX_LEVEL 12
 enum screens_t
 {
 	SCR_LEVELSELECT,

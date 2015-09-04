@@ -17,7 +17,7 @@ class Level
 	std::vector<Terrain *> mapLayer;
 	std::vector<Object *> objectLayer;
 	std::vector<int> receivers[MAX_CONNECTIONS];
-	int senders[MAX_CONNECTIONS];
+	std::vector<int> senders[MAX_CONNECTIONS];
 	char **connectionLayer;
 	Level(FILE* inFile, int levelNum);
 	void loadAllLayers(char *buffer,FILE *inFile);
