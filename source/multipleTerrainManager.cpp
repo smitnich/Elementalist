@@ -40,6 +40,14 @@ void MultipleTerrainManager::addTerrain(Terrain *in) {
 	}
 	within.push_back(in);
 }
+void MultipleTerrainManager::removeTerrain(Terrain *in) {
+	for (unsigned int i = 0; i < within.size(); i++) {
+		if (within.at(i) == in) {
+			within.erase(within.begin()+i);
+			return;
+		}
+	}
+}
 void MultipleTerrainManager::activate() {
 	for (unsigned int i = 0; i < within.size(); i++) {
 		within.at(i)->activate();

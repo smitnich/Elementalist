@@ -55,6 +55,7 @@ public:
 	void onExit(Object* other);
 	bool requestEntry(Object* other, int dir);
 	void addTerrain(Terrain *in);
+	void removeTerrain(Terrain *in);
 };
 class Floor : public Terrain{
 public:

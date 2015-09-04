@@ -161,6 +161,7 @@ void removeTerrain(Terrain *terrain) {
 		getCurrentLevel()->mapLayer[index] = NULL;
 	}
 	else if (tmp->id == m_manager) {
-
+		MultipleTerrainManager* manager = (MultipleTerrainManager*) tmp;
+		manager->removeTerrain(terrain);
 	}
 }
