@@ -22,3 +22,4 @@ extern SDL_Surface *spr_risingWall;
 extern SDL_Surface *spr_oilFloor;
 extern SDL_Surface *spr_levelButton;
 extern SDL_Surface *spr_levelButtonSelected;
+extern SDL_Surface *spr_flame;

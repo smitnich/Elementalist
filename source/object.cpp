@@ -30,7 +30,7 @@ extern std::list<MoveRequest> moveQueue;
 void doDeleteQueue();
 void addDeleteQueue(Object *in);
 void removeMoveRequest(Object *remove);
-
+void doLogicTerrain();
 void doSwitchQueue();
 
 //The distance away from the player at which the sound is fully
@@ -407,6 +407,7 @@ void objectLogic()
 	checkCreationQueue();
 	doDeleteQueue();
 	doSwitchQueue();
+	doLogicTerrain();
 }
 void doPlayer()
 {

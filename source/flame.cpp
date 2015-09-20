@@ -1,8 +1,10 @@
 #include "sdlFiles.h"
 #include "sprites.h"
 #include "level.h"
+#include "tileEnum.h"
 extern Object *player;
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
+void applyTerrain(int input, int index);
 Level* getCurrentLevel();
 bool objMove();
 
@@ -22,6 +24,8 @@ public:
 		objMoveFraction = 0;
 		faceDir = 0;
 		prevMove = D_NONE;
+		applyTerrain(m_firefloor, getCurrentLevel()->convertIndex(x, y));
+		die();
 	}
 	Object* clone(int _x, int _y)
 	{

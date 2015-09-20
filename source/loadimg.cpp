@@ -110,6 +110,7 @@ void imgInit()
 	spr_oilFloor = loadOptimizedIMG("gfx/oilfloor.png");
 	spr_levelButton = loadOptimizedIMG("gfx/ui/levelButton.png");
 	spr_levelButtonSelected = loadOptimizedIMG("gfx/ui/levelButtonSelected.png");
+	spr_flame = loadOptimizedIMG("gfx/flames.png");
 	createButtons();
 }
 //Optimize the image for proper depth and for transparecny

@@ -1,6 +1,6 @@
 enum tiles_t
 {
-	OBJ_MANAGER = -2,
+	m_firefloor = -2,
 	m_manager = -1,
 	m_defaultWall = 0,
 	m_exit,

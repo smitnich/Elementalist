@@ -69,6 +69,7 @@ void resetSwitchQueue();
 void resetMoves();
 void dumpMoves();
 void setTicks();
+void clearLogicList();
 
 Object* objectInit(unsigned int id, int x, int y);
 std::string constructLevelName(int);
@@ -162,7 +163,7 @@ void Level::makeConnections()
 	for (unsigned int i = 0; i < MAX_CONNECTIONS; i++)
 	{
 		std::vector<int> tmpSenders = senders[i];
-		for (int k = 0; k < tmpSenders.size(); k++) {
+		for (unsigned int k = 0; k < tmpSenders.size(); k++) {
 			//If the connector wasn't placed over a valid trigger,
 			//skip it
 			Terrain *test = mapLayer.at(tmpSenders[k]);
@@ -335,6 +336,9 @@ class Terrain *instantiateTerrain(int input, int i)
 	Terrain *out = NULL;
 	switch (input)
 	{
+	case m_firefloor:
+		out = new FireFloor(i % getCurrentLevel()->width, i / getCurrentLevel()->width);
+		break;
 	case m_defaultWall:
 		out = new Wall(-1);
 		break;
@@ -474,6 +478,8 @@ void switchLevel(int levelNum)
 	clearObjects();
 	clearTerrain();
 	changeText();
+	resetDeleteQueue();
+	clearLogicList();
 	if (loadLevel(tempLevel,levelNum) == 0)
 	{
 		exit(0);
@@ -488,7 +494,6 @@ void switchLevel(int levelNum)
 	resetMoveQueue();
 	resetCreationQueue();
 	resetActivateQueue();
-	resetDeleteQueue();
 	resetSwitchQueue();
 	levelStartTime = getTicks();
 	resetMoves();

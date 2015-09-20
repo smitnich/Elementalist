@@ -165,3 +165,43 @@ void removeTerrain(Terrain *terrain) {
 		manager->removeTerrain(terrain);
 	}
 }
+
+//Some terrain unfortunately needs to be checked each turn in order to perform logic;
+//this adds them to the list of such terrain on creation
+std::list<LogicTerrain*> terrainLogicList;
+std::list<LogicTerrain*> toRemove;
+void addTerrainLogic(LogicTerrain *in) {
+	terrainLogicList.push_back(in);
+}
+void removeLogicTerrainRequest(LogicTerrain *in) {
+	toRemove.push_back(in);
+}
+
+void clearLogicList() {
+	terrainLogicList.clear();
+	toRemove.clear();
+}
+
+void doLogicTerrain() {
+	if (terrainLogicList.size() == 0)
+		return;
+	for (std::list<LogicTerrain*>::iterator it = terrainLogicList.begin();
+		it != terrainLogicList.end(); it++) {
+		(*it)->doLogic();
+	}
+	while (toRemove.size() > 0) {
+		Terrain *tmp = toRemove.front();
+		toRemove.pop_front();
+		for (std::list<LogicTerrain*>::iterator it = terrainLogicList.begin();
+			it != terrainLogicList.end(); it++) {
+			if (*it == tmp) {
+				removeTerrain(tmp);
+				terrainLogicList.remove(*it);
+				break;
+			}
+		}
+	}
+}
+LogicTerrain::LogicTerrain() {
+	addTerrainLogic(this);
+}

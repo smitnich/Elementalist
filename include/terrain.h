@@ -228,4 +228,21 @@ public:
 	void heat();
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 };
+class LogicTerrain : public Terrain {
+public:
+	int x, y;
+	LogicTerrain();
+	virtual void doLogic() = 0;
+};
+class FireFloor : public LogicTerrain {
+public:
+	float timeToLive;
+	float lifeTime;
+	~FireFloor();
+	FireFloor(int _x, int _y);
+	bool requestEntry(Object* other, int dir);
+	bool requestExit(Object* other, int dir);
+	void onEnter(Object *other, bool solidFound = false);
+	void doLogic();
+};
 #endif
