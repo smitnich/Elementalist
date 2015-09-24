@@ -3,8 +3,9 @@
 #include "sprites.h"
 #include "level.h"
 #include "tileEnum.h"
-Object *addSwitchQueue(Object *in, int switchId);
-extern Object *player;
+#include "queues.h"
+#include "player.h"
+
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 Level* getCurrentLevel();
 void objMove();

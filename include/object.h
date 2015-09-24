@@ -14,19 +14,14 @@ extern bool displayName;
 extern int conveyorSpeed;
 extern int levelChange;
 extern std::string startLevelName;
-int lastInput = INPUT_NONE;
+extern int lastInput;
 extern int currentLevel;
 //The current frame
-int frame = 0;
+extern int frame;
 //The last frame to recieve input
-unsigned long lastInputTime = 0;
-Object* player;
+extern unsigned long lastInputTime;
 //Whether or not a player has been placed yet
 //Used to determine which one to make active
-bool playerPlaced = 0;
-//The number of panels depressed
-//Todo: Change to be more generic
-int pressureCount = 0;
 extern double fpsModifier;
 //0 = not solid, 1 = solid 2 = solid & pushable
 void apply_surface (int x, int y, SDL_Surface* source, SDL_Surface* destination);
@@ -35,12 +30,18 @@ void changeObjects(int);
 void changeTextToWin();
 bool between(int, int, int);
 void cleanup();
-SDL_Surface* pickSprite(int id, int dir, int moveFraction);
-int compareCoordinates(Object*,Object*);
 void addMoveRequest(Object *obj, int x, int y, int checkX, int checkY);
-//Player stuff
-int getInput();
-//The last input to be recieved
-void switchLevel(int);
+
+void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY);
+void doDraw(Object *drawObject, int xOffset, int yOffset);
+Object* objectInit(unsigned int id, int x, int y);
+void clearObjects();
+void clearObjects();
+void objectDraw();
+void objectLogic();
+void doPlayer();
+double getPlayerMoveFraction();
+bool switchPlayerFocus();
+
 void queuePlaceAll();
 Object* objectInit(unsigned int id, int x, int y, int moveDir, int moveFraction);

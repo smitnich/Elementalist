@@ -5,7 +5,6 @@
 #include "defs.h"
 void doWall(int type,int x,int y, int moveFractionX, int moveFractionY);
 void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY);
-void doDraw(Object *drawObject, int xOffset, int yOffset);
 int getCenter(int a, int b);
 int getControlType();
 void apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination);
@@ -15,8 +14,6 @@ void doTextBox(int posY);
 void drawSprite(int,int,SDL_Surface*);
 void imgInit();
 void drawWrappedSprite(int x, int y, SDL_Surface* source, SDL_Surface* destination, int xWrap, int yWrap);
-double getPlayerMoveFraction();
-int getPlayerMoveDir();
 void drawBorders();
 SDL_Rect* rectMake(int x, int y, int h, int w);
 SDL_Surface* loadOptimizedIMG(std::string);

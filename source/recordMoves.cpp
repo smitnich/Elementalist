@@ -4,6 +4,7 @@ int determineInput(bool mouse);
 #include "inputDef.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "recordMoves.h"
 
 void writeDebugText(char *in);
 const char *replayPath = "replays";

@@ -1,5 +1,7 @@
 #include <list>
 #include "terrain.h"
+#include "queues.h"
+
 std::list<Trigger*> activateQueue;
 
 void resetActivateQueue()

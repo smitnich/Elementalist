@@ -5,6 +5,8 @@
 #include "inputDef.h"
 #include <string>
 
+#include "levelSelect.h"
+
 void checkEvents();
 void drawSprite(int drawX, int drawY, SDL_Surface* toDraw);
 int determineInput(bool mouse);

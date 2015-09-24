@@ -1,5 +1,6 @@
 #include <list>
 #include "terrain.h"
+#include "queues.h"
 //Used when a new object is created using the duplicator: since two objects can't exist
 //in the same square, we need to store newly created objects in the queue before they
 //move to the next square

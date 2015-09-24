@@ -1,18 +1,15 @@
 #include "sdlFiles.h"
 #include <list>
 #include "defs.h"
+#include "ui.h"
+#include "level.h"
+#include "levelSelect.h"
 
 void apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination);
 SDL_Surface* loadOptimizedIMG(const char *fileName);
 extern int xInitial;
 extern int yInitial;
 extern int currentScreen;
-
-void handleLevelSelectClick(int x, int y);
-void restartLevel();
-void nextLevel();
-void prevLevel();
-void gotoLevelSelect();
 
 struct InterfaceMember {
 	int x, y;

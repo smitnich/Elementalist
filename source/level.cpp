@@ -5,6 +5,9 @@
 #include "tileEnum.h"
 #include "wallLookup.h"
 #include <queue>
+#include "queues.h"
+
+#include "level.h"
 
 const std::string LevelStrings[] =
 {
@@ -60,12 +63,7 @@ extern int currentLevelNum;
 extern Object* player;
 void changeText();
 unsigned long getTicks();
-void doActivateQueue();
-void resetMoveQueue();
-void resetCreationQueue();
-void resetActivateQueue();
-void resetDeleteQueue();
-void resetSwitchQueue();
+
 void resetMoves();
 void dumpMoves();
 void setTicks();

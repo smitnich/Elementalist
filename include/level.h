@@ -34,4 +34,17 @@ class Level
 	void checkTerrain();
 };
 Level *getCurrentLevel();
+Object* objectInit(unsigned int id, int x, int y);
+std::string constructLevelName(int);
+extern class Level *allLevels[MAX_LEVEL];
+
+class Terrain *instantiateTerrain(int input, int i);
+unsigned char lookupWall(int index);
+void switchLevel(int levelNum);
+std::string constructLevelName(int levelNum);
+class Level* getCurrentLevel();
+bool loadLevel(std::string fileName, int levelNum);
+void restartLevel();
+void prevLevel();
+void nextLevel();
 #endif

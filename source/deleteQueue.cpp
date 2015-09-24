@@ -1,12 +1,8 @@
 #include <list>
 #include "level.h"
+#include "queues.h"
 
 class Object;
-
-struct deleteNode {
-	Object *object;
-	Terrain *terrain;
-};
 
 std::list<deleteNode> deleteQueue;
 

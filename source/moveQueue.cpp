@@ -2,6 +2,8 @@
 #include "objectDef.h"
 #include "level.h"
 #include "moveRequest.h"
+#include "queues.h"
+
 Level* getCurrentLevel();
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 void doDraw(Object *drawObject, int moveFractionX, int moveFractionY);

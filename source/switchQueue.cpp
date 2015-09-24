@@ -2,11 +2,7 @@
 #include "objectDef.h"
 
 #include "level.h"
-
-struct SwitchRequest {
-	Object *obj;
-	Object *switchTo;
-};
+#include "queues.h"
 
 Object* objectInit(unsigned int id, int x, int y);
 

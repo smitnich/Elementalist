@@ -1,5 +1,6 @@
 #include "sdlFiles.h"
 #include "defs.h"
+#include "object.h"
 #include <iostream>
 #ifdef _WIN32
 #include <direct.h>
@@ -18,6 +19,9 @@ extern "C" {
 }
 bool smbInit();
 #endif
+
+#include "player.h"
+
 extern char directorySymbol;
 void parseConfig(char argv[]);
 void musicInit();
@@ -45,12 +49,15 @@ extern std::string levelPath, appPath;
 extern SDL_Surface *screen;
 extern int videoSizeX, videoSizeY, bitDepth, argumentCount, frame, lastInput, \
 framesPerSecond, levelChange, levelStartCounter;
-unsigned long lastTicks = 0;
 extern unsigned long lastInputTime;
 double delta = 0.0;
+int lastInput = INPUT_NONE;
 int currentScreen = SCR_LEVELSELECT;
-extern bool playerDead;
+
+int frame = 0;
 unsigned long ticks = 0;
+unsigned long lastTicks = 0;
+unsigned long lastInputTime = 0;
 extern char debugString[];
 extern unsigned long levelStartTime;
 //Keep every event that occurs during a frame to the same tick value

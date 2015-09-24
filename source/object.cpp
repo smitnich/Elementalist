@@ -7,6 +7,9 @@
 #include <climits>
 #include <algorithm>
 
+#include "queues.h"
+#include "player.h"
+
 #ifdef GEKKO
 #include <cmath>
 #endif
@@ -24,14 +27,9 @@ void writeDebugText(char* in);
 bool checkCollision(Object *first, Object *second);
 void setPanning(unsigned int channel, unsigned int right);
 Object *objectList[MAX_OBJECTS] = { NULL };
-extern std::list<Object*> creationQueue;
-extern std::list<MoveRequest> moveQueue;
+bool playerPlaced = 0;
 
-void doDeleteQueue();
-void addDeleteQueue(Object *in);
-void removeMoveRequest(Object *remove);
 void doLogicTerrain();
-void doSwitchQueue();
 
 //The distance away from the player at which the sound is fully
 //in the left or right direction

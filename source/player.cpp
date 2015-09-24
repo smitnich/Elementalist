@@ -3,8 +3,13 @@
 #include "inputDef.h"
 #include "level.h"
 #include "debugText.h"
+
+#include "recordMoves.h"
+
+Object* player;
 extern int pressureCount;
 extern int prevMove;
+extern double fpsModifier;
 extern unsigned long lastInputTime;
 extern int frame;
 extern bool playerPlaced;
@@ -30,7 +35,6 @@ extern Object *player;
 void gameOver();
 bool switchPlayerFocus();
 Object* objectInit(unsigned int id, int x, int y, int moveDir, int moveFraction);
-void recordMove();
 //The player
 class Person : public Object
 {
@@ -38,6 +42,7 @@ public:
 	OBJECT_DECLARATION(Person, 1004)
 	int active;
 	int moveIndex;
+	int inputMove;
 	Person(const Person &other, int _x, int _y)
 	{
 		active = true;
@@ -53,6 +58,7 @@ public:
 		numFrames = other.numFrames;
 		faceDir = 0;
 		queuedMove = D_NONE;
+		inputMove = D_NONE;
 		for (int i = 0; i < 6; i++)
 		{
 			spriteew[i] = other.spriteew[i];
@@ -84,6 +90,7 @@ public:
 	//Moves, gets input if needed and checks for forces on the player eg conveyor belts
 	void doLogic()
 	{
+		inputMove = D_NONE;
 		if (playerDead || displayName)
 			return;
 		if (active == false && objMoveDir == D_NONE)
@@ -116,6 +123,7 @@ public:
 		case B_RIGHT:
 			if (x < MAP_SIZE && objMoveFraction == 0 && !frozen)
 			{
+				inputMove = D_RIGHT;
 				if (startMove(D_RIGHT, 1)) {
 					faceDir = D_RIGHT;
 					recordMove();
@@ -127,6 +135,7 @@ public:
 		case B_LEFT:
 			if (x > 0 && objMoveFraction == 0 && !frozen)
 			{
+				inputMove = D_LEFT;
 				if (startMove(D_LEFT, 1)) {
 					faceDir = D_LEFT;
 					recordMove();
@@ -138,6 +147,7 @@ public:
 		case B_DOWN:
 			if (y < MAP_SIZE && objMoveFraction == 0 && !frozen)
 			{
+				inputMove = D_DOWN;
 				if (startMove(D_DOWN, 1)) {
 					faceDir = D_DOWN;
 					recordMove();
@@ -149,6 +159,7 @@ public:
 		case B_UP:
 			if (y > 0 && objMoveFraction == 0 && !frozen)
 			{
+				inputMove = D_UP;
 				if (startMove(D_UP, 1)) {
 					faceDir = D_UP;
 					recordMove();
@@ -213,6 +224,34 @@ public:
 	Object* clone(int _x, int _y)
 	{
 		return new Person(*this, _x, _y);
+	}
+	bool startMove(int dir, int priority)
+	{
+		if (priority < currentMovePriority)
+			return false;
+		if (inputMove != D_NONE && inputMove != dir)
+			moveIndex--;
+		int xChange = 0;
+		int yChange = 0;
+		switch (dir) {
+		case D_UP:
+			yChange = -1;
+			break;
+		case D_DOWN:
+			yChange = 1;
+			break;
+		case D_LEFT:
+			xChange = -1;
+			break;
+		case D_RIGHT:
+			xChange = 1;
+			break;
+		}
+		if (dir == D_NONE || !requestMove(x, y, xChange, yChange, this))
+			return false;
+		objMoveDir = dir;
+		tempSpeed = (double)3 * fpsModifier;
+		return true;
 	}
 };
 const char *Person::imageNames[4][3] = { { "gfx/personn1.png", "gfx/personn2.png", "gfx/personn3.png" },
