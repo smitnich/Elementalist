@@ -4,6 +4,26 @@
 #include "debugText.h"
 #include "defs.h"
 
+extern int videoSizeY, videoSizeX;
+extern int xInitial, yInitial, tilesSizeX, tilesX, tilesY, tileSizeY;
+extern int mouseX, mouseY, currentLevelNum;
+extern std::string appPath;
+extern std::string levelPath;
+extern std::string startLevelName;
+extern bool displayName;
+extern int framesPerSecond;
+extern int xMax, yMax;
+#include "level.h"
+#include "sprites.h"
+extern bool showCursor;
+extern int frame;
+//The font to show the level name in
+extern TTF_Font *font;
+//A smaller font
+extern TTF_Font *fontSmall;
+//Let the font be black
+extern SDL_Color textColor;
+
 extern Object *player;
 SDL_Surface *iceBlock = NULL;
 SDL_Rect borderRect[4];

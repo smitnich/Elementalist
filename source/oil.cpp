@@ -10,6 +10,8 @@ Terrain *addTerrainChange(int index, Terrain *changeTo);
 Object *objectInit(unsigned int id, int idx);
 
 SDL_Surface *spr_oilFloor = NULL;
+extern int xInitial, yInitial;
+
 OilFloor::~OilFloor() {
 }
 OilFloor::OilFloor()

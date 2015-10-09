@@ -3,8 +3,7 @@
 #include "sprites.h"
 #include "tileEnum.h"
 
-Terrain* addTerrainChange(int index, Terrain *changeTo);
-void removeTerrain(Terrain *terrain);
+extern int xInitial, yInitial;
 
 SDL_Surface *iceFloor = NULL;
 IceFloor::~IceFloor() {

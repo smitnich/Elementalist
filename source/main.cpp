@@ -21,29 +21,18 @@ bool smbInit();
 #endif
 
 #include "player.h"
+#include "files.h"
+#include "gfx.h"
+#include "event.h"
+#include "inputManager.h"
+#include "terrain.h"
+#include "sound.h"
+#include "queues.h"
+#include "loadImg.h"
+#include "input.h"
+#include "levelSelect.h"
 
 extern char directorySymbol;
-void parseConfig(char argv[]);
-void musicInit();
-void fileInit();
-void inputInit();
-void joystickInit();
-void gfxInit();
-bool fontInit();
-void switchLevel(int level);
-void clearObjects();
-void freeAllImages();
-void checkEvents();
-void drawScreen();
-void objectLogic();
-void doPlayer();
-void doTerrainChanges();
-void handleInput();
-void createGlobalInstances();
-void freeGlobalInstances();
-void changeTextToDead();
-int selectLevel();
-void makeLevelButtons();
 extern bool defaultPath, fullScreen, done, displayName;
 extern std::string levelPath, appPath;
 extern SDL_Surface *screen;

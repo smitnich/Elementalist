@@ -3,6 +3,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <iostream>
+
+#include "inputManager.h"
+
 unsigned long getTicks();
 int determineInput(bool mouse);
 void cleanup();
@@ -12,10 +15,6 @@ extern unsigned long lastInputTime, levelStartTime;
 extern std::string startLevelName;
 int currentInput;
 extern bool debugOn;
-
-void recordMove();
-bool loadMoves();
-int getNextReplayMove(int index);
 
 bool replayEnabled = false;
 

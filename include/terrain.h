@@ -5,8 +5,6 @@
 #include "objectDef.h"
 #include "defs.h"
 #include <vector>
-extern int xInitial;
-extern int yInitial;
 
 void apply_surface(int x, int y, SDL_Surface *apply, SDL_Surface *dest);
 class Terrain
@@ -245,4 +243,7 @@ public:
 	void onEnter(Object *other, bool solidFound = false);
 	void doLogic();
 };
+void applyTerrain(int terrainNum, int index);
+void doTerrainChanges();
+void removeTerrain(Terrain *in);
 #endif

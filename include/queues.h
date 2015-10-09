@@ -5,6 +5,7 @@ struct SwitchRequest {
 };
 class Trigger;
 class Object;
+class Terrain;
 
 extern std::list<SwitchRequest> objectSwitchQueue;
 

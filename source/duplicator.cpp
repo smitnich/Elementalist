@@ -2,8 +2,10 @@
 #include "terrain.h"
 #include "sprites.h"
 #include "level.h"
+#include "queues.h"
+
 SDL_Surface *spr_dupe[4] = { NULL, NULL, NULL, NULL };
-void addCreationQueue(Object *in);
+extern int xInitial, yInitial;
 
 void Duplicator::onEnter(Object *other, bool solidFound)
 {

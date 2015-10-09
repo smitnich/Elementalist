@@ -2,6 +2,8 @@
 #include "sprites.h"
 #include "objectDef.h"
 #include "defs.h"
+#include "loadImg.h"
+
 #define COLORKEY 0xFF00DC
 SDL_Surface* loadOptimizedIMG(const char *fileName);
 
@@ -10,9 +12,6 @@ struct TerrainChangeRequest;
 std::list<Object *> *imagesToLoad = NULL;
 extern std::list<TerrainChangeRequest *> changeReqs;
 std::list<SDL_Surface*> allImages;
-
-void createButtons();
-void loadAllImages();
 
 //Load a whole bunch of images
 //Todo: Merge all image files into one and blit the portions of it onto individual sprites

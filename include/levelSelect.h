@@ -7,3 +7,4 @@ void checkInput();
 int selectLevel();
 void handleLevelSelectClick(int x, int y);
 void gotoLevelSelect();
+void switchLevel(int level);

@@ -3,6 +3,7 @@
 SDL_Surface *spr_blackHole = NULL;
 SDL_Surface *spr_electricFloor[2] = { NULL, NULL };
 extern SDL_Surface *tiles;
+extern int xInitial, yInitial;
 
 BlackHole::BlackHole()
 {

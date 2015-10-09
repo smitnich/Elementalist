@@ -1,10 +1,45 @@
 #include "inputDef.h"
 #include "input.h"
+
+bool useMouse = 0;
+extern int mouseX;
+extern int mouseY;
+extern int numJoysticks;
+int controltype = CONTROLLER_NONE;
+bool checkGC();
+int keyInput();
+int secondaryControl;
+int joyInput();
+extern int chosenController;
+extern int hatDirection;
+extern int mouseInput;
+struct mousePosition
+{
+	int x;
+	int y;
+};
 extern bool replayEnabled;
 int getNextReplayMove();
+
 #ifdef GEKKO
 #include "wii.h"
 #include <gccore.h>
+
+extern bool showCursor;
+u32 exp_type;
+int WInput(u16,bool,int);
+int classicInput(int);
+int wupcInput(int wpadnum);
+u16 WButtonsDown[4];
+int wpadnum = 0;
+bool mouseConnected = 0;
+ir_t ir;
+int gcsensitivity = 80;
+int padnum = 0;
+u16 GCButtonsDown[4];
+int GCInput(u16 GCButtonsDown);
+int GCControlPort;
+
 extern char HWButton;
 int wupcInput(int);
 //Wii

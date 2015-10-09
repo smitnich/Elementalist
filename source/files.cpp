@@ -15,6 +15,8 @@ extern std::string appPath;
 #endif
 #include "defs.h"
 extern char directorySymbol;
+bool markCard[2] = { false, false };
+
 //Gets the length of a file passed in
 int getFileLength(char fileName[])
 {
@@ -65,9 +67,9 @@ void fileInit()
 	fatMountSimple("usb", &__io_usbstorage);
 	/*Only try to mount these if requested: little reason to use*/
 	if (markCard[0] == true)
-	fatMountSimple("carda",&__io_gcsda);
+		fatMountSimple("carda",&__io_gcsda);
 	if (markCard[1] == true)
-	fatMountSimple("cardb",&__io_gcsdb);
+		fatMountSimple("cardb",&__io_gcsdb);
 	//ntfsCount = ntfsMountAll(&mounts, NTFS_DEFAULT | NTFS_RECOVER);
 	chdir(appPath.data());
 #endif

@@ -3,6 +3,8 @@
 #include "tileEnum.h"
 #include "sound.h"
 #include "level.h"
+extern int xInitial, yInitial;
+
 
 unsigned char lookupWall(int index);
 int reverseDir(int dir);

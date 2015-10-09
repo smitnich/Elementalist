@@ -2,10 +2,12 @@
 #include "level.h"
 #include "tileEnum.h"
 #include <list>
+
+extern int xInitial;
+extern int yInitial;
+
 void switchLevel(int levelNum);
 bool playSound(Mix_Chunk *input);
-void doAssignQueue();
-void applyTerrain(int terrainNum, int index);
 void addDeleteQueue(Terrain *in);
 extern int currentLevelNum;
 SDL_Surface *wall[47] = { NULL };
