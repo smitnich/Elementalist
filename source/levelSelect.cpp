@@ -6,13 +6,10 @@
 #include <string>
 
 #include "levelSelect.h"
-
-void checkEvents();
-void drawSprite(int drawX, int drawY, SDL_Surface* toDraw);
-int determineInput(bool mouse);
-void switchLevel(int level);
-
-void apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination);
+#include "gfx.h"
+#include "event.h"
+#include "input.h"
+#include "level.h"
 
 extern std::list<SDL_Surface *> allImages;
 

@@ -2,11 +2,12 @@
 #include "sprites.h"
 #include "level.h"
 #include "tileEnum.h"
+#include "terrain.h"
+#include "object.h"
+
 extern Object *player;
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
-void applyTerrain(int input, int index);
 Level* getCurrentLevel();
-bool objMove();
 
 extern double delta;
 

@@ -7,10 +7,8 @@
 #include <SDL/SDL_events.h>
 #endif
 #include "inputdef.h"
+#include "input.h"
 void cleanup();
-void doMouse(SDL_Event);
-void updateKeys(SDL_Event);
-void updateJoystick(SDL_Event,int);
 extern int hatDirection;
 extern int chosenController;
 extern int mouseInput;

@@ -1,8 +1,8 @@
 #include "inputDef.h"
+#include "input.h"
 #include "keyinput.h"
 //USBKeyboard_IsConnected
 extern bool won;
-void doMouse(SDL_Event);
 //The previous key hit
 SDLKey oldKey = SDLK_FIRST;
 //The key last hit to win
@@ -16,17 +16,17 @@ int keysPushed = 0;
 void updateKeys(SDL_Event event)
 {
 	if (event.type == SDL_KEYDOWN)
-		{
+	{
 		keyMap[event.key.keysym.sym] = 1;
 		oldKey = event.key.keysym.sym;
 		keysPushed++;
-		}
+	}
 	else if (event.type == SDL_KEYUP)
-		{
+	{
 		keyMap[event.key.keysym.sym] = 0;
 		oldKey = event.key.keysym.sym;
 		keysPushed--;
-		}
+	}
 }
 //Check if the exit button is pressed on the keyboard
 //Make work regardless of chosen input

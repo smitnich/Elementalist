@@ -9,27 +9,42 @@
 
 #include "queues.h"
 #include "player.h"
+#include "sound.h"
+#include "terrain.h"
 
 #ifdef GEKKO
 #include <cmath>
 #endif
 
+extern bool won;
+//The map which places Object pointers in their actual game locations, used for collision detection
+extern int xInitial, yInitial, tilesX, tilesY;
+extern int framesPerSecond;
+extern int levelStartCounter;
+extern std::string levelName;
+extern bool displayName;
+extern int conveyorSpeed;
+extern int levelChange;
+extern std::string startLevelName;
+extern int lastInput;
+extern int currentLevel;
+//The current frame
+extern int frame;
+//The last frame to recieve input
+extern unsigned long lastInputTime;
+//Whether or not a player has been placed yet
+//Used to determine which one to make active
+extern double fpsModifier;
+//0 = not solid, 1 = solid 2 = solid & pushable
+
 SDL_Surface *personns[6] = { NULL };
 SDL_Surface *personew[6] = { NULL };
 SDL_Surface *deadPerson = NULL;
-class Level* getCurrentLevel();
+
 extern double delta;
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
-void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY);
-Level *getCurrentLevel();
-void checkCreationQueue();
-void writeDebugText(char* in);
-bool checkCollision(Object *first, Object *second);
-void setPanning(unsigned int channel, unsigned int right);
 Object *objectList[MAX_OBJECTS] = { NULL };
 bool playerPlaced = 0;
-
-void doLogicTerrain();
 
 //The distance away from the player at which the sound is fully
 //in the left or right direction

@@ -6,6 +6,8 @@
 #include "wallLookup.h"
 #include <queue>
 #include "queues.h"
+#include "sound.h"
+#include "object.h"
 
 #include "level.h"
 
@@ -24,6 +26,8 @@ const std::string LevelStrings[] =
 	"test10",
 	"test11"
 };
+
+void doTextBox(int);
 
 //The number of objects created
 extern unsigned int numObjects;
@@ -51,13 +55,6 @@ extern bool won;
 extern int frame;
 extern bool replayEnabled;
 extern Mix_Music* levelMusic[MAX_LEVEL];
-void freeMusic(int levelNum);
-bool loadLevel(std::string levelName,int levelNum);
-void clearObjects();
-void clearTerrain();
-void doTextBox(int);
-void applyTerrain(int input, int index);
-void playMusic(int level);
 class Terrain *instantiateTerrain(int input, int offset);
 extern int currentLevelNum;
 extern Object* player;

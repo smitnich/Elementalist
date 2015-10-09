@@ -1,6 +1,7 @@
 #ifdef GEKKO
 #include "inputDef.h"
 #include "wii.h"
+#include "wupc.h"
 #include <wupc/wupc.h>
 //The percentage of the total magnitude that the stick must be moved to register as pressed
 #define PRO_SENSITIVITY 0.75

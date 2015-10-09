@@ -4,7 +4,6 @@
 extern int pressureCount;
 extern int totalPressureCount;
 extern class Level *allLevels[MAX_LEVEL];
-Level *getCurrentLevel();
 
 //Checks the space given a coordinate to start with
 //and a direction to go in

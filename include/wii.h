@@ -1,3 +1,4 @@
+#ifdef GEKKO
 #include <fat.h>
 #include <sdcard/wiisd_io.h>
 #include <sys/dir.h>
@@ -7,3 +8,7 @@
 #include <ogcsys.h>
 #include <unistd.h>
 #include <ntfs.h>
+int wupcInput(int wpadnum);
+int GCInput(u16 GCButtonsDown);
+bool checkGC();
+#endif

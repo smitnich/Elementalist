@@ -3,6 +3,10 @@
 #include "objectDef.h"
 #include "debugText.h"
 #include "defs.h"
+#include "queues.h"
+#include "ui.h"
+#include "sprites.h"
+
 
 extern int videoSizeY, videoSizeX;
 extern int xInitial, yInitial, tilesSizeX, tilesX, tilesY, tileSizeY;
@@ -13,8 +17,6 @@ extern std::string startLevelName;
 extern bool displayName;
 extern int framesPerSecond;
 extern int xMax, yMax;
-#include "level.h"
-#include "sprites.h"
 extern bool showCursor;
 extern int frame;
 //The font to show the level name in
@@ -27,12 +29,7 @@ extern SDL_Color textColor;
 extern Object *player;
 SDL_Surface *iceBlock = NULL;
 SDL_Rect borderRect[4];
-Level *getCurrentLevel();
 extern bool playerDead;
-void queueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY);
-void creationQueueDrawAll(SDL_Surface *dest, int moveFractionX, int moveFractionY);
-void renderHighSprites(int moveFractionX, int moveFractionY);
-void renderUserInterface(SDL_Surface *screen);
 //Draws the static map features, the objects, the player, and the textbox on the screen
 void drawScreen()
 {

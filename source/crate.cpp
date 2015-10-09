@@ -5,17 +5,13 @@
 #include "tileEnum.h"
 #include "queues.h"
 #include "player.h"
+#include "terrain.h"
+#include "object.h"
 
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
-Level* getCurrentLevel();
-void objMove();
-void applyTerrain(int input, int index);
-void addMoveRequest(Object *obj, int x, int y, int checkX, int checkY);
 
 extern double delta;
 extern Mix_Chunk* snd_explode;
-
-Object* objectInit(unsigned int id, int x, int y);
 
 class Crate : public Object {
 public:

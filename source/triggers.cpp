@@ -2,10 +2,10 @@
 #include "terrain.h"
 class Object;
 #include <list>
+#include "queues.h"
 SDL_Surface *spr_pressureToggle[2] = { NULL, NULL };
 SDL_Surface *pressureTile = NULL;
 extern std::list<Trigger*> activateQueue;
-void addActivateQueue(Trigger *in);
 void Trigger::addConnection(Terrain *in) {
 	connections.push_back(in);
 	in->totalConnections++;

@@ -6,8 +6,8 @@
 #include <SDL/SDL_events.h>
 #endif
 #include "inputdef.h"
-//Update the mouse
-void checkClick(int x, int y);
+#include "ui.h"
+
 int mouseX, mouseY;
 int mouseInput = INPUT_NONE;
 extern bool showCursor;

@@ -1,6 +1,7 @@
 #include "sdlFiles.h"
 #include <iostream>
 #include "defs.h"
+#include "sound.h"
 Mix_Chunk *pushBlock;
 bool channelArray[MAX_CHANNELS];
 bool levelMusicLoaded[MAX_LEVEL];
@@ -9,7 +10,6 @@ char *musicNames[] = {"Dystopic-Factory.mp3","Puzzle-Game-5.mp3"};
 int numSongs;
 extern std::string appPath;
 std::string musicPath;
-Mix_Music* loadMusic(char *fileName);
 Mix_Chunk* snd_explode = NULL;
 bool audioEnabled = true;
 /*SDL WII bug avoidance*/

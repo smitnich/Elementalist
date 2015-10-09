@@ -246,4 +246,6 @@ public:
 void applyTerrain(int terrainNum, int index);
 void doTerrainChanges();
 void removeTerrain(Terrain *in);
+void doLogicTerrain();
+void clearTerrain();
 #endif

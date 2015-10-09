@@ -8,6 +8,15 @@
 #include <SDL/SDL.h>
 #elif _WIN32
 #include <SDL/SDL.h>
+bool checkGC();
 #endif
 void joystickInit();
 void inputInit();
+int getControlPort();
+int determineInput(bool mouse);
+int keyInput();
+int joyInput();
+void doMouse(SDL_Event event);
+void doMouse(SDL_Event);
+void updateKeys(SDL_Event);
+void updateJoystick(SDL_Event, int);
