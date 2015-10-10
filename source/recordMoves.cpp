@@ -38,6 +38,11 @@ void recordMove() {
 	input.time = time;
 	inputArray.push_back(input);
 }
+void unrecordMove()
+{
+	if (inputArray.size() > 0)
+		inputArray.pop_back();
+}
 void resetMoves() {
 	inputArray.resize(ARRAY_SIZE);
 	inputArray.clear();

@@ -43,6 +43,7 @@ public:
 	int active;
 	int moveIndex;
 	int inputMove;
+	bool recordedMoveActive;
 	Person(const Person &other, int _x, int _y)
 	{
 		active = true;
@@ -90,6 +91,7 @@ public:
 	//Moves, gets input if needed and checks for forces on the player eg conveyor belts
 	void doLogic()
 	{
+		recordedMoveActive = false;
 		inputMove = D_NONE;
 		if (playerDead || displayName)
 			return;
@@ -127,6 +129,8 @@ public:
 				if (startMove(D_RIGHT, 1)) {
 					faceDir = D_RIGHT;
 					recordMove();
+					recordedMoveActive = true;
+
 				}
 			}
 			lastInput = B_RIGHT;
@@ -139,6 +143,7 @@ public:
 				if (startMove(D_LEFT, 1)) {
 					faceDir = D_LEFT;
 					recordMove();
+					recordedMoveActive = true;
 				}
 			}
 			lastInput = B_LEFT;
@@ -151,6 +156,7 @@ public:
 				if (startMove(D_DOWN, 1)) {
 					faceDir = D_DOWN;
 					recordMove();
+					recordedMoveActive = true;
 				}
 			}
 			queuedMove = D_DOWN;
@@ -163,6 +169,7 @@ public:
 				if (startMove(D_UP, 1)) {
 					faceDir = D_UP;
 					recordMove();
+					recordedMoveActive = true;
 				}
 			}
 			queuedMove = D_UP;
@@ -225,12 +232,16 @@ public:
 	{
 		return new Person(*this, _x, _y);
 	}
-	bool startMove(int dir, int priority)
+	bool startMove(int dir, int priority) override
 	{
 		if (priority < currentMovePriority)
 			return false;
-		if (inputMove != D_NONE && inputMove != dir)
+		if (recordedMoveActive)
+		{
+			recordedMoveActive = false;
 			moveIndex--;
+			unrecordMove();
+		}
 		int xChange = 0;
 		int yChange = 0;
 		switch (dir) {

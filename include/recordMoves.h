@@ -3,3 +3,4 @@ void resetMoves();
 void dumpMoves();
 bool loadMoves();
 int getNextReplayMove(int i);
+void unrecordMove();
