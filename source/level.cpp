@@ -48,8 +48,6 @@ extern int prevMove;
 //Whether to display the level name
 extern bool displayName;
 unsigned long levelStartTime;
-//The players y position
-extern int posY;
 //Whether or not the player has won the level
 extern bool won;
 extern int frame;
@@ -162,12 +160,17 @@ void Level::makeConnections()
 			//If the connector wasn't placed over a valid trigger,
 			//skip it
 			Terrain *test = mapLayer.at(tmpSenders[k]);
+			if (test->id == m_manager)
+			{
+				MultipleTerrainManager *manager = (MultipleTerrainManager*) test;
+				test = manager->within[1];
+			}	
 			if (test->isTrigger == false)
 				continue;
-			tmp = (Trigger*)mapLayer.at(tmpSenders[k]);
+			tmp = (Trigger*) test;
 			for (unsigned int j = 0; j < receivers[i].size(); j++)
 			{
-				tmp->addConnection(mapLayer.at(receivers[i].at(j)));
+				tmp->addConnection(mapLayer.at(receivers[i].at(j)), receivers[i].at(j));
 			}
 		}
 	}
@@ -175,7 +178,12 @@ void Level::makeConnections()
 }
 int Level::convertIndex(int x, int y)
 {
-	return x+y*this->height;
+	return x+y*width;
+}
+void Level::convertIndex(int input, int &x, int &y)
+{
+	x = input % width;
+	y = input / width;
 }
 bool Level::assignObject(int x, int y, Object *obj)
 {
@@ -187,11 +195,27 @@ bool Level::assignObject(int x, int y, Object *obj)
 	objectLayer[convertIndex(x,y)] = obj;
 	return retVal;
 }
+bool Level::assignObject(int index, Object *obj)
+{
+	bool retVal = false;
+	if (objectLayer.size() == 0)
+		return false;
+	if (objectLayer[index] == NULL)
+		retVal = true;
+	objectLayer[index] = obj;
+	return retVal;
+}
 Object* Level::getObject(int x, int y)
 {
 	if (x < 0 || y < 0 || x >= width || y >= height)
 		return NULL;
 	return objectLayer[convertIndex(x,y)];
+}
+Object *Level::getObject(int index)
+{
+	if (index < 0 || index > width*height)
+		return NULL;
+	return objectLayer[index];
 }
 Terrain* Level::getTerrain(int x, int y)
 {
@@ -413,13 +437,22 @@ class Terrain *instantiateTerrain(int input, int i)
 		out = new RisingWall(i);
 		break;
 	case m_oilspill:
-		if (getCurrentLevel()->mapLayer.at(i) == NULL) {
+		if (getCurrentLevel()->mapLayer.at(i) == NULL)
 			applyTerrain(m_floor, i);
-		}
 		out = new OilFloor();
 		break;
 	case m_manager:
 		out = new MultipleTerrainManager();
+		break;
+	case m_teleSource:
+		if (getCurrentLevel()->mapLayer.at(i) == NULL)
+			applyTerrain(m_floor, i);
+		out = new Teleporter();
+		break;
+	case m_teleDest:
+		if (getCurrentLevel()->mapLayer.at(i) == NULL)
+			applyTerrain(m_floor, i);
+		out = new TeleDestination();
 		break;
 	case m_floor:
 	default:

@@ -122,11 +122,20 @@ public:
 	Conveyor(int direction);
 };
 extern std::vector<char> mapLayer;
+struct connection
+{
+	Terrain *terrain;
+	int index;
+};
 class Trigger : public Terrain
 {
 public:
-	std::vector<Terrain*> connections;
-	void addConnection(Terrain *in);
+	Trigger()
+	{
+		isTrigger = true;
+	}
+	std::vector<connection> connections;
+	void addConnection(Terrain *in, int index);
 };
 class PressureSwitch : public Trigger
 {
@@ -242,6 +251,16 @@ public:
 	bool requestExit(Object* other, int dir);
 	void onEnter(Object *other, bool solidFound = false);
 	void doLogic();
+};
+class Teleporter : public Trigger {
+public:
+	int xDest, yDest;
+	Teleporter();
+	void onEnter(Object *other, bool solidFound = false);
+};
+class TeleDestination : public Terrain {
+public:
+	TeleDestination();
 };
 void applyTerrain(int terrainNum, int index);
 void doTerrainChanges();

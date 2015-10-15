@@ -5,7 +5,6 @@
 #include "loadImg.h"
 
 #define COLORKEY 0xFF00DC
-SDL_Surface* loadOptimizedIMG(const char *fileName);
 
 #include <list>
 struct TerrainChangeRequest;
@@ -110,6 +109,8 @@ void imgInit()
 	spr_levelButton = loadOptimizedIMG("gfx/ui/levelButton.png");
 	spr_levelButtonSelected = loadOptimizedIMG("gfx/ui/levelButtonSelected.png");
 	spr_flame = loadOptimizedIMG("gfx/flames.png");
+	spr_teleSource = loadOptimizedIMG("gfx/teleSource.png");
+	spr_teleDest = loadOptimizedIMG("gfx/teleDest.png");
 	createButtons();
 }
 //Optimize the image for proper depth and for transparecny

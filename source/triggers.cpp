@@ -5,9 +5,13 @@ class Object;
 #include "queues.h"
 SDL_Surface *spr_pressureToggle[2] = { NULL, NULL };
 SDL_Surface *pressureTile = NULL;
+
 extern std::list<Trigger*> activateQueue;
-void Trigger::addConnection(Terrain *in) {
-	connections.push_back(in);
+void Trigger::addConnection(Terrain *in, int _index) {
+	connection tmp = { NULL, 0 };
+	tmp.terrain = in;
+	tmp.index = _index;
+	connections.push_back(tmp);
 	in->totalConnections++;
 }
 void PressureSwitch::onEnter(Object *other, bool solidFound)
@@ -17,8 +21,8 @@ void PressureSwitch::onEnter(Object *other, bool solidFound)
 	int length = connections.size();
 	for (int i = 0; i < length; i++)
 	{
-		connections.at(i)->activate();
-	}
+		connections.at(i).terrain->activate();
+	} 
 }
 void PressureSwitch::onExit(Object *other)
 {
@@ -27,7 +31,7 @@ void PressureSwitch::onExit(Object *other)
 	int length = connections.size();
 	for (int i = 0; i < length; i++)
 	{
-		connections.at(i)->deactivate();
+		connections.at(i).terrain->deactivate();
 	}
 }
 PressureSwitch::PressureSwitch()
@@ -45,9 +49,9 @@ void ToggleSwitch::onEnter(Object *other, bool solidFound)
 	for (int i = 0; i < length; i++)
 	{
 		if (enabled)
-			connections.at(i)->activate();
+			connections.at(i).terrain->activate();
 		else
-			connections.at(i)->deactivate();
+			connections.at(i).terrain->deactivate();
 	}
 	sprite = spr_pressureToggle[enabled];
 }

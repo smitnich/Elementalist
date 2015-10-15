@@ -229,6 +229,7 @@
     <ClCompile Include="..\source\renderQueue.cpp" />
     <ClCompile Include="..\source\switchQueue.cpp" />
     <ClCompile Include="..\source\fireFloor.cpp" />
+    <ClCompile Include="..\source\teleporter.cpp" />
     <ClCompile Include="..\source\terrainHazards.cpp" />
     <ClCompile Include="..\source\checkspace.cpp" />
     <ClCompile Include="..\source\config.cpp" />

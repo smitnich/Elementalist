@@ -23,11 +23,14 @@ class Level
 	void loadAllLayers(char *buffer,FILE *inFile);
 	void loadObjects();
 	int convertIndex(int x, int y);
+	void convertIndex(int input, int &x, int &y);
 	void loadLayer(FILE *inFile, std::string str, int xSize, int ySize);
 	void loadMapLayer(FILE *inFile, std::vector<unsigned int> *layer,int xSize, int ySize);
 	void reloadMapLayer();
 	bool assignObject(int x, int y, Object *obj);
+	bool assignObject(int index, Object *obj);
 	Object* getObject(int x, int y);
+	Object *getObject(int index);
 	Terrain* getTerrain(int x, int y);
 	void loadConnections(FILE *inFile, int xSize, int ySize);
 	void makeConnections();

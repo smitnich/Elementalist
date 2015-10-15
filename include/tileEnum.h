@@ -31,6 +31,8 @@ enum tiles_t
 	m_bounceWall,
 	m_risingWall,
 	m_oilspill,
+	m_teleSource,
+	m_teleDest,
 
 	OBJ_BLOCK = 1001,
 	OBJ_HEAVY_BLOCK,
