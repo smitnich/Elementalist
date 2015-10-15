@@ -1,6 +1,7 @@
 #include "sdlFiles.h"
 #include "terrain.h"
 #include "level.h"
+#include "queues.h"
 
 void teleportTo(Object *toTeleport, int dest, int start)
 {
@@ -9,9 +10,7 @@ void teleportTo(Object *toTeleport, int dest, int start)
 		toDie->die();
 	int x, y;
 	getCurrentLevel()->convertIndex(dest, x, y);
-	toTeleport->x = x;
-	toTeleport->y = y;
-	getCurrentLevel()->assignObject(dest, toTeleport);
+	addMoveRequest(toTeleport, x, y, 0, 0);
 	getCurrentLevel()->assignObject(start, NULL);
 }
 
