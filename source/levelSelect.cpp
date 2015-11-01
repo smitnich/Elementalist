@@ -11,6 +11,7 @@
 #include "input.h"
 #include "level.h"
 
+extern int bitDepth;
 extern std::list<SDL_Surface *> allImages;
 
 extern const std::string LevelStrings[];
@@ -42,11 +43,16 @@ bool finished = false;
 extern int lastInput;
 int selected = 0;
 
+static int borderMargin = 5;
+static int textMargin = 10;
+
 int scrollDistance = 0;
 
 struct LevelButton {
 	int x, y;
+	int xMargin, yMargin;
 	SDL_Surface *text;
+	SDL_Surface *backdrop[2];
 	int levelNum;
 };
 LevelButton allButtons[MAX_LEVEL];
@@ -65,16 +71,40 @@ SDL_Surface *renderText(const char *text, SDL_Color textColor) {
 
 void makeLevelButtons() {
 	int i;
+#define GREEN 34,177,76
+#define YELLOW 255,242,0
 	for (i = 1; i < MAX_LEVEL; i++) {
 		LevelButton button;
 		button.levelNum = i;
 		button.x = xMargin;
 		button.y = yMargin + (buttonSizeY + spacingY)*(i-1);
 		button.text = renderText(LevelStrings[i].c_str(), defaultTextColor);
+		button.backdrop[0] = renderBackground(button.text->w + textMargin*2, GREEN);
+		button.backdrop[1] = renderBackground(button.text->w + textMargin*2, YELLOW);
 		allImages.push_front(button.text);
 		allButtons[i] = button;
 	}
 }
+
+SDL_Surface *makeSurface(int width, int height)
+{
+	SDL_Surface *surf = SDL_CreateRGBSurface(0, width + borderMargin, height + borderMargin,
+											screen->format->BitsPerPixel, 0, 0, 0, 0);
+	allImages.push_front(surf);
+	return surf;
+}
+
+SDL_Surface *renderBackground(int width, int r, int g, int b)
+{
+	static const int height = 48 + textMargin*2;
+	SDL_Surface *surf = makeSurface(width, height);
+	SDL_Rect borderRect = { 0, 0, width, height };
+	SDL_Rect innerRect = { borderMargin, borderMargin, width - borderMargin, height - borderMargin};
+	SDL_FillRect(surf, &borderRect, SDL_MapRGB(screen->format, 0, 0, 0));
+	SDL_FillRect(surf, &innerRect, SDL_MapRGB(screen->format, r, g, b));
+	return surf;
+}
+
 void drawCenteredText(int xStart, int yStart, SDL_Surface *text, SDL_Surface *button) {
 	int yMargin = yStart + (button->h-text->h)/2;
 	int xMargin = xStart + (button->w - text->w) / 2;
@@ -83,20 +113,28 @@ void drawCenteredText(int xStart, int yStart, SDL_Surface *text, SDL_Surface *bu
 void renderLevelSelectScreen() {
 	int i;
 	LevelButton tmpButton;
+	// Text doesn't quite align in the center properly yet, so we add this to its
+	// y value
+	static int yOffset = 3;
+	const int scrollOffset = scrollDistance*(buttonSizeY + spacingY);
 	SDL_Rect rect = { 0, 0, videoSizeX, videoSizeY };
 	SDL_FillRect(screen, &rect, SDL_MapRGB(screen->format, 91, 91, 255));
 	for (i = 1; i < MAX_LEVEL; i++) {
 		tmpButton = allButtons[i];
-		if (allButtons[i].y - scrollDistance*(buttonSizeY + spacingY) >= videoSizeY){
+		if (allButtons[i].y - scrollOffset >= videoSizeY){
 			break;
 		}
 		if (i == selected || checkWithin(tmpButton,mouseX,mouseY)) {
-			drawSprite(tmpButton.x, tmpButton.y - scrollDistance*(buttonSizeY + spacingY), spr_levelButtonSelected);
+			drawSprite(tmpButton.x, tmpButton.y - scrollOffset, tmpButton.backdrop[1]);
 		}
 		else {
-			drawSprite(tmpButton.x, tmpButton.y - scrollDistance*(buttonSizeY + spacingY), spr_levelButton);
+			drawSprite(tmpButton.x, tmpButton.y - scrollOffset, tmpButton.backdrop[0]);
 		}
-		drawCenteredText(tmpButton.x, tmpButton.y - scrollDistance*(buttonSizeY + spacingY), tmpButton.text, spr_levelButton);
+		int xPos = tmpButton.x + borderMargin + textMargin;
+		int yPos = tmpButton.y + tmpButton.text->h / 2 + yOffset
+				   - scrollDistance*(buttonSizeY + spacingY) + textMargin;
+		drawSprite(xPos, yPos, tmpButton.text);
+		//drawCenteredText(tmpButton.x, tmpButton.y - scrollDistance*(buttonSizeY + spacingY), tmpButton.text, spr_levelButton);
 	}
 	//Draw the mouse if it is within bounds and should be drawn
 #ifdef GEKKO

@@ -8,3 +8,4 @@ int selectLevel();
 void handleLevelSelectClick(int x, int y);
 void gotoLevelSelect();
 void switchLevel(int level);
+SDL_Surface *renderBackground(int width, int r, int g, int b);
