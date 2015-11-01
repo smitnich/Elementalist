@@ -39,9 +39,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\base.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\callback.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -78,9 +75,6 @@
     <ClInclude Include="..\include\sprites.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\input_def.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -108,6 +102,42 @@
     <ClInclude Include="..\include\imageMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\inputdef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\moveRequest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\levelSelect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\recordMoves.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\queues.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\inputManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\loadImg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\source\conveyor.cpp">
@@ -125,13 +155,7 @@
     <ClCompile Include="..\source\activateQueue.cpp">
       <Filter>Source Files\Queues</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\assignQueue.cpp">
-      <Filter>Source Files\Queues</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\moveQueue.cpp">
-      <Filter>Source Files\Queues</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\transitQueue.cpp">
       <Filter>Source Files\Queues</Filter>
     </ClCompile>
     <ClCompile Include="..\source\object.cpp">
@@ -212,11 +236,59 @@
     <ClCompile Include="..\source\water.cpp">
       <Filter>Source Files\Terrain</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\iceElemental.cpp">
-      <Filter>Source Files\Objects\Elementals</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\flame.cpp">
       <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\basicTerrain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\fireBall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\iceBall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\inputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\levelSelect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\magnet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\multipleTerrainManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\oil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\recordMoves.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\ui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\pipes.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\creationQueue.cpp">
+      <Filter>Source Files\Queues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\deleteQueue.cpp">
+      <Filter>Source Files\Queues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\renderQueue.cpp">
+      <Filter>Source Files\Queues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\switchQueue.cpp">
+      <Filter>Source Files\Queues</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\fireFloor.cpp">
+      <Filter>Source Files\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\teleporter.cpp">
+      <Filter>Source Files\Terrain</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -27,9 +27,9 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>Makefile</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v120_xp</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -44,6 +44,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <NMakeBuildCommandLine>cd $(SolutionDir) &amp; make &amp; install.bat</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>cd $(SolutionDir) &amp; make clean &amp; make &amp; install.bat</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>cd $(SolutionDir) &amp; make clean</NMakeCleanCommandLine>
+    <NMakePreprocessorDefinitions>-GEKKO</NMakePreprocessorDefinitions>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <NMakeBuildCommandLine>cd $(SolutionDir) &amp; make &amp; install.bat</NMakeBuildCommandLine>
     <NMakeReBuildCommandLine>cd $(SolutionDir) &amp; make clean &amp; make &amp; install.bat</NMakeReBuildCommandLine>
     <NMakeCleanCommandLine>cd $(SolutionDir) &amp; make clean</NMakeCleanCommandLine>
