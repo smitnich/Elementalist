@@ -24,7 +24,8 @@ const std::string LevelStrings[] =
 	"test8",
 	"test9",
 	"test10",
-	"test11"
+	"test11",
+	"Teleporters"
 };
 
 void doTextBox(int);
