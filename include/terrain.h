@@ -247,6 +247,7 @@ public:
 	float lifeTime;
 	~FireFloor();
 	FireFloor(int _x, int _y);
+	FireFloor(int _x, int _y, double _timeToLive);
 	bool requestEntry(Object* other, int dir);
 	bool requestExit(Object* other, int dir);
 	void onEnter(Object *other, bool solidFound = false);

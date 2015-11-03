@@ -16,7 +16,10 @@ FireFloor::FireFloor(int _x, int _y) : LogicTerrain() {
 	y = _y;
 	sprite = spr_flame;
 	lifeTime = 0;
-	timeToLive = 60.0f;
+	timeToLive = nan(NULL);
+}
+FireFloor::FireFloor(int _x, int _y, double _timeToLive) : FireFloor(_x, _y) {
+	timeToLive = _timeToLive;
 }
 bool FireFloor::requestEntry(Object* other, int dir) {
 	return true;
