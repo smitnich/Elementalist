@@ -14,18 +14,19 @@
 const std::string LevelStrings[] =
 {
 	"Dummy",//0
-	"test",//1
-	"test2",//2
-	"test3",//3
-	"test4",//4
-	"test5",
-	"test6",
-	"test7",
-	"test8",
-	"test9",
-	"test10",
-	"test11",
-	"Teleporters"
+	"Conveyors",//1
+	"The Sea",//2
+	"Electricity",//3
+	"Magnets",//4
+	"Pipes",
+	"Bombs",
+	"Frozen",
+	"Ice Blocks",
+	"Flooded Prison",
+	"One Way",
+	"Toggle Trick",
+	"Teleporters",
+	"Duplicators"
 };
 
 void doTextBox(int);
@@ -526,6 +527,7 @@ void switchLevel(int levelNum)
 	resetSwitchQueue();
 	levelStartTime = getTicks();
 	resetMoves();
+	getCurrentLevel()->checkTerrain();
 	replayEnabled = false;
 }
 //Make the level name given the number
