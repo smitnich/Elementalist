@@ -10,6 +10,7 @@
 #include "event.h"
 #include "input.h"
 #include "level.h"
+#include "main.h"
 
 extern int bitDepth;
 extern std::list<SDL_Surface *> allImages;
@@ -168,8 +169,11 @@ void checkInput() {
 		if (selected != 0)
 			finished = true;
 		break;
-	default:
+	case BUTTON_MENU:
+		cleanup();
 		break;
+	default:
+		return;
 	}
 	if (scrollDistance < selected-5) {
 		scrollDistance += 1;
