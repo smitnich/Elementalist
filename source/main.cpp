@@ -128,7 +128,7 @@ void init(int argc, char* argv[])
 	SDL_FillRect(screen, 0, SDL_MapRGB(screen->format, 91, 91, 255));
 }
 //Clear the screen and free all remaining resources
-void cleanup(){
+void cleanup() {
 	done = true;
 	//saveLevel(map,posX,posY);
 #ifdef GEKKO
