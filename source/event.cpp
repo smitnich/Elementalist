@@ -42,6 +42,7 @@ void checkEvents()
 		//Exit button pressed
 		case SDL_QUIT:
 			cleanup();
+			exit(0);
 			break;
 		default:
 			break;

@@ -26,7 +26,8 @@ const std::string LevelStrings[] =
 	"One Way",
 	"Toggle Trick",
 	"Teleporters",
-	"Duplicators"
+	"Duplicators",
+	"Boulder"
 };
 
 void doTextBox(int);
@@ -561,11 +562,13 @@ bool loadLevel(std::string fileName, int levelNum)
 	ftemp = fopen(fileName.c_str(), "rb");
 	if (ftemp == NULL)
 	{
+		cleanup();
 		exit(0);
 	}
 	class Level *tmp = new class Level(ftemp, levelNum);
 	if (tmp == NULL)
 	{
+		cleanup();
 		exit(0);
 	}
 	mapLoaded[levelNum] = true;
