@@ -1,5 +1,6 @@
 #include "terrain.h"
 #include "level.h"
+#include <cmath>
 
 SDL_Surface *spr_flame;
 void addTerrainLogic(Terrain *in);
