@@ -258,7 +258,7 @@ bool Object::objMove()
 			checkY = -1;
 		else if (objMoveDir == D_DOWN)
 			checkY = 1;
-		if (this->frozen == false)
+		if (this->slides() == false)
 			objMoveDir = D_NONE;
 		objMoveFraction = 0;
 		addMoveRequest(this, x, y, checkX, checkY);

@@ -84,9 +84,9 @@ public:
 		return;
 	}
 	void freeze() {
+		Object::freeze();
 		if (player == this)
 			switchPlayerFocus();
-		frozen = true;
 	}
 	//Moves, gets input if needed and checks for forces on the player eg conveyor belts
 	void doLogic()
@@ -107,6 +107,10 @@ public:
 		}
 		if (input != INPUT_NONE) {
 			lastInputTime = getTicks();
+		}
+		if (frozen)
+		{
+			int tmp = 5;
 		}
 		switch (input){
 		case BUTTON_1:
@@ -133,8 +137,11 @@ public:
 
 				}
 			}
-			lastInput = B_RIGHT;
-			queuedMove = D_RIGHT;
+			else if (!frozen)
+			{
+				lastInput = B_RIGHT;
+				queuedMove = D_RIGHT;
+			}
 			break;
 		case B_LEFT:
 			if (x > 0 && objMoveFraction == 0 && !frozen)
@@ -146,8 +153,11 @@ public:
 					recordedMoveActive = true;
 				}
 			}
-			lastInput = B_LEFT;
-			queuedMove = D_LEFT;
+			else if (!frozen)
+			{
+				lastInput = B_LEFT;
+				queuedMove = D_LEFT;
+			}
 			break;
 		case B_DOWN:
 			if (y < MAP_SIZE && objMoveFraction == 0 && !frozen)
@@ -159,8 +169,11 @@ public:
 					recordedMoveActive = true;
 				}
 			}
-			queuedMove = D_DOWN;
-			lastInput = B_DOWN;
+			else if (!frozen)
+			{
+				queuedMove = D_DOWN;
+				lastInput = B_DOWN;
+			}
 			break;
 		case B_UP:
 			if (y > 0 && objMoveFraction == 0 && !frozen)
@@ -172,8 +185,11 @@ public:
 					recordedMoveActive = true;
 				}
 			}
-			queuedMove = D_UP;
-			lastInput = B_UP;
+			else if (!frozen)
+			{
+				queuedMove = D_UP;
+				lastInput = B_UP;
+			}
 			break;
 		default:
 			//lastInput = B_NONE;
