@@ -5,9 +5,9 @@
 Mix_Chunk *pushBlock;
 bool channelArray[MAX_CHANNELS];
 bool levelMusicLoaded[MAX_LEVEL];
-Mix_Music *levelMusic[MAX_LEVEL];
-char *musicNames[] = {"Dystopic-Factory.mp3","Puzzle-Game-5.mp3"};
-int numSongs;
+char *musicNames[] = { "Dystopic-Factory.mp3", "Puzzle-Game-5.mp3" };
+int numSongs = sizeof(musicNames) / sizeof(musicNames[0]);
+Mix_Music *levelMusic[sizeof(musicNames)/sizeof(musicNames[0])];
 extern std::string appPath;
 std::string musicPath;
 Mix_Chunk* snd_explode = NULL;
@@ -56,15 +56,12 @@ void playMusic(int levelNum)
 		return;
 	if (levelNum < 0 || levelNum > MAX_LEVEL)
 		return;
-	char *fileName = musicNames[levelNum-1];
+	char *fileName = musicNames[(levelNum-1) % numSongs];
 	char buffer[80];
 	if (levelMusic[(levelNum - 1) % numSongs] == NULL)
 	{
-		if (levelNum - 1 >= numSongs) {
-			fileName = musicNames[(levelNum - 1) % numSongs];
-		}
 		sprintf(buffer, "%s%s", musicPath.c_str(), fileName);
-		levelMusic[levelNum - 1] = Mix_LoadMUS(buffer);
+		levelMusic[(levelNum - 1) % numSongs] = Mix_LoadMUS(buffer);
 	}
 	Mix_PlayMusic(levelMusic[(levelNum-1) % numSongs], -1);
 }
