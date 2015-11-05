@@ -96,6 +96,8 @@ public:
 	//Can't be moved in a line
 	bool requestEntry(Object *other, int dir)
 	{
+		if (other->id == OBJ_BOULDER)
+			return true;
 		if (other->isMovableBlock())
 			return false;
 		int xdir = 0;
@@ -185,68 +187,6 @@ public:
 		Boulder(int x, int y) : Crate(x, y) {
 		moving = false;
 	}
-	//Objects that move in some way
-	bool objMove()
-	{
-		int checkX = 0;
-		int checkY = 0;
-		if (objMoveDir == D_NONE)
-			return false;
-		if (objMoveFraction == 0.0) {
-			prevMove = objMoveDir;
-		}
-		if (objMoveDir == D_LEFT)
-			checkX = -1;
-		else if (objMoveDir == D_UP)
-			checkY = -1;
-		else if (objMoveDir == D_DOWN)
-			checkY = 1;
-		else if (objMoveDir == D_RIGHT)
-			checkX = 1;
-		Object *other = getCurrentLevel()->getObject(x + checkX, y + checkY);
-		if (other != NULL) {
-			other->die();
-			onCollision(other, objMoveDir);
-		}
-		//Make sure that we can move where we're trying to
-		if (getCurrentLevel()->getTerrain(x, y)->requestExit(this, objMoveDir) && requestMove(x, y, checkX, checkY, this))
-		{
-			objMoveFraction += tempSpeed*delta;
-		}
-		//Otherwise bounce back
-		else
-		{
-			objMoveFraction -= tempSpeed*delta;
-			if (objMoveFraction <= 0)
-			{
-				objMoveDir = D_NONE;
-				objMoveFraction = 0;
-			}
-		}
-		/*If the object has reached the next tile, reset its move variable
-		and increment its position variable*/
-		if (objMoveFraction >= TILE_SIZE)
-		{
-			Level *lev = getCurrentLevel();
-			if (lev->getObject(x, y) == this)
-				lev->assignObject(x, y, NULL);
-			prevMove = objMoveDir;
-			if (objMoveDir == D_LEFT)
-				checkX = -1;
-			else if (objMoveDir == D_RIGHT)
-				checkX = 1;
-			else if (objMoveDir == D_UP)
-				checkY = -1;
-			else if (objMoveDir == D_DOWN)
-				checkY = 1;
-			if (this->frozen == false)
-				objMoveDir = D_NONE;
-			objMoveFraction = 0;
-			addMoveRequest(this, x, y, checkX, checkY);
-			return true;
-		}
-		return false;
-	}
 	void doLogic() {
 		if (objMove()) {
 			if (!startMove(prevMove, 2)) {
@@ -255,16 +195,19 @@ public:
 		}
 	}
 	void onCollision(Object *other, int dir) {
-		if (!moving) {
+		if (objMoveDir == D_NONE && objMoveFraction == 0.0f) {
 			if (startMove(dir, 2)) {
 				objMoveFraction = other->objMoveFraction;
 				moving = true;
 			}
 		}
-		else {
+		else if (other->id < OBJ_PIPE_NW || other->id > OBJ_PIPE_NE) {
 			if (other->objMoveDir != dir)
-			other->die();
+				other->die();
 		}
+	}
+	bool slides() {
+		return true;
 	}
 };
 

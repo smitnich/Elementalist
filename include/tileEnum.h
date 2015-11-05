@@ -59,6 +59,7 @@ enum tiles_t
 	OBJ_FIRE_ELEMENT_S,
 	OBJ_FIRE_ELEMENT_W,
 	OBJ_OIL_BARREL,
+	OBJ_BOULDER,
 
 	m_sender1 = 2001,
 	m_receiver1,

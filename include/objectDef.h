@@ -2,6 +2,7 @@
 #define _OBJECTDEF
 #include "sdlFiles.h"
 #include <stdexcept>
+#include "defs.h"
 class Object
 {
 public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
@@ -34,6 +35,8 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		virtual void freeze()
 		{
 			frozen = true;
+			objMoveDir = D_NONE;
+			objMoveFraction = 0.0f;
 		}
 		virtual void heat(Object *heatObj = NULL)
 		{
@@ -78,6 +81,9 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		}
 		void setTimeToLive(double time) {
 			timeToLive = time;
+		}
+		virtual bool slides() {
+			return (frozen != 0);
 		}
 		virtual Object* createInstance(int x, int y) = 0;
 };
