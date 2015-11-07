@@ -14,7 +14,12 @@ int getCenter(int a, int b);
 void doTextBox(int posY)
 {
 	int y = 0;
-	int maxx = 5;
+	int textSize = (text->w + TILE_SIZE + (text->w % TILE_SIZE)) / TILE_SIZE;
+	int maxx = textSize > 5 ? textSize : 5;
+	// Make sure we always have an odd number of tiles for length so the display
+	// is symmetrical
+	if (maxx % 2 == 0)
+		maxx += 1;
 	int maxy = 3;
 	int xcounter = 0;
 	int ycounter = 0;
@@ -57,5 +62,5 @@ void doTextBox(int posY)
 			}
 		}
 	}
-	apply_surface(x+TILE_SIZE, y+TILE_SIZE, text, screen);
+	apply_surface(x + getCenter(maxx*TILE_SIZE, text->w), y + TILE_SIZE, text, screen);
 }
