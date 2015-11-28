@@ -2,6 +2,7 @@
 #include "terrain.h"
 #include "level.h"
 #include "queues.h"
+#include "sound.h"
 
 void teleportTo(Object *toTeleport, int dest, int start)
 {
@@ -27,6 +28,7 @@ void Teleporter::onEnter(Object *in, bool solidFound)
 		return;
 	int sendTo = connections.at(0).index;
 	teleportTo(in, sendTo, index);
+	playSound(snd_teleport);
 }
 TeleDestination::TeleDestination() {
 	sprite = spr_teleDest;

@@ -3,6 +3,7 @@
 class Object;
 #include <list>
 #include "queues.h"
+#include "sound.h"
 SDL_Surface *spr_pressureToggle[2] = { NULL, NULL };
 SDL_Surface *pressureTile = NULL;
 
@@ -54,6 +55,7 @@ void ToggleSwitch::onEnter(Object *other, bool solidFound)
 			connections.at(i).terrain->deactivate();
 	}
 	sprite = spr_pressureToggle[enabled];
+	playSound(snd_switch);
 }
 ToggleSwitch::ToggleSwitch(bool isEnabled)
 {

@@ -1,5 +1,7 @@
 struct Mix_Chunk;
-extern Mix_Chunk* snd_explode;
+extern Mix_Chunk *snd_explode;
+extern Mix_Chunk *snd_switch;
+extern Mix_Chunk *snd_teleport;
 bool playSound(Mix_Chunk *input);
 void musicInit();
 void setPanning(unsigned int channel, unsigned int right);

@@ -10,7 +10,9 @@ int numSongs = sizeof(musicNames) / sizeof(musicNames[0]);
 Mix_Music *levelMusic[sizeof(musicNames)/sizeof(musicNames[0])];
 extern std::string appPath;
 std::string musicPath;
-Mix_Chunk* snd_explode = NULL;
+Mix_Chunk *snd_explode = NULL;
+Mix_Chunk *snd_switch = NULL;
+Mix_Chunk *snd_teleport = NULL;
 bool audioEnabled = true;
 /*SDL WII bug avoidance*/
 void setPanning(unsigned int channel, unsigned int right)
@@ -39,6 +41,9 @@ void musicInit()
 		return;
 	}
 	snd_explode = Mix_LoadWAV("sound/explode.wav");
+	snd_switch = Mix_LoadWAV("sound/switch.wav");
+	snd_teleport = Mix_LoadWAV("sound/teleport.wav");
+
 }
 void freeMusic(int levelNum)
 {
