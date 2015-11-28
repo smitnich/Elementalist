@@ -95,7 +95,9 @@ void Object::die()
 }
 Object::~Object()
 {
-	getCurrentLevel()->assignObject(x, y, NULL);
+	Level *curLevel = getCurrentLevel();
+	if (curLevel != NULL)
+		curLevel->assignObject(x, y, NULL);
 }
 void Object::updateTime() {
 	lifeTime += delta;
