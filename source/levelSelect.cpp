@@ -11,6 +11,7 @@
 #include "input.h"
 #include "level.h"
 #include "main.h"
+#include "sprites.h"
 
 extern int bitDepth;
 extern std::list<SDL_Surface *> allImages;
@@ -111,6 +112,16 @@ void drawCenteredText(int xStart, int yStart, SDL_Surface *text, SDL_Surface *bu
 	int xMargin = xStart + (button->w - text->w) / 2;
 	drawSprite(xMargin, yMargin, text);
 }
+void drawBackground()
+{
+	for (int x = 0; x <= screen->w / TILE_SIZE; x++)
+	{
+		for (int y = 0; y <= screen->h / TILE_SIZE; y++)
+		{
+			apply_surface(x*TILE_SIZE, y*TILE_SIZE, tiles, screen);
+		}
+	}
+}
 void renderLevelSelectScreen() {
 	int i;
 	LevelButton tmpButton;
@@ -120,6 +131,7 @@ void renderLevelSelectScreen() {
 	const int scrollOffset = scrollDistance*(buttonSizeY + spacingY);
 	SDL_Rect rect = { 0, 0, videoSizeX, videoSizeY };
 	SDL_FillRect(screen, &rect, SDL_MapRGB(screen->format, 91, 91, 255));
+	drawBackground();
 	for (i = 1; i < MAX_LEVEL; i++) {
 		tmpButton = allButtons[i];
 		if (allButtons[i].y - scrollOffset >= videoSizeY){
