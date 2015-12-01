@@ -27,6 +27,7 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		int getX();
 		int getY();
 		bool objMove();
+		bool visible;
 		virtual bool startMove(int dir, int priority);
 		virtual void drown()
 		{

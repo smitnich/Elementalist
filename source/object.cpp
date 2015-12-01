@@ -71,6 +71,7 @@ Object::Object(int x2, int y2)
 	prevMove = D_NONE;
 	timeToLive = nan("");
 	dead = false;
+	visible = true;
 }
 Object::Object(Object &other, int _x, int _y)
 {
@@ -292,6 +293,8 @@ void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, in
 //Gets the coordinates for the object and draws it to the screen
 void doDraw(Object *drawObject, int moveFractionX, int moveFractionY)
 {
+	if (!drawObject->visible)
+		return;
 	int posX = 0;
 	int posY = 0;
 	if (player != NULL)

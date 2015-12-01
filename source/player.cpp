@@ -5,6 +5,7 @@
 #include "debugText.h"
 
 #include "recordMoves.h"
+#include "tileEnum.h"
 
 Object* player;
 extern int pressureCount;
@@ -238,6 +239,10 @@ public:
 			}
 			else {
 				delete this;
+			}
+			if (getCurrentLevel()->getTerrain(x, y)->id == m_water)
+			{
+				visible = false;
 			}
 		}
 		else {
