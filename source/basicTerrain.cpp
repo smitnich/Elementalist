@@ -149,7 +149,10 @@ bool BounceWall::requestEntry(Object *other, int dir) {
 	other->prevMove = reverseDir(dir);
 	terrain->onEnter(other);
 	if (other->objMoveDir != dir)
+	{
+		playSound(snd_spring);
 		return true;
+	}
 	else
 		return false;
 }
