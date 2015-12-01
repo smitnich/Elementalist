@@ -2,6 +2,7 @@
 #include "terrain.h"
 #include "sprites.h"
 #include "tileEnum.h"
+#include "sound.h"
 
 Terrain* addTerrainChange(int index, int changeTo);
 SDL_Surface *spr_water = NULL;
@@ -20,5 +21,8 @@ void Water::onEnter(Object *other, bool solid)
 	else if (!other->isPlayer && !other->hovering)
 		addTerrainChange(index, m_floor);
 	if (!other->hovering)
+	{
+		playSound(snd_splash);
 		other->drown();
+	}
 }

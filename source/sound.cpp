@@ -13,6 +13,8 @@ std::string musicPath;
 Mix_Chunk *snd_explode = NULL;
 Mix_Chunk *snd_switch = NULL;
 Mix_Chunk *snd_teleport = NULL;
+Mix_Chunk *snd_spring = NULL;
+Mix_Chunk *snd_splash = NULL;
 bool audioEnabled = true;
 /*SDL WII bug avoidance*/
 void setPanning(unsigned int channel, unsigned int right)
@@ -40,11 +42,11 @@ void musicInit()
 		audioEnabled = false;
 		return;
 	}
-	Mix_Volume(-1, 0);
 	snd_explode = Mix_LoadWAV("sound/explode.wav");
 	snd_switch = Mix_LoadWAV("sound/switch.wav");
 	snd_teleport = Mix_LoadWAV("sound/teleport.wav");
-
+	snd_spring = Mix_LoadWAV("sound/spring.wav");
+	snd_splash = Mix_LoadWAV("sound/splash.wav");
 }
 void freeMusic(int levelNum)
 {
