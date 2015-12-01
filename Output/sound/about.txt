@@ -1,0 +1,23 @@
+The sounds in this folder were used from the following locations:
+
+Switch hit:
+http://www.solastudios.net/
+http://www.freesound.org/people/Seidhepriest/sounds/329742/ 
+329742__seidhepriest__silver-coin.wav
+
+Explosion:
+http://www.freesound.org/people/bareform/sounds/218721/
+
+Teleport:
+http://www.solastudios.net/ 
+http://www.freesound.org/people/Seidhepriest/sounds/211423/
+seidheprite__ring-blast-explosion.wav
+Shortened from original file
+
+Spring:
+EFX_INT_Goofy_Spring_Bounces_04.wav
+Shortened from original file
+https://gamesounds.xyz/Sonniss.com%20-%20GDC%20-%20Game%20Audio%20Bundle/Coll%20Anderson%20-%20Slapstick%20Comedy/EFX%20INT%20Crash%20Layer%20Drumset%2004.wav
+
+Splash:
+110393__soundscalpel-com__water-splash
