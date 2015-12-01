@@ -40,6 +40,7 @@ void musicInit()
 		audioEnabled = false;
 		return;
 	}
+	Mix_Volume(-1, 0);
 	snd_explode = Mix_LoadWAV("sound/explode.wav");
 	snd_switch = Mix_LoadWAV("sound/switch.wav");
 	snd_teleport = Mix_LoadWAV("sound/teleport.wav");
@@ -57,6 +58,7 @@ void freeMusic(int levelNum)
 }
 void playMusic(int levelNum)
 {
+	Mix_Volume(-1, 128);
 	if (!audioEnabled)
 		return;
 	if (levelNum < 0 || levelNum > MAX_LEVEL)
@@ -72,6 +74,7 @@ void playMusic(int levelNum)
 }
 bool playSound(Mix_Chunk *input)
 {
+	Mix_Volume(-1, 128);
 	if (!audioEnabled)
 		return false;
 	if (input == NULL)
