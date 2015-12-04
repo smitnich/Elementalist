@@ -130,7 +130,7 @@ void renderLevelSelectScreen() {
 	static int yOffset = 3;
 	const int scrollOffset = scrollDistance*(buttonSizeY + spacingY);
 	SDL_Rect rect = { 0, 0, videoSizeX, videoSizeY };
-	SDL_FillRect(screen, &rect, SDL_MapRGB(screen->format, 91, 91, 255));
+	//SDL_FillRect(screen, &rect, SDL_MapRGB(screen->format, 91, 91, 255));
 	drawBackground();
 	for (i = 1; i < MAX_LEVEL; i++) {
 		tmpButton = allButtons[i];

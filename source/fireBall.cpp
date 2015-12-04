@@ -8,9 +8,9 @@ void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, in
 
 class FireBall : public Object {
 public:
-	OBJECT_DECLARATION(FireBall, 0)
+		OBJECT_DECLARATION(FireBall, 0)
 		int prevMove;
-	FireBall(int x2, int y2) : Object(x2, y2) {
+		FireBall(int x2, int y2) : Object(x2, y2) {
 		hovering = true;
 		x = x2;
 		y = y2;

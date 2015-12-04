@@ -1,7 +1,6 @@
 #include <list>
 #include "objectDef.h"
 #include "level.h"
-#include "moveRequest.h"
 #include "queues.h"
 
 Level* getCurrentLevel();

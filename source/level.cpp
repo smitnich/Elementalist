@@ -19,7 +19,6 @@ const std::string LevelStrings[] =
 	"Electricity",//3
 	"Magnets",//4
 	"Pipes",
-	"Bombs",
 	"Frozen",
 	"Ice Blocks",
 	"Flooded Prison",
@@ -27,7 +26,8 @@ const std::string LevelStrings[] =
 	"Toggle Trick",
 	"Teleporters",
 	"Duplicators",
-	"Boulder"
+	"Boulder",
+	"Pushers"
 };
 
 void doTextBox(int);

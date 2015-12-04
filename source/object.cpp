@@ -3,7 +3,6 @@
 #include "level.h"
 #include "tileEnum.h"
 #include "defs.h"
-#include "moveRequest.h"
 #include <climits>
 #include <algorithm>
 

@@ -60,6 +60,10 @@ enum tiles_t
 	OBJ_FIRE_ELEMENT_W,
 	OBJ_OIL_BARREL,
 	OBJ_BOULDER,
+	OBJ_PUSHER_E,
+	OBJ_PUSHER_N,
+	OBJ_PUSHER_S,
+	OBJ_PUSHER_W,
 
 	m_sender1 = 2001,
 	m_receiver1,
