@@ -20,3 +20,4 @@ void imgInit();
 void drawWrappedSprite(int x, int y, SDL_Surface* source, SDL_Surface* destination, int xWrap, int yWrap);
 void drawBorders();
 void drawScreen();
+extern SDL_Surface *screen;

@@ -8,5 +8,7 @@ bool playSound(Mix_Chunk *input);
 void musicInit();
 void setPanning(unsigned int channel, unsigned int right);
 Mix_Music* loadMusic(char *fileName);
+extern Mix_Music *titleMusic;
 void freeMusic(int levelNum);
 void playMusic(int levelNum);
+void playMusic(Mix_Music *music);

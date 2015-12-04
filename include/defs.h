@@ -26,6 +26,8 @@ enum directions_t
 enum screens_t
 {
 	SCR_LEVELSELECT,
-	SCR_GAME
+	SCR_GAME,
+	SCR_TITLE,
+	SCR_CREDITS
 };
 #endif

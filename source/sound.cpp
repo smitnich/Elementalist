@@ -15,6 +15,7 @@ Mix_Chunk *snd_switch = NULL;
 Mix_Chunk *snd_teleport = NULL;
 Mix_Chunk *snd_spring = NULL;
 Mix_Chunk *snd_splash = NULL;
+Mix_Music *titleMusic;
 bool audioEnabled = true;
 /*SDL WII bug avoidance*/
 void setPanning(unsigned int channel, unsigned int right)
@@ -47,6 +48,8 @@ void musicInit()
 	snd_teleport = Mix_LoadWAV("sound/teleport.wav");
 	snd_spring = Mix_LoadWAV("sound/spring.wav");
 	snd_splash = Mix_LoadWAV("sound/splash.wav");
+	//titleMusic = Mix_LoadMUS("music/Dystopic-Factory.mp3");
+	titleMusic = Mix_LoadMUS("music/Sculpture-Garden.mp3");
 }
 void freeMusic(int levelNum)
 {
@@ -57,6 +60,13 @@ void freeMusic(int levelNum)
 	Mix_HaltMusic();
 	Mix_FreeMusic(levelMusic[levelNum - 1]);
 	levelMusic[levelNum - 1] = NULL;
+}
+void playMusic(Mix_Music *music)
+{
+	Mix_Volume(-1, 128);
+	if (!audioEnabled)
+		return;
+	Mix_PlayMusic(music, -1);
 }
 void playMusic(int levelNum)
 {

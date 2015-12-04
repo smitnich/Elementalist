@@ -2,3 +2,6 @@
 //Loads the fonts or returns false if they could not be opened
 bool fontInit();
 void fontCleanup();
+extern TTF_Font *font;
+extern TTF_Font *fontBig;
+extern SDL_Color textColor;
