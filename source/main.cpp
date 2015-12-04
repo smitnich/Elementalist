@@ -123,7 +123,6 @@ void init(int argc, char* argv[])
 	SDL_ShowCursor(SDL_ENABLE);
 #endif
 	makeLevelButtons();
-	switchLevel(selectLevel());
 	atexit(SDL_Quit);
 	SDL_FillRect(screen, 0, SDL_MapRGB(screen->format, 91, 91, 255));
 }
@@ -161,9 +160,14 @@ void updateDelta()
 	delta = ((double)(curTime - lastTicks)) / (1000.0 / ((float)framesPerSecond));
 	lastTicks = curTime;
 }
+
+void titleLoop();
+
 int main(int argc, char* argv[]){
 	argumentCount = argc;
 	init(argc, argv);
+	titleLoop();
+	switchLevel(selectLevel());
 	//Main game loop
 	while (!done)
 	{
@@ -183,6 +187,7 @@ int main(int argc, char* argv[]){
 		drawScreen();
 		if (levelChange != -1)
 		{
+			Mix_Volume(-1, 0);
 			switchLevel(levelChange);
 			levelChange = -1;
 		}
