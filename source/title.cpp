@@ -11,7 +11,7 @@ SDL_Surface *startText = NULL;
 SDL_Surface *creditsText = NULL;
 SDL_Surface *quitText = NULL;
 
-static int selected = 2;
+static int selected = 0;
 static const int numButtons = 3;
 
 void gotoCredits();
@@ -24,7 +24,7 @@ SDL_Color titleTextColor = {255, 255, 255};
 SDL_Surface *titleBackground = NULL;
 SDL_Surface *backgroundSurface[2][numButtons];
 static const int borderMargin = 5;
-static const Uint32 selectedColor[2] = { 192*256*256+192*256+192, 255*256*256+242*256};
+static Uint32 selectedColor[2] = { 0, 0 };
 
 SDL_Surface *makeTitleSurface(int width, int height, Uint32 color)
 {
@@ -43,6 +43,8 @@ void initTitle()
 	startText = TTF_RenderText_Solid(font, "Start", titleTextColor);
 	creditsText = TTF_RenderText_Solid(font, "Credits", titleTextColor);
 	quitText = TTF_RenderText_Solid(font, "Quit", titleTextColor);
+	selectedColor[0] = SDL_MapRGB(screen->format, 192, 192, 192);
+	selectedColor[1] = SDL_MapRGB(screen->format, 255, 242, 0);
 	titleBackground = makeTitleSurface(titleText->w+10, titleText->h+10, selectedColor[0]);
 	for (int i = 0; i < 2; i++)
 	{

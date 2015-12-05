@@ -4,6 +4,7 @@ extern Mix_Chunk *snd_switch;
 extern Mix_Chunk *snd_teleport;
 extern Mix_Chunk *snd_spring;
 extern Mix_Chunk *snd_splash;
+extern Mix_Music *levelSelectMusic;
 bool playSound(Mix_Chunk *input);
 void musicInit();
 void setPanning(unsigned int channel, unsigned int right);

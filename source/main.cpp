@@ -91,7 +91,6 @@ void init(int argc, char* argv[])
 		//Change to the app directory, necessary for running levels outside of the folder
 		chdir(appPath.data());
 	}
-	musicInit();
 	fileInit();
 	if ( SDL_Init( SDL_INIT_EVERYTHING) < 0 )
 	{
@@ -99,6 +98,7 @@ void init(int argc, char* argv[])
 		SDL_Delay( 5000 );
 		exit(EXIT_FAILURE);
 	}
+	musicInit();
 	SDL_ShowCursor(SDL_DISABLE);
 #ifndef GEKKO
 	joystickInit();

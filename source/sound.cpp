@@ -4,10 +4,10 @@
 #include "sound.h"
 Mix_Chunk *pushBlock;
 bool channelArray[MAX_CHANNELS];
-bool levelMusicLoaded[MAX_LEVEL];
+bool levelMusicLoaded[MAX_LEVEL] = { 0 };
 char *musicNames[] = { "Dystopic-Factory.mp3", "Puzzle-Game-5.mp3" };
 int numSongs = sizeof(musicNames) / sizeof(musicNames[0]);
-Mix_Music *levelMusic[sizeof(musicNames)/sizeof(musicNames[0])];
+Mix_Music *levelMusic[sizeof(musicNames) / sizeof(musicNames[0])] = { 0 };
 extern std::string appPath;
 std::string musicPath;
 Mix_Chunk *snd_explode = NULL;
@@ -15,7 +15,8 @@ Mix_Chunk *snd_switch = NULL;
 Mix_Chunk *snd_teleport = NULL;
 Mix_Chunk *snd_spring = NULL;
 Mix_Chunk *snd_splash = NULL;
-Mix_Music *titleMusic;
+Mix_Music *titleMusic = NULL;
+Mix_Music *levelSelectMusic = NULL;
 bool audioEnabled = true;
 /*SDL WII bug avoidance*/
 void setPanning(unsigned int channel, unsigned int right)
@@ -31,12 +32,6 @@ void setPanning(unsigned int channel, unsigned int right)
 void musicInit()
 {
 	numSongs = sizeof(musicNames) / sizeof(musicNames[0]);
-	int i;
-	for (i = 0; i < MAX_LEVEL; i++)
-	{
-		levelMusicLoaded[i] = 0;
-		levelMusic[i] = NULL;
-	}
 	musicPath.assign("music/");
 	if (Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
 	{
@@ -48,8 +43,8 @@ void musicInit()
 	snd_teleport = Mix_LoadWAV("sound/teleport.wav");
 	snd_spring = Mix_LoadWAV("sound/spring.wav");
 	snd_splash = Mix_LoadWAV("sound/splash.wav");
-	//titleMusic = Mix_LoadMUS("music/Dystopic-Factory.mp3");
 	titleMusic = Mix_LoadMUS("music/Sculpture-Garden.mp3");
+	levelSelectMusic = Mix_LoadMUS("music/Techno-Gameplay.mp3");
 }
 void freeMusic(int levelNum)
 {

@@ -12,6 +12,7 @@
 #include "level.h"
 #include "main.h"
 #include "sprites.h"
+#include "sound.h"
 
 extern int bitDepth;
 extern std::list<SDL_Surface *> allImages;
@@ -178,6 +179,7 @@ void checkInput() {
 		}
 		break;
 	case BUTTON_1:
+	case BUTTON_2:
 		if (selected != 0)
 			finished = true;
 		break;
@@ -197,6 +199,11 @@ void checkInput() {
 int selectLevel() {
 	currentScreen = SCR_LEVELSELECT;
 	finished = false;
+// Currently the level select music doesn't play nicely with
+// the Wii version; so its disabled currently
+#ifndef GEKKO
+	Mix_PlayMusic(levelSelectMusic, -1);
+#endif
 	while (!finished) {
 		renderLevelSelectScreen();
 		checkEvents();
