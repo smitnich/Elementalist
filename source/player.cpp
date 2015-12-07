@@ -239,6 +239,7 @@ public:
 			}
 			else {
 				delete this;
+				return;
 			}
 			if (getCurrentLevel()->getTerrain(x, y)->id == m_water)
 			{
@@ -247,6 +248,7 @@ public:
 		}
 		else {
 			delete this;
+			return;
 		}
 	}
 	Object* clone(int _x, int _y)
