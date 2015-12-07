@@ -134,9 +134,7 @@ SDL_Rect* rectMake(int x, int y, int h, int w)
 }
 //Blit an entire image to the screen
 void apply_surface (int x,int y,SDL_Surface* source,SDL_Surface* destination){
-	SDL_Rect offset;
-	offset.x = x;
-	offset.y = y;
+	SDL_Rect offset = { x, y, 0, 0 };
 	SDL_BlitSurface( source, NULL, destination, &offset );
 }
 //Initialize the graphics and fill the screen with the background
@@ -241,4 +239,15 @@ void changeTextToWin()
 		SDL_FreeSurface(text);
 	displayName = true;
 	text = TTF_RenderText_Solid(font, "You win!", textColor);
+}
+// Quickly load and blit the loading text to the screen and flip it
+// This is useful on the Wii because loading everything can take a while
+// so make sure we let the user know that something is happening
+void displayLoadingText()
+{
+	static const char *fileName = "gfx/text/loading.bmp";
+	SDL_Surface *loadedImage = IMG_Load(fileName);
+	apply_surface(getCenter(screen->w, loadedImage->w), getCenter(screen->h, loadedImage->h), loadedImage, screen);
+	SDL_FreeSurface(loadedImage);
+	SDL_Flip(screen);
 }

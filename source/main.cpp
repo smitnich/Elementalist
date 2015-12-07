@@ -98,6 +98,11 @@ void init(int argc, char* argv[])
 		SDL_Delay( 5000 );
 		exit(EXIT_FAILURE);
 	}
+	if (fullScreen == false)
+		screen = SDL_SetVideoMode(videoSizeX, videoSizeY, bitDepth, SDL_HWSURFACE | SDL_DOUBLEBUF);
+	else
+		screen = SDL_SetVideoMode(videoSizeX, videoSizeY, bitDepth, SDL_HWSURFACE | SDL_DOUBLEBUF | SDL_FULLSCREEN);
+	displayLoadingText();
 	musicInit();
 	SDL_ShowCursor(SDL_DISABLE);
 #ifndef GEKKO
@@ -105,10 +110,6 @@ void init(int argc, char* argv[])
 	SDL_WM_SetCaption("Elementalist", 0 );
 	SDL_WM_SetIcon(IMG_Load("gfx/icon_large.png"), NULL);
 #endif
-	if (fullScreen == false)
-		screen = SDL_SetVideoMode(videoSizeX, videoSizeY, bitDepth, SDL_HWSURFACE|SDL_DOUBLEBUF);
-	else
-		screen = SDL_SetVideoMode(videoSizeX, videoSizeY, bitDepth, SDL_HWSURFACE|SDL_DOUBLEBUF|SDL_FULLSCREEN);
 	if ( !screen )
 	{
 		fprintf(stderr, "Unable to set video: %s\n", SDL_GetError());
