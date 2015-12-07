@@ -497,11 +497,6 @@ unsigned char lookupWall(int index)
 //Clear the current level and load the next
 void switchLevel(int levelNum)
 {
-	//On most systems we can probably afford to keep the music in memory
-	//On the Wii not so much
-#ifdef GEKKO
-	 freeMusic(currentLevelNum);
-#endif
 	setTicks();
 	dumpMoves();
 	currentLevelNum = levelNum;
