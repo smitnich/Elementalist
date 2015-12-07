@@ -49,7 +49,7 @@ int selected = 0;
 static int borderMargin = 5;
 static int textMargin = 10;
 
-int scrollDistance = 0;
+int scrollDistance = 1;
 
 struct LevelButton {
 	int x, y;
@@ -167,7 +167,7 @@ void checkInput() {
 		selected++;
 		if (selected >= MAX_LEVEL) {
 			selected = 1;
-			scrollDistance = 0;
+			scrollDistance = 1;
 		}
 		break;
 	case B_UP:
