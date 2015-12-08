@@ -4,6 +4,7 @@
 #include "ui.h"
 #include "level.h"
 #include "levelSelect.h"
+#include "title.h"
 
 void apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination);
 SDL_Surface* loadOptimizedIMG(const char *fileName);
@@ -63,6 +64,9 @@ void checkClick(int x, int y) {
 		break;
 	case SCR_LEVELSELECT:
 		handleLevelSelectClick(x, y);
+		break;
+	case SCR_TITLE:
+		handleTitleClick(x, y);
 		break;
 	}
 }

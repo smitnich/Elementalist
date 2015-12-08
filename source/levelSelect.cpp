@@ -13,6 +13,7 @@
 #include "main.h"
 #include "sprites.h"
 #include "sound.h"
+#include "button.h"
 
 extern int bitDepth;
 extern std::list<SDL_Surface *> allImages;
@@ -51,13 +52,6 @@ static int textMargin = 10;
 
 int scrollDistance = 1;
 
-struct LevelButton {
-	int x, y;
-	int xMargin, yMargin;
-	SDL_Surface *text;
-	SDL_Surface *backdrop[2];
-	int levelNum;
-};
 LevelButton allButtons[MAX_LEVEL];
 
 bool checkWithin(LevelButton button, int x, int y) {

@@ -6,6 +6,8 @@
 #include "event.h"
 #include "main.h"
 
+extern int mouseX, mouseY;
+
 SDL_Surface *titleText = NULL;
 SDL_Surface *startText = NULL;
 SDL_Surface *creditsText = NULL;
@@ -25,6 +27,9 @@ SDL_Surface *titleBackground = NULL;
 SDL_Surface *backgroundSurface[2][numButtons];
 static const int borderMargin = 5;
 static Uint32 selectedColor[2] = { 0, 0 };
+SDL_Rect buttonRects[numButtons] = { 0 };
+
+bool exitRequested = false;
 
 SDL_Surface *makeTitleSurface(int width, int height, Uint32 color)
 {
@@ -66,15 +71,59 @@ void drawTitle()
 	apply_surface(tmp - borderMargin, 25 - borderMargin, titleBackground, screen);
 	apply_surface(tmp, 30, titleText, screen);
 	tmp = getCenter(screen->w, startText->w);
+	buttonRects[0] = { tmp - borderMargin, 150 - borderMargin, backgroundSurface[0][0]->w, backgroundSurface[0][0]->h };
 	apply_surface(tmp - borderMargin, 150 - borderMargin, backgroundSurface[selected == 0][0], screen);
 	apply_surface(tmp, 155, startText, screen);
 	tmp = getCenter(screen->w, creditsText->w);
+	buttonRects[1] = { tmp - borderMargin, 275 - borderMargin, backgroundSurface[0][1]->w, backgroundSurface[0][1]->h };
 	apply_surface(tmp - borderMargin, 275 - borderMargin, backgroundSurface[selected == 1][1], screen);
 	apply_surface(tmp, 280, creditsText, screen);
 	tmp = getCenter(screen->w, quitText->w);
+	buttonRects[2] = { tmp - borderMargin, 400 - borderMargin, backgroundSurface[0][2]->w, backgroundSurface[0][2]->h };
 	apply_surface(tmp - borderMargin, 400 - borderMargin, backgroundSurface[selected == 2][2], screen);
 	apply_surface(tmp, 405, quitText, screen);
 	SDL_Flip(screen);
+}
+// Check if the mouse is within any buttons
+int checkButtons(int x, int y)
+{
+	for (int i = 0; i < numButtons; i++)
+	{
+		SDL_Rect tmp = buttonRects[i];
+		if (x >= tmp.x && x <= tmp.x + tmp.w && y >= tmp.y && y <= tmp.y + tmp.h)
+			return i;
+	}
+	return -1;
+}
+void buttonSelected(int which)
+{
+	switch (selected)
+	{
+	case 0:
+		exitRequested = true;
+	case 1:
+		//gotoCredits();
+		break;
+	default:
+		break;
+	}
+}
+void handleTitleClick(int x, int y)
+{
+	int tmp = checkButtons(x, y);
+	if (tmp != -1)
+		selected = tmp;
+	else
+		return;
+	if (tmp == 2)
+	{
+		exitRequested = true;
+		cleanup();
+	}
+	else
+	{
+		buttonSelected(tmp);
+	}
 }
 
 void titleLoop()
@@ -83,7 +132,7 @@ void titleLoop()
 	static int input = INPUT_NONE;
 	initTitle();
 	currentScreen = SCR_TITLE;
-	while (true)
+	while (!exitRequested)
 	{
 		drawTitle();
 		checkEvents();
@@ -96,27 +145,21 @@ void titleLoop()
 		case BUTTON_MENU:
 			cleanup();
 			break;
+		case BUTTON_MOUSEWHEEL_DOWN:
 		case B_DOWN:
 			selected = (selected + 1) % numButtons;
 			break;
+		case BUTTON_MOUSEWHEEL_UP:
 		case B_UP:
 			selected = (selected - 1);
 			if (selected < 0)
 				selected += numButtons;
 			break;
+		// Fall through after setting the selected object
 		case BUTTON_1:
 		case BUTTON_2:
-			switch (selected)
-			{
-			case 0:
-				return;
-			case 1:
-				//gotoCredits();
-				break;
-			case 2:
-				cleanup();
-				break;
-			}
+			buttonSelected(selected);
+			break;
 		}
 	}
 }
