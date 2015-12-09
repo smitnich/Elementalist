@@ -27,7 +27,7 @@ const std::string LevelStrings[] =
 	"Teleporters",
 	"Duplicators",
 	"Boulder",
-	"Pushers"
+	"Ice Puzzle"
 };
 
 void doTextBox(int);

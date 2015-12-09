@@ -4,7 +4,7 @@
 #include "level.h"
 
 #define MAGNET_ID 1017
-#define MAGNET_DIST 9
+#define MAGNET_DIST 10
 
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 int reverseDir(int dir);
