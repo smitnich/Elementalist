@@ -4,6 +4,7 @@
 #include "tileEnum.h"
 #include "terrain.h"
 #include "object.h"
+#include "main.h"
 
 extern Object *player;
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
@@ -14,6 +15,7 @@ extern double delta;
 class Flame : Object
 {
 public:
+	int startTime = 0;
 	OBJECT_DECLARATION(Flame,1012)
 	Flame(int x2, int y2) : Object(x2,y2)
 	{
@@ -27,6 +29,7 @@ public:
 		prevMove = D_NONE;
 		applyTerrain(m_firefloor, getCurrentLevel()->convertIndex(x, y));
 		die();
+		startTime = getTicks();
 	}
 	Object* clone(int _x, int _y)
 	{

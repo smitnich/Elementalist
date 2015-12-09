@@ -108,7 +108,9 @@ void imgInit()
 	spr_oilFloor = loadOptimizedIMG("gfx/oilfloor.png");
 	spr_levelButton = loadOptimizedIMG("gfx/ui/levelButton.png");
 	spr_levelButtonSelected = loadOptimizedIMG("gfx/ui/levelButtonSelected.png");
-	spr_flame = loadOptimizedIMG("gfx/flames.png");
+	spr_flame[0] = loadOptimizedIMG("gfx/flames.png");
+	spr_flame[1] = loadOptimizedIMG("gfx/flames2.png");
+	spr_flame[2] = loadOptimizedIMG("gfx/flames3.png");
 	spr_teleSource = loadOptimizedIMG("gfx/teleSource.png");
 	spr_teleDest = loadOptimizedIMG("gfx/teleDest.png");
 	createButtons();
@@ -116,6 +118,8 @@ void imgInit()
 //Optimize the image for proper depth and for transparecny
 SDL_Surface* loadOptimizedIMG(const char *fileName)
 {
+	if (fileName == NULL)
+		return NULL;
 	SDL_Surface *loadedImage = IMG_Load(fileName);
 	if (loadedImage == NULL)
 	{

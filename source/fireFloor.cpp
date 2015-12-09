@@ -2,12 +2,13 @@
 #include "level.h"
 #include <cmath>
 
-SDL_Surface *spr_flame;
+SDL_Surface *spr_flame[3];
 void addTerrainLogic(Terrain *in);
 Level *getCurrentLevel();
 void addDeleteQueue(Terrain *in);
 void removeLogicTerrainRequest(LogicTerrain *in);
 
+extern int xInitial, yInitial;
 extern double delta;
 
 FireFloor::~FireFloor() {
@@ -15,7 +16,6 @@ FireFloor::~FireFloor() {
 FireFloor::FireFloor(int _x, int _y) : LogicTerrain() {
 	x = _x;
 	y = _y;
-	sprite = spr_flame;
 	lifeTime = 0;
 	timeToLive = nan(NULL);
 }
@@ -30,6 +30,13 @@ bool FireFloor::requestExit(Object* other, int dir) {
 }
 void FireFloor::onEnter(Object *other, bool solidFound) {
 	other->burn();
+}
+void FireFloor::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
+{
+	int frame = (int) (lifeTime/5) % 3;
+	int xStart = xTile*TILE_SIZE + xInitial + xOff;
+	int yStart = yTile*TILE_SIZE + yInitial + yOff;
+	apply_surface(xStart, yStart, spr_flame[frame], drawTo);
 }
 void FireFloor::doLogic()
 {

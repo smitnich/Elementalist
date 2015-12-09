@@ -248,6 +248,7 @@ public:
 	~FireFloor();
 	FireFloor(int _x, int _y);
 	FireFloor(int _x, int _y, double _timeToLive);
+	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	bool requestEntry(Object* other, int dir);
 	bool requestExit(Object* other, int dir);
 	void onEnter(Object *other, bool solidFound = false);

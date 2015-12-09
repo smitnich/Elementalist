@@ -27,12 +27,13 @@ void X::loadImages() \
 	for (int i = 0; i < 6; i++){ \
 		spriteew[i] = stationary; \
 		spritens[i] = stationary; \
-						} \
+			} \
 }\
 class X Test##X = X();
 #define OBJECT_DECLARATION(X,Z) static SDL_Surface *stationary; \
 static SDL_Surface *spriteew[6]; \
 static SDL_Surface *spritens[6]; \
+static SDL_Surface *sprite[3]; \
 static const char *imageNames[4][3]; \
 SDL_Surface *getSprite(); \
 void loadImages();	\
@@ -47,6 +48,7 @@ const static int objectNum = Z;
 SDL_Surface *X::spriteew[6]; \
 SDL_Surface *X::spritens[6]; \
 SDL_Surface *X::getSprite() { \
+	int frame = frozen ? 0 : ((int) objMoveFraction)/(TILE_SIZE/3); \
 	if (objMoveDir == D_NONE) { \
 		if (prevMove == D_RIGHT) \
 			return spriteew[3]; \
@@ -60,13 +62,13 @@ SDL_Surface *X::getSprite() { \
 			return stationary; \
 	} \
 	else if (objMoveDir == D_LEFT)\
-		return spriteew[((int) objMoveFraction)/(TILE_SIZE/3)]; \
+		return spriteew[frame]; \
 	else if (objMoveDir == D_RIGHT) \
-		return spriteew[(((int) objMoveFraction)/(TILE_SIZE/3))+3]; \
+		return spriteew[frame+3]; \
 	else if (objMoveDir == D_UP) \
-		return spritens[(((int) objMoveFraction)/(TILE_SIZE / 3))]; \
+		return spritens[frame]; \
 	else \
-		return spritens[(((int) objMoveFraction)/(TILE_SIZE / 3))+3]; \
+		return spritens[frame+3]; \
 } \
 X::X(){ \
 	if (objectNum < 1000) \
