@@ -83,13 +83,14 @@ public:
 class Barrier : public Terrain
 {
 private:
+	bool defaultState;
 	bool disabled;
 public:
 	bool requestEntry(Object* other, int dir);
 	void activate();
 	void deactivate();
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
-	Barrier();
+	Barrier(bool _disabled);
 };
 class ColorBarrier : public Terrain
 {

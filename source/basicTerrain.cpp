@@ -46,12 +46,13 @@ Exit::Exit()
 	isTrigger = false;
 	this->sprite = exitTile;
 }
-Barrier::Barrier()
+Barrier::Barrier(bool _disabled)
 {
+	defaultState = _disabled;
 	totalConnections = numConnectionsActive = 0;
 	index = 0;
-	disabled = false;
-	this->sprite = barrierTile;
+	disabled = _disabled;
+	sprite = barrierTile;
 }
 void Barrier::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
 {
@@ -69,13 +70,13 @@ void Barrier::activate()
 {
 	numConnectionsActive++;
 	if (numConnectionsActive >= totalConnections) {
-		disabled = true;
+		disabled = !defaultState;
 	}
 }
 void Barrier::deactivate()
 {
 	numConnectionsActive--;
-	disabled = false;
+	disabled = defaultState;
 }
 void ColorBarrier::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
 {

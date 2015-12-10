@@ -33,6 +33,7 @@ enum tiles_t
 	m_oilspill,
 	m_teleSource,
 	m_teleDest,
+	m_barrierOff,
 
 	OBJ_BLOCK = 1001,
 	OBJ_HEAVY_BLOCK,
