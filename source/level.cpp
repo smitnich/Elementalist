@@ -387,7 +387,7 @@ class Terrain *instantiateTerrain(int input, int i)
 		break;
 	case m_barrier:
 	case m_barrierOff:
-		out = new Barrier(input != m_barrierOff);
+		out = new Barrier(input == m_barrierOff);
 		break;
 	case m_yellowBarrier:
 		out = new ColorBarrier(0);
