@@ -68,5 +68,8 @@ void checkClick(int x, int y) {
 	case SCR_TITLE:
 		handleTitleClick(x, y);
 		break;
+	case SCR_CREDITS:
+	default:
+		break;
 	}
 }

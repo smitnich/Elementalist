@@ -21,4 +21,5 @@ void drawWrappedSprite(int x, int y, SDL_Surface* source, SDL_Surface* destinati
 void drawBorders();
 void drawScreen();
 void displayLoadingText();
+void drawMouse();
 extern SDL_Surface *screen;

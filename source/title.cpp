@@ -16,8 +16,8 @@ SDL_Surface *quitText = NULL;
 static int selected = 0;
 static const int numButtons = 3;
 
-void gotoCredits();
 void drawBackground();
+void doCredits();
 
 extern std::list<SDL_Surface *> allImages;
 
@@ -60,10 +60,6 @@ void initTitle()
 	playMusic(titleMusic);
 }
 
-void gotoTitle()
-{
-}
-
 void drawTitle()
 {
 	drawBackground();
@@ -101,8 +97,9 @@ void buttonSelected(int which)
 	{
 	case 0:
 		exitRequested = true;
+		break;
 	case 1:
-		//gotoCredits();
+		doCredits();
 		break;
 	default:
 		break;
@@ -136,6 +133,7 @@ void titleLoop()
 	{
 		drawTitle();
 		checkEvents();
+		drawMouse();
 		input = determineInput(true);
 		if (input == lastInput)
 			continue;
