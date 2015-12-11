@@ -66,7 +66,7 @@ SPRITE_STATIONARY(Crate, "gfx/block.png")
 class ColorCrate1 : public Crate
 {
 public:
-	OBJECT_DECLARATION(ColorCrate1, 1011)
+	OBJECT_DECLARATION(ColorCrate1, OBJ_BARRIER_BLOCK_1)
 	ColorCrate1(int x2, int y2) : Crate(x2,y2)
 	{
 		
@@ -77,6 +77,51 @@ public:
 };
 
 SPRITE_STATIONARY(ColorCrate1, "gfx/barrierBlock1.png")
+
+class ColorCrate2 : public Crate
+{
+public:
+	OBJECT_DECLARATION(ColorCrate2, OBJ_BARRIER_BLOCK_2)
+		ColorCrate2(int x2, int y2) : Crate(x2, y2)
+	{
+
+	}
+	void heat() {
+		return;
+	}
+};
+
+SPRITE_STATIONARY(ColorCrate2, "gfx/barrierBlock2.png")
+
+class ColorCrate3 : public Crate
+{
+public:
+	OBJECT_DECLARATION(ColorCrate3, OBJ_BARRIER_BLOCK_3)
+		ColorCrate3(int x2, int y2) : Crate(x2, y2)
+	{
+
+	}
+	void heat() {
+		return;
+	}
+};
+
+SPRITE_STATIONARY(ColorCrate3, "gfx/barrierBlock3.png")
+
+class ColorCrate4 : public Crate
+{
+public:
+	OBJECT_DECLARATION(ColorCrate4, OBJ_BARRIER_BLOCK_4)
+		ColorCrate4(int x2, int y2) : Crate(x2, y2)
+	{
+
+	}
+	void heat() {
+		return;
+	}
+};
+
+SPRITE_STATIONARY(ColorCrate4, "gfx/barrierBlock4.png")
 
 Object* Crate::clone(int _x, int _y)
 {

@@ -9,7 +9,7 @@ extern int xInitial, yInitial;
 unsigned char lookupWall(int index);
 int reverseDir(int dir);
 extern bool won;
-int colorBlockIds[BARRIER_TYPES] = { OBJ_YELLOW_BLOCK };
+int colorBlockIds[BARRIER_TYPES] = { OBJ_BARRIER_BLOCK_1, OBJ_BARRIER_BLOCK_2, OBJ_BARRIER_BLOCK_3, OBJ_BARRIER_BLOCK_4 };
 Terrain *addTerrainChange(int index, Terrain *newTerrain);
 Terrain *addTerrainChange(int index, int newIndex);
 

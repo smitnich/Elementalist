@@ -1,7 +1,7 @@
 #ifndef _TERRAIN
 #define _TERRAIN
 #define MAX_CONNECTIONS 16
-#define BARRIER_TYPES 1
+#define BARRIER_TYPES 4
 #include "objectDef.h"
 #include "defs.h"
 #include <vector>

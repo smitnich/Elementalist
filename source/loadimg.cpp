@@ -103,6 +103,9 @@ void imgInit()
 	spr_pickupWall = loadOptimizedIMG("gfx/pickupWall.png");
 	spr_water = loadOptimizedIMG("gfx/water.png");
 	spr_colorBarrier[0] = loadOptimizedIMG("gfx/wall/colorBarrier1.png");
+	spr_colorBarrier[1] = loadOptimizedIMG("gfx/wall/colorBarrier2.png");
+	spr_colorBarrier[2] = loadOptimizedIMG("gfx/wall/colorBarrier3.png");
+	spr_colorBarrier[3] = loadOptimizedIMG("gfx/wall/colorBarrier4.png");
 	spr_bounceWall = loadOptimizedIMG("gfx/wall/bounceWall.png");
 	spr_risingWall = loadOptimizedIMG("gfx/risingWall.png");
 	spr_oilFloor = loadOptimizedIMG("gfx/oilfloor.png");
