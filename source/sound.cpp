@@ -33,7 +33,7 @@ void musicInit()
 {
 	numSongs = sizeof(musicNames) / sizeof(musicNames[0]);
 	musicPath.assign("music/");
-	if (Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
+	if (Mix_OpenAudio( 22050*2, MIX_DEFAULT_FORMAT, 2, 4096) == -1)
 	{
 		audioEnabled = false;
 		return;
@@ -55,10 +55,10 @@ void freeMusic(int levelNum)
 	Mix_HaltMusic();
 	Mix_FreeMusic(levelMusic[levelNum - 1]);
 	levelMusic[levelNum - 1] = NULL;
+	levelMusicLoaded[levelNum - 1] = false;
 }
 void playMusic(Mix_Music *music)
 {
-	Mix_Volume(-1, 128);
 	if (!audioEnabled)
 		return;
 	Mix_PlayMusic(music, -1);
