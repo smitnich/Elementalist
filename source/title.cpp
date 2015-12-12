@@ -21,7 +21,7 @@ void doCredits();
 
 extern std::list<SDL_Surface *> allImages;
 
-SDL_Color titleTextColor = {255, 255, 255};
+SDL_Color titleTextColor = {0, 0, 0};
 
 SDL_Surface *titleBackground = NULL;
 SDL_Surface *backgroundSurface[2][numButtons];
@@ -69,15 +69,15 @@ void drawTitle()
 	tmp = getCenter(screen->w, startText->w);
 	buttonRects[0] = { tmp - borderMargin, 150 - borderMargin, backgroundSurface[0][0]->w, backgroundSurface[0][0]->h };
 	apply_surface(tmp - borderMargin, 150 - borderMargin, backgroundSurface[selected == 0][0], screen);
-	apply_surface(tmp, 155, startText, screen);
+	apply_surface(tmp+5, 155, startText, screen);
 	tmp = getCenter(screen->w, creditsText->w);
 	buttonRects[1] = { tmp - borderMargin, 275 - borderMargin, backgroundSurface[0][1]->w, backgroundSurface[0][1]->h };
 	apply_surface(tmp - borderMargin, 275 - borderMargin, backgroundSurface[selected == 1][1], screen);
-	apply_surface(tmp, 280, creditsText, screen);
+	apply_surface(tmp+5, 280, creditsText, screen);
 	tmp = getCenter(screen->w, quitText->w);
 	buttonRects[2] = { tmp - borderMargin, 400 - borderMargin, backgroundSurface[0][2]->w, backgroundSurface[0][2]->h };
 	apply_surface(tmp - borderMargin, 400 - borderMargin, backgroundSurface[selected == 2][2], screen);
-	apply_surface(tmp, 405, quitText, screen);
+	apply_surface(tmp+5, 405, quitText, screen);
 	SDL_Flip(screen);
 }
 // Check if the mouse is within any buttons
