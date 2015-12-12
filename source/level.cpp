@@ -148,7 +148,9 @@ void Level::checkTerrain() {
 		{
 			if (origObjectLayer[convertIndex(x, y)] != 0)
 			{
-				mapLayer[convertIndex(x, y)]->onEnter(objectLayer[convertIndex(x, y)]);
+				Object *tmp = objectLayer[convertIndex(x, y)];
+				if (tmp != NULL)
+					mapLayer[convertIndex(x, y)]->onEnter(tmp);
 			}
 		}
 	}
