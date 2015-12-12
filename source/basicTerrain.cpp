@@ -9,7 +9,6 @@ extern int xInitial, yInitial;
 unsigned char lookupWall(int index);
 int reverseDir(int dir);
 extern bool won;
-int colorBlockIds[BARRIER_TYPES] = { OBJ_BARRIER_BLOCK_1, OBJ_BARRIER_BLOCK_2, OBJ_BARRIER_BLOCK_3, OBJ_BARRIER_BLOCK_4 };
 Terrain *addTerrainChange(int index, Terrain *newTerrain);
 Terrain *addTerrainChange(int index, int newIndex);
 
@@ -77,29 +76,6 @@ void Barrier::deactivate()
 {
 	numConnectionsActive--;
 	disabled = defaultState;
-}
-void ColorBarrier::draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff)
-{
-	int xStart = xTile*TILE_SIZE + xInitial + xOff;
-	int yStart = yTile*TILE_SIZE + yInitial + yOff;
-	apply_surface(xStart, yStart, tiles, drawTo);
-	apply_surface(xStart, yStart, sprite, drawTo);
-}
-ColorBarrier::ColorBarrier(int type)
-{
-	index = 0;
-	colorType = type;
-	sprite = spr_colorBarrier[type];
-}
-bool ColorBarrier::requestEntry(Object *other, int dir)
-{
-	//Need to check if the other object is a block of the right
-	//color and delete this terrain as well as the block
-	if (other->id == colorBlockIds[this->colorType])
-	{
-		return true;
-	}
-	return false;
 }
 void ColorBarrier::onEnter(Object *other, bool solidFound)
 {

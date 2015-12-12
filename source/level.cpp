@@ -391,12 +391,6 @@ class Terrain *instantiateTerrain(int input, int i)
 	case m_barrierOff:
 		out = new Barrier(input == m_barrierOff);
 		break;
-	case m_color_barrier_1:
-	case m_color_barrier_2:
-	case m_color_barrier_3:
-	case m_color_barrier_4:
-		out = new ColorBarrier(input-m_color_barrier_1);
-		break;
 	case m_icefloor:
 		if (getCurrentLevel()->mapLayer.at(i) == NULL) {
 			applyTerrain(m_floor, i);
