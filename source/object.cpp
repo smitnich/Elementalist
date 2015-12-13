@@ -412,7 +412,8 @@ void objectLogic()
 	{
 		Object *tmp = curLevel->objectLayer.at(i);
 		if (tmp != NULL) {
-			curLevel->getTerrain(tmp->x, tmp->y)->whileIn(tmp);
+			if (tmp->objMoveFraction < TILE_SIZE/2)
+				curLevel->getTerrain(tmp->x, tmp->y)->whileIn(tmp);
 			//The Object may have been deleted during the while in call,
 			//so reload it here
 			tmp = curLevel->objectLayer.at(i);
