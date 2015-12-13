@@ -220,11 +220,7 @@ public:
 		case -1:
 			return true;
 		}
-		if (!requestMove(x, y, checkX, checkY, this))
-		{
-			return false;
-		}
-		return true;
+		return requestMove(x, y, checkX, checkY, this);
 	}
 	void onCollision(Object *other, int dir)
 	{

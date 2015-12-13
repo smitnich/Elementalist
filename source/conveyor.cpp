@@ -10,6 +10,7 @@ extern int framesPerSecond;
 extern bool displayName;
 extern int frame;
 extern int xInitial, yInitial;
+
 bool Conveyor::requestEntry(Object* other, int objDir)
 {
 	return true;

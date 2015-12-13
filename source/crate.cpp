@@ -47,7 +47,8 @@ public:
 			ydir = -1;
 		else if (dir == D_DOWN)
 			ydir = 1;
-		if (requestMove(x,y,xdir,ydir,this)){
+		if (requestMove(x,y,xdir,ydir,this))
+		{
 			return true;
 		}
 		if (objMoveDir == dir)

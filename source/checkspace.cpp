@@ -12,7 +12,6 @@ bool requestMove(int x, int y, int xChange, int yChange, Object* obj)
 	if (x+xChange < 0 || x+xChange >= MAP_SIZE || y+yChange < 0 || y+yChange >= MAP_SIZE)
 		return false;
 	Level *level = getCurrentLevel();
-
 	int index = level->convertIndex(x+xChange,y+yChange);
 	Terrain *terrain = level->mapLayer.at(index);
 	Object *otherObj = level->objectLayer[level->convertIndex(x+xChange,y+yChange)];
