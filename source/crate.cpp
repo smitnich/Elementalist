@@ -50,8 +50,10 @@ public:
 		if (requestMove(x,y,xdir,ydir,this)){
 			return true;
 		}
-		if (objMoveDir != D_NONE)
+		if (objMoveDir == dir)
+		{
 			return true;
+		}
 		return false;
 	}
 	void heat() {
