@@ -86,7 +86,7 @@ public:
 				if (tmp != NULL && tmp->isMagnetic) {
 					if (requestMove(tmp->x, tmp->y, xChange, yChange, tmp)) {
 						if (tmp->objMoveDir == D_NONE)
-							tmp->startMove(reverseDir(dir), true);
+							tmp->startMove(reverseDir(dir), 4);
 					}
 				}
 			}
