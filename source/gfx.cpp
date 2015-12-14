@@ -43,8 +43,6 @@ void drawMouse()
 //Draws the static map features, the objects, the player, and the textbox on the screen
 void drawScreen()
 {
-	if (player == NULL)
-		exit(0);
 	int x, y, xOffset = 0, yOffset = 0, xStart = player->x, yStart = player->y;
 	Level *currentLevel = getCurrentLevel();
 	bool doDir[4] = {  (player->objMoveDir == D_UP),
