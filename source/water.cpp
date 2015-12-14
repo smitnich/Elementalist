@@ -17,7 +17,7 @@ void Water::onEnter(Object *other, bool solid)
 	if (solid)
 		return;
 	if (other->frozen)
-		addTerrainChange(index, m_icefloor);
+		freeze();
 	else if (!other->isPlayer && !other->hovering)
 		addTerrainChange(index, m_floor);
 	if (!other->hovering)
