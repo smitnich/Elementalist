@@ -108,7 +108,7 @@ bool RaisedFloor::requestEntry(Object *other, int dir)
 {
 	if (other == NULL)
 		return true;
-	return !other->isMovableBlock();
+	return !other->isMovableBlock() && !other->frozen;
 }
 BounceWall::BounceWall() {
 	sprite = spr_bounceWall;
