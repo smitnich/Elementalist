@@ -85,6 +85,7 @@ Object::Object(Object &other, int _x, int _y)
 	frozen = other.frozen;
 	numFrames = other.numFrames;
 	faceDir = 0;
+	visible = true;
 }
 //Clean up the object
 void Object::die()
