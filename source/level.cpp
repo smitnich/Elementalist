@@ -11,7 +11,7 @@
 
 #include "level.h"
 
-const std::string LevelStrings[] =
+const std::string LevelStrings[MAX_LEVEL] =
 {
 	"Dummy",//0
 	"Conveyors",//1
@@ -27,7 +27,9 @@ const std::string LevelStrings[] =
 	"Teleporters",
 	"Duplicators",
 	"Boulder",
-	"Ice Puzzle"
+	"Ice Puzzle",
+	"Key Blocks",
+	"The Moat"
 };
 
 void doTextBox(int);
