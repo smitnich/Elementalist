@@ -57,7 +57,6 @@ void Duplicator::activate()
 }
 void Duplicator::deactivate() {
 	numConnectionsActive--;
-	copyObj = NULL;
 	createQueued = false;
 }
 Duplicator::Duplicator(int _dir)
