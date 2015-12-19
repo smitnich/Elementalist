@@ -9,8 +9,6 @@
 #include "sound.h"
 #include "object.h"
 
-#include "level.h"
-
 const std::string LevelStrings[MAX_LEVEL] =
 {
 	"Dummy",//0
@@ -29,7 +27,8 @@ const std::string LevelStrings[MAX_LEVEL] =
 	"Boulder",
 	"Ice Puzzle",
 	"Key Blocks",
-	"The Moat"
+	"The Moat",
+	"Fire and Oil"
 };
 
 void doTextBox(int);
@@ -69,7 +68,6 @@ void dumpMoves();
 void setTicks();
 void clearLogicList();
 
-Object* objectInit(unsigned int id, int x, int y);
 std::string constructLevelName(int);
 class Level *allLevels[MAX_LEVEL];
 Level::Level(FILE* inFile, int levelNum)
@@ -362,6 +360,9 @@ class Terrain *instantiateTerrain(int input, int i)
 	Terrain *out = NULL;
 	switch (input)
 	{
+	case m_temp_firefloor:
+		out = new FireFloor(i % getCurrentLevel()->width, i / getCurrentLevel()->width, 60.0f);
+		break;
 	case m_firefloor:
 		out = new FireFloor(i % getCurrentLevel()->width, i / getCurrentLevel()->width);
 		break;

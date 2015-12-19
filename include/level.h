@@ -37,7 +37,8 @@ class Level
 	void checkTerrain();
 };
 Level *getCurrentLevel();
-Object* objectInit(unsigned int id, int x, int y);
+Object* objectInit(unsigned int id, int x, int y, bool addToLevel = true);
+Object* objectInit(unsigned int id, int idx, bool addToLevel = true);
 std::string constructLevelName(int);
 extern class Level *allLevels[MAX_LEVEL];
 

@@ -15,7 +15,6 @@ void addMoveRequest(Object *obj, int x, int y, int checkX, int checkY);
 
 void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY);
 void doDraw(Object *drawObject, int xOffset, int yOffset);
-Object* objectInit(unsigned int id, int x, int y);
 void clearObjects();
 void objectDraw();
 void objectLogic();

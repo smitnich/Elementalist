@@ -1,5 +1,6 @@
 enum tiles_t
 {
+	m_temp_firefloor = -3,
 	m_firefloor = -2,
 	m_manager = -1,
 	m_defaultWall = 0,

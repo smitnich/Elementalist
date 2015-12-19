@@ -219,9 +219,16 @@ public:
 			applyTerrain(m_oilspill, getCurrentLevel()->convertIndex(x, y));
 		}
 	}
-	void heat() {
+	void burn()
+	{
+		heat();
+	}
+	void heat(Object *heatObj = NULL) {
+		if (dead)
+			return;
 		Object *flame = addSwitchQueue(this, OBJ_FLAME);
 		flame->setTimeToLive(120.0f);
+		dead = true;
 	}
 };
 SPRITE_STATIONARY(OilBarrel, "gfx/oilBarrel.png")

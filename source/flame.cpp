@@ -27,8 +27,6 @@ public:
 		objMoveFraction = 0;
 		faceDir = 0;
 		prevMove = D_NONE;
-		applyTerrain(m_firefloor, getCurrentLevel()->convertIndex(x, y));
-		die();
 		startTime = getTicks();
 	}
 	Object* clone(int _x, int _y)
@@ -42,20 +40,8 @@ public:
 	}
 	void doLogic()
 	{
-		if (lifeTime < 30.0f)
-			return;
-		for (int xMod = -1; xMod <= 1; xMod++)
-			for (int yMod = -1; yMod <= 1; yMod++)
-			{
-				if (xMod == 0 && yMod == 0)
-					continue;
-				Object *tmpObj = getCurrentLevel()->getObject(x + xMod, y + yMod);
-				if (tmpObj != NULL)
-					tmpObj->heat();
-				Terrain *tmpTerrain = getCurrentLevel()->getTerrain(x + xMod, y + yMod);
-				if (tmpTerrain != NULL)
-					tmpTerrain->heat();
-			}
+		applyTerrain(m_firefloor, getCurrentLevel()->convertIndex(x, y));
+		die();
 	}
 };
 SPRITE_STATIONARY(Flame, "gfx/flames.png")

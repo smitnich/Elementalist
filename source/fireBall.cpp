@@ -28,7 +28,21 @@ public:
 		return tmp;
 	}
 	void doLogic() {
+		// Heat only the terrain that the fireball is currently on
 		getCurrentLevel()->getTerrain(x, y)->heat();
+		// But heat all nearby objects
+		Object *tmpObj = getCurrentLevel()->getObject(x + 1, y);
+		if (tmpObj != NULL)
+			tmpObj->heat();
+		tmpObj = getCurrentLevel()->getObject(x - 1, y);
+		if (tmpObj != NULL)
+			tmpObj->heat();
+		tmpObj = getCurrentLevel()->getObject(x, y - 1);
+		if (tmpObj != NULL)
+			tmpObj->heat();
+		tmpObj = getCurrentLevel()->getObject(x, y + 1);
+		if (tmpObj != NULL)
+			tmpObj->heat();
 		objMove();
 		if (objMoveFraction == 0.0f) {
 			preferRightTurn();
@@ -40,8 +54,12 @@ public:
 	void heat() {
 		return;
 	}
+	void burn()
+	{
+		return;
+	}
 	void onCollision(Object *other, int dir){
-		other->heat();
+		other->burn();
 	}
 };
 SPRITE_MOVING(FireBall)

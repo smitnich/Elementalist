@@ -21,8 +21,8 @@ Object *addSwitchQueue(Object *in, int switchId)
 	}
 	SwitchRequest req;
 	req.obj = in;
-	req.switchTo = objectInit(switchId, in->x, in->y);
-	getCurrentLevel()->assignObject(in->x, in->y, in);
+	req.switchTo = objectInit(switchId, in->x, in->y, false);
+	//getCurrentLevel()->assignObject(in->x, in->y, in);
 	objectSwitchQueue.push_back(req);
 	return req.switchTo;
 }

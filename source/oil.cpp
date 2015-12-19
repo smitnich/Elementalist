@@ -7,7 +7,7 @@ void removeTerrain(Terrain *terrain);
 Terrain *addTerrainChange(int index, int changeTo);
 Terrain *addTerrainChange(int index, Terrain *changeTo);
 
-Object *objectInit(unsigned int id, int idx);
+Object *objectInit(unsigned int id, int idx, bool addToLevel);
 
 SDL_Surface *spr_oilFloor = NULL;
 extern int xInitial, yInitial;
@@ -41,5 +41,5 @@ bool OilFloor::requestExit(Object *other, int dir) {
 }
 void OilFloor::heat() {
 	removeTerrain(this);
-	objectInit(1012, index)->setTimeToLive(60.0);
+	applyTerrain(m_temp_firefloor, index);
 }

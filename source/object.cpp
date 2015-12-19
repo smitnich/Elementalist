@@ -357,7 +357,7 @@ void doDraw(Object *drawObject, int moveFractionX, int moveFractionY)
 void Object::draw(int moveFractionX, int moveFractionY) {
 	doDraw(this, moveFractionX, moveFractionY);
 }
-Object* objectInit(unsigned int id, int x, int y)
+Object* objectInit(unsigned int id, int x, int y, bool addToLevel)
 {
 	Object *newObject = objectList[id-1000]->createInstance(x,y);
 	if (newObject == NULL)
@@ -367,11 +367,12 @@ Object* objectInit(unsigned int id, int x, int y)
 		player = newObject;
 	newObject->id = id;
 	Level *curLevel = getCurrentLevel();
-	curLevel->assignObject(x, y, newObject);
+	if (addToLevel)
+		curLevel->assignObject(x, y, newObject);
 	return newObject;
 }
-Object *objectInit(unsigned int id, int idx) {
-	return objectInit(id, idx % TILE_SIZE, idx / TILE_SIZE);
+Object *objectInit(unsigned int id, int idx, bool addToLevel) {
+	return objectInit(id, idx % TILE_SIZE, idx / TILE_SIZE, addToLevel);
 }
 void clearObjects()
 {
