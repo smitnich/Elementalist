@@ -35,10 +35,8 @@ enum tiles_t
 	m_teleSource,
 	m_teleDest,
 	m_barrierOff,
-	m_color_barrier_1,
-	m_color_barrier_2,
-	m_color_barrier_3,
-	m_color_barrier_4,
+	m_heaterOn,
+	m_heaterOff,
 
 	OBJ_BLOCK = 1001,
 	OBJ_HEAVY_BLOCK,

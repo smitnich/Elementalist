@@ -25,3 +25,4 @@ extern SDL_Surface *spr_levelButtonSelected;
 extern SDL_Surface *spr_flame[];
 extern SDL_Surface *spr_teleDest;
 extern SDL_Surface *spr_teleSource;
+extern SDL_Surface *spr_heater[2];

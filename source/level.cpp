@@ -433,6 +433,10 @@ class Terrain *instantiateTerrain(int input, int i)
 	case m_freezerFloor:
 		out = new Freezer(true);
 		break;
+	case m_heaterOn:
+	case m_heaterOff:
+		out = new Heater(input == m_heaterOn);
+		break;
 	case m_water:
 		out = new Water();
 		break;

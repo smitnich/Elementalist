@@ -116,6 +116,8 @@ void imgInit()
 	spr_flame[2] = loadOptimizedIMG("gfx/flames3.png");
 	spr_teleSource = loadOptimizedIMG("gfx/teleSource.png");
 	spr_teleDest = loadOptimizedIMG("gfx/teleDest.png");
+	spr_heater[0] = loadOptimizedIMG("gfx/heaterFloorOff.png");
+	spr_heater[1] = loadOptimizedIMG("gfx/heaterFloor.png");
 	createButtons();
 }
 //Optimize the image for proper depth and for transparecny

@@ -212,6 +212,18 @@ public:
 	void deactivate();
 	Freezer(bool _enabled);
 };
+class Heater : public Terrain
+{
+public:
+	Object *heatObj;
+	bool enabled;
+	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
+	void onEnter(Object *other, bool solidFound = false);
+	void onExit(Object *other);
+	void activate();
+	void deactivate();
+	Heater(bool _enabled);
+};
 class BounceWall : public Terrain {
 public:
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
