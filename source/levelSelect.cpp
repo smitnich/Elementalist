@@ -56,7 +56,7 @@ LevelButton allButtons[MAX_LEVEL];
 
 bool checkWithin(LevelButton button, int x, int y) {
 	int newY = y + scrollDistance*(buttonSizeY + spacingY);
-	if ((x >= button.x) && x <= (button.x + spr_levelButton->w) && (newY >= button.y) && newY <= (button.y + spr_levelButton->h))
+	if ((x >= button.x) && x <= (button.x + button.backdrop[0]->w) && (newY >= button.y) && newY <= (button.y + button.backdrop[0]->h))
 		return true;
 	else
 		return false;
