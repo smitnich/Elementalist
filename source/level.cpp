@@ -24,8 +24,8 @@ const std::string LevelStrings[MAX_LEVEL] =
 	"Toggle Trick",
 	"Teleporters",
 	"Duplicators",
-	"Boulder",
-	"Ice Puzzle",
+	"Boulders",
+	"Superconductors",
 	"Key Blocks",
 	"The Moat",
 	"Fire and Oil"
