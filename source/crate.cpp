@@ -229,6 +229,7 @@ public:
 		Object *flame = addSwitchQueue(this, OBJ_FLAME);
 		flame->setTimeToLive(120.0f);
 		dead = true;
+		playSound(snd_explode);
 	}
 };
 SPRITE_STATIONARY(OilBarrel, "gfx/oilBarrel.png")
