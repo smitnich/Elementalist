@@ -37,6 +37,8 @@ int WInput(u16 WButtonsDown,bool checkNunchuk,int wpadnum)
 		return BUTTON_LEVEL_NEXT;
 	if (WButtonsDown & WPAD_BUTTON_1)
 		return BUTTON_1;
+	if (WButtonsDown & WPAD_BUTTON_B)
+		return BUTTON_RESET;
 	if (checkNunchuk == 1)
 	{ 
 		if (WButtonsDown & WPAD_NUNCHUK_BUTTON_Z)

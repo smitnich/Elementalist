@@ -5,6 +5,7 @@
 #include <SDL/SDL.h>
 #endif
 #include "inputDef.h"
+#include "level.h"
 #define JOYSTICK_MAX 32767;
 #define MAX_BUTTONS 32
 //The direction that the hat is currently facing
@@ -29,10 +30,9 @@ int buttonA = 0;
 //Which is the second button
 int buttonB = 1;
 //The next button
-int buttonNext = 5;
+int buttonReset1 = 5;
 //The previous button
-//Todo: allow these to be rebound
-int buttonPrev = 4;
+int buttonReset2 = 4;
 //The exit button
 int buttonExit = 7;
 //The number of axes on a controlelr
@@ -195,10 +195,8 @@ int joyInput()
     if (xboxAxis2 <= xboxAxisSensitivityThreshold*-1 )
         levelDir -= 1;
     #endif
-	if (joyButtonsDown[buttonNext])
-		levelDir += 1;
-	else if (joyButtonsDown[buttonPrev])
-		levelDir -= 1;
+	if (joyButtonsDown[buttonReset1] || joyButtonsDown[buttonReset2])
+		return BUTTON_RESET;
 	if (levelDir < 0)
 		return BUTTON_LEVEL_PREV;
 	else if (levelDir > 0)

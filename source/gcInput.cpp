@@ -38,6 +38,8 @@ int GCInput(u16 GCButtonsDown)
 		return BUTTON_LEVEL_PREV;
 	if (leveldir >= 1)
 		return BUTTON_LEVEL_NEXT;
+	if (GCButtonsDown & PAD_TRIGGER_Z)
+		return BUTTON_RESET;
 	if (GCButtonsDown & PAD_BUTTON_B)
 		return BUTTON_1;
 	if (GCButtonsDown & PAD_BUTTON_A)

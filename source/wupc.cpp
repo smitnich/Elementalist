@@ -61,7 +61,7 @@ int wupcInput(int wpadnum)
 	if (proController->button & WPAD_CLASSIC_BUTTON_FULL_L||proController->button & WPAD_CLASSIC_BUTTON_ZR)
 		return B_ANY;
 	if (proController->button & WPAD_CLASSIC_BUTTON_ZL || proController->button & WPAD_CLASSIC_BUTTON_ZR)
-		return B_ANY;
+		return BUTTON_RESET;
 	return INPUT_NONE;
 }
 #endif

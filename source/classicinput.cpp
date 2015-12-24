@@ -74,9 +74,9 @@ int classicInput(int wpadnum)
 		return B_UP;
 	if (ydir >= 1)
 		return B_DOWN;
+	if (classic->btns_h & WPAD_CLASSIC_BUTTON_ZL ||  classic->btns_h & WPAD_CLASSIC_BUTTON_ZR)
+		return BUTTON_RESET;
 	if (classic->btns_h & WPAD_CLASSIC_BUTTON_FULL_L||classic->btns_h & WPAD_CLASSIC_BUTTON_ZR)
-		return B_ANY;
-	if (classic->btns_h & WPAD_CLASSIC_BUTTON_ZL || classic->btns_h & WPAD_CLASSIC_BUTTON_ZR)
 		return B_ANY;
 	return INPUT_NONE;
 }

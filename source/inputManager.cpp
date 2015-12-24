@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <iostream>
-
+#include "level.h"
 #include "inputManager.h"
 
 unsigned long getTicks();
@@ -17,7 +17,8 @@ int currentInput;
 extern bool debugOn;
 
 bool replayEnabled = false;
-
+static const int ticksRequired = 1000;
+static int startHold = 0;
 //Store the latest input so we don't end up reading from the controllers
 //multiple times per frame
 int getInput(int index = 0) {
@@ -27,13 +28,36 @@ int getInput(int index = 0) {
 	return currentInput;
 }
 void handleInput() {
+	static int _lastInput = INPUT_NONE;
 	currentInput = determineInput(false);
+	if (currentInput == BUTTON_RESET || currentInput == BUTTON_MENU
+		|| currentInput == BUTTON_LEVEL_NEXT || currentInput == BUTTON_LEVEL_PREV)
+	{
+		if (_lastInput == currentInput)
+		{
+			if (getTicks() - ticksRequired < startHold)
+				currentInput = INPUT_NONE;
+		}
+		else
+		{
+			startHold = getTicks();
+			_lastInput = currentInput;
+			currentInput = INPUT_NONE;
+		}
+	}
+	else
+	{
+		startHold = getTicks();
+		_lastInput = currentInput;
+	}
 	if (displayName == true)
 	{
 		if (currentInput == BUTTON_2) {
+#ifdef DEBUG
 			replayEnabled = loadMoves();
 			displayName = false;
 			return;
+#endif
 		}
 		else if (currentInput != INPUT_NONE && (getTicks() - levelStartTime > 1000))
 		{
@@ -88,7 +112,15 @@ void handleInput() {
 		lastInput = BUTTON_LEVEL_PREV;
 		break;
 	case BUTTON_1:
+#ifdef DEBUG
 		debugOn = !debugOn;
+#endif
+		break;
+	case BUTTON_RESET:
+		restartLevel();
+		break;
+	default:
+		break;
 	}
 	if (currentInput != INPUT_NONE) {
 		lastInput = currentInput;
