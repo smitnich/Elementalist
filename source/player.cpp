@@ -117,7 +117,9 @@ public:
 		case BUTTON_1:
 			if (lastInput != BUTTON_1)
 			{
+#ifdef DEBUG
 				debugOn = !debugOn;
+#endif
 				lastInput = BUTTON_1;
 			}
 			break;

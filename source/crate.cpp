@@ -7,11 +7,11 @@
 #include "player.h"
 #include "terrain.h"
 #include "object.h"
+#include "sound.h"
 
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 
 extern double delta;
-extern Mix_Chunk* snd_explode;
 
 class Crate : public Object {
 public:
@@ -259,7 +259,10 @@ public:
 		}
 		else if (other->id < OBJ_PIPE_NW || other->id > OBJ_PIPE_NE) {
 			if (other->objMoveDir != dir)
+			{
+				other->playSound(snd_smash);
 				other->die();
+			}
 		}
 	}
 	bool slides() {

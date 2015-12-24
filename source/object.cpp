@@ -94,6 +94,14 @@ void Object::die()
 		addDeleteQueue(this);
 	dead = true;
 }
+void Object::electrocute()
+{
+	if (!frozen)
+	{
+		die();
+		playSound(snd_zap);
+	}
+}
 Object::~Object()
 {
 	Level *curLevel = getCurrentLevel();
