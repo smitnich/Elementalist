@@ -277,6 +277,21 @@ bool Object::objMove()
 	}
 	return false;
 }
+void Object::addConnection(Object *in, int _index)
+{
+	connection tmp = { NULL, NULL, 0 };
+	tmp.obj = in;
+	tmp.index = _index;
+	connections.push_back(tmp);
+	in->totalConnections++;
+}
+void Object::addConnection(Terrain *in, int _index) {
+	connection tmp = { NULL, NULL, 0 };
+	tmp.terrain = in;
+	tmp.index = _index;
+	connections.push_back(tmp);
+	in->totalConnections++;
+}
 //Takes in pointers to movefractionx and y and modifies their values based on direction
 void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY)
 {

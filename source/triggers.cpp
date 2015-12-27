@@ -9,8 +9,15 @@ SDL_Surface *pressureTile = NULL;
 
 extern std::list<Trigger*> activateQueue;
 void Trigger::addConnection(Terrain *in, int _index) {
-	connection tmp = { NULL, 0 };
+	connection tmp = { NULL, NULL, 0 };
 	tmp.terrain = in;
+	tmp.index = _index;
+	connections.push_back(tmp);
+	in->totalConnections++;
+}
+void Trigger::addConnection(Object *in, int _index) {
+	connection tmp = { NULL, NULL, 0 };
+	tmp.obj = in;
 	tmp.index = _index;
 	connections.push_back(tmp);
 	in->totalConnections++;
@@ -22,7 +29,7 @@ void PressureSwitch::onEnter(Object *other, bool solidFound)
 	int length = connections.size();
 	for (int i = 0; i < length; i++)
 	{
-		connections.at(i).terrain->activate();
+		activateConnection(&connections.at(i));
 	} 
 }
 void PressureSwitch::onExit(Object *other)
@@ -32,7 +39,7 @@ void PressureSwitch::onExit(Object *other)
 	int length = connections.size();
 	for (int i = 0; i < length; i++)
 	{
-		connections.at(i).terrain->deactivate();
+		deactivateConnection(&connections.at(i));
 	}
 }
 PressureSwitch::PressureSwitch()
@@ -50,9 +57,9 @@ void ToggleSwitch::onEnter(Object *other, bool solidFound)
 	for (int i = 0; i < length; i++)
 	{
 		if (enabled)
-			connections.at(i).terrain->activate();
+			activateConnection(&connections.at(i));
 		else
-			connections.at(i).terrain->deactivate();
+			deactivateConnection(&connections.at(i));
 	}
 	sprite = spr_pressureToggle[enabled];
 	playSound(snd_switch);

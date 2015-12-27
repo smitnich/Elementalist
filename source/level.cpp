@@ -28,7 +28,8 @@ const std::string LevelStrings[MAX_LEVEL] =
 	"Superconductors",
 	"Key Blocks",
 	"The Moat",
-	"Fire and Oil"
+	"Fire and Oil",
+	"Red Crystals"
 };
 
 void doTextBox(int);
@@ -161,21 +162,36 @@ void Level::makeConnections()
 	for (unsigned int i = 0; i < MAX_CONNECTIONS; i++)
 	{
 		std::vector<int> tmpSenders = senders[i];
+		std::vector<int> tmpReceivers = receivers[i];
 		for (unsigned int k = 0; k < tmpSenders.size(); k++) {
 			//If the connector wasn't placed over a valid trigger,
 			//skip it
 			Terrain *test = mapLayer.at(tmpSenders[k]);
 			if (test->id == m_manager)
 			{
-				MultipleTerrainManager *manager = (MultipleTerrainManager*) test;
+				MultipleTerrainManager *manager = (MultipleTerrainManager*)test;
 				test = manager->within[1];
-			}	
-			if (test->isTrigger == false)
-				continue;
-			tmp = (Trigger*) test;
-			for (unsigned int j = 0; j < receivers[i].size(); j++)
+			}
+			if (test->isTrigger) {
+				tmp = (Trigger*)test;
+				for (unsigned int j = 0; j < receivers[i].size(); j++)
+				{
+					tmp->addConnection(mapLayer.at(receivers[i].at(j)), receivers[i].at(j));
+					Object *tmpObj = objectLayer.at(receivers[i].at(j));
+					if (tmpObj != NULL)
+						tmp->addConnection(tmpObj, receivers[i].at(j));
+				}
+			}
+			Object *obj = objectLayer.at(tmpSenders[k]);
+			if (obj != NULL)
 			{
-				tmp->addConnection(mapLayer.at(receivers[i].at(j)), receivers[i].at(j));
+				for (unsigned int j = 0; j < receivers[i].size(); j++)
+				{
+					obj->addConnection(mapLayer.at(receivers[i].at(j)), receivers[i].at(j));
+					Object *tmpObj = objectLayer.at(receivers[i].at(j));
+					if (tmpObj != NULL)
+						obj->addConnection(tmpObj, receivers[i].at(j));
+				}
 			}
 		}
 	}

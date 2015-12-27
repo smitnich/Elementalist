@@ -271,3 +271,28 @@ public:
 };
 
 SPRITE_STATIONARY(Boulder, "gfx/elementals/boulder.png")
+
+class CrystalBlock : public Crate {
+public:
+	OBJECT_DECLARATION(CrystalBlock, OBJ_CRYSTAL_BLOCK)
+		CrystalBlock(int x2, int y2) : Crate(x2, y2) {
+	}
+	Object *clone(int _x, int _y)
+	{
+		Object *tmp = new Crate(_x, _y);
+		//Copy all of the contents of this object over to the new one
+		memcpy(tmp, this, sizeof(*this));
+		tmp->x = _x;
+		tmp->y = _y;
+		return tmp;
+	}
+	void die()
+	{
+		for (unsigned int i = 0; i < connections.size(); i++)
+		{
+			activateConnection(&connections.at(i));
+		}
+		Object::die();
+	}
+};
+SPRITE_STATIONARY(CrystalBlock, "gfx/redCrystal.png")

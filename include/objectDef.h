@@ -3,6 +3,8 @@
 #include "sdlFiles.h"
 #include <stdexcept>
 #include "defs.h"
+#include "connection.h"
+#include <vector>
 class Object
 {
 public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
@@ -28,7 +30,12 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		int getY();
 		bool objMove();
 		bool visible;
+		int totalConnections;
+		int numConnectionsActive;
+		std::vector<connection> connections;
 		virtual bool startMove(int dir, int priority);
+		void addConnection(Object *in, int _index);
+		void addConnection(Terrain *in, int _index);
 		virtual void drown()
 		{
 			die();
@@ -43,13 +50,17 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		{
 			frozen = false;
 		}
-		virtual void electrocute()
-		{
-			if (!frozen)
-				die();
-		}
+		virtual void electrocute();
 		virtual void burn() {
 			die();
+		}
+		virtual void activate()
+		{
+			return;
+		}
+		virtual void deactivate()
+		{
+			return;
 		}
 		//It should not be possible to have two different objects in one tile in
 		//most cases, so throw an exception by default

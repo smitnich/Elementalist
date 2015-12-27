@@ -5,6 +5,7 @@
 #include "objectDef.h"
 #include "defs.h"
 #include <vector>
+#include "connection.h"
 
 void apply_surface(int x, int y, SDL_Surface *apply, SDL_Surface *dest);
 class Terrain
@@ -123,11 +124,7 @@ public:
 	Conveyor(int direction);
 };
 extern std::vector<char> mapLayer;
-struct connection
-{
-	Terrain *terrain;
-	int index;
-};
+
 class Trigger : public Terrain
 {
 public:
@@ -137,6 +134,7 @@ public:
 	}
 	std::vector<connection> connections;
 	void addConnection(Terrain *in, int index);
+	void addConnection(Object *in, int index);
 };
 class PressureSwitch : public Trigger
 {

@@ -28,7 +28,8 @@ bool requestMove(int x, int y, int xChange, int yChange, Object* obj)
 		dir = D_DOWN;
 	if (!level->getTerrain(obj->x, obj->y)->requestExit(obj, dir))
 		return false;
-	if (terrain != NULL && terrain->requestEntry(obj, dir) && (otherObj == NULL || otherObj->requestEntry(obj, dir)))
+	if (terrain != NULL && terrain->requestEntry(obj, dir) &&
+		(otherObj == NULL || otherObj->dead || otherObj->requestEntry(obj, dir)))
 	{
 		return true;
 	}
