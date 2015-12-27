@@ -35,7 +35,8 @@ class Pickup : public Object
 public:
 	OBJECT_DECLARATION(Pickup, 1009)
 	//Pickups should be destroyed when any object enters their square
-	void onCollision(Object *other, int dir) {
+	void onCollision(Object *other, int dir)
+	{
 		die();
 	}
 	bool requestEntry(Object *other, int dir)
@@ -45,7 +46,7 @@ public:
 	void die()
 	{
 		getCurrentLevel()->pickupCount--;
-		delete this;
+		Object::die();
 	}
 	Pickup(int _x, int _y) : Object(x,y)
 	{
@@ -59,7 +60,8 @@ public:
 	{
 		return NULL;
 	}
-	bool allowEntry() {
+	bool allowEntry()
+	{
 		return true;
 	}
 
