@@ -31,10 +31,11 @@ bool smbInit();
 #include "loadImg.h"
 #include "input.h"
 #include "levelSelect.h"
+#include "level.h"
 
 extern char directorySymbol;
 extern bool defaultPath, fullScreen, done, displayName;
-extern std::string levelPath, appPath;
+extern std::string levelPath, appPath, startLevel;
 extern SDL_Surface *screen;
 extern int videoSizeX, videoSizeY, bitDepth, argumentCount, frame, lastInput, \
 framesPerSecond, levelChange, levelStartCounter;
@@ -167,8 +168,16 @@ void titleLoop();
 int main(int argc, char* argv[]){
 	argumentCount = argc;
 	init(argc, argv);
-	titleLoop();
-	switchLevel(selectLevel());
+	if (startLevel.length() == 0)
+	{
+		titleLoop();
+		switchLevel(selectLevel());
+	}
+	else
+	{
+		loadLevel(startLevel, 0);
+		switchLevel(0);
+	}
 	//Main game loop
 	while (!done)
 	{
