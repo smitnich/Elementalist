@@ -70,7 +70,7 @@ public:
 		hovering = false;
 		moveIndex = other.moveIndex;
 	}
-	Person(int x2, int y2) : Object(x2,y2)
+	Person(int x2, int y2) : Object(x2, y2)
 	{
 		numFrames = 3;
 		isPlayer = true;
@@ -79,10 +79,6 @@ public:
 		prevMove = D_NONE;
 		active = true;
 		moveIndex = 0;
-	}
-	void makeElement(bool doSecond)
-	{
-		return;
 	}
 	void freeze() {
 		Object::freeze();
@@ -236,7 +232,7 @@ public:
 				gameOver();
 			}
 			else {
-				delete this;
+				Object::die();
 				return;
 			}
 			if (getCurrentLevel()->getTerrain(x, y)->id == m_water)
@@ -244,8 +240,9 @@ public:
 				visible = false;
 			}
 		}
-		else {
-			delete this;
+		else 
+		{
+			Object::die();
 			return;
 		}
 	}
