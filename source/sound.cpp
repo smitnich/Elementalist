@@ -17,6 +17,8 @@ Mix_Chunk *snd_spring = NULL;
 Mix_Chunk *snd_splash = NULL;
 Mix_Chunk *snd_zap = NULL;
 Mix_Chunk *snd_smash = NULL;
+Mix_Chunk *snd_barrierOpen = NULL;
+Mix_Chunk *snd_burn = NULL;
 Mix_Music *titleMusic = NULL;
 Mix_Music *levelSelectMusic = NULL;
 bool audioEnabled = true;
@@ -47,6 +49,8 @@ void musicInit()
 	snd_splash = Mix_LoadWAV("sound/splash.wav");
 	snd_zap = Mix_LoadWAV("sound/zap.wav");
 	snd_smash = Mix_LoadWAV("sound/smash.wav");
+	snd_barrierOpen = Mix_LoadWAV("sound/barrierOpen.wav");
+	snd_burn = Mix_LoadWAV("sound/burn.wav");
 	titleMusic = Mix_LoadMUS("music/Sculpture-Garden.mp3");
 	levelSelectMusic = Mix_LoadMUS("music/Techno-Gameplay.mp3");
 }
