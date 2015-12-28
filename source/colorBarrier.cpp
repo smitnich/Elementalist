@@ -2,6 +2,7 @@
 #include "imageMacros.h"
 #include "sdlFiles.h"
 #include "tileEnum.h"
+#include "sound.h"
 
 #define BARRIER_TYPES 4
 
@@ -19,6 +20,7 @@ public:
 	{
 		other->die();
 		die();
+		playSound(snd_barrierOpen);
 	}
 	Object *clone(int _x, int _y)
 	{

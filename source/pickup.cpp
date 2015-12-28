@@ -1,6 +1,8 @@
 #include "objectDef.h"
 #include "sdlFiles.h"
 #include "level.h"
+#include "sound.h"
+
 SDL_Surface *spr_pickup = NULL;
 SDL_Surface *spr_pickupWall = NULL;
 
@@ -11,7 +13,10 @@ public:
 	void doLogic()
 	{
 		if (getCurrentLevel()->pickupCount <= 0)
-			delete this;
+		{
+			playSound(snd_barrierOpen);
+			die();
+		}
 	}
 	PickupWall(int _x, int _y) : Object(x,y)
 	{
