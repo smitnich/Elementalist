@@ -292,6 +292,11 @@ void Object::addConnection(Terrain *in, int _index) {
 	connections.push_back(tmp);
 	in->totalConnections++;
 }
+void Object::burn()
+{
+	playSound(snd_burn);
+	die();
+}
 //Takes in pointers to movefractionx and y and modifies their values based on direction
 void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY)
 {

@@ -51,9 +51,7 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 			frozen = false;
 		}
 		virtual void electrocute();
-		virtual void burn() {
-			die();
-		}
+		virtual void burn();
 		virtual void activate()
 		{
 			return;
