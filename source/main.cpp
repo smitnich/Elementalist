@@ -189,7 +189,7 @@ int main(int argc, char* argv[]){
 		if (HWButton != -1)
 			cleanup();
 #endif
-		if (displayName == false && playerDead == false)
+		if (displayName == false)
 			objectLogic();
 		else
 			doPlayer();

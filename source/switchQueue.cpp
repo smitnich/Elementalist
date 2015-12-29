@@ -33,7 +33,7 @@ void doSwitchQueue()
 	for (int i = 0; i < size; i++)
 	{
 		req = objectSwitchQueue.front();
-		delete req.obj;
+		req.obj->die();
 		getCurrentLevel()->assignObject(req.switchTo->x, req.switchTo->y, req.switchTo);
 		objectSwitchQueue.pop_front();
 	}

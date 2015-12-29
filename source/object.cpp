@@ -39,6 +39,7 @@ extern double fpsModifier;
 SDL_Surface *personns[6] = { NULL };
 SDL_Surface *personew[6] = { NULL };
 SDL_Surface *deadPerson = NULL;
+SDL_Surface *spr_ash = NULL;
 
 extern double delta;
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
@@ -87,6 +88,13 @@ Object::Object(Object &other, int _x, int _y)
 	faceDir = 0;
 	visible = true;
 }
+void Object::toAsh()
+{
+	die();
+	Object *ash = addSwitchQueue(this, OBJ_ASH);
+	if (isPlayer)
+		player = ash;
+}
 //Clean up the object
 void Object::die()
 {
@@ -98,7 +106,7 @@ void Object::electrocute()
 {
 	if (!frozen)
 	{
-		die();
+		toAsh();
 		playSound(snd_zap);
 	}
 }
@@ -106,7 +114,10 @@ Object::~Object()
 {
 	Level *curLevel = getCurrentLevel();
 	if (curLevel != NULL)
-		curLevel->assignObject(x, y, NULL);
+	{
+		if (curLevel->getObject(x,y) == this)
+			curLevel->assignObject(x, y, NULL);
+	}
 }
 void Object::updateTime() {
 	lifeTime += delta;
@@ -295,7 +306,7 @@ void Object::addConnection(Terrain *in, int _index) {
 void Object::burn()
 {
 	playSound(snd_burn);
-	die();
+	toAsh();
 }
 //Takes in pointers to movefractionx and y and modifies their values based on direction
 void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY)
@@ -453,8 +464,8 @@ void objectLogic()
 	}
 	queuePlaceAll();
 	checkCreationQueue();
-	doDeleteQueue();
 	doSwitchQueue();
+	doDeleteQueue();
 	doLogicTerrain();
 }
 void doPlayer()

@@ -118,6 +118,7 @@ void imgInit()
 	spr_teleDest = loadOptimizedIMG("gfx/teleDest.png");
 	spr_heater[0] = loadOptimizedIMG("gfx/heaterFloorOff.png");
 	spr_heater[1] = loadOptimizedIMG("gfx/heaterFloor.png");
+	spr_ash = loadOptimizedIMG("gfx/ash.png");
 	createButtons();
 }
 //Optimize the image for proper depth and for transparecny

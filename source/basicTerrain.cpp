@@ -3,6 +3,7 @@
 #include "tileEnum.h"
 #include "sound.h"
 #include "level.h"
+#include "queues.h"
 extern int xInitial, yInitial;
 
 
@@ -89,7 +90,7 @@ Bomb::Bomb()
 }
 void Bomb::onEnter(Object *other, bool solidFound)
 {
-	other->die();
+	other->toAsh();
 	addTerrainChange(index, m_floor);
 	playSound(snd_explode);
 }

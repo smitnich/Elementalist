@@ -34,7 +34,8 @@ void doDeleteQueue()
 		if (tmpNode.object != NULL) {
 			Object *tmp = tmpNode.object;
 			removeMoveRequest(tmp);
-			getCurrentLevel()->assignObject(tmp->x, tmp->y, NULL);
+			if (getCurrentLevel()->getObject(tmp->x, tmp->y) == tmp)
+				getCurrentLevel()->assignObject(tmp->x, tmp->y, NULL);
 			delete tmp;
 			deleteQueue.pop_front();
 		}

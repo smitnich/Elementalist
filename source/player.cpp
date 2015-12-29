@@ -230,8 +230,10 @@ public:
 		{
 			if (!switchPlayerFocus()) {
 				gameOver();
+				Object::die();
 			}
-			else {
+			else 
+			{
 				Object::die();
 				return;
 			}

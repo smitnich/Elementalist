@@ -36,6 +36,7 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		virtual bool startMove(int dir, int priority);
 		void addConnection(Object *in, int _index);
 		void addConnection(Terrain *in, int _index);
+		virtual void toAsh();
 		virtual void drown()
 		{
 			die();
