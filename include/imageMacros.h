@@ -1,5 +1,6 @@
 #ifndef IMAGE_MACRO
 #include <list>
+#include "objectDef.h"
 #define MAX_OBJECTS 1000
 #define IMAGE_MACRO
 void addToImageList(Object *other);
