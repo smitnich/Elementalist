@@ -176,7 +176,7 @@ int main(int argc, char* argv[]){
 	else
 	{
 		loadLevel(startLevel, 0);
-		switchLevel(0);
+		playMusic(1);
 	}
 	//Main game loop
 	while (!done)
