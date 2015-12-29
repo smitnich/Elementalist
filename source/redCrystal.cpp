@@ -15,7 +15,9 @@ public:
 	}
 	void activate()
 	{
-		die();
+		numConnectionsActive++;
+		if (numConnectionsActive >= connections.size())
+			die();
 	}
 };
 
