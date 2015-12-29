@@ -93,15 +93,6 @@ public:
 	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
 	Barrier(bool _disabled);
 };
-class ColorBarrier : public Terrain
-{
-public:
-	int colorType;
-	bool requestEntry(Object *other, int dir);
-	void draw(SDL_Surface *drawTo, int xTile, int yTile, int xOff, int yOff);
-	void onEnter(Object *other, bool solidFound = false);
-	ColorBarrier(int type);
-};
 class Conveyor : public Terrain
 {
 private:

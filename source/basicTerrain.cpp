@@ -78,11 +78,6 @@ void Barrier::deactivate()
 	numConnectionsActive--;
 	disabled = defaultState;
 }
-void ColorBarrier::onEnter(Object *other, bool solidFound)
-{
-	addTerrainChange(index, m_floor);
-	other->die();
-}
 Bomb::Bomb()
 {
 	index = 0;
