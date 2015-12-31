@@ -22,6 +22,18 @@ class Ash : public Object
 		{
 			return;
 		}
+		bool requestEntry(Object *other, int dir)
+		{
+			return true;
+		}
+		void onCollision(Object *other, int dir)
+		{
+			die();
+		}
+		bool allowEntry()
+		{
+			return true;
+		}
 };
 
 SPRITE_STATIONARY(Ash, "gfx/ash.png")
