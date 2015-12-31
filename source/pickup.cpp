@@ -52,6 +52,7 @@ public:
 	void die()
 	{
 		getCurrentLevel()->pickupCount--;
+		playSound(snd_crystalBreak);
 		Object::die();
 	}
 	Pickup(int _x, int _y) : Object(x,y)

@@ -1,5 +1,11 @@
 The sounds in this folder were used from the following locations:
 
+Attribution Noncommercial license link
+http://creativecommons.org/licenses/by-nc/3.0/legalcode
+
+Attribution license:
+http://creativecommons.org/licenses/by/3.0/legalcode
+
 Switch hit:
 http://www.solastudios.net/
 http://www.freesound.org/people/Seidhepriest/sounds/329742/ 
@@ -36,3 +42,9 @@ Shortened from original file
 Barrier Open:
 http://www.freesound.org/people/Greencouch/sounds/124905/
 Shortened from original file
+
+Crystal break:
+Used under the Attribution Noncommercial license
+Shortened from original file
+Copyright Mickfire
+https://freesound.org/people/mickfire/sounds/326422/

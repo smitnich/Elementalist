@@ -21,6 +21,11 @@ public:
 		if (numConnectionsActive >= connections.size())
 			die();
 	}
+	void die()
+	{
+		playSound(snd_crystalBreak);
+		Object::die();
+	}
 };
 
 SPRITE_STATIONARY(CrystalWall, "gfx/redCrystalWall.png")

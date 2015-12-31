@@ -7,6 +7,7 @@ extern Mix_Chunk *snd_splash;
 extern Mix_Chunk *snd_zap;
 extern Mix_Chunk *snd_smash;
 extern Mix_Chunk *snd_burn;
+extern Mix_Chunk *snd_crystalBreak;
 extern Mix_Music *levelSelectMusic;
 extern Mix_Chunk *snd_barrierOpen;
 bool playSound(Mix_Chunk *input);
