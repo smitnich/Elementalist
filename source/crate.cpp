@@ -8,6 +8,7 @@
 #include "terrain.h"
 #include "object.h"
 #include "sound.h"
+#include "imageMacros.h"
 
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 

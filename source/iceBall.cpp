@@ -1,6 +1,7 @@
 #include "objectDef.h"
 #include "defs.h"
 #include "level.h"
+#include "imageMacros.h"
 
 void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY);
 

@@ -5,6 +5,7 @@
 #include "input.h"
 #include "event.h"
 #include "main.h"
+#include <list>
 
 extern int mouseX, mouseY;
 

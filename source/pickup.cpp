@@ -2,6 +2,7 @@
 #include "sdlFiles.h"
 #include "level.h"
 #include "sound.h"
+#include "imageMacros.h"
 
 SDL_Surface *spr_pickup = NULL;
 SDL_Surface *spr_pickupWall = NULL;

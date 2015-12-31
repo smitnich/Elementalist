@@ -1,6 +1,7 @@
 #include "objectDef.h"
 #include "defs.h"
 #include "level.h"
+#include "imageMacros.h"
 
 #define FIREBALL_ID 1021
 

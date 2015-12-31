@@ -5,6 +5,7 @@
 #include "defs.h"
 #include <climits>
 #include <algorithm>
+#include "imageMacros.h"
 
 #include "queues.h"
 #include "player.h"

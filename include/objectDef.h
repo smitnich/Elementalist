@@ -98,6 +98,5 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		}
 		virtual Object* createInstance(int x, int y) = 0;
 };
-#include "imageMacros.h"
 SDL_Surface* loadOptimizedIMG(const char *fileName);
 #endif

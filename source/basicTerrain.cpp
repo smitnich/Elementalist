@@ -5,7 +5,7 @@
 #include "level.h"
 #include "queues.h"
 extern int xInitial, yInitial;
-
+extern Object *player;
 
 unsigned char lookupWall(int index);
 int reverseDir(int dir);

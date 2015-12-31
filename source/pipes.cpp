@@ -1,10 +1,11 @@
 #include "objectDef.h"
 #include "defs.h"
-void addMoveRequest(Object *obj, int x, int y, int checkX, int checkY);
+#include "imageMacros.h"
+#include "queues.h"
+#include "object.h"
+
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 #define PIPE_ID 1013
-void doDraw(Object *draw, int moveFractionX, int moveFractionY);
-void addRenderQueue(Object *obj);
 int reverseDir(int dir) {
 	switch (dir){
 	case D_LEFT:

@@ -5,6 +5,7 @@
 #include "terrain.h"
 #include "object.h"
 #include "main.h"
+#include "imageMacros.h"
 
 extern Object *player;
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);

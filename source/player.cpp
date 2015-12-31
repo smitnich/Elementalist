@@ -3,6 +3,7 @@
 #include "inputDef.h"
 #include "level.h"
 #include "debugText.h"
+#include "imageMacros.h"
 
 #include "recordMoves.h"
 #include "tileEnum.h"

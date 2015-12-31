@@ -1,5 +1,7 @@
 #include "objectDef.h"
+#include "imageMacros.h"
 #include "tileEnum.h"
+#include "sound.h"
 
 class CrystalWall : public Object {
 public:
