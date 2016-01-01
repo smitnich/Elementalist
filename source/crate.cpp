@@ -190,6 +190,7 @@ public:
 	}
 	void heat(Object *heatObj = NULL) {
 		die();
+		playSound(snd_melt);
 	}
 };
 SPRITE_STATIONARY(FrozenCrate, "gfx/iceBlock.png")

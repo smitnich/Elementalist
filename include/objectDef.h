@@ -41,16 +41,8 @@ public: int x, y,  objMoveDir, solid, frozen, numFrames, faceDir;
 		{
 			die();
 		}
-		virtual void freeze()
-		{
-			frozen = true;
-			objMoveDir = D_NONE;
-			objMoveFraction = 0.0f;
-		}
-		virtual void heat(Object *heatObj = NULL)
-		{
-			frozen = false;
-		}
+		virtual void freeze();
+		virtual void heat(Object *heatObj = NULL);
 		virtual void electrocute();
 		virtual void burn();
 		virtual void activate()

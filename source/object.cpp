@@ -309,6 +309,19 @@ void Object::burn()
 	playSound(snd_burn);
 	toAsh();
 }
+void Object::freeze()
+{
+	frozen = true;
+	objMoveDir = D_NONE;
+	objMoveFraction = 0.0f;
+	playSound(snd_freeze);
+}
+void Object::heat(Object *heatObj)
+{
+	if (frozen)
+		playSound(snd_melt);
+	frozen = false;
+}
 //Takes in pointers to movefractionx and y and modifies their values based on direction
 void calculateMoveFraction(int moveDir, int moveFraction, int *moveFractionX, int *moveFractionY)
 {
