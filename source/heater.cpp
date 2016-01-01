@@ -9,7 +9,7 @@ void Heater::onEnter(Object *other, bool solidFound)
 {
 	heatObj = other;
 	if (enabled)
-		heatObj->freeze();
+		heatObj->heat();
 }
 void Heater::onExit(Object *other)
 {
