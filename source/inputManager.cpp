@@ -5,6 +5,7 @@
 #include <iostream>
 #include "level.h"
 #include "inputManager.h"
+#include "levelSelect.h"
 
 unsigned long getTicks();
 int determineInput(bool mouse);
@@ -71,7 +72,7 @@ void handleInput() {
 	else if (won == true)
 	{
 		if (currentLevelNum >= MAX_LEVEL - 1)
-			exit(0);
+			gotoLevelSelect();
 		levelChange = currentLevelNum + 1;
 		startLevelName.assign("");
 	}
