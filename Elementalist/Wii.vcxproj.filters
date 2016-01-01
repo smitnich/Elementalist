@@ -10,5 +10,6 @@
     <ClCompile Include="..\source\gcInput.cpp" />
     <ClCompile Include="..\source\winput.cpp" />
     <ClCompile Include="..\source\wupc.cpp" />
+    <ClCompile Include="..\source\classicinput.cpp" />
   </ItemGroup>
 </Project>

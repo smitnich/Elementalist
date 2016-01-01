@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\source\classicinput.cpp" />
     <ClCompile Include="..\source\gcInput.cpp" />
     <ClCompile Include="..\source\winput.cpp" />
     <ClCompile Include="..\source\wupc.cpp" />

@@ -34,9 +34,6 @@
     <Filter Include="Source Files\Terrain">
       <UniqueIdentifier>{304603db-ae7d-4b8c-a14d-3d426f92ae6b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Objects\Elementals">
-      <UniqueIdentifier>{2377668b-c521-42d2-8992-58dbf20bafd7}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\callback.h">
@@ -105,9 +102,6 @@
     <ClInclude Include="..\include\inputdef.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\moveRequest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\sound.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -136,6 +130,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\loadImg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\title.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\connection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -206,9 +206,6 @@
     <ClCompile Include="..\source\terrain.cpp">
       <Filter>Source Files\Terrain</Filter>
     </ClCompile>
-    <ClCompile Include="..\source\sound.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
     <ClCompile Include="..\source\ice.cpp">
       <Filter>Source Files\Terrain</Filter>
     </ClCompile>
@@ -238,15 +235,6 @@
     </ClCompile>
     <ClCompile Include="..\source\flame.cpp">
       <Filter>Source Files\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\basicTerrain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\fireBall.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\source\iceBall.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\source\inputManager.cpp">
       <Filter>Source Files</Filter>
@@ -289,6 +277,39 @@
     </ClCompile>
     <ClCompile Include="..\source\teleporter.cpp">
       <Filter>Source Files\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\fireBall.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\iceBall.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\basicTerrain.cpp">
+      <Filter>Source Files\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\title.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\sound.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\credits.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\colorBarrier.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\heater.cpp">
+      <Filter>Source Files\Machines</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\redCrystal.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\connection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\corpses.cpp">
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
