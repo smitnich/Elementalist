@@ -62,7 +62,7 @@ unsigned long getTicks()
 void init(int argc, char* argv[])
 {
 	#ifdef GEKKO
-	//__exception_setreload(8);
+	__exception_setreload(8);
 	SYS_SetResetCallback(WiiResetPressed);
 	SYS_SetPowerCallback(WiiPowerPressed);
 	WPAD_SetPowerButtonCallback(WiimotePowerPressed);
