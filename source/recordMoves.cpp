@@ -49,6 +49,9 @@ void resetMoves() {
 	currentReplayInput = INPUT_NONE;
 }
 void dumpMoves() {
+// Playing back moves doesn't work nearly as well as I would like, so the functionality
+// is disabled currently
+#ifdef DEBUG
 	if (inputArray.size() == 0) {
 		return;
 	}
@@ -66,6 +69,7 @@ void dumpMoves() {
 		fputs(buffer,output);
 	}
 	fclose(output);
+#endif
 }
 bool loadMoves() {
 	char buffer[128];
