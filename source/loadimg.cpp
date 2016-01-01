@@ -129,7 +129,7 @@ SDL_Surface* loadOptimizedIMG(const char *fileName)
 	SDL_Surface *loadedImage = IMG_Load(fileName);
 	if (loadedImage == NULL)
 	{
-		exit(0);
+		return NULL;
 	}
 	SDL_Surface *newImage = SDL_DisplayFormat( loadedImage );
 	unsigned int colorkey = SDL_MapRGB( newImage->format, 0xFF, 0x00, 0xDC );
