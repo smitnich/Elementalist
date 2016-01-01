@@ -416,7 +416,7 @@ Object* objectInit(unsigned int id, int x, int y, bool addToLevel)
 	if (newObject == NULL)
 		exit(0);
 	//If this is the player:
-	if (id == 1004)
+	if (id == OBJ_PLAYER)
 		player = newObject;
 	newObject->id = id;
 	Level *curLevel = getCurrentLevel();
