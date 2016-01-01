@@ -6,6 +6,7 @@
 
 bool requestMove(int x, int y, int xChange, int yChange, Object* obj);
 #define PIPE_ID 1013
+
 int reverseDir(int dir) {
 	switch (dir){
 	case D_LEFT:

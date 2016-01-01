@@ -192,7 +192,6 @@ public:
 			}
 			break;
 		default:
-			//lastInput = B_NONE;
 			break;
 		}
 	}	

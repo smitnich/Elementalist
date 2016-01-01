@@ -57,21 +57,6 @@ void parseConfig(char config[])
 		defaultPath = 0;
 		return;
 	}
-	//Align the interface to the left or the right
-	else if (name == "align")
-	{
-		if (value == "left")
-		{
-			xInitial = 192;
-			alignLeft = 1;
-		}
-		else if (value == "right")
-		{
-			xInitial = 24;
-			alignLeft = 0;
-		}
-		return;
-	}
 	//Change the levelpath
 	else if (name == "levelPath")
 	{
@@ -123,7 +108,6 @@ void parseConfig(char config[])
 	}
 #endif
 }
-/*Modify the levelname and */
 void loadLevelFromArg(std::string strConfig)
 {
 		startLevel.assign(strConfig);

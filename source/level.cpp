@@ -487,8 +487,6 @@ class Terrain *instantiateTerrain(int input, int i)
 	}
 	//Give the object the id that was used to create them
 	out->id = input;
-	//Set the index, but only for objects which don't have it set to -1
-	//(meaning the singleton objects)
 	out->index = i;
 	return out;
 }

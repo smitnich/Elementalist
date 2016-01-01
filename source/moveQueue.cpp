@@ -38,7 +38,8 @@ void queuePlaceAll()
 			Terrain *tmpTerrain = level->getTerrain(x, y);
 			tmpTerrain->onEnter(tmp.obj);
 		}
-		else if (blockingObject->allowEntry()) {
+		else if (blockingObject->allowEntry())
+		{
 			blockingObject->onEnter(tmp.obj, tmp.checkX, tmp.checkY);
 		}
 		else

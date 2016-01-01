@@ -71,7 +71,6 @@ void MultipleTerrainManager::onEnter(Object *other, bool solidFound) {
 	bool solid = false;
 	for (int i = within.size()-1; i >= 0; i--) {
 		within.at(i)->onEnter(other,solid);
-		//If a piece of terrain is solid, then it
 		if (within.at(i)->solid) {
 			solid = true;
 		}

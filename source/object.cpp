@@ -246,7 +246,8 @@ bool Object::objMove()
 	else if (objMoveDir == D_RIGHT)
 		checkX = 1;
 	Object *other = getCurrentLevel()->getObject(x + checkX, y + checkY);
-	if (other != NULL && checkCollision(this,other)) {
+	if (other != NULL && checkCollision(this, other))
+	{
 		other->onCollision(this, objMoveDir);
 		onCollision(other, objMoveDir);
 	}
@@ -399,10 +400,9 @@ void doDraw(Object *drawObject, int moveFractionX, int moveFractionY)
 	{
 		drawPortionY = yInitial + (TILE_SIZE*(tilesY * 2 + 1)) - drawY;
 	}
-	//if (drawX >= xInitial && drawX < (tilesX*TILE_SIZE)+xInitial && drawY >= yInitial && drawY < (tilesY*TILE_SIZE)+yInitial)
 	apply_surface(drawX, drawY, drawPortionX, drawPortionY, toDraw, screen);
 	//Overlay the iceblock graphic if the object is frozen
-	if (drawObject->frozen == 1)
+	if (drawObject->frozen == true)
 	{
 		apply_surface(drawX, drawY, drawPortionX, drawPortionY, iceBlock, screen);
 	}
@@ -415,7 +415,6 @@ Object* objectInit(unsigned int id, int x, int y, bool addToLevel)
 	Object *newObject = objectList[id-1000]->createInstance(x,y);
 	if (newObject == NULL)
 		exit(0);
-	//If this is the player:
 	if (id == OBJ_PLAYER)
 		player = newObject;
 	newObject->id = id;
@@ -424,7 +423,8 @@ Object* objectInit(unsigned int id, int x, int y, bool addToLevel)
 		curLevel->assignObject(x, y, newObject);
 	return newObject;
 }
-Object *objectInit(unsigned int id, int idx, bool addToLevel) {
+Object *objectInit(unsigned int id, int idx, bool addToLevel)
+{
 	return objectInit(id, idx % TILE_SIZE, idx / TILE_SIZE, addToLevel);
 }
 void clearObjects()

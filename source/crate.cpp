@@ -21,7 +21,7 @@ public:
 	{
 		return true;
 	}
-	void electrocute(){
+	void electrocute() {
 
 	}
 	Crate(int x2, int y2) : Object(x2,y2)

@@ -22,13 +22,15 @@ static const int ticksRequired = 1000;
 static int startHold = 0;
 //Store the latest input so we don't end up reading from the controllers
 //multiple times per frame
-int getInput(int index = 0) {
+int getInput(int index = 0)
+{
 	if (replayEnabled) {
 		currentInput = getNextReplayMove(index);
 	}
 	return currentInput;
 }
-void handleInput() {
+void handleInput()
+{
 	static int _lastInput = INPUT_NONE;
 	currentInput = determineInput(false);
 	if (currentInput == BUTTON_RESET || currentInput == BUTTON_MENU
@@ -53,7 +55,8 @@ void handleInput() {
 	}
 	if (displayName == true)
 	{
-		if (currentInput == BUTTON_2) {
+		if (currentInput == BUTTON_2)
+		{
 #ifdef DEBUG
 			replayEnabled = loadMoves();
 			displayName = false;
@@ -64,7 +67,8 @@ void handleInput() {
 		{
 			displayName = false;
 		}
-		else {
+		else
+		{
 			currentInput = INPUT_NONE;
 			return;
 		}
