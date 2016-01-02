@@ -267,6 +267,14 @@ public:
 			}
 		}
 	}
+	void burn()
+	{
+		return;
+	}
+	void electrocute()
+	{
+		return;
+	}
 	bool slides() {
 		return true;
 	}
