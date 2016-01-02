@@ -232,6 +232,13 @@ public:
 	{
 		return new Person(*this, _x, _y);
 	}
+	void toAsh()
+	{
+		Object::toAsh();
+		if (!switchPlayerFocus()) {
+			gameOver();
+		}
+	}
 	bool startMove(int dir, int priority) override
 	{
 		if (priority < currentMovePriority)
