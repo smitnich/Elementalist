@@ -3,6 +3,7 @@
 #include "sprites.h"
 #include "level.h"
 #include "queues.h"
+#include "sound.h"
 
 SDL_Surface *spr_dupe[4] = { NULL, NULL, NULL, NULL };
 extern int xInitial, yInitial;
@@ -52,6 +53,7 @@ void Duplicator::activate()
 		if (tmp == NULL)
 			return;
 		tmp->startMove(dir, 3);
+		tmp->playSound(snd_duplicate);
 		addCreationQueue(tmp);
 	}
 }

@@ -12,6 +12,7 @@ extern Mix_Chunk *snd_melt;
 extern Mix_Chunk *snd_crystalBreak;
 extern Mix_Music *levelSelectMusic;
 extern Mix_Chunk *snd_barrierOpen;
+extern Mix_Chunk *snd_duplicate;
 bool playSound(Mix_Chunk *input);
 void musicInit();
 void setPanning(unsigned int channel, unsigned int right);
