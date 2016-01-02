@@ -48,29 +48,9 @@ public:
 	bool recordedMoveActive;
 	Person(const Person &other, int _x, int _y)
 	{
-		active = true;
-		isPlayer = other.isPlayer;
+		memcpy(this, &other, sizeof(*this));
 		x = _x;
 		y = _y;
-		objMoveFraction = 0;
-		objMoveDir = 0;
-		solid = other.solid;
-		moveSpeed = other.moveSpeed;
-		tempSpeed = 0;
-		frozen = other.frozen;
-		numFrames = other.numFrames;
-		faceDir = 0;
-		queuedMove = D_NONE;
-		inputMove = D_NONE;
-		for (int i = 0; i < 6; i++)
-		{
-			spriteew[i] = other.spriteew[i];
-			spritens[i] = other.spritens[i];
-		}
-		within = NULL;
-		hovering = false;
-		dead = false;
-		moveIndex = other.moveIndex;
 	}
 	Person(int x2, int y2) : Object(x2, y2)
 	{
