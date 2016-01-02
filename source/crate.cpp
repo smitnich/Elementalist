@@ -236,12 +236,10 @@ public:
 };
 SPRITE_STATIONARY(OilBarrel, "gfx/oilBarrel.png")
 
-#define BOULDER_ID 1026
-
 class Boulder : Crate {
 public:
 	bool moving;
-	OBJECT_DECLARATION(Boulder, BOULDER_ID)
+	OBJECT_DECLARATION(Boulder, OBJ_BOULDER)
 		Boulder(int x, int y) : Crate(x, y) {
 		moving = false;
 	}

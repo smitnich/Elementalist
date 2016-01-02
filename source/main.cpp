@@ -131,7 +131,6 @@ void init(int argc, char* argv[])
 //Clear the screen and free all remaining resources
 void cleanup() {
 	done = true;
-	//saveLevel(map,posX,posY);
 #ifdef GEKKO
 	fatUnmount(0);
 #endif
