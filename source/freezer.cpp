@@ -29,6 +29,12 @@ void Freezer::activate()
 	if (numConnectionsActive >= totalConnections) {
 		enabled = !enabled;
 		sprite = spr_freezer[enabled];
+		if (enabled && freezeObj != NULL)
+		{
+			int x = freezeObj->x;
+			int y = freezeObj->y;
+			getCurrentLevel()->getObject(x, y)->freeze();
+		}
 	}
 }
 void Freezer::deactivate()
@@ -36,11 +42,12 @@ void Freezer::deactivate()
 	numConnectionsActive--;
 	enabled = !enabled;
 	sprite = spr_freezer[enabled];
-	if (freezeObj == NULL)
-		return;
-	int x = freezeObj->x;
-	int y = freezeObj->y;
-	getCurrentLevel()->getObject(x, y)->freeze();
+	if (enabled && freezeObj != NULL)
+	{
+		int x = freezeObj->x;
+		int y = freezeObj->y;
+		getCurrentLevel()->getObject(x, y)->freeze();
+	}
 }
 Freezer::Freezer(bool _enabled)
 {
