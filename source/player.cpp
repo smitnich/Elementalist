@@ -69,6 +69,7 @@ public:
 		}
 		within = NULL;
 		hovering = false;
+		dead = false;
 		moveIndex = other.moveIndex;
 	}
 	Person(int x2, int y2) : Object(x2, y2)
@@ -134,7 +135,6 @@ public:
 					faceDir = D_RIGHT;
 					recordMove();
 					recordedMoveActive = true;
-
 				}
 			}
 			else if (!frozen)
