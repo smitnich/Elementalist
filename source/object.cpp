@@ -312,10 +312,11 @@ void Object::burn()
 }
 void Object::freeze()
 {
+	if (!frozen)
+		playSound(snd_freeze);
 	frozen = true;
 	objMoveDir = D_NONE;
 	objMoveFraction = 0.0f;
-	playSound(snd_freeze);
 }
 void Object::heat(Object *heatObj)
 {
