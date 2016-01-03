@@ -30,6 +30,8 @@ static const int borderMargin = 5;
 static Uint32 selectedColor[2] = { 0, 0 };
 SDL_Rect buttonRects[numButtons] = { 0 };
 
+static long startTime = 0;
+
 bool exitRequested = false;
 
 SDL_Surface *makeTitleSurface(int width, int height, Uint32 color)
@@ -100,7 +102,11 @@ void buttonSelected(int which)
 		exitRequested = true;
 		break;
 	case 1:
-		doCredits();
+        if (SDL_GetTicks() - 1000 >= startTime)
+        {
+            doCredits();
+            currentScreen = SCR_TITLE;
+		}
 		break;
 	default:
 		break;
@@ -130,6 +136,7 @@ void titleLoop()
 	static int input = INPUT_NONE;
 	initTitle();
 	currentScreen = SCR_TITLE;
+	startTime = SDL_GetTicks();
 	while (!exitRequested)
 	{
 		drawTitle();
