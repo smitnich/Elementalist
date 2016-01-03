@@ -2,6 +2,7 @@
 #include "terrain.h"
 #include "sprites.h"
 #include "tileEnum.h"
+#include "sound.h"
 
 void removeTerrain(Terrain *terrain);
 Terrain *addTerrainChange(int index, int changeTo);
@@ -42,4 +43,5 @@ bool OilFloor::requestExit(Object *other, int dir) {
 void OilFloor::heat() {
 	removeTerrain(this);
 	applyTerrain(m_temp_firefloor, index);
+	playSound(snd_ignite);
 }

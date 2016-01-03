@@ -23,6 +23,7 @@ Mix_Chunk *snd_crystalBreak = NULL;
 Mix_Chunk *snd_freeze = NULL;
 Mix_Chunk *snd_melt = NULL;
 Mix_Chunk *snd_duplicate = NULL;
+Mix_Chunk *snd_ignite = NULL;
 Mix_Music *titleMusic = NULL;
 Mix_Music *levelSelectMusic = NULL;
 bool audioEnabled = true;
@@ -59,8 +60,40 @@ void musicInit()
 	snd_freeze = Mix_LoadWAV("sound/freeze.wav");
 	snd_melt = Mix_LoadWAV("sound/melt.wav");
 	snd_duplicate = Mix_LoadWAV("sound/duplicate.wav");
+	snd_ignite = Mix_LoadWAV("sound/ignite.wav");
 	titleMusic = Mix_LoadMUS("music/Sculpture-Garden.mp3");
 	levelSelectMusic = Mix_LoadMUS("music/Techno-Gameplay.mp3");
+}
+static void freeSoundWrapper(Mix_Chunk *chunk)
+{
+	if (chunk != NULL)
+		Mix_FreeChunk(chunk);
+}
+void freeSound()
+{
+	freeSoundWrapper(snd_explode);
+	freeSoundWrapper(snd_switch);
+	freeSoundWrapper(snd_teleport);
+	freeSoundWrapper(snd_spring);
+	freeSoundWrapper(snd_splash);
+	freeSoundWrapper(snd_zap);
+	freeSoundWrapper(snd_smash);
+	freeSoundWrapper(snd_barrierOpen);
+	freeSoundWrapper(snd_burn);
+	freeSoundWrapper(snd_crystalBreak);
+	freeSoundWrapper(snd_freeze);
+	freeSoundWrapper(snd_melt);
+	freeSoundWrapper(snd_duplicate);
+	freeSoundWrapper(snd_ignite);
+}
+void freeAllMusic()
+{
+	for (int i = 0; i < numSongs; i++)
+	{
+		freeMusic(i);
+	}
+	Mix_FreeMusic(titleMusic);
+	Mix_FreeMusic(levelSelectMusic);
 }
 void freeMusic(int levelNum)
 {
@@ -93,7 +126,12 @@ void playMusic(int levelNum)
 		sprintf(buffer, "%s%s", musicPath.c_str(), fileName);
 		levelMusic[(levelNum - 1) % numSongs] = Mix_LoadMUS(buffer);
 	}
-	Mix_PlayMusic(levelMusic[(levelNum-1) % numSongs], -1);
+	int res = Mix_PlayMusic(levelMusic[(levelNum-1) % numSongs], -1);
+	if (res < 0)
+	{
+		char *error = Mix_GetError();
+		fprintf(stderr,"%s",error);
+	}
 }
 bool playSound(Mix_Chunk *input)
 {

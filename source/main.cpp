@@ -136,6 +136,8 @@ void cleanup() {
 #endif
 	SDL_FillRect(screen, 0, SDL_MapRGB(screen->format, 0, 0, 0));
 	SDL_Flip(screen);
+	freeAllMusic();
+	freeSound();
 	Mix_CloseAudio();
 	clearObjects();
 	SDL_Quit();
