@@ -336,7 +336,7 @@ void Level::loadConnections(FILE *inFile, int xSize, int ySize)
 			}
 			if (numRead == 0)
 			{
-				delete buffer;
+				delete[] buffer;
 				return;
 			}
 			if (val != 0)
