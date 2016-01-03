@@ -87,10 +87,6 @@ public:
 		if (input != INPUT_NONE) {
 			lastInputTime = getTicks();
 		}
-		if (frozen)
-		{
-			int tmp = 5;
-		}
 		switch (input){
 		case BUTTON_1:
 			if (lastInput != BUTTON_1)
