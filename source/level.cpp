@@ -588,7 +588,6 @@ bool loadLevel(std::string fileName, int levelNum)
 		exit(0);
 	}
 	mapLoaded[levelNum] = true;
-	fclose(ftemp);
 	changeText();
 	return true;
 }
