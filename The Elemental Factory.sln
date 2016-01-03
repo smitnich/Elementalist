@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Elementalist", "Elementalist\Elementalist.vcxproj", "{86760FF3-FAED-4794-860F-AE6D7ED22766}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "The Elemental Factory", "Elementalist\Elementalist.vcxproj", "{86760FF3-FAED-4794-860F-AE6D7ED22766}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F9485F3F-382E-41E6-BBC9-DCCD14EC0C39}"
 EndProject

@@ -108,7 +108,7 @@ void init(int argc, char* argv[])
 	SDL_ShowCursor(SDL_DISABLE);
 #ifndef GEKKO
 	joystickInit();
-	SDL_WM_SetCaption("Elementalist", 0 );
+	SDL_WM_SetCaption("The Elemental Factory", 0 );
 	SDL_WM_SetIcon(IMG_Load("gfx/icon_large.png"), NULL);
 #endif
 	if ( !screen )
