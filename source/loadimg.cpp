@@ -161,6 +161,6 @@ void freeAllImages() {
 	while (allImages.size() > 0) {
 		tmp = allImages.front();
 		allImages.pop_front();
-		SDL_FreeSurface(tmp);
+		if (tmp != NULL)
+            SDL_FreeSurface(tmp);
 	}
-}
