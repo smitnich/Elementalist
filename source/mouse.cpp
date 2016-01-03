@@ -5,7 +5,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_events.h>
 #endif
-#include "inputdef.h"
+#include "inputDef.h"
 #include "ui.h"
 
 int mouseX, mouseY;

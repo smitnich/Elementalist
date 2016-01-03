@@ -12,7 +12,7 @@
 #include "sound.h"
 #include "terrain.h"
 
-#ifdef GEKKO
+#if defined(GEKKO) || defined(LINUX)
 #include <cmath>
 #endif
 

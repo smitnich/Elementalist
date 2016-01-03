@@ -8,7 +8,8 @@
 #include <SDL/SDL.h>
 #elif _WIN32
 #include <SDL/SDL.h>
-bool checkGC();
+#elif LINUX
+#include <SDL/SDL.h>
 #endif
 void joystickInit();
 void inputInit();

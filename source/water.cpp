@@ -1,4 +1,4 @@
-#include "SDLFiles.h"
+#include "sdlFiles.h"
 #include "terrain.h"
 #include "sprites.h"
 #include "tileEnum.h"

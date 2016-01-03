@@ -6,7 +6,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_events.h>
 #endif
-#include "inputdef.h"
+#include "inputDef.h"
 #include "input.h"
 void cleanup();
 extern int hatDirection;

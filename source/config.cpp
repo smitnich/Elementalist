@@ -1,4 +1,5 @@
 #include "config.h"
+#include <cstdlib>
 
 //Changes values that are either loaded from config.txt or through arguments
 void parseConfig(char config[])
