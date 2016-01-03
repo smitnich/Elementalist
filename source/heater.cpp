@@ -29,12 +29,13 @@ void Heater::activate()
 	if (numConnectionsActive >= totalConnections) {
 		enabled = !enabled;
 		sprite = spr_heater[enabled];
-		if (enabled && heatObj != NULL)
+		if (enabled)
 		{
 			int x = index % getCurrentLevel()->width;
 			int y = index / getCurrentLevel()->height;
 			getCurrentLevel()->getTerrain(x, y)->heat();
-			heatObj->heat();
+			if (heatObj != NULL)
+				heatObj->heat();
 		}
 	}
 }
@@ -43,12 +44,13 @@ void Heater::deactivate()
 	numConnectionsActive--;
 	enabled = !enabled;
 	sprite = spr_heater[enabled];
-	if (enabled && heatObj != NULL)
+	if (enabled)
 	{
 		int x = index % getCurrentLevel()->width;
 		int y = index / getCurrentLevel()->height;
 		getCurrentLevel()->getTerrain(x, y)->heat();
-		heatObj->heat();
+		if (heatObj != NULL)
+			heatObj->heat();
 	}
 }
 Heater::Heater(bool _enabled)
