@@ -11,6 +11,7 @@ SDL_Surface* loadOptimizedIMG(const char *fileName);
 extern int xInitial;
 extern int yInitial;
 extern int currentScreen;
+extern bool hasClicked;
 
 struct InterfaceMember {
 	int x, y;
@@ -69,6 +70,7 @@ void checkClick(int x, int y) {
 		handleTitleClick(x, y);
 		break;
 	case SCR_CREDITS:
+        hasClicked = true;
 	default:
 		break;
 	}

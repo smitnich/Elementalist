@@ -12,6 +12,8 @@ SDL_Surface *backText = NULL;
 
 SDL_Surface *backdrop = NULL;
 
+bool hasClicked = false;
+
 extern int lastInput;
 extern SDL_Surface *screen;
 // Make sure we stay open for at least a second
@@ -35,6 +37,7 @@ void drawBackground();
 
 void initCredits()
 {
+    hasClicked = false;
 	for (int i = 0; i < 2; i++)
 	{
 		sdlText[i] = TTF_RenderText_Solid(fontSmall, sdlString[i], textColor);
@@ -68,6 +71,8 @@ void doCredits()
 	currentScreen = SCR_CREDITS;
 	startTime = SDL_GetTicks();
 	do {
+        if (hasClicked)
+            break;
 		checkEvents();
 		drawCredits();
 		drawMouse();
