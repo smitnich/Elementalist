@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Elementalist" />
+		<Option platforms="Unix;" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../../../../../../home/nick/Desktop/Output/ElementalistLinux" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="`sdl-config --cflags`" />
+					<Add option="-DLINUX" />
+					<Add directory="/media/nick/Hard Disk/source/elementalist/include" />
+					<Add directory="/usr/include" />
+					<Add directory="/usr/include/SDL" />
+				</Compiler>
+				<Linker>
+					<Add option="-lSDL" />
+					<Add option="-lSDL_mixer" />
+					<Add option="-lSDL_image" />
+					<Add option="-lSDL_ttf" />
+					<Add directory="../include" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Debug/Elementalist" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="`sdl-config --cflags`" />
+					<Add option="-DLINUX" />
+					<Add directory="/host/Elementalist/include" />
+					<Add directory="/usr/include" />
+				</Compiler>
+				<Linker>
+					<Add option="`sdl-config --libs`" />
+					<Add directory="../include" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="`sdl-config --cflags`" />
+			<Add option="-Wall" />
+		</Compiler>
+		<Linker>
+			<Add option="`sdl-config --libs`" />
+		</Linker>
+		<Unit filename="../include/button.h" />
+		<Unit filename="../include/callback.h" />
+		<Unit filename="../include/config.h" />
+		<Unit filename="../include/connection.h" />
+		<Unit filename="../include/debugText.h" />
+		<Unit filename="../include/defs.h" />
+		<Unit filename="../include/event.h" />
+		<Unit filename="../include/files.h" />
+		<Unit filename="../include/font.h" />
+		<Unit filename="../include/gcinput.h" />
+		<Unit filename="../include/gfx.h" />
+		<Unit filename="../include/imageMacros.h" />
+		<Unit filename="../include/input.h" />
+		<Unit filename="../include/inputDef.h" />
+		<Unit filename="../include/inputManager.h" />
+		<Unit filename="../include/keyinput.h" />
+		<Unit filename="../include/level.h" />
+		<Unit filename="../include/levelNames.h" />
+		<Unit filename="../include/levelSelect.h" />
+		<Unit filename="../include/loadImg.h" />
+		<Unit filename="../include/main.h" />
+		<Unit filename="../include/map.h" />
+		<Unit filename="../include/move.h" />
+		<Unit filename="../include/multipleObjectManager.h" />
+		<Unit filename="../include/object.h" />
+		<Unit filename="../include/objectDef.h" />
+		<Unit filename="../include/player.h" />
+		<Unit filename="../include/queues.h" />
+		<Unit filename="../include/recordMoves.h" />
+		<Unit filename="../include/resource.h" />
+		<Unit filename="../include/sdlFiles.h" />
+		<Unit filename="../include/sound.h" />
+		<Unit filename="../include/sprites.h" />
+		<Unit filename="../include/terrain.h" />
+		<Unit filename="../include/tileEnum.h" />
+		<Unit filename="../include/title.h" />
+		<Unit filename="../include/ui.h" />
+		<Unit filename="../include/wall.h" />
+		<Unit filename="../include/wallLookup.h" />
+		<Unit filename="../include/wallnames.h" />
+		<Unit filename="../include/wii.h" />
+		<Unit filename="../include/wupc.h" />
+		<Unit filename="../source/activateQueue.cpp" />
+		<Unit filename="../source/basicTerrain.cpp" />
+		<Unit filename="../source/checkspace.cpp" />
+		<Unit filename="../source/classicinput.cpp" />
+		<Unit filename="../source/colorBarrier.cpp" />
+		<Unit filename="../source/colors.cpp" />
+		<Unit filename="../source/config.cpp" />
+		<Unit filename="../source/connection.cpp" />
+		<Unit filename="../source/conveyor.cpp" />
+		<Unit filename="../source/corpses.cpp" />
+		<Unit filename="../source/crate.cpp" />
+		<Unit filename="../source/creationQueue.cpp" />
+		<Unit filename="../source/credits.cpp" />
+		<Unit filename="../source/debugText.cpp" />
+		<Unit filename="../source/deleteQueue.cpp" />
+		<Unit filename="../source/duplicator.cpp" />
+		<Unit filename="../source/event.cpp" />
+		<Unit filename="../source/files.cpp" />
+		<Unit filename="../source/fireBall.cpp" />
+		<Unit filename="../source/fireFloor.cpp" />
+		<Unit filename="../source/flame.cpp" />
+		<Unit filename="../source/font.cpp" />
+		<Unit filename="../source/framerate.cpp" />
+		<Unit filename="../source/freezer.cpp" />
+		<Unit filename="../source/gcInput.cpp" />
+		<Unit filename="../source/gfx.cpp" />
+		<Unit filename="../source/globals.cpp" />
+		<Unit filename="../source/heater.cpp" />
+		<Unit filename="../source/ice.cpp" />
+		<Unit filename="../source/iceBall.cpp" />
+		<Unit filename="../source/input.cpp" />
+		<Unit filename="../source/inputManager.cpp" />
+		<Unit filename="../source/joystick.cpp" />
+		<Unit filename="../source/keyinput.cpp" />
+		<Unit filename="../source/level.cpp" />
+		<Unit filename="../source/levelSelect.cpp" />
+		<Unit filename="../source/loadimg.cpp" />
+		<Unit filename="../source/magnet.cpp" />
+		<Unit filename="../source/main.cpp" />
+		<Unit filename="../source/misc.cpp" />
+		<Unit filename="../source/mouse.cpp" />
+		<Unit filename="../source/moveQueue.cpp" />
+		<Unit filename="../source/multipleObjectManager.cpp" />
+		<Unit filename="../source/multipleTerrainManager.cpp" />
+		<Unit filename="../source/object.cpp" />
+		<Unit filename="../source/objectFactory.cpp" />
+		<Unit filename="../source/oil.cpp" />
+		<Unit filename="../source/pickup.cpp" />
+		<Unit filename="../source/pipes.cpp" />
+		<Unit filename="../source/player.cpp" />
+		<Unit filename="../source/recordMoves.cpp" />
+		<Unit filename="../source/redCrystal.cpp" />
+		<Unit filename="../source/renderQueue.cpp" />
+		<Unit filename="../source/sound.cpp" />
+		<Unit filename="../source/switchQueue.cpp" />
+		<Unit filename="../source/teleporter.cpp" />
+		<Unit filename="../source/terrain.cpp" />
+		<Unit filename="../source/terrainHazards.cpp" />
+		<Unit filename="../source/textbox.cpp" />
+		<Unit filename="../source/tileSprites.cpp" />
+		<Unit filename="../source/tiles.cpp" />
+		<Unit filename="../source/title.cpp" />
+		<Unit filename="../source/triggers.cpp" />
+		<Unit filename="../source/ui.cpp" />
+		<Unit filename="../source/water.cpp" />
+		<Unit filename="../source/winput.cpp" />
+		<Unit filename="../source/wupc.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
