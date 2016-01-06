@@ -1,4 +1,4 @@
-An grid-based 2d puzzle game for Windows, Linux, and the Wii game console<br>
+A grid-based 2d puzzle game for Windows, Linux, and the Wii game console<br>
 <br>
 <h3>Controls:</h3><ul>
 Basic USB Keyboards and mice ARE supported on the Wii.<br>
